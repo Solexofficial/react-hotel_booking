@@ -25,8 +25,8 @@ const HomeLogo = props => {
           y2='27.0589'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#BC9CFF' />
-          <stop offset='1' stop-color='#8BA4F9' />
+          <stop stopColor='#BC9CFF' />
+          <stop offset='1' stopColor='#8BA4F9' />
         </linearGradient>
         <linearGradient
           id='paint1_linear_18370:63'
@@ -36,12 +36,12 @@ const HomeLogo = props => {
           y2='21.206'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#6FCF97' />
-          <stop offset='1' stop-color='#66D2EA' />
+          <stop stopColor='#6FCF97' />
+          <stop offset='1' stopColor='#66D2EA' />
         </linearGradient>
         <linearGradient id='paint2_linear_18370:63' x1='20' y1='0' x2='20' y2='40' gradientUnits='userSpaceOnUse'>
-          <stop stop-color='#BC9CFF' />
-          <stop offset='1' stop-color='#8BA4F9' />
+          <stop stopColor='#BC9CFF' />
+          <stop offset='1' stopColor='#8BA4F9' />
         </linearGradient>
       </defs>
     </SvgIcon>
