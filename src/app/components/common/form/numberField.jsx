@@ -21,7 +21,9 @@ const NumberField = ({ name, label, data, setData }) => {
 
   return (
     <Box sx={{ mt: '10px', display: 'flex', justifyContent: 'space-between' }}>
-      <Typography sx={{ fontWeight: 700 }}>{label}</Typography>
+      <Typography variant='subtitle2' sx={{ fontWeight: 700 }}>
+        {label}
+      </Typography>
       <Box sx={{ minWidth: '120px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
         <Button
           sx={{ width: 30, height: 30, borderRadius: '50%', minWidth: 30 }}
