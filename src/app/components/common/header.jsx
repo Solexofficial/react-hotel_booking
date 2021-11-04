@@ -6,9 +6,9 @@ import HomeLogo from '../icons/logo';
 
 const Header = () => {
   return (
-    <Box sx={{ flexGrow: 1, zIndex: 1000 }}>
+    <Box sx={{ flexGrow: 1, zIndex: 1000, mt: 2 }}>
       <Container>
-        <AppBar position='static' color='inherit'>
+        <AppBar position='static' color='inherit' sx={{ borderRadius: 2 }}>
           <Toolbar>
             <HomeLogo viewBox='0 0 40 40' />
             <Typography
