@@ -31,7 +31,7 @@ const NumberField = ({ name, label, data, setData }) => {
         >
           <RemoveIcon fontSize='small' />
         </Button>
-        <span style={{ margin: '0 15px' }}>{data[name]}</span>
+        <span style={{ margin: '0 15px', minWidth: '25px', textAlign: 'center' }}>{data[name]}</span>
         <Button
           sx={{ width: 30, height: 30, borderRadius: '50%', minWidth: 30 }}
           variant='contained'
