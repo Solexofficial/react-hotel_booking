@@ -1,64 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText } from '@material-ui/core';
 
-const SelectField = ({
-    label,
-    value,
-    onChange,
-    defaultOption,
-    options,
-    error,
-    ...rest
-}) => {
-    const handleChange = ({ target }) => {
-        onChange({ name: target.name, value: target.value });
-    };
-    const getInputClasses = () => {
-        return "form-select" + (error ? " is-invalid" : "");
-    };
-
-    const optionsArray =
-        !Array.isArray(options) && typeof options === "object"
-            ? Object.keys(options).map((optionName) => ({
-                  name: options[optionName].name,
-                  value: options[optionName]._id
-              }))
-            : options;
-
-    return (
-        <div className="mb-4">
-            <label htmlFor="validationCustom04" className="form-label">
-                {label}
-            </label>
-            <select
-                className={getInputClasses()}
-                id="validationCustom04"
-                name="profession"
-                value={value}
-                onChange={handleChange}
-                {...rest}
-            >
-                <option disabled value="">
-                    {defaultOption}
-                </option>
-                {optionsArray &&
-                    optionsArray.map((option) => (
-                        <option value={option.value} key={option.value}>
-                            {option.name}
-                        </option>
-                    ))}
-            </select>
-            {error && <div className="invalid-feedback">{error}</div>}
-        </div>
-    );
+const SelectField = ({ label, name, value, onChange, options, error }) => {
+  return (
+    <FormControl variant='outlined' {...(error && { error: true })}>
+      <InputLabel>{label}</InputLabel>
+      <MuiSelect label={label} name={name} value={value} onChange={onChange}>
+        <MenuItem value=''>None</MenuItem>
+        {options.map(item => (
+          <MenuItem key={item.id} value={item.id}>
+            {item.title}
+          </MenuItem>
+        ))}
+      </MuiSelect>
+      {error && <FormHelperText>{error}</FormHelperText>}
+    </FormControl>
+  );
 };
 SelectField.propTypes = {
-    defaultOption: PropTypes.string,
-    label: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    error: PropTypes.string,
-    options: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  error: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default React.memo(SelectField);

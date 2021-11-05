@@ -1,2 +1,12 @@
 import SelectField from './selectField';
-export { SelectField };
+import NumberField from './numberField';
+import InputField from './inputField';
+import Checkbox from './checkBox';
+
+const Fields = {
+  SelectField,
+  NumberField,
+  InputField,
+  Checkbox,
+};
+export default Fields;

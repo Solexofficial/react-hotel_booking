@@ -6,7 +6,14 @@ import DatePicker from '@mui/lab/DatePicker';
 import React from 'react';
 import { Box } from '@mui/system';
 
-const DatePickerField = ({ label, name, value, setData, ...rest }) => {
+const DatePickerField = ({ label, name, value, onChange, ...rest }) => {
+  const convertToDefEventParam = (name, value) => ({
+    target: {
+      name,
+      value,
+    },
+  });
+
   return (
     <Box style={{ margin: '15px 0' }}>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
@@ -14,12 +21,7 @@ const DatePickerField = ({ label, name, value, setData, ...rest }) => {
           mask='__.__.____'
           label={label}
           value={value}
-          onChange={newValue => {
-            setData(prevState => ({
-              ...prevState,
-              [name]: newValue,
-            }));
-          }}
+          onChange={date => onChange(convertToDefEventParam(name, date))}
           {...rest}
           renderInput={params => <TextField {...params} size='small' />}
         />
