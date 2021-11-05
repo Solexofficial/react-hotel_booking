@@ -3,11 +3,10 @@ import { Button, Card, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import declOfNum from '../../utils/declOfNum';
 import FormComponent from '../common/form';
+import DatePickerField from '../common/form/datePickerField';
 import NumberField from '../common/form/numberField';
 import Title from '../common/typography/title';
 import MyAccordion from './accordion';
-import DatePickerField from '../common/form/datePickerField';
-import { Box } from '@mui/system';
 
 const initialState = { adults: 0, children: 0, babies: 0 };
 const SearchRoomsForm = () => {
