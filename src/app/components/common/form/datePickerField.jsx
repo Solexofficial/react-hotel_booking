@@ -3,11 +3,10 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import ruLocale from 'date-fns/locale/ru';
 import DatePicker from '@mui/lab/DatePicker';
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/system';
 
-const DatePickerField = ({ label, ...rest }) => {
-  const [value, setValue] = useState(null);
+const DatePickerField = ({ label, name, value, setData, ...rest }) => {
   return (
     <Box style={{ margin: '15px 0' }}>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
@@ -16,7 +15,10 @@ const DatePickerField = ({ label, ...rest }) => {
           label={label}
           value={value}
           onChange={newValue => {
-            setValue(newValue);
+            setData(prevState => ({
+              ...prevState,
+              [name]: newValue,
+            }));
           }}
           {...rest}
           renderInput={params => <TextField {...params} size='small' />}
