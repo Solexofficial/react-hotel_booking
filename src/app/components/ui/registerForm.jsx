@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, Form } from '../../hooks/useForm';
 import Fields from '../common/form/fields';
-import Button from '../ui/buttons/Button';
+import Button from './buttons/Button';
 
 const initialData = {
   name: '',
@@ -10,15 +10,15 @@ const initialData = {
 
 const LoginForm = () => {
   const validate = (fieldValues = data) => {
-    let temp = { ...errors };
-    if ('name' in fieldValues) temp.name = fieldValues.name ? '' : 'Поле "Имя" обязательно для заполнения';
+    let errorsList = { ...errors };
+    if ('name' in fieldValues) errorsList.name = fieldValues.name ? '' : 'Поле "Имя" обязательно для заполнения';
     if ('email' in fieldValues)
-      temp.email = /^\S+@\S+\.\S+$/g.test(fieldValues.email) ? '' : 'Электронная почта некорректна';
+      errorsList.email = /^\S+@\S+\.\S+$/g.test(fieldValues.email) ? '' : 'Электронная почта некорректна';
     setErrors({
-      ...temp,
+      ...errorsList,
     });
 
-    if (fieldValues === data) return Object.values(temp).every(x => x === '');
+    if (fieldValues === data) return Object.values(errorsList).every(x => x === '');
   };
 
   const { data, setData, errors, setErrors, handleInputChange, resetForm } = useForm(initialData, true, validate);
@@ -30,6 +30,7 @@ const LoginForm = () => {
       resetForm();
     }
   };
+
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -41,8 +42,8 @@ const LoginForm = () => {
           onChange={handleInputChange}
           error={errors.email}
         />
-        <Button onClick={handleSubmit} fullWidth>
-          Войти
+        <Button onClick={handleSubmit} fullWidth disabled={!Object.values(errors).every(x => x === '')}>
+          Зарегистрироваться
         </Button>
       </Form>
     </>

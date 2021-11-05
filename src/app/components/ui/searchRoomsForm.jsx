@@ -20,6 +20,8 @@ const SearchRoomsForm = () => {
     setData(initialState);
   };
 
+  
+
   const getAccordionLabel = () => {
     const countGuests = data.adults + data.children + data.babies;
     const countBabies = data.babies;
