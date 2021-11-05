@@ -33,7 +33,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiFormControl-root': {
       width: '100%',
-      margin: '15px 0',
+      marginBottom: '10px',
+      '&:first-child': {
+        marginTop: '20px',
+      },
     },
   },
 }));

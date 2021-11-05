@@ -10,12 +10,13 @@ const useStyles = makeStyles(theme => ({
     '&:after': {
       content: '""',
       width: '100%',
-      height: '700px',
+      height: '100%',
       position: 'absolute',
-      background: `url(${background})`,
+      background: `url(${background}) no-repeat center center`,
+      backgroundSize: 'cover',
       zIndex: -1,
       display: 'block',
-      top: 0,
+      top: '-10%',
     },
   },
   formFooter: {

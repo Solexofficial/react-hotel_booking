@@ -39,7 +39,7 @@ const Login = () => {
             </>
           ) : (
             <>
-              <Title isBold>Зарегистрироваться</Title>
+              <Title isBold>Регистрация</Title>
               <RegisterForm />
               <Box className={classes.formFooter}>
                 <Text variant='subtitle2' component='h5'>
