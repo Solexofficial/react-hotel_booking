@@ -6,10 +6,13 @@ import FormComponent from '../common/form';
 import NumberField from '../common/form/numberField';
 import Title from '../common/typography/title';
 import MyAccordion from './accordion';
+import DatePickerField from '../common/form/datePickerField';
+import { Box } from '@mui/system';
 
 const initialState = { adults: 0, children: 0, babies: 0 };
 const SearchRoomsForm = () => {
   const [data, setData] = useState(initialState);
+
   const handleSubmit = e => {
     e.preventDefault();
     console.log(data);
@@ -51,15 +54,17 @@ const SearchRoomsForm = () => {
         <Title isBold>Найдём номера под ваши пожелания</Title>
         {/* <FormComponent onSubmit={handleSubmit} validatorConfig={validatorConfig} defaultData={data}></FormComponent> */}
         <form>
+          <DatePickerField label='Дата прибытия' style={{ margin: '15px 0' }} />
+          <DatePickerField label='Дата выезда' style={{ margin: '15px 0' }} />
           <Typography sx={{ marginTop: '20px', fontWeight: 700 }}>Гости</Typography>
           <MyAccordion label={getAccordionLabel()}>
             <NumberField label='Взрослые' name='adults' data={data} setData={setData} />
             <NumberField label='Дети' name='children' data={data} setData={setData} />
             <NumberField label='Младенцы' name='babies' data={data} setData={setData} />
-            <Button variant='outlined' size='small' onClick={handleReset} sx={{ mt: '15px' }}>
-              Очистить
-            </Button>
           </MyAccordion>
+          <Button variant='outlined' size='small' onClick={handleReset} sx={{ mt: '15px' }}>
+            Очистить
+          </Button>
           <Button
             variant='contained'
             size='large'
