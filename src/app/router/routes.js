@@ -1,5 +1,5 @@
 import Login from '../layouts/login';
-import Main from '../layouts/main';
+import Main from '../layouts/main/main.jsx';
 import Rooms from '../layouts/rooms';
 import Dashboard from '../layouts/dashboard';
 
