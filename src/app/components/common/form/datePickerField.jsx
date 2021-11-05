@@ -15,7 +15,7 @@ const DatePickerField = ({ label, name, value, onChange, ...rest }) => {
   });
 
   return (
-    <Box style={{ margin: '15px 0' }}>
+    <Box>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
         <DatePicker
           mask='__.__.____'
@@ -23,7 +23,7 @@ const DatePickerField = ({ label, name, value, onChange, ...rest }) => {
           value={value}
           onChange={date => onChange(convertToDefEventParam(name, date))}
           {...rest}
-          renderInput={params => <TextField {...params} size='small' />}
+          renderInput={params => <TextField {...params} />}
         />
       </LocalizationProvider>
     </Box>
