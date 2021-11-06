@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, Form } from '../../hooks/useForm';
 import Fields from '../common/form/fields';
+import Switch from '../common/form/switch';
 import Button from './buttons/Button';
 
 const genderItems = [
@@ -13,8 +14,9 @@ const initialData = {
   secondName: '',
   gender: 'male',
   birthYear: Date.now(),
-  email: "",
-  password: ""
+  email: '',
+  password: '',
+  subscribe: false,
 };
 
 const LoginForm = () => {
@@ -89,7 +91,13 @@ const LoginForm = () => {
           error={errors.password}
           inputProps={{ type: 'password' }}
         />
-        <Button onClick={handleSubmit} fullWidth disabled={!Object.values(errors).every(x => x === '')}>
+        <Fields.Switch
+          name='subscribe'
+          label='Получать спецпредложения'
+          value={data.subscribe}
+          onChange={handleInputChange}
+        />
+        <Button type='submit' onClick={handleSubmit} fullWidth disabled={!Object.values(errors).every(x => x === '')}>
           Зарегистрироваться
         </Button>
       </Form>
