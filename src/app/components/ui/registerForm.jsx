@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, Form } from '../../hooks/useForm';
-import Fields from '../common/form/fields';
-import Switch from '../common/form/switch';
+import { InputField, RadioGroup, DatePickerField, Switch } from '../common/form/fields';
+
 import Button from './buttons/Button';
 
 const genderItems = [
@@ -50,7 +50,7 @@ const LoginForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Fields.InputField
+        <InputField
           autoFocus
           name='firstName'
           label='Имя'
@@ -58,15 +58,15 @@ const LoginForm = () => {
           onChange={handleInputChange}
           error={errors.firstName}
         />
-        <Fields.InputField
+        <InputField
           name='secondName'
           label='Фамилия'
           value={data.secondName}
           onChange={handleInputChange}
           error={errors.secondName}
         />
-        <Fields.RadioGroup name='gender' value={data.gender} onChange={handleInputChange} items={genderItems} />
-        <Fields.DatePickerField
+        <RadioGroup name='gender' value={data.gender} onChange={handleInputChange} items={genderItems} />
+        <DatePickerField
           openTo='year'
           mask='__.__.____'
           label='Дата Рождения'
@@ -75,14 +75,8 @@ const LoginForm = () => {
           value={data.birthYear}
           inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         />
-        <Fields.InputField
-          name='email'
-          label='Почта'
-          value={data.email}
-          onChange={handleInputChange}
-          error={errors.email}
-        />
-        <Fields.InputField
+        <InputField name='email' label='Почта' value={data.email} onChange={handleInputChange} error={errors.email} />
+        <InputField
           name='password'
           label='Пароль'
           type='password'
@@ -91,12 +85,7 @@ const LoginForm = () => {
           error={errors.password}
           inputProps={{ type: 'password' }}
         />
-        <Fields.Switch
-          name='subscribe'
-          label='Получать спецпредложения'
-          value={data.subscribe}
-          onChange={handleInputChange}
-        />
+        <Switch name='subscribe' label='Получать спецпредложения' value={data.subscribe} onChange={handleInputChange} />
         <Button type='submit' onClick={handleSubmit} fullWidth disabled={!Object.values(errors).every(x => x === '')}>
           Зарегистрироваться
         </Button>

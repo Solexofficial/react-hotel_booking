@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, Form } from '../../hooks/useForm';
-import Fields from '../common/form/fields';
+import { InputField } from '../common/form/fields';
 import Button from '../ui/buttons/Button';
 
 const initialData = {
@@ -33,14 +33,8 @@ const LoginForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Fields.InputField name='name' label='Имя' value={data.name} onChange={handleInputChange} error={errors.name} />
-        <Fields.InputField
-          name='email'
-          label='Email'
-          value={data.email}
-          onChange={handleInputChange}
-          error={errors.email}
-        />
+        <InputField name='name' label='Имя' value={data.name} onChange={handleInputChange} error={errors.name} />
+        <InputField name='email' label='Email' value={data.email} onChange={handleInputChange} error={errors.email} />
         <Button onClick={handleSubmit} fullWidth>
           Войти
         </Button>

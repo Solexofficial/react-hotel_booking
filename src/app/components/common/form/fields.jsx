@@ -6,13 +6,4 @@ import RadioGroup from './radioGroupField';
 import DatePickerField from './datePickerField';
 import Switch from './switch';
 
-const Fields = {
-  SelectField,
-  NumberField,
-  InputField,
-  Checkbox,
-  RadioGroup,
-  DatePickerField,
-  Switch,
-};
-export default Fields;
+export { SelectField, NumberField, InputField, Checkbox, RadioGroup, DatePickerField, Switch };
