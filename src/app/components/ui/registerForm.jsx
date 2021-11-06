@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useForm, Form } from '../../hooks/useForm';
 import { InputField, RadioGroup, DatePickerField, Switch } from '../common/form/fields';
+import withPassword from '../common/form/withPassword';
 
 import Button from './buttons/Button';
 
@@ -47,6 +48,8 @@ const LoginForm = () => {
     }
   };
 
+  const InputFieldWithPassword = useMemo(() => withPassword(InputField), []);
+
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -76,7 +79,7 @@ const LoginForm = () => {
           inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         />
         <InputField name='email' label='Почта' value={data.email} onChange={handleInputChange} error={errors.email} />
-        <InputField
+        <InputFieldWithPassword
           name='password'
           label='Пароль'
           type='password'
