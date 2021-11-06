@@ -10,6 +10,7 @@ const InputField = ({ label, type, name, value, onChange, error = null, ...rest 
       name={name}
       value={value}
       onChange={onChange}
+      type={type}
       {...rest}
       {...(error && { error: true, helperText: error })}
     />

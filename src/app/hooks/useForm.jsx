@@ -41,12 +41,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function Form(props) {
+export function Form({ children, ...rest }) {
   const classes = useStyles();
-  const { children, ...other } = props;
   return (
-    <form className={classes.root} autoComplete='off' {...other}>
-      {props.children}
+    <form className={classes.root} autoComplete='off' {...rest}>
+      {children}
     </form>
   );
 }
