@@ -1,5 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
-import { Card } from '@mui/material';
+import { Paper } from '@mui/material';
 import React from 'react';
 import { Form, useForm } from '../../../hooks/useForm';
 import declOfNum from '../../../utils/declOfNum';
@@ -51,7 +51,7 @@ const SearchRoomsForm = () => {
   };
 
   return (
-    <Card raised className={classes.root}>
+    <Paper elevation={3} className={classes.root}>
       <Title isBold>Найдём номера под ваши пожелания</Title>
       <Form
         onSubmit={handleSubmit}
@@ -92,7 +92,7 @@ const SearchRoomsForm = () => {
           Подобрать номер
         </Button>
       </Form>
-    </Card>
+    </Paper>
   );
 };
 
