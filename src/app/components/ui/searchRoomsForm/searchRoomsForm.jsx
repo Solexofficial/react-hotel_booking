@@ -1,15 +1,20 @@
+import { FormControl } from '@material-ui/core';
 import { ArrowRight } from '@mui/icons-material';
-import { Button, Card, Typography } from '@mui/material';
+import { Card } from '@mui/material';
 import React from 'react';
-import { useForm } from '../../hooks/useForm';
-import declOfNum from '../../utils/declOfNum';
-import DatePickerField from '../common/form/datePickerField';
-import NumberField from '../common/form/numberField';
-import Title from '../common/typography/title';
-import MyAccordion from './accordion';
+import { useForm } from '../../../hooks/useForm';
+import declOfNum from '../../../utils/declOfNum';
+import { DatePickerField, NumberField } from '../../common/form/fields';
+import SmallTitle from '../../common/typography/smallTitle';
+import Title from '../../common/typography/title';
+import Accordion from '../accordion';
+import Button from '../buttons/Button';
+import useStyles from './styles';
 
 const initialDate = { adults: 0, children: 0, babies: 0, arrival: null, departure: null };
+
 const SearchRoomsForm = () => {
+  const classes = useStyles();
   const validate = (fieldValues = data) => {
     let temp = { ...errors };
     if ('fullName' in fieldValues) temp.fullName = fieldValues.fullName ? '' : 'This field is required.';
@@ -25,6 +30,7 @@ const SearchRoomsForm = () => {
   };
 
   const { data, setData, errors, setErrors, handleInputChange, resetForm } = useForm(initialDate, true, validate);
+
   const handleSubmit = e => {
     e.preventDefault();
     if (validate()) {
@@ -50,37 +56,36 @@ const SearchRoomsForm = () => {
 
   return (
     <>
-      <Card
-        raised
-        sx={{ mt: '70px', padding: '30px', paddingTop: '40px', background: '#fff', width: 380 }}
-        component='form'
-      >
-        <Title isBold>Найдём номера под ваши пожелания</Title>
-        <DatePickerField
-          label='Дата прибытия'
-          style={{ margin: '15px 0' }}
-          value={data.arrival}
-          setData={setData}
-          onChange={handleInputChange}
-          name='arrival'
-          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-        />
-        <DatePickerField
-          label='Дата выезда'
-          style={{ margin: '15px 0' }}
-          value={data.departure}
-          setData={setData}
-          onChange={handleInputChange}
-          name='departure'
-          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-        />
-        <Typography sx={{ marginTop: '20px', fontWeight: 700 }}>Гости</Typography>
-        <MyAccordion label={getAccordionLabel()}>
-          <NumberField label='Взрослые' name='adults' data={data} setData={setData} />
-          <NumberField label='Дети' name='children' data={data} setData={setData} />
-          <NumberField label='Младенцы' name='babies' data={data} setData={setData} />
-        </MyAccordion>
-        <Button variant='outlined' size='small' onClick={resetForm} sx={{ mt: '15px' }}>
+      <Card raised className={classes.root} component='form'>
+        <FormControl fullWidth>
+          <Title isBold>Найдём номера под ваши пожелания</Title>
+          <DatePickerField
+            label='Дата прибытия'
+            value={data.arrival}
+            onChange={handleInputChange}
+            name='arrival'
+            inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
+          />
+          <DatePickerField
+            label='Дата выезда'
+            value={data.departure}
+            minDate={Date.now()}
+            onChange={handleInputChange}
+            name='departure'
+            inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
+          />
+        </FormControl>
+        <FormControl fullWidth>
+          <SmallTitle isBold upperCase>
+            Гости
+          </SmallTitle>
+          <Accordion label={getAccordionLabel()}>
+            <NumberField label='Взрослые' name='adults' data={data} setData={setData} />
+            <NumberField label='Дети' name='children' data={data} setData={setData} />
+            <NumberField label='Младенцы' name='babies' data={data} setData={setData} />
+          </Accordion>
+        </FormControl>
+        <Button variant='outlined' size='small' onClick={resetForm} className={classes.btnReset}>
           Очистить
         </Button>
         <Button
@@ -88,7 +93,7 @@ const SearchRoomsForm = () => {
           size='large'
           color='primary'
           endIcon={<ArrowRight />}
-          sx={{ mt: '30px' }}
+          className={classes.btnSubmit}
           onClick={handleSubmit}
           fullWidth
         >

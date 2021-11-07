@@ -2,7 +2,7 @@ import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
 import Header from '../../components/common/header';
 import ImageSlider from '../../components/common/slider';
-import SearchRoomsForm from '../../components/ui/searchRoomsForm';
+import SearchRoomsForm from '../../components/ui/searchRoomsForm/searchRoomsForm';
 import useStyles from './styles';
 
 const Main = () => {

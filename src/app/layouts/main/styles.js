@@ -7,10 +7,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   textWishes: {
-    marginTop: 'auto',
-    marginBottom: '20px',
+    marginTop: 'auto !important',
+    marginBottom: '20px !important',
     maxWidth: '300px',
-    fontSize: '14px',
+    fontSize: '14px !important',
     alignSelf: 'flex-end',
   },
 }));

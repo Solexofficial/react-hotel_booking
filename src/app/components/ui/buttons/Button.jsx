@@ -1,18 +1,7 @@
-import React from 'react';
 import { Button as MuiButton } from '@mui/material';
-import { makeStyles } from '@material-ui/styles';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    margin: '15px',
-  },
-  label: {
-    textTransform: 'none',
-  },
-}));
+import React from 'react';
 
 const Button = ({ size, color, variant, onClick, children, ...rest }) => {
-  const classes = useStyles();
   return (
     <MuiButton
       variant={variant || 'contained'}
@@ -20,7 +9,6 @@ const Button = ({ size, color, variant, onClick, children, ...rest }) => {
       color={color || 'primary'}
       onClick={onClick}
       {...rest}
-      classes={{ root: classes.root, label: classes.label }}
     >
       {children}
     </MuiButton>

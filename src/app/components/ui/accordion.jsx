@@ -1,17 +1,17 @@
 import { ExpandMore } from '@mui/icons-material';
-import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material';
+import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material';
 import React from 'react';
 
-const MyAccordion = ({ children, label }) => {
+const Accordion = ({ children, label }) => {
   return (
-    <Accordion>
+    <MuiAccordion>
       <AccordionSummary expandIcon={<ExpandMore />} aria-controls='panel1a-content' id='panel1a-header'>
         <Typography variant='subtitle2'>{label}</Typography>
       </AccordionSummary>
       <Divider />
       <AccordionDetails>{children}</AccordionDetails>
-    </Accordion>
+    </MuiAccordion>
   );
 };
 
-export default MyAccordion;
+export default Accordion;

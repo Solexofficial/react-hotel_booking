@@ -1,4 +1,4 @@
-import { FormControl, IconButton, InputAdornment } from '@material-ui/core';
+import { IconButton, InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import React, { useState } from 'react';
 
