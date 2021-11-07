@@ -54,7 +54,7 @@ const SearchRoomsForm = () => {
 
   return (
     <>
-      <Card raised className={classes.root} component='form'>
+      <Card raised className={classes.root}>
         <Form onSubmit={handleSubmit}>
           <Title isBold>Найдём номера под ваши пожелания</Title>
           <FormControl fullWidth>

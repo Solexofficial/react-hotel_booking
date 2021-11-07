@@ -1,17 +1,42 @@
 import React, { useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
+import { validator } from '../utils/validator';
 
-export function useForm(initialData, validateOnChange = false, validate) {
+export function useForm(initialData, validateOnChange = false, validatorConfig) {
   const [data, setData] = useState(initialData || {});
   const [errors, setErrors] = useState({});
 
-  const handleInputChange = useCallback(e => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-    if (validateOnChange) validate({ [name]: value });
+  const validate = useCallback(
+    data => {
+      const errors = validator(data, validatorConfig);
+      setErrors(errors);
+      return Object.keys(errors).length === 0;
+    },
+    [validatorConfig, setErrors]
+  );
+
+  const handleInputChange = useCallback(
+    event => {
+      const { name, value } = event.target;
+      setData(prevState => ({
+        ...prevState,
+        [name]: value,
+      }));
+      if (validateOnChange) validate({ [name]: value });
+    },
+    [validateOnChange, validate]
+  );
+
+  const handleKeyDown = useCallback(event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      const form = event.target.form;
+      const formElements = [...form.elements].filter(
+        el => el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'button'
+      );
+      const indexField = Array.prototype.indexOf.call(formElements, event.target);
+      formElements[indexField + 1].focus();
+    }
   }, []);
 
   const resetForm = () => {
@@ -25,6 +50,8 @@ export function useForm(initialData, validateOnChange = false, validate) {
     errors,
     setErrors,
     handleInputChange,
+    handleKeyDown,
+    validate,
     resetForm,
   };
 }
@@ -41,11 +68,37 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function Form({ children, ...rest }) {
+export function Form({ children, handleChange, data, errors, handleKeyDown, ...rest }) {
   const classes = useStyles();
+
+  const clonedElements = React.Children.map(children, child => {
+    const childType = typeof child.type;
+    let config = {};
+    if (childType === 'object' || (childType === 'function' && child.props.type !== 'submit')) {
+      if (!child.props.name) {
+        throw new Error('name property is required for field component', child);
+      }
+      config = {
+        ...child.props,
+        onChange: handleChange,
+        value: data[child.props.name] || '',
+        error: errors[child.props.name],
+        onKeyDown: handleKeyDown,
+      };
+    }
+    if (childType === 'string') {
+      if (child.type === 'button') {
+        if (child.props.type === 'submit' || child.props.type === undefined) {
+          config = { ...child.props, disabled: true };
+        }
+      }
+    }
+    return React.cloneElement(child, config);
+  });
+
   return (
-    <form className={classes.root} autoComplete='off' {...rest}>
-      {children}
+    <form className={classes.root} {...rest}>
+      {clonedElements}
     </form>
   );
 }

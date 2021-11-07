@@ -5,10 +5,10 @@ import { useParams } from 'react-router';
 import Header from '../../components/common/header';
 import Text from '../../components/common/typography/text';
 import Title from '../../components/common/typography/title';
-import LoginForm from '../../components/ui/loginForm';
+import Button from '../../components/ui/buttons/button';
+import LoginForm from '../../components/ui/LoginForm/loginForm';
 import RegisterForm from '../../components/ui/registerForm';
 import useStyles from './styles';
-import Button from '../../components/ui/buttons/Button';
 
 const Login = () => {
   const classes = useStyles();
@@ -40,7 +40,7 @@ const Login = () => {
           ) : (
             <>
               <Title isBold>Регистрация</Title>
-              <RegisterForm />
+              {/* <RegisterForm /> */}
               <Box className={classes.formFooter}>
                 <Text variant='subtitle2' component='h5'>
                   Уже есть аккаунт на Toxin?
