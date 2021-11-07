@@ -2,7 +2,7 @@ import { Card, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
-import Header from '../../components/common/header';
+import Header from '../../components/common/header/header';
 import Text from '../../components/common/typography/text';
 import Title from '../../components/common/typography/title';
 import Button from '../../components/ui/buttons/button';

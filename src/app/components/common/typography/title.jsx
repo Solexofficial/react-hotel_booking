@@ -2,9 +2,14 @@ import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Title = ({ children, isBold }) => {
+const Title = ({ children, component, variant, isBold, ...rest }) => {
   return (
-    <Typography variant='h2' component='h2' style={{ fontSize: '24px', fontWeight: isBold ? '700' : '400' }}>
+    <Typography
+      variant={variant || 'h2'}
+      component={component || 'h2'}
+      style={{ fontSize: '24px', fontWeight: isBold ? '700' : '400' }}
+      {...rest}
+    >
       {children}
     </Typography>
   );
