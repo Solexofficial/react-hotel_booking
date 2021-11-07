@@ -1,10 +1,35 @@
-import { Button, Typography } from '@mui/material';
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Box } from '@mui/system';
+import CircleButton from '../../ui/buttons/circleButton';
+import SmallTitle from '../typography/smallTitle';
+import { makeStyles } from '@material-ui/core';
+import { InputField } from './fields';
 
-const NumberField = ({ name, label, data, setData }) => {
+const useStyle = makeStyles(theme => ({
+  root: {
+    marginTop: '10px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  btnGroup: {
+    minWidth: '120px',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  count: {
+    all: 'unset',
+    margin: '0 15px',
+    minWidth: '25px',
+    textAlign: 'center',
+    display: 'inline-block',
+  },
+}));
+
+const NumberField = ({ name, label, value, setData }) => {
   const handleDecrease = () => {
     setData(prevState => ({
       ...prevState,
@@ -19,29 +44,19 @@ const NumberField = ({ name, label, data, setData }) => {
     }));
   };
 
+  const classes = useStyle();
+
   return (
-    <Box sx={{ mt: '10px', display: 'flex', justifyContent: 'space-between' }}>
-      <Typography variant='subtitle2' sx={{ fontWeight: 700 }}>
-        {label}
-      </Typography>
-      <Box sx={{ minWidth: '120px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        <Button
-          sx={{ width: 30, height: 30, borderRadius: '50%', minWidth: 30 }}
-          variant='contained'
-          aria-label='reduce'
-          onClick={handleDecrease}
-        >
+    <Box className={classes.root}>
+      <SmallTitle variant='subtitle2'>{label}</SmallTitle>
+      <Box className={classes.btnGroup}>
+        <CircleButton variant='contained' size='small' aria-label='reduce' onClick={handleDecrease}>
           <RemoveIcon fontSize='small' />
-        </Button>
-        <span style={{ margin: '0 15px', minWidth: '25px', textAlign: 'center' }}>{data[name]}</span>
-        <Button
-          sx={{ width: 30, height: 30, borderRadius: '50%', minWidth: 30 }}
-          variant='contained'
-          aria-label='increase'
-          onClick={handleIncrease}
-        >
+        </CircleButton>
+        <span className={classes.count}>{value}</span>
+        <CircleButton variant='contained' size='small' aria-label='increase' onClick={handleIncrease}>
           <AddIcon fontSize='small' />
-        </Button>
+        </CircleButton>
       </Box>
     </Box>
   );

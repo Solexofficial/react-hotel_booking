@@ -8,7 +8,7 @@ import { DatePickerField, NumberField } from '../../common/form/fields';
 import SmallTitle from '../../common/typography/smallTitle';
 import Title from '../../common/typography/title';
 import Accordion from '../accordion';
-import Button from '../buttons/Button';
+import Button from '../buttons/button';
 import useStyles from './styles';
 
 const initialDate = { adults: 0, children: 0, babies: 0, arrival: null, departure: null };
@@ -80,9 +80,9 @@ const SearchRoomsForm = () => {
             Гости
           </SmallTitle>
           <Accordion label={getAccordionLabel()}>
-            <NumberField label='Взрослые' name='adults' data={data} setData={setData} />
-            <NumberField label='Дети' name='children' data={data} setData={setData} />
-            <NumberField label='Младенцы' name='babies' data={data} setData={setData} />
+            <NumberField label='Взрослые' name='adults' value={data.adults} setData={setData} />
+            <NumberField label='Дети' name='children' value={data.children} setData={setData} />
+            <NumberField label='Младенцы' name='babies' value={data.babies} setData={setData} />
           </Accordion>
         </FormControl>
         <Button variant='outlined' size='small' onClick={resetForm} className={classes.btnReset}>
