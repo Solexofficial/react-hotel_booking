@@ -19,7 +19,9 @@ const DatePickerField = ({ label, name, value, onChange, ...rest }) => {
         mask='__.__.____'
         label={label}
         value={value}
-        onChange={date => onChange(convertToDefEventParam(name, date))}
+        onChange={date => {
+          onChange(convertToDefEventParam(name, new Date(date).getTime()));
+        }}
         {...rest}
         renderInput={params => <TextField {...params} />}
       />

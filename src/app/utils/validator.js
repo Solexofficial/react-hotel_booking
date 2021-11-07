@@ -4,10 +4,11 @@ export function validator(data, config) {
     let statusValidate;
     switch (validateMethod) {
       case 'isRequired': {
+        console.log(data);
         if (typeof data === 'boolean') {
           statusValidate = !data;
         } else {
-          statusValidate = data.trim() === '';
+          statusValidate = data && data.trim() === '';
         }
         break;
       }
@@ -28,6 +29,10 @@ export function validator(data, config) {
       }
       case 'min': {
         statusValidate = data.length < config.value;
+        break;
+      }
+      case 'isValidDate': {
+        statusValidate = data === 0;
         break;
       }
       default:

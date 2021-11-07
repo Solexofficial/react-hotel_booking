@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { validator } from '../utils/validator';
 
-export function useForm(initialData, validateOnChange = false, validatorConfig) {
+export function useForm(initialData, validateOnChange, validatorConfig) {
   const [data, setData] = useState(initialData || {});
   const [errors, setErrors] = useState({});
 
@@ -70,11 +70,13 @@ const useStyles = makeStyles(theme => ({
 
 export function Form({ children, handleChange, data, errors, handleKeyDown, ...rest }) {
   const classes = useStyles();
-
   const clonedElements = React.Children.map(children, child => {
     const childType = typeof child.type;
     let config = {};
-    if (childType === 'object' || (childType === 'function' && child.props.type !== 'submit')) {
+    if (
+      childType === 'object' ||
+      (childType === 'function' && child.props.type !== 'submit' && child.props.type !== 'button')
+    ) {
       if (!child.props.name) {
         throw new Error('name property is required for field component', child);
       }
@@ -85,13 +87,6 @@ export function Form({ children, handleChange, data, errors, handleKeyDown, ...r
         error: errors[child.props.name],
         onKeyDown: handleKeyDown,
       };
-    }
-    if (childType === 'string') {
-      if (child.type === 'button') {
-        if (child.props.type === 'submit' || child.props.type === undefined) {
-          config = { ...child.props, disabled: true };
-        }
-      }
     }
     return React.cloneElement(child, config);
   });

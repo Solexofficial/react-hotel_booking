@@ -1,4 +1,14 @@
 const validatorConfig = {
+  firstName: {
+    isRequired: {
+      message: 'Поле "Имя" обязательно для заполнения',
+    },
+  },
+  secondName: {
+    isRequired: {
+      message: 'Поле "Фамилия" обязательно для заполнения',
+    },
+  },
   email: {
     isRequired: {
       message: 'Электронная почта обязательна для заполнения',

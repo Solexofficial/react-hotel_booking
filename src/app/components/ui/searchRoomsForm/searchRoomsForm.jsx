@@ -1,39 +1,37 @@
-import { FormControl } from '@material-ui/core';
 import { ArrowRight } from '@mui/icons-material';
 import { Card } from '@mui/material';
 import React from 'react';
-import { useForm, Form } from '../../../hooks/useForm';
+import { Form, useForm } from '../../../hooks/useForm';
 import declOfNum from '../../../utils/declOfNum';
 import { DatePickerField, NumberField } from '../../common/form/fields';
-import SmallTitle from '../../common/typography/smallTitle';
 import Title from '../../common/typography/title';
 import Accordion from '../accordion';
 import Button from '../buttons/button';
 import useStyles from './styles';
+import validatorConfig from './validatorConfig';
 
-const initialDate = { adults: 0, children: 0, babies: 0, arrival: null, departure: null };
+const initialData = {
+  adults: 0,
+  children: 0,
+  babies: 0,
+  arrival: new Date(Date.now()),
+  departure: new Date(Date.now()),
+};
 
 const SearchRoomsForm = () => {
   const classes = useStyles();
-  const validate = (fieldValues = data) => {
-    let temp = { ...errors };
-    if ('fullName' in fieldValues) temp.fullName = fieldValues.fullName ? '' : 'This field is required.';
-    if ('email' in fieldValues) temp.email = /$^|.+@.+..+/.test(fieldValues.email) ? '' : 'Email is not valid.';
-    if ('mobile' in fieldValues) temp.mobile = fieldValues.mobile.length > 9 ? '' : 'Minimum 10 numbers required.';
-    if ('departmentId' in fieldValues)
-      temp.departmentId = fieldValues.departmentId.length !== 0 ? '' : 'This field is required.';
-    setErrors({
-      ...temp,
-    });
 
-    if (fieldValues === data) return Object.values(temp).every(x => x === '');
-  };
-
-  const { data, setData, errors, setErrors, handleInputChange, resetForm } = useForm(initialDate, true, validate);
+  const { data, setData, errors, handleInputChange, handleKeyDown, validate, resetForm } = useForm(
+    initialData,
+    true,
+    validatorConfig
+  );
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (validate()) {
+    console.log(errors);
+    console.log(validate(data));
+    if (validate(data)) {
       console.log(data);
       resetForm();
     }
@@ -53,55 +51,48 @@ const SearchRoomsForm = () => {
   };
 
   return (
-    <>
-      <Card raised className={classes.root}>
-        <Form onSubmit={handleSubmit}>
-          <Title isBold>Найдём номера под ваши пожелания</Title>
-          <FormControl fullWidth>
-            <DatePickerField
-              label='Дата прибытия'
-              value={data.arrival}
-              minDate={Date.now()}
-              onChange={handleInputChange}
-              name='arrival'
-              inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-            />
-            <DatePickerField
-              label='Дата выезда'
-              value={data.departure}
-              minDate={Date.now()}
-              onChange={handleInputChange}
-              name='departure'
-              inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-            />
-          </FormControl>
-          <FormControl fullWidth>
-            <SmallTitle isBold upperCase>
-              Гости
-            </SmallTitle>
-            <Accordion label={getAccordionLabel()}>
-              <NumberField label='Взрослые' name='adults' value={data.adults} setData={setData} />
-              <NumberField label='Дети' name='children' value={data.children} setData={setData} />
-              <NumberField label='Младенцы' name='babies' value={data.babies} setData={setData} />
-            </Accordion>
-          </FormControl>
-          <Button variant='outlined' size='small' onClick={resetForm} className={classes.btnReset}>
-            Очистить
-          </Button>
-          <Button
-            variant='contained'
-            size='large'
-            color='primary'
-            endIcon={<ArrowRight />}
-            className={classes.btnSubmit}
-            onClick={handleSubmit}
-            fullWidth
-          >
-            Подобрать номер
-          </Button>
-        </Form>
-      </Card>
-    </>
+    <Card raised className={classes.root}>
+      <Title isBold>Найдём номера под ваши пожелания</Title>
+      <Form
+        onSubmit={handleSubmit}
+        data={data}
+        errors={errors}
+        handleChange={handleInputChange}
+        handleKeyDown={handleKeyDown}
+      >
+        <DatePickerField
+          label='Дата прибытия'
+          minDate={Date.now()}
+          name='arrival'
+          clearable
+          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
+        />
+        <DatePickerField
+          label='Дата выезда'
+          minDate={Date.now()}
+          name='departure'
+          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
+        />
+        <Accordion label={getAccordionLabel()} name='accordion'>
+          <NumberField label='Взрослые' name='adults' value={data.adults} setData={setData} />
+          <NumberField label='Дети' name='children' value={data.children} setData={setData} />
+          <NumberField label='Младенцы' name='babies' value={data.babies} setData={setData} />
+        </Accordion>
+        <Button variant='outlined' type='button' size='small' onClick={resetForm} className={classes.btnReset}>
+          Очистить
+        </Button>
+        <Button
+          endIcon={<ArrowRight />}
+          type='submit'
+          className={classes.btnSubmit}
+          onClick={handleSubmit}
+          disabled={Object.keys(errors).length > 0}
+          fullWidth
+        >
+          Подобрать номер
+        </Button>
+      </Form>
+    </Card>
   );
 };
 
