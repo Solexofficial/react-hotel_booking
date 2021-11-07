@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 
 export function useForm(initialData, validateOnChange = false, validate) {
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState(initialData || {});
   const [errors, setErrors] = useState({});
 
-  const handleInputChange = e => {
+  const handleInputChange = useCallback(e => {
     const { name, value } = e.target;
     setData({
       ...data,
       [name]: value,
     });
     if (validateOnChange) validate({ [name]: value });
-  };
+  }, []);
 
   const resetForm = () => {
     setData(initialData);

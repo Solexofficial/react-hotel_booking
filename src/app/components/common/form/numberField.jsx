@@ -1,11 +1,10 @@
-import React from 'react';
+import { makeStyles } from '@material-ui/core';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Box } from '@mui/system';
+import React from 'react';
 import CircleButton from '../../ui/buttons/circleButton';
 import SmallTitle from '../typography/smallTitle';
-import { makeStyles } from '@material-ui/core';
-import { InputField } from './fields';
 
 const useStyle = makeStyles(theme => ({
   root: {

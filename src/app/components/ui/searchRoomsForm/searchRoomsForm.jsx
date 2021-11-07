@@ -2,7 +2,7 @@ import { FormControl } from '@material-ui/core';
 import { ArrowRight } from '@mui/icons-material';
 import { Card } from '@mui/material';
 import React from 'react';
-import { useForm } from '../../../hooks/useForm';
+import { useForm, Form } from '../../../hooks/useForm';
 import declOfNum from '../../../utils/declOfNum';
 import { DatePickerField, NumberField } from '../../common/form/fields';
 import SmallTitle from '../../common/typography/smallTitle';
@@ -44,61 +44,62 @@ const SearchRoomsForm = () => {
     const countBabies = data.babies;
     const guestsStr = `${countGuests} ${declOfNum(countGuests, ['гость', 'гостя', 'гостей'])}`;
     const babiesStr = `${countBabies} ${declOfNum(countBabies, ['младенец', 'младенца', 'младенцев'])}`;
+
     if (countGuests > 0 && countBabies > 0) {
       return `${guestsStr} ${babiesStr}`;
     }
 
-    if (countGuests > 0) {
-      return guestsStr;
-    }
-    return 'Сколько гостей';
+    return countGuests > 0 ? guestsStr : 'Сколько гостей';
   };
 
   return (
     <>
       <Card raised className={classes.root} component='form'>
-        <FormControl fullWidth>
+        <Form onSubmit={handleSubmit}>
           <Title isBold>Найдём номера под ваши пожелания</Title>
-          <DatePickerField
-            label='Дата прибытия'
-            value={data.arrival}
-            onChange={handleInputChange}
-            name='arrival'
-            inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-          />
-          <DatePickerField
-            label='Дата выезда'
-            value={data.departure}
-            minDate={Date.now()}
-            onChange={handleInputChange}
-            name='departure'
-            inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-          />
-        </FormControl>
-        <FormControl fullWidth>
-          <SmallTitle isBold upperCase>
-            Гости
-          </SmallTitle>
-          <Accordion label={getAccordionLabel()}>
-            <NumberField label='Взрослые' name='adults' value={data.adults} setData={setData} />
-            <NumberField label='Дети' name='children' value={data.children} setData={setData} />
-            <NumberField label='Младенцы' name='babies' value={data.babies} setData={setData} />
-          </Accordion>
-        </FormControl>
-        <Button variant='outlined' size='small' onClick={resetForm} className={classes.btnReset}>
-          Очистить
-        </Button>
-        <Button
-          variant='contained'
-          size='large'
-          color='primary'
-          endIcon={<ArrowRight />}
-          className={classes.btnSubmit}
-          onClick={handleSubmit}
-          fullWidth
-        >
-          Подобрать номер
-        </Button>
+          <FormControl fullWidth>
+            <DatePickerField
+              label='Дата прибытия'
+              value={data.arrival}
+              minDate={Date.now()}
+              onChange={handleInputChange}
+              name='arrival'
+              inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
+            />
+            <DatePickerField
+              label='Дата выезда'
+              value={data.departure}
+              minDate={Date.now()}
+              onChange={handleInputChange}
+              name='departure'
+              inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <SmallTitle isBold upperCase>
+              Гости
+            </SmallTitle>
+            <Accordion label={getAccordionLabel()}>
+              <NumberField label='Взрослые' name='adults' value={data.adults} setData={setData} />
+              <NumberField label='Дети' name='children' value={data.children} setData={setData} />
+              <NumberField label='Младенцы' name='babies' value={data.babies} setData={setData} />
+            </Accordion>
+          </FormControl>
+          <Button variant='outlined' size='small' onClick={resetForm} className={classes.btnReset}>
+            Очистить
+          </Button>
+          <Button
+            variant='contained'
+            size='large'
+            color='primary'
+            endIcon={<ArrowRight />}
+            className={classes.btnSubmit}
+            onClick={handleSubmit}
+            fullWidth
+          >
+            Подобрать номер
+          </Button>
+        </Form>
       </Card>
     </>
   );

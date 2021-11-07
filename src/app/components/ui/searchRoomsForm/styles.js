@@ -4,7 +4,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginTop: '70px',
     padding: '30px',
-    paddingTop: '40px',
     background: '#fff',
     width: 380,
   },
