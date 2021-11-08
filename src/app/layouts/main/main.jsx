@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
+import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import ImageSlider from '../../components/common/slider';
 import SearchRoomsForm from '../../components/ui/searchRoomsForm/searchRoomsForm';
@@ -19,6 +20,7 @@ const Main = () => {
           </Typography>
         </Box>
       </Container>
+      <Footer />
     </>
   );
 };
