@@ -1,4 +1,5 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Link } from '@material-ui/core';
+import { GitHub } from '@mui/icons-material';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import HomeLogo from '../../icons/logo';
@@ -14,145 +15,128 @@ const Footer = () => {
   const SubscribeInput = withSubscribe(InputField);
   const classes = useStyles();
   return (
-    <>
-      <Grid container component='footer' className='footer__main'>
-        <Container>
-          <div className={classes.footerContainer}>
-            <div className={classes.footerLogo}>
-              <NavLink to='/' className={classes.footerLinkLogo}>
-                <HomeLogo viewBox='0 0 40 40' />
-                <Title variant='h6' component='h2' className={classes.footerLogoTitle}>
-                  Toxin
-                </Title>
-              </NavLink>
-              <Text variant='subtitle2'>
-                Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»
-              </Text>
-            </div>
-            <nav className={classes.footerNav}>
-              <ul className='footer__item'>
+    <footer className={classes.root}>
+      <Container>
+        <Grid container spacing={2} className={classes.footerMainWrapper}>
+          <Grid item xs={3}>
+            <NavLink to='/' className={classes.footerLinkLogo}>
+              <HomeLogo viewBox='0 0 40 40' />
+              <Title variant='h6' component='h2' className={classes.footerLogoTitle}>
+                Toxin
+              </Title>
+            </NavLink>
+            <Text variant='subtitle2'>
+              Бронирование номеров в лучшем отеле 2021 года по версии ассоциации «Отельные взгляды»
+            </Text>
+          </Grid>
+          <Grid item xs={6} component='nav' className={classes.footerNav}>
+            <Grid spacing={6} container direction='row'>
+              <Grid item direction='column'>
                 <Title isBold component='h3' variant='subtitle2'>
                   Навигация
                 </Title>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     О нас
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Новости
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Служба поддержки
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Услуги
-                  </a>
-                </li>
-              </ul>
-              <ul className='footer__item'>
+                  </NavLink>
+                </Grid>
+              </Grid>
+              <Grid item direction='column' className='footer__item'>
                 <Title isBold component='h3' variant='subtitle2'>
                   О нас
                 </Title>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     О сервисе
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Наша команда
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Вакансии
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Инвесторы
-                  </a>
-                </li>
-              </ul>
-              <ul className='footer__item'>
+                  </NavLink>
+                </Grid>
+              </Grid>
+              <Grid item direction='column' className='footer__item'>
                 <Title isBold component='h3' variant='subtitle2'>
                   Служба поддержки
                 </Title>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Соглашения
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Сообщества
-                  </a>
-                </li>
-                <li className='footer__list-item'>
-                  <a className='footer__list-link' href='#!'>
+                  </NavLink>
+                </Grid>
+                <Grid item className='footer__list-item'>
+                  <NavLink to='/' className={classes.footerNavLink}>
                     Связь с нами
-                  </a>
-                </li>
-              </ul>
-            </nav>
+                  </NavLink>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={3}>
             <form className='footer__newsletter'>
-              <h3 className='footer__title'>Подписка</h3>
-              <p className='footer__info'>Получайте специальные предложения и новости сервиса</p>
+              <Title isBold component='h3' variant='subtitle2'>
+                Подписка
+              </Title>
+              <Text variant='subtitle2'>Получайте специальные предложения и новости сервиса</Text>
               <div className='footer__input-newsletter'>
                 <div className='field'>
                   <div className='field__wrapper'>
-                    <SubscribeInput placeholder='Email' name='email' type='email' />
+                    <SubscribeInput size='small' placeholder='Email' name='email' type='email' />
                   </div>
                 </div>
               </div>
             </form>
-          </div>
-        </Container>
-      </Grid>
-      <Divider variant='fullWidth' />
+          </Grid>
+        </Grid>
+      </Container>
+      <Divider variant='fullWidth' className={classes.footerDivider} />
       <Container>
-        <div className='footer__sub'>
-          <div className='footer__sub-container'>
-            <p className='footer__copyright'>Copyright © 2019 Toxin отель. Все права зачищены.</p>
-            <nav className='footer__soc-list'>
-              <ul className='footer__item'>
-                <li className='footer__soc-item'>
-                  <a className='footer__soc-link' href='https://twitter.com/' rel='noopener noreferrer' target='_blank'>
-                    <img className='footer__soc-ico' src='/Toxin/twitter.62ede93e.svg' alt='Twitter' />
-                  </a>
-                </li>
-                <li className='footer__soc-item'>
-                  <a
-                    className='footer__soc-link'
-                    href='https://www.facebook.com/'
-                    rel='noopener noreferrer'
-                    target='_blank'
-                  >
-                    <img className='footer__soc-ico' src='/Toxin/fb.1976a669.svg' alt='FaceBook' />
-                  </a>
-                </li>
-                <li className='footer__soc-item'>
-                  <a
-                    className='footer__soc-link'
-                    href='https://www.instagram.com/'
-                    rel='noopener noreferrer'
-                    target='_blank'
-                  >
-                    <img className='footer__soc-ico' src='/Toxin/ig.5706be58.svg' alt='Instagram' />
-                  </a>
-                </li>
-              </ul>
-            </nav>
+        <div className={classes.footerSub}>
+          <div className={classes.footerSubContainer}>
+            <Text variant='text'>Copyright © 2021 Toxin отель. Все права зачищены.</Text>
+            <Link underline='none' href='https://github.com/Solexofficial' rel='noopener noreferrer' target='_blank'>
+              <div className={classes.footerSocial}>
+                <GitHub />
+                <Text component='span' className={classes.footerSocialTextLink}>
+                  Solexofficial
+                </Text>
+              </div>
+            </Link>
           </div>
         </div>
       </Container>
-    </>
+    </footer>
   );
 };
 
