@@ -52,7 +52,9 @@ const SearchRoomsForm = () => {
 
   return (
     <Paper elevation={3} className={classes.root}>
-      <Title isBold>Найдём номера под ваши пожелания</Title>
+      <Title isBold component='h2' variant='h5'>
+        Найдём номера под ваши пожелания
+      </Title>
       <Form
         onSubmit={handleSubmit}
         data={data}

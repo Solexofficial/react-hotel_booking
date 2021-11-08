@@ -26,7 +26,9 @@ const Login = () => {
         <Card className={classes.formWrapper}>
           {formType === 'register' ? (
             <>
-              <Title isBold>Войти</Title>
+              <Title isBold component='h2' variant='h5'>
+                Войти
+              </Title>
               <LoginForm />
               <Box className={classes.formFooter}>
                 <Text variant='subtitle2' component='h5'>
@@ -39,7 +41,9 @@ const Login = () => {
             </>
           ) : (
             <>
-              <Title isBold>Регистрация</Title>
+              <Title isBold component='h2' variant='h5'>
+                Регистрация
+              </Title>
               <RegisterForm />
               <Box className={classes.formFooter}>
                 <Text variant='subtitle2' component='h5'>

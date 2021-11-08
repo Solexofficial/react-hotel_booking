@@ -5,10 +5,10 @@ const useStyles = makeStyles(theme => ({
     padding: '100px 0 50px',
   },
   footerContainer: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   footerLogo: {
     maxWidth: '33.33%',
