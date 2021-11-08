@@ -2,6 +2,7 @@ import { Card, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
+import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Text from '../../components/common/typography/text';
 import Title from '../../components/common/typography/title';
@@ -20,44 +21,47 @@ const Login = () => {
   };
 
   return (
-    <Container>
+    <>
       <Header />
-      <Box className={classes.rootWrapper}>
-        <Card className={classes.formWrapper}>
-          {formType === 'register' ? (
-            <>
-              <Title isBold component='h2' variant='h5'>
-                Войти
-              </Title>
-              <LoginForm />
-              <Box className={classes.formFooter}>
-                <Text variant='subtitle2' component='h5'>
-                  Нет аккаунта на Toxin?
-                </Text>
-                <Button variant='outlined' size='small' onClick={toggleFormType}>
-                  Создать
-                </Button>
-              </Box>
-            </>
-          ) : (
-            <>
-              <Title isBold component='h2' variant='h5'>
-                Регистрация
-              </Title>
-              <RegisterForm />
-              <Box className={classes.formFooter}>
-                <Text variant='subtitle2' component='h5'>
-                  Уже есть аккаунт на Toxin?
-                </Text>
-                <Button variant='outlined' size='small' onClick={toggleFormType}>
+      <Container>
+        <Box className={classes.rootWrapper}>
+          <Card className={classes.formWrapper}>
+            {formType === 'register' ? (
+              <>
+                <Title isBold component='h2' variant='h5'>
                   Войти
-                </Button>
-              </Box>
-            </>
-          )}
-        </Card>
-      </Box>
-    </Container>
+                </Title>
+                <LoginForm />
+                <Box className={classes.formFooter}>
+                  <Text variant='subtitle2' component='h5'>
+                    Нет аккаунта на Toxin?
+                  </Text>
+                  <Button variant='outlined' size='small' onClick={toggleFormType}>
+                    Создать
+                  </Button>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Title isBold component='h2' variant='h5'>
+                  Регистрация
+                </Title>
+                <RegisterForm />
+                <Box className={classes.formFooter}>
+                  <Text variant='subtitle2' component='h5'>
+                    Уже есть аккаунт на Toxin?
+                  </Text>
+                  <Button variant='outlined' size='small' onClick={toggleFormType}>
+                    Войти
+                  </Button>
+                </Box>
+              </>
+            )}
+          </Card>
+        </Box>
+      </Container>
+      <Footer />
+    </>
   );
 };
 

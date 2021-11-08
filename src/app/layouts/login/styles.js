@@ -3,6 +3,7 @@ import background from '../../assets/img/signIn-background.jpg';
 
 const useStyles = makeStyles(theme => ({
   rootWrapper: {
+    height: '90vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
       backgroundSize: 'cover',
       zIndex: -1,
       display: 'block',
-      top: '-10%',
+      top: '0',
     },
   },
   formFooter: {
@@ -28,7 +29,6 @@ const useStyles = makeStyles(theme => ({
   formWrapper: {
     padding: '30px',
     paddingTop: '40px',
-    marginTop: '100px',
     width: '480px',
   },
 }));

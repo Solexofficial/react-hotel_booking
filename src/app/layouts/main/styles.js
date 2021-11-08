@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
   contentWrapper: {
-    height: '826px',
+    height: '90vh',
     display: 'flex',
     flexDirection: 'column',
   },
