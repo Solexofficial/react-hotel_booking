@@ -37,8 +37,6 @@ const LoginForm = () => {
 
   const InputFieldWithPassword = useMemo(() => withPassword(InputField), []);
 
-  console.log(Object.values(errors));
-
   return (
     <Form
       onSubmit={handleSubmit}
@@ -60,7 +58,7 @@ const LoginForm = () => {
       <InputField name='email' label='Почта' />
       <InputFieldWithPassword name='password' label='Пароль' type='password' inputProps={{ type: 'password' }} />
       <Switch name='subscribe' label='Получать спецпредложения' />
-      <Button type='submit' onClick={handleSubmit} fullWidth disabled={!Object.values(errors).every(x => x === '')}>
+      <Button type='submit' onClick={handleSubmit} fullWidth disabled={Object.keys(errors).length !== 0}>
         Зарегистрироваться
       </Button>
     </Form>
