@@ -28,22 +28,27 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-const NumberField = ({ name, label, value, setData }) => {
+const NumberField = ({ name, label, value, setData, fieldName }) => {
+  const classes = useStyle();
+
+  const handleIncrease = () => {
+    setData(prevState => {
+      return {
+        ...prevState,
+        [fieldName]: { ...prevState[fieldName], [name]: { ...prevState[fieldName][name], value: value + 1 } },
+      };
+    });
+  };
+
   const handleDecrease = () => {
     setData(prevState => ({
       ...prevState,
-      [name]: prevState[name] > 0 ? +prevState[name] - 1 : 0,
+      [fieldName]: {
+        ...prevState[fieldName],
+        [name]: { ...prevState[fieldName][name], value: value > 0 ? value - 1 : 0 },
+      },
     }));
   };
-
-  const handleIncrease = () => {
-    setData(prevState => ({
-      ...prevState,
-      [name]: +prevState[name] + 1,
-    }));
-  };
-
-  const classes = useStyle();
 
   return (
     <Box className={classes.root}>

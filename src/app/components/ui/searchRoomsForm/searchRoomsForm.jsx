@@ -1,6 +1,7 @@
 import { ArrowRight } from '@mui/icons-material';
 import { Paper } from '@mui/material';
 import React from 'react';
+import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../hooks/useForm';
 import declOfNum from '../../../utils/declOfNum';
 import { DatePickerField, NumberField } from '../../common/form/fields';
@@ -9,17 +10,25 @@ import Accordion from '../accordion';
 import Button from '../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
+import queryString from 'query-string';
+import GuestsDropDownField from '../../common/form/guestsDropDownField';
 
 const initialData = {
+  guests: {
+    adults: { name: 'adults', label: 'Взрослые', value: 0 },
+    children: { name: 'children', label: 'Дети', value: 0 },
+    babies: { name: 'babies', label: 'Младенцы', value: 0 },
+  },
   adults: 0,
   children: 0,
   babies: 0,
-  arrival: new Date(Date.now()),
-  departure: new Date(Date.now()),
+  arrival: new Date(Date.now()).getTime(),
+  departure: new Date(Date.now()).getTime(),
 };
 
 const SearchRoomsForm = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const { data, setData, errors, handleInputChange, handleKeyDown, validate, resetForm } = useForm(
     initialData,
@@ -29,11 +38,12 @@ const SearchRoomsForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(errors);
-    console.log(validate(data));
     if (validate(data)) {
       console.log(data);
+      const queryStr = queryString.stringify({ ...data, guests: JSON.stringify(data.guests) });
+      console.log(queryStr);
       resetForm();
+      history.push(`/rooms/?${queryStr}`);
     }
   };
 
@@ -75,11 +85,12 @@ const SearchRoomsForm = () => {
           name='departure'
           inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         />
-        <Accordion label={getAccordionLabel()} name='accordion'>
+        <GuestsDropDownField name='guests' setData={setData} data={data} />
+        {/* <Accordion label={getAccordionLabel()} name='accordion'>
           <NumberField label='Взрослые' name='adults' value={data.adults} setData={setData} />
           <NumberField label='Дети' name='children' value={data.children} setData={setData} />
           <NumberField label='Младенцы' name='babies' value={data.babies} setData={setData} />
-        </Accordion>
+        </Accordion> */}
         <Button variant='outlined' type='button' size='small' onClick={resetForm} className={classes.btnReset}>
           Очистить
         </Button>
