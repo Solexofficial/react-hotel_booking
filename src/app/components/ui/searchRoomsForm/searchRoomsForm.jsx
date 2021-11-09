@@ -85,11 +85,6 @@ const SearchRoomsForm = () => {
           inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         />
         <GuestsDropDownField name='guests' setData={setData} data={data} />
-        {/* <Accordion label={getAccordionLabel()} name='accordion'>
-          <NumberField label='Взрослые' name='adults' value={data.adults} setData={setData} />
-          <NumberField label='Дети' name='children' value={data.children} setData={setData} />
-          <NumberField label='Младенцы' name='babies' value={data.babies} setData={setData} />
-        </Accordion> */}
         <Button variant='outlined' type='button' size='small' onClick={resetForm} className={classes.btnReset}>
           Очистить
         </Button>

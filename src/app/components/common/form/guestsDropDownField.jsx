@@ -38,19 +38,12 @@ const GuestsDropDownField = ({ value, setData, name }) => {
 
   if (data) {
     return (
-      <>
-        <h1>GUESTS</h1>
-        <Accordion label={getAccordionLabel()}>
-          {Object.values(data).map(guest => {
-            const { value, name, label } = guest;
-            return <NumberField key={name} label={label} name={name} value={value} onIncrease={handleIncrease} />;
-          })}
-        </Accordion>
-        <hr />
-        <hr />
-        <hr />
-        <hr />
-      </>
+      <Accordion label={getAccordionLabel()}>
+        {Object.values(data).map(guest => {
+          const { value, name, label } = guest;
+          return <NumberField key={name} label={label} name={name} value={value} onIncrease={handleIncrease} />;
+        })}
+      </Accordion>
     );
   }
   return <h1>Loading...</h1>;
