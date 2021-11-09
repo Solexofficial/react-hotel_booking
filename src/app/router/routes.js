@@ -1,6 +1,6 @@
-import Login from '../layouts/login/login.jsx';
-import Main from '../layouts/main/main.jsx';
-import Rooms from '../layouts/rooms';
+import Login from '../layouts/login/login';
+import Main from '../layouts/main/main';
+import Rooms from '../layouts/rooms/rooms';
 import Dashboard from '../layouts/dashboard';
 
 export const publicRoutes = [

@@ -22,6 +22,7 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
         ...prevState,
         [name]: value,
       }));
+      console.log(data);
       if (validateOnChange) validate({ [name]: value });
     },
     [validateOnChange, validate]
