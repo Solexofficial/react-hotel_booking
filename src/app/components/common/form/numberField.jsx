@@ -28,26 +28,11 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-const NumberField = ({ name, label, value, setData, fieldName }) => {
+const NumberField = ({ name, label, value, setData, setState, parentFieldName, onIncrease }) => {
   const classes = useStyle();
 
-  const handleIncrease = () => {
-    setData(prevState => {
-      return {
-        ...prevState,
-        [fieldName]: { ...prevState[fieldName], [name]: { ...prevState[fieldName][name], value: value + 1 } },
-      };
-    });
-  };
-
   const handleDecrease = () => {
-    setData(prevState => ({
-      ...prevState,
-      [fieldName]: {
-        ...prevState[fieldName],
-        [name]: { ...prevState[fieldName][name], value: value > 0 ? value - 1 : 0 },
-      },
-    }));
+    return null;
   };
 
   return (
@@ -58,7 +43,7 @@ const NumberField = ({ name, label, value, setData, fieldName }) => {
           <RemoveIcon fontSize='small' />
         </CircleButton>
         <span className={classes.count}>{value}</span>
-        <CircleButton variant='contained' size='small' aria-label='increase' onClick={handleIncrease}>
+        <CircleButton variant='contained' size='small' aria-label='increase' onClick={() => onIncrease(name)}>
           <AddIcon fontSize='small' />
         </CircleButton>
       </Box>

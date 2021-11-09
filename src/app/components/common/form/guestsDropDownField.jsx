@@ -4,13 +4,13 @@ import Accordion from '../../ui/accordion';
 import NumberField from './numberField';
 
 const GuestsDropDownField = ({ value, setData, name }) => {
-  const fieldName = name;
-  console.log('value', value);
-  console.log('fieldName', fieldName);
+  const [data, dataKey] = [value, name];
+  console.log(data);
 
   const getAccordionLabel = () => {
-    const countGuests = Number(value.adults) + Number(value.children) + Number(value.babies);
-    const countBabies = Number(value.babies);
+    console.log('label accordion', data);
+    const countGuests = Object.values(data).reduce((acc, cur) => acc + cur.value, 0);
+    const countBabies = Number(data.babies.value);
     const guestsStr = `${countGuests} ${declOfNum(countGuests, ['гость', 'гостя', 'гостей'])}`;
     const babiesStr = `${countBabies} ${declOfNum(countBabies, ['младенец', 'младенца', 'младенцев'])}`;
 
@@ -21,26 +21,39 @@ const GuestsDropDownField = ({ value, setData, name }) => {
     return countGuests > 0 ? guestsStr : 'Сколько гостей';
   };
 
-  return (
-    <>
-      <h1>GUESTS</h1>
-      <Accordion label={getAccordionLabel()}>
-        {/*   <NumberField label='Взрослые' name='adults' value={value.adults} setData={setData} />
-        <NumberField label='Дети' name='children' value={value.children} setData={setData} />
-        <NumberField label='Младенцы' name='babies' value={value.babies} setData={setData} /> */}
-        {Object.values(value).map(guest => {
-          const { value, name, label } = guest;
-          return (
-            <NumberField key={name} label={label} name={name} value={value} setData={setData} fieldName={fieldName} />
-          );
-        })}
-      </Accordion>
-      <hr />
-      <hr />
-      <hr />
-      <hr />
-    </>
-  );
+  const handleIncrease = name => {
+    setData(prevState => {
+      return {
+        ...prevState,
+        [dataKey]: {
+          ...prevState[dataKey],
+          [name]: {
+            ...prevState[dataKey][name],
+            value: prevState[dataKey][name].value + 1,
+          },
+        },
+      };
+    });
+  };
+
+  if (data) {
+    return (
+      <>
+        <h1>GUESTS</h1>
+        <Accordion label={getAccordionLabel()}>
+          {Object.values(data).map(guest => {
+            const { value, name, label } = guest;
+            return <NumberField key={name} label={label} name={name} value={value} onIncrease={handleIncrease} />;
+          })}
+        </Accordion>
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+      </>
+    );
+  }
+  return <h1>Loading...</h1>;
 };
 
 export default GuestsDropDownField;

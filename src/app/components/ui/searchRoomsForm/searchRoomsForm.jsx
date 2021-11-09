@@ -39,9 +39,8 @@ const SearchRoomsForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (validate(data)) {
-      console.log(data);
+      console.log('data##########:', data);
       const queryStr = queryString.stringify({ ...data, guests: JSON.stringify(data.guests) });
-      console.log(queryStr);
       resetForm();
       history.push(`/rooms/?${queryStr}`);
     }
@@ -81,7 +80,7 @@ const SearchRoomsForm = () => {
         />
         <DatePickerField
           label='Дата выезда'
-          minDate={Date.now()}
+          minDate={new Date(data.arrival)}
           name='departure'
           inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         />

@@ -3,6 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import Footer from '../../components/common/footer/footer';
 import DatePickerField from '../../components/common/form/datePickerField';
+import GuestsDropDownField from '../../components/common/form/guestsDropDownField';
 import NumberField from '../../components/common/form/numberField';
 import Header from '../../components/common/header/header';
 import Accordion from '../../components/ui/accordion';
@@ -12,7 +13,7 @@ import declOfNum from '../../utils/declOfNum';
 const Rooms = () => {
   const history = useHistory();
   let data = queryString.parse(history.location.search);
-  console.log('data', { ...data, guests: JSON.parse(data.guests) });
+  console.log('data query', { ...data, guests: JSON.parse(data.guests) });
   data = { ...data, guests: JSON.parse(data.guests) };
 
   const getAccordionLabel = () => {
@@ -32,7 +33,6 @@ const Rooms = () => {
     <>
       <Header />
       <h1>Rooms</h1>
-      <SearchRoomsForm />
       <DatePickerField
         label='Дата прибытия'
         minDate={Date.now()}
@@ -48,11 +48,7 @@ const Rooms = () => {
         inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         value={Number(data.departure)}
       />
-      <Accordion label={getAccordionLabel()} name='accordion'>
-        <NumberField label='Взрослые' name='adults' value={data.adults} />
-        <NumberField label='Дети' name='children' value={data.children} />
-        <NumberField label='Младенцы' name='babies' value={data.babies} />
-      </Accordion>
+      <GuestsDropDownField value={data.guests} name='guests' />
       <Footer />
     </>
   );
