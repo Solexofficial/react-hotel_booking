@@ -5,12 +5,10 @@ import NumberField from './numberField';
 
 const GuestsDropDownField = ({ value, setData, name }) => {
   const [data, dataKey] = [value, name];
-  console.log(data);
 
   const getAccordionLabel = () => {
-    console.log('label accordion', data);
-    const countGuests = Object.values(data).reduce((acc, cur) => acc + cur.value, 0);
-    const countBabies = Number(data.babies.value);
+    const countGuests = data.reduce((acc, cur) => acc + cur.value, 0);
+    const countBabies = Number(data.find(el => el.name === 'babies').value);
     const guestsStr = `${countGuests} ${declOfNum(countGuests, ['гость', 'гостя', 'гостей'])}`;
     const babiesStr = `${countBabies} ${declOfNum(countBabies, ['младенец', 'младенца', 'младенцев'])}`;
 
@@ -22,26 +20,35 @@ const GuestsDropDownField = ({ value, setData, name }) => {
   };
 
   const handleIncrease = name => {
-    setData(prevState => {
-      return {
-        ...prevState,
-        [dataKey]: {
-          ...prevState[dataKey],
-          [name]: {
-            ...prevState[dataKey][name],
-            value: prevState[dataKey][name].value + 1,
-          },
-        },
-      };
-    });
+    setData(prevState => ({
+      ...prevState,
+      [dataKey]: prevState[dataKey].map(el => (el.name === name ? { ...el, value: el.value + 1 } : el)),
+    }));
+  };
+  const handleDecrease = name => {
+    setData(prevState => ({
+      ...prevState,
+      [dataKey]: prevState[dataKey].map(el =>
+        el.name === name ? { ...el, value: el.value > 0 ? el.value - 1 : 0 } : el
+      ),
+    }));
   };
 
   if (data) {
     return (
       <Accordion label={getAccordionLabel()}>
-        {Object.values(data).map(guest => {
+        {data.map(guest => {
           const { value, name, label } = guest;
-          return <NumberField key={name} label={label} name={name} value={value} onIncrease={handleIncrease} />;
+          return (
+            <NumberField
+              key={name}
+              label={label}
+              name={name}
+              value={value}
+              onIncrease={handleIncrease}
+              onDecrease={handleDecrease}
+            />
+          );
         })}
       </Accordion>
     );

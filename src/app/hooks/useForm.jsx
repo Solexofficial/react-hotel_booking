@@ -18,12 +18,10 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
   const handleInputChange = useCallback(
     ({ target }) => {
       const { name, value } = target;
-      console.log('name, value: ', name, value);
       setData(prevState => ({
         ...prevState,
         [name]: value,
       }));
-      console.log('data is: ', data);
       if (validateOnChange) validate({ [name]: value });
     },
     [validateOnChange, validate]

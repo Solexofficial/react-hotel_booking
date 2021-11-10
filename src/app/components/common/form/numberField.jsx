@@ -28,18 +28,14 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-const NumberField = ({ name, label, value, setData, setState, parentFieldName, onIncrease }) => {
+const NumberField = ({ name, label, value, onIncrease, onDecrease }) => {
   const classes = useStyle();
-
-  const handleDecrease = () => {
-    return null;
-  };
 
   return (
     <Box className={classes.root}>
       <SmallTitle variant='subtitle2'>{label}</SmallTitle>
       <Box className={classes.btnGroup}>
-        <CircleButton variant='contained' size='small' aria-label='reduce' onClick={handleDecrease}>
+        <CircleButton variant='contained' size='small' aria-label='reduce' onClick={() => onDecrease(name)}>
           <RemoveIcon fontSize='small' />
         </CircleButton>
         <span className={classes.count}>{value}</span>

@@ -14,11 +14,11 @@ import queryString from 'query-string';
 import GuestsDropDownField from '../../common/form/guestsDropDownField';
 
 const initialData = {
-  guests: {
-    adults: { name: 'adults', label: 'Взрослые', value: 0 },
-    children: { name: 'children', label: 'Дети', value: 0 },
-    babies: { name: 'babies', label: 'Младенцы', value: 0 },
-  },
+  guests: [
+    { name: 'adults', label: 'Взрослые', value: 0 },
+    { name: 'children', label: 'Дети', value: 0 },
+    { name: 'babies', label: 'Младенцы', value: 0 },
+  ],
   adults: 0,
   children: 0,
   babies: 0,
@@ -44,19 +44,6 @@ const SearchRoomsForm = () => {
       resetForm();
       history.push(`/rooms/?${queryStr}`);
     }
-  };
-
-  const getAccordionLabel = () => {
-    const countGuests = data.adults + data.children + data.babies;
-    const countBabies = data.babies;
-    const guestsStr = `${countGuests} ${declOfNum(countGuests, ['гость', 'гостя', 'гостей'])}`;
-    const babiesStr = `${countBabies} ${declOfNum(countBabies, ['младенец', 'младенца', 'младенцев'])}`;
-
-    if (countGuests > 0 && countBabies > 0) {
-      return `${guestsStr} ${babiesStr}`;
-    }
-
-    return countGuests > 0 ? guestsStr : 'Сколько гостей';
   };
 
   return (
