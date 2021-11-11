@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: 'auto',
     padding: '75px 0 50px',
     background: '#fff',
+    borderTop: '1px solid rgba(31,32,65,.25);',
   },
   footerMainWrapper: {
     padding: '30px 0',

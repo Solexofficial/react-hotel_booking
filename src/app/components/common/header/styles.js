@@ -2,15 +2,20 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: '10px',
+    background: '#fff',
     flexGrow: 1,
     zIndex: 1000,
+    boxShadow: '0 10px 20px rgba(31,32,65,.05)',
   },
   headerWrapper: {
     borderRadius: '5px',
+    '&.MuiAppBar-root': {
+      boxShadow: 'none',
+    },
   },
   headerInner: {
     justifyContent: 'space-between',
+    boxShadow: 'none',
   },
 
   headerTitle: {
