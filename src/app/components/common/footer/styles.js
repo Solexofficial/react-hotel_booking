@@ -9,6 +9,13 @@ const useStyles = makeStyles(theme => ({
   footerMainWrapper: {
     padding: '30px 0',
   },
+  footerNavTitle: {
+    '&.MuiTypography-root': {
+      marginBottom: '10px',
+      fontSize: '14px',
+      textTransform: 'uppercase',
+    },
+  },
   footerLogo: {
     maxWidth: '33.33%',
   },

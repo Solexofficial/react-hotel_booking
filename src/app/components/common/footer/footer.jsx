@@ -32,7 +32,7 @@ const Footer = () => {
           <Grid item xs={6} component='nav' className={classes.footerNav}>
             <Grid spacing={6} container direction='row'>
               <Grid item direction='column'>
-                <Title isBold component='h3' variant='subtitle2'>
+                <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
                   Навигация
                 </Title>
                 <Grid item className='footer__list-item'>
@@ -57,7 +57,7 @@ const Footer = () => {
                 </Grid>
               </Grid>
               <Grid item direction='column' className='footer__item'>
-                <Title isBold component='h3' variant='subtitle2'>
+                <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
                   О нас
                 </Title>
                 <Grid item className='footer__list-item'>
@@ -82,7 +82,7 @@ const Footer = () => {
                 </Grid>
               </Grid>
               <Grid item direction='column' className='footer__item'>
-                <Title isBold component='h3' variant='subtitle2'>
+                <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
                   Служба поддержки
                 </Title>
                 <Grid item className='footer__list-item'>
@@ -105,7 +105,7 @@ const Footer = () => {
           </Grid>
           <Grid item xs={3}>
             <form className='footer__newsletter'>
-              <Title isBold component='h3' variant='subtitle2'>
+              <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
                 Подписка
               </Title>
               <Text variant='subtitle2'>Получайте специальные предложения и новости сервиса</Text>
