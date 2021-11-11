@@ -5,5 +5,6 @@ import Checkbox from './checkBox';
 import RadioGroup from './radioGroupField';
 import DatePickerField from './datePickerField';
 import Switch from './switch';
+import RangeSliderField from './rangeSliderField';
 
-export { SelectField, NumberField, InputField, Checkbox, RadioGroup, DatePickerField, Switch };
+export { SelectField, NumberField, InputField, Checkbox, RadioGroup, DatePickerField, Switch, RangeSliderField };
