@@ -1,3 +1,4 @@
+import { Card } from '@material-ui/core';
 import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
 import Footer from '../../components/common/footer/footer';
@@ -15,9 +16,9 @@ const Main = () => {
       <Container>
         <Box className={classes.contentWrapper}>
           <SearchRoomsForm />
-          <Typography align='right' className={classes.textWishes}>
-            Лучшие номера для вашей работы, отдыха и просто вдохновения
-          </Typography>
+          <Card className={classes.textWishes}>
+            <Typography align='right'>Лучшие номера для вашей работы, отдыха и просто вдохновения</Typography>
+          </Card>
         </Box>
       </Container>
       <Footer />
