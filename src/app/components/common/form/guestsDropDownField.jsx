@@ -28,9 +28,7 @@ const GuestsDropDownField = ({ value, setData, name }) => {
   const handleDecrease = name => {
     setData(prevState => ({
       ...prevState,
-      [dataKey]: prevState[dataKey].map(el =>
-        el.name === name ? { ...el, value: el.value > 0 ? el.value - 1 : 0 } : el
-      ),
+      [dataKey]: prevState[dataKey].map(el => (el.name === name ? { ...el, value: Math.max(el.value - 1, 0) } : el)),
     }));
   };
 
