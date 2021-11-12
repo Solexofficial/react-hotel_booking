@@ -6,13 +6,12 @@ const SmallTitle = ({ children, isBold, upperCase, ...props }) => {
   return (
     <Typography
       {...props}
-      variant='h3'
-      component='h3'
+      variant={props.variant || 'h3'}
+      component={props.component || 'h3'}
       style={{
-        fontSize: '16px',
+        fontSize: '14px',
         fontWeight: isBold ? '700' : '400',
         textTransform: upperCase ? 'uppercase' : 'capitalize',
-        marginBottom: '5px',
       }}
     >
       {children}

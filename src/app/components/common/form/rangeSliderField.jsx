@@ -1,18 +1,19 @@
-import { Slider, Typography } from '@mui/material';
+import { Slider } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
+import Title from '../typography/title';
+import Text from '../typography/text';
 
-function valuetext(value) {
-  return `${value} °C`;
-}
+const valuetext = value => {
+  return `${value}₽`;
+};
 
 const minDistance = 2000;
 
 const RangeSliderField = () => {
-  const [value, setValue] = React.useState([5000, 10000]);
+  const [value, setValue] = useState([5000, 10000]);
 
   const handleChange = (event, newValue, activeThumb) => {
-    console.log(newValue);
     if (!Array.isArray(newValue)) {
       return;
     }
@@ -30,23 +31,27 @@ const RangeSliderField = () => {
   };
 
   return (
-    <Box sx={{ width: 250 }}>
-      <Typography id='input-slider' gutterBottom>
-        Диапазон цены
-      </Typography>
-      <Box sx={{ width: 300 }}>
-        <Slider
-          getAriaLabel={() => 'Minimum distance shift'}
-          value={value}
-          onChange={handleChange}
-          valueLabelDisplay='auto'
-          getAriaValueText={valuetext}
-          min={0}
-          max={15000}
-          step={100}
-          disableSwap
-        />
+    <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
+        <Title component='h3' variant='subtitle2' isBold>
+          Диапазон цены
+        </Title>
+        <Text component='span' variant='subtitle2' sx={{ fontSize: '12px' }}>
+          {value[0]}&#8381; - {value[1]}&#8381;
+        </Text>
       </Box>
+      <Slider
+        value={value}
+        valueLabelFormat={valuetext}
+        onChange={handleChange}
+        valueLabelDisplay='auto'
+        min={0}
+        max={15000}
+        step={100}
+      />
+      <Text variant='subtitle2' component='p' sx={{ fontSize: '12px' }}>
+        Стоимость за сутки пребывания в номере
+      </Text>
     </Box>
   );
 };

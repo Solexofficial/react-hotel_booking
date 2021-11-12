@@ -23,7 +23,7 @@ const Rooms = () => {
         <h1>Rooms</h1>
         <div
           className='filters'
-          style={{ width: '325px', borderRight: '1px solid #333', paddingTop: '30px', paddingRight: '60px' }}
+          style={{ width: '325px', borderRight: '1px solid #333', paddingTop: '30px', paddingRight: '50px' }}
         >
           <div className='filters-form'>
             <DatePickerField
