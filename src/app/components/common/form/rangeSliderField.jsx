@@ -1,59 +1,71 @@
 import { Slider } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
-import Title from '../typography/title';
+import React, { useCallback, useEffect, useState } from 'react';
 import Text from '../typography/text';
+import Title from '../typography/title';
 
 const valuetext = value => {
   return `${value}₽`;
 };
 
-const minDistance = 2000;
+const RangeSliderField = ({ label, name, onChange, value, min, max, minDistance = 2000 }) => {
+  const [sliderValue, setSliderValue] = useState(value);
+  const [mouseState, setMouseState] = useState(null);
 
-const RangeSliderField = () => {
-  const [value, setValue] = useState([5000, 10000]);
-
-  const handleChange = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (newValue[1] - newValue[0] < minDistance) {
-      if (activeThumb === 0) {
-        const clamped = Math.min(newValue[0], 15000 - minDistance);
-        setValue([clamped, clamped + minDistance]);
+  const handleChange = useCallback(
+    (event, newValue, activeThumb) => {
+      if (newValue[1] - newValue[0] < minDistance) {
+        if (activeThumb === 0) {
+          const clamped = Math.min(newValue[0], max - minDistance);
+          setSliderValue([clamped, clamped + minDistance]);
+        } else {
+          const clamped = Math.max(newValue[1], minDistance);
+          setSliderValue([clamped - minDistance, clamped]);
+        }
       } else {
-        const clamped = Math.max(newValue[1], minDistance);
-        setValue([clamped - minDistance, clamped]);
+        setSliderValue(newValue);
       }
-    } else {
-      setValue(newValue);
-    }
-  };
+    },
+    [sliderValue, onChange]
+  );
 
-  return (
-    <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
-        <Title component='h3' variant='subtitle2' isBold>
-          Диапазон цены
-        </Title>
-        <Text component='span' variant='subtitle2' sx={{ fontSize: '12px' }}>
-          {value[0]}&#8381; - {value[1]}&#8381;
+  useEffect(() => {
+    if (mouseState === 'leave') {
+      onChange({ target: { name, value: sliderValue } });
+    }
+  }, [mouseState]);
+
+  console.log('render range slider');
+  if (value) {
+    return (
+      <Box>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
+          <Title component='h3' variant='subtitle2' isBold>
+            {label || 'Range Slider'}
+          </Title>
+          <Text component='span' variant='subtitle2' sx={{ fontSize: '12px' }}>
+            {value[0]}&#8381; - {value[1]}&#8381;
+          </Text>
+        </Box>
+        <Slider
+          name={name}
+          value={sliderValue}
+          valueLabelFormat={valuetext}
+          onChange={handleChange}
+          valueLabelDisplay='auto'
+          min={min}
+          max={max}
+          step={100}
+          onMouseDown={() => setMouseState('hold')}
+          onMouseUp={() => setMouseState('leave')}
+        />
+        <Text variant='subtitle2' component='p' sx={{ fontSize: '12px' }}>
+          Стоимость за сутки пребывания в номере
         </Text>
       </Box>
-      <Slider
-        value={value}
-        valueLabelFormat={valuetext}
-        onChange={handleChange}
-        valueLabelDisplay='auto'
-        min={0}
-        max={15000}
-        step={100}
-      />
-      <Text variant='subtitle2' component='p' sx={{ fontSize: '12px' }}>
-        Стоимость за сутки пребывания в номере
-      </Text>
-    </Box>
-  );
+    );
+  }
+  return <p>Loading...</p>;
 };
 
-export default RangeSliderField;
+export default React.memo(RangeSliderField);
