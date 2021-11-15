@@ -2,7 +2,8 @@ import { Grid, Link } from '@material-ui/core';
 import { GitHub } from '@mui/icons-material';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import HomeLogo from '../../icons/logo';
+import HomeLogo from '../logo/logoImage';
+import NavList from '../../ui/navList';
 import Container from '../container';
 import Divider from '../divider';
 import { InputField } from '../form/fields';
@@ -10,98 +11,46 @@ import withSubscribe from '../form/withSubscribe';
 import Text from '../typography/text';
 import Title from '../typography/title';
 import useStyles from './styles';
+import Logo from '../logo/logo';
 
 const Footer = () => {
   const SubscribeInput = withSubscribe(InputField);
   const classes = useStyles();
+
+  const navigationRoutes = [
+    { path: '/', name: 'О нас' },
+    { path: '/', name: 'Новости' },
+    { path: '/', name: 'Служба поддержки' },
+    { path: '/', name: 'Услуги' },
+  ];
+
+  const aboutRoutes = [
+    { path: '/', name: 'О сервисе' },
+    { path: '/', name: 'Наша команда' },
+    { path: '/', name: 'Вакансии' },
+    { path: '/', name: 'Инвесторы' },
+  ];
+
+  const supportRoutes = [
+    { path: '/', name: 'Соглашения' },
+    { path: '/', name: 'Сообщества' },
+    { path: '/', name: 'Связь с нами' },
+  ];
+
   return (
     <footer className={classes.root}>
       <Container>
         <Grid container spacing={2} className={classes.footerMainWrapper}>
           <Grid item xs={3}>
-            <NavLink to='/' className={classes.footerLinkLogo}>
-              <HomeLogo viewBox='0 0 40 40' />
-              <Title variant='h6' component='h2' className={classes.footerLogoTitle}>
-                Toxin
-              </Title>
-            </NavLink>
+            <Logo />
             <Text variant='subtitle2'>
               Бронирование номеров в лучшем отеле 2021 года по версии ассоциации «Отельные взгляды»
             </Text>
           </Grid>
           <Grid item xs={6} component='nav' className={classes.footerNav}>
-            <Grid spacing={6} container direction='row'>
-              <Grid item direction='column'>
-                <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
-                  Навигация
-                </Title>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    О нас
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Новости
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Служба поддержки
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Услуги
-                  </NavLink>
-                </Grid>
-              </Grid>
-              <Grid item direction='column' className='footer__item'>
-                <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
-                  О нас
-                </Title>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    О сервисе
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Наша команда
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Вакансии
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Инвесторы
-                  </NavLink>
-                </Grid>
-              </Grid>
-              <Grid item direction='column' className='footer__item'>
-                <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
-                  Служба поддержки
-                </Title>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Соглашения
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Сообщества
-                  </NavLink>
-                </Grid>
-                <Grid item className='footer__list-item'>
-                  <NavLink to='/' className={classes.footerNavLink}>
-                    Связь с нами
-                  </NavLink>
-                </Grid>
-              </Grid>
-            </Grid>
+            <NavList label='Навигация' routes={navigationRoutes} direction='column' />
+            <NavList label='О нас' routes={aboutRoutes} direction='column' />
+            <NavList label='Служба поддержки' routes={supportRoutes} direction='column' />
           </Grid>
           <Grid item xs={3}>
             <form className='footer__newsletter'>
@@ -124,7 +73,7 @@ const Footer = () => {
       <Container>
         <div className={classes.footerSub}>
           <div className={classes.footerSubContainer}>
-            <Text variant='text'>Copyright © 2021 Toxin отель. Все права зачищены.</Text>
+            <Text variant='text'>Copyright © 2021 Toxin отель. Все права защищены.</Text>
             <Link underline='none' href='https://github.com/Solexofficial' rel='noopener noreferrer' target='_blank'>
               <div className={classes.footerSocial}>
                 <GitHub />

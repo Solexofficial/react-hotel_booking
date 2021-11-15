@@ -1,7 +1,7 @@
 import React from 'react';
 import { SvgIcon } from '@mui/material';
 
-const HomeLogo = props => {
+const LogoImage = props => {
   return (
     <SvgIcon {...props}>
       <path
@@ -48,4 +48,4 @@ const HomeLogo = props => {
   );
 };
 
-export default HomeLogo;
+export default LogoImage;

@@ -2,10 +2,9 @@ import { AppBar, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import HomeLogo from '../../icons/logo';
 import Button from '../../ui/buttons/button';
 import Container from '../container';
-import Title from '../typography/title';
+import Logo from '../logo/logo';
 import useStyles from './styles';
 
 const Header = () => {
@@ -17,12 +16,7 @@ const Header = () => {
         <AppBar position='static' color='inherit' className={classes.headerWrapper}>
           <Toolbar className={classes.headerInner}>
             <Box>
-              <NavLink to='/' className={classes.headerLinkLogo}>
-                <HomeLogo viewBox='0 0 40 40' />
-                <Title variant='h6' component='h1' className={classes.headerTitle}>
-                  Toxin
-                </Title>
-              </NavLink>
+              <Logo />
             </Box>
             <Box>
               <NavLink to='/login' className={classes.headerLink}>

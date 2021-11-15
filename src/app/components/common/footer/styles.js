@@ -7,9 +7,15 @@ const useStyles = makeStyles(theme => ({
     background: '#fff',
     borderTop: '1px solid rgba(31,32,65,.25);',
   },
+
   footerMainWrapper: {
     padding: '30px 0',
   },
+
+  footerNav: {
+    display: 'flex',
+  },
+
   footerNavTitle: {
     '&.MuiTypography-root': {
       marginBottom: '10px',
@@ -17,21 +23,9 @@ const useStyles = makeStyles(theme => ({
       textTransform: 'uppercase',
     },
   },
+
   footerLogo: {
     maxWidth: '33.33%',
-  },
-  footerLinkLogo: {
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    color: 'inherit',
-  },
-  footerLogoTitle: {
-    '&.MuiTypography-root': {
-      textTransform: 'uppercase',
-      marginLeft: '13px',
-      flexGrow: 1,
-    },
   },
 
   footerNavLink: {
