@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import Container from '../../components/common/container';
 import Footer from '../../components/common/footer/footer';
 import DatePickerField from '../../components/common/form/datePickerField';
@@ -10,11 +11,14 @@ import RoomsList from '../../components/ui/rooms/roomsList';
 
 const Rooms = () => {
   const [filterData, setFilterData] = useState({});
+  const { params } = useParams();
 
   useEffect(() => {
-    let queryData = queryString.parse(window.location.search);
-    queryData = { ...queryData, guests: JSON.parse(queryData.guests) };
-    setFilterData(queryData);
+    if (params) {
+      let queryData = queryString.parse(window.location.search);
+      queryData = { ...queryData, guests: JSON.parse(queryData.guests) };
+      setFilterData(queryData);
+    }
   }, []);
 
   return (

@@ -5,14 +5,14 @@ import { NavLink } from 'react-router-dom';
 import Title from '../common/typography/title';
 
 const useStyles = makeStyles(theme => ({
-  footerNavTitle: {
+  NavTitle: {
     '&.MuiTypography-root': {
       marginBottom: '10px',
       fontSize: '14px',
       textTransform: 'uppercase',
     },
   },
-  footerNavLink: {
+  NavLink: {
     textDecoration: 'none',
     color: 'inherit',
     fontSize: '14px',
@@ -23,18 +23,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NavList = ({ label, routes, direction = 'row' }) => {
+const NavList = ({ label, routes, direction = 'row', spacing }) => {
   const classes = useStyles();
   return (
-    <Grid container direction={direction}>
+    <Grid container direction={direction} spacing={spacing}>
       {label && (
-        <Title isBold component='h3' variant='subtitle2' className={classes.footerNavTitle}>
+        <Title isBold component='h3' variant='subtitle2' className={classes.NavTitle}>
           {label}
         </Title>
       )}
       {routes.map(route => (
-        <Grid key={route.name} item className='footer__list-item'>
-          <NavLink to={route.path} className={classes.footerNavLink}>
+        <Grid item key={route.name} className={classes.NavWrapper}>
+          <NavLink to={route.path} className={classes.NavLink}>
             {route.name}
           </NavLink>
         </Grid>
