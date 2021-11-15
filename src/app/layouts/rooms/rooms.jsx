@@ -9,16 +9,23 @@ import RangeSliderField from '../../components/common/form/rangeSliderField';
 import Header from '../../components/common/header/header';
 import RoomsList from '../../components/ui/rooms/roomsList';
 
+const initialData = {
+  guests: [
+    { name: 'adults', label: 'Взрослые', value: 0 },
+    { name: 'children', label: 'Дети', value: 0 },
+    { name: 'babies', label: 'Младенцы', value: 0 },
+  ],
+  arrival: new Date(Date.now()).getTime(),
+  departure: new Date(Date.now()).getTime(),
+};
+
 const Rooms = () => {
-  const [filterData, setFilterData] = useState({});
-  const { params } = useParams();
+  const [filterData, setFilterData] = useState(initialData || {});
 
   useEffect(() => {
-    if (params) {
-      let queryData = queryString.parse(window.location.search);
-      queryData = { ...queryData, guests: JSON.parse(queryData.guests) };
-      setFilterData(queryData);
-    }
+    let queryData = queryString.parse(window.location.search);
+    queryData = { ...queryData, guests: JSON.parse(queryData.guests) };
+    setFilterData(queryData);
   }, []);
 
   return (

@@ -1,17 +1,15 @@
 import { ArrowRight } from '@mui/icons-material';
 import { Paper } from '@mui/material';
+import queryString from 'query-string';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../hooks/useForm';
-import declOfNum from '../../../utils/declOfNum';
-import { DatePickerField, NumberField } from '../../common/form/fields';
+import { DatePickerField } from '../../common/form/fields';
+import GuestsDropDownField from '../../common/form/guestsDropDownField';
 import Title from '../../common/typography/title';
-import Accordion from '../accordion';
 import Button from '../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
-import queryString from 'query-string';
-import GuestsDropDownField from '../../common/form/guestsDropDownField';
 
 const initialData = {
   guests: [
@@ -19,9 +17,6 @@ const initialData = {
     { name: 'children', label: 'Дети', value: 0 },
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
-  adults: 0,
-  children: 0,
-  babies: 0,
   arrival: new Date(Date.now()).getTime(),
   departure: new Date(Date.now()).getTime(),
 };
