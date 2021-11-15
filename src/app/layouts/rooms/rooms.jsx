@@ -1,6 +1,6 @@
 import queryString from 'query-string';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import Container from '../../components/common/container';
 import Footer from '../../components/common/footer/footer';
 import DatePickerField from '../../components/common/form/datePickerField';
@@ -21,12 +21,24 @@ const initialData = {
 
 const Rooms = () => {
   const [filterData, setFilterData] = useState(initialData || {});
+  const history = useHistory();
+  const querySearchStr = history.location.search;
+
+  const getQueryData = useCallback(async () => {
+    let queryData = queryString.parse(querySearchStr);
+    queryData = { ...queryData, guests: JSON.parse(queryData.guests) };
+    return queryData;
+  }, [querySearchStr]);
 
   useEffect(() => {
-    let queryData = queryString.parse(window.location.search);
-    queryData = { ...queryData, guests: JSON.parse(queryData.guests) };
-    setFilterData(queryData);
-  }, []);
+    if (querySearchStr) {
+      try {
+        getQueryData().then(data => setFilterData(data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [querySearchStr, getQueryData]);
 
   return (
     <>
