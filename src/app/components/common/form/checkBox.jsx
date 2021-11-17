@@ -1,7 +1,8 @@
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import React from 'react';
-import { FormControl, FormControlLabel, Checkbox as MuiCheckbox } from '@material-ui/core';
 
-const Checkbox = ({ name, label, value, onChange }) => {
+const Checkbox2 = ({ name, label, labelDescription, value, color, onChange, ...rest }) => {
   const convertToDefEventParam = (name, value) => ({
     target: {
       name,
@@ -10,20 +11,34 @@ const Checkbox = ({ name, label, value, onChange }) => {
   });
 
   return (
-    <FormControl>
+    <>
       <FormControlLabel
+        style={{ alignItems: 'flex-start' }}
         control={
-          <MuiCheckbox
+          <Checkbox
             name={name}
-            color='primary'
+            color={color || 'primary'}
             checked={value}
             onChange={e => onChange(convertToDefEventParam(name, e.target.checked))}
+            style={{ padding: '0 10px' }}
+            {...rest}
           />
         }
-        label={label}
+        label={
+          labelDescription ? (
+            <div style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+              <div style={{ fontWeight: 700 }}>{label}</div>
+              <div className='label-description' style={{ fontSize: '12px', color: 'rgba(31,32,65,0.5)' }}>
+                {labelDescription}
+              </div>
+            </div>
+          ) : (
+            <div>{label}</div>
+          )
+        }
       />
-    </FormControl>
+    </>
   );
 };
 
-export default Checkbox;
+export default Checkbox2;
