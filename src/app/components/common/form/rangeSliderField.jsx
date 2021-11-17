@@ -25,21 +25,21 @@ const RangeSliderField = ({ label, name, onChange, value, min, max, minDistance 
         setSliderValue(newValue);
       }
     },
-    [sliderValue, onChange]
+    [max, minDistance]
   );
 
   useEffect(() => {
     if (mouseState === 'leave') {
       onChange({ target: { name, value: sliderValue } });
     }
-  }, [mouseState]);
+  }, [mouseState, name, onChange, sliderValue]);
 
   console.log('render range slider');
   if (value) {
     return (
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
-          <Title component='span' variant='subtitle2' isBold>
+          <Title component='span' variant='subtitle2' isBold sx={{ fontSize: '12px', textTransform: 'uppercase' }}>
             {label || 'Range Slider'}
           </Title>
           <Text component='span' variant='subtitle2' sx={{ fontSize: '12px' }}>

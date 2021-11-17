@@ -1,17 +1,15 @@
 import { Grid, Link } from '@material-ui/core';
 import { GitHub } from '@mui/icons-material';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import HomeLogo from '../logo/logoImage';
 import NavList from '../../ui/navList';
 import Container from '../container';
 import Divider from '../divider';
 import { InputField } from '../form/fields';
 import withSubscribe from '../form/withSubscribe';
+import Logo from '../logo/logo';
 import Text from '../typography/text';
 import Title from '../typography/title';
 import useStyles from './styles';
-import Logo from '../logo/logo';
 
 const Footer = () => {
   const SubscribeInput = withSubscribe(InputField);
