@@ -2,17 +2,11 @@ import { Grid } from '@mui/material';
 import React from 'react';
 import RoomCard from './roomCard';
 
-const RoomsList = () => {
-  const roomsList = [
-    { numberRoom: '888', rentPerDay: 9990, rate: 5, countReviews: 145, lux: true },
-    { numberRoom: '123', rentPerDay: 9990, rate: 5, countReviews: 145 },
-    { numberRoom: '321', rentPerDay: 9990, rate: 5, countReviews: 145 },
-    { numberRoom: '423', rentPerDay: 9990, rate: 5, countReviews: 145 },
-  ];
+const RoomsList = ({ rooms }) => {
   return (
     <Grid container spacing={1}>
-      {roomsList.map(room => (
-        <Grid item xs={4} key={room.numberRoom}>
+      {rooms.map(room => (
+        <Grid item xs={4} key={room.id}>
           <RoomCard {...room} />
         </Grid>
       ))}

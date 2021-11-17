@@ -5,6 +5,25 @@ import Header from '../../components/common/header/header';
 import RoomsFilter from '../../components/ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../../components/ui/rooms/roomsList';
 
+import image1 from '../../assets/img/room888/1.jpg';
+import image2 from '../../assets/img/room888/2.jpg';
+import image3 from '../../assets/img/room888/3.jpg';
+
+const roomsList = [
+  {
+    id: '888',
+    numberRoom: '888',
+    rentPerDay: 9990,
+    rate: 5,
+    countReviews: 145,
+    lux: true,
+    images: [image1, image2, image3],
+  },
+  { id: '123', numberRoom: '123', rentPerDay: 9990, rate: 5, countReviews: 145 },
+  { id: '321', numberRoom: '321', rentPerDay: 9990, rate: 5, countReviews: 145 },
+  { id: '423', numberRoom: '423', rentPerDay: 9990, rate: 5, countReviews: 145 },
+];
+
 const Rooms = () => {
   return (
     <>
@@ -16,7 +35,7 @@ const Rooms = () => {
           </aside>
           <section className='mainContent' style={{ flex: '1' }}>
             <h2>Номера, которые мы для вас подобрали</h2>
-            <RoomsList />
+            <RoomsList rooms={roomsList} />
           </section>
         </div>
       </Container>
