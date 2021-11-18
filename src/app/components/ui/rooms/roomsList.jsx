@@ -4,7 +4,7 @@ import RoomCard from './roomCard';
 
 const RoomsList = ({ rooms }) => {
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={2}>
       {rooms.map(room => (
         <Grid item xs={4} key={room.id}>
           <RoomCard {...room} />
