@@ -36,6 +36,7 @@ const Rooms = () => {
           <section className='mainContent' style={{ flex: '1' }}>
             <h2>Номера, которые мы для вас подобрали</h2>
             <RoomsList rooms={roomsList} />
+            <div></div>
           </section>
         </div>
       </Container>

@@ -4,13 +4,22 @@ import RoomCard from './roomCard';
 
 const RoomsList = ({ rooms }) => {
   return (
-    <Grid container spacing={2}>
-      {rooms.map(room => (
-        <Grid item xs={4} key={room.id}>
-          <RoomCard {...room} />
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      {/* <ul className='rooms__list'>
+        {rooms.map(room => (
+          <li className='rooms__list-item'>
+            <RoomCard {...room} />
+          </li>
+        ))}
+      </ul> */}
+      <Grid xs={12} container spacing={2}>
+        {rooms.map(room => (
+          <Grid item xs={4} md={6} key={room.id}>
+            <RoomCard {...room} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 };
 

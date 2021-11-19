@@ -1,3 +1,21 @@
+* {
+  min-width: 0;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rooms__list {
+  display: grid;
+  grid-row-gap: 20px;
+  grid-column-gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
 .room-card {
   background: #ffffff;
   overflow: hidden;
@@ -66,7 +84,6 @@
   }
   &__gallery-item {
     height: 100%;
-    object-fit: contain;
   }
   .slick-dotted.slick-slider {
     margin-bottom: 0;
@@ -106,5 +123,7 @@
       background-color: #fff;
       box-shadow: 0px 5px 5px rgba(31, 32, 65, 0.3);
     }
+  }
+  .slick-slide {
   }
 }

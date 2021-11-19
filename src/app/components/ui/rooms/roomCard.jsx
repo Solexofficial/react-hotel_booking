@@ -13,23 +13,32 @@ const sliderImages = [
   { url: image3, key: 'image3' },
 ];
 
+function SamplePrevArrow(props) {
+  const { style, onClick } = props;
+  return (
+    <>
+      <button
+        style={{
+          ...style,
+          display: 'block',
+          background: 'green',
+          right: 0,
+          position: 'absolute',
+          width: '20px',
+          height: '20px',
+          zIndex: 3,
+        }}
+        onClick={onClick}
+      ></button>
+    </>
+  );
+}
+
 const sliderSettings = {
   dots: true,
-  nextArrow: (
-    <>
-      <button className='room-card__gallery-arrow room-card__gallery-arrow--next slick-arrow'>
-        <ChevronRightIcon />
-      </button>
-    </>
-  ),
-  prevArrow: (
-    <>
-      <button className='room-card__gallery-arrow room-card__gallery-arrow--prev prev-slick-arrow"'>123</button>
-    </>
-  ),
-  infinite: false,
-  draggable: false,
-  speed: 500,
+  nextArrow: <SamplePrevArrow />,
+  prevArrow: <SamplePrevArrow />,
+  infinite: true,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -38,14 +47,14 @@ const RoomCard = ({ numberRoom, rentPerDay, rate, countReviews, images }) => {
   console.log(images);
   console.log(numberRoom, rentPerDay, rate, countReviews);
   return (
-    <Card className='room-card'>
+    <div className='room-card'>
       <SlickSlider {...sliderSettings} images={sliderImages} />
 
       <p>Number: {numberRoom}</p>
       <p>rentPerDay: {rentPerDay}</p>
       <p>rate: {rate}</p>
       <p>countReviews: {countReviews}</p>
-    </Card>
+    </div>
   );
 };
 
