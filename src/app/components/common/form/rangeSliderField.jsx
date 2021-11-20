@@ -34,7 +34,6 @@ const RangeSliderField = ({ label, name, onChange, value, min, max, minDistance 
     }
   }, [mouseState, name, onChange, sliderValue]);
 
-  console.log('render range slider');
   if (value) {
     return (
       <div>

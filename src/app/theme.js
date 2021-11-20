@@ -117,7 +117,7 @@ const theme = createTheme({
   typography: {
     useNextVariants: true,
     fontFamily: "'Montserrat', sans-serif",
-    fontSize: 16,
+    fontSize: 14,
   },
 });
 

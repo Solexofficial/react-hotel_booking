@@ -1,0 +1,6 @@
+.rooms__list {
+  display: grid;
+  grid-row-gap: 20px;
+  grid-column-gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
