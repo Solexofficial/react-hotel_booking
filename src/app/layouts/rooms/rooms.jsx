@@ -16,12 +16,12 @@ const roomsList = [
     rentPerDay: 9990,
     rate: 5,
     countReviews: 145,
-    lux: true,
+    type: 'Люкс',
     images: [image1, image2, image3],
   },
-  { id: '123', numberRoom: '123', rentPerDay: 9990, rate: 5, countReviews: 145 },
-  { id: '321', numberRoom: '321', rentPerDay: 9990, rate: 5, countReviews: 145 },
-  { id: '423', numberRoom: '423', rentPerDay: 9990, rate: 5, countReviews: 145 },
+  { id: '123', numberRoom: '123', rentPerDay: 9990, rate: 4, countReviews: 145 },
+  { id: '321', numberRoom: '321', rentPerDay: 9990, rate: 3, countReviews: 145 },
+  { id: '423', numberRoom: '423', rentPerDay: 9990, rate: 2, countReviews: 145 },
 ];
 
 const Rooms = () => {

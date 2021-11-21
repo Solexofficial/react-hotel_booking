@@ -5,6 +5,19 @@
   min-width: 0;
 }
 
+body {
+  font-size: $text-base-size !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 ul,
 li {
   list-style: none;
@@ -24,8 +37,4 @@ li {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
-}
-
-body {
-  font-size: $text-base-size;
 }

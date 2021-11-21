@@ -70,6 +70,56 @@
   &__gallery-item {
     height: 100%;
   }
+
+  &__description {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: $accent;
+  }
+
+  &__description-row {
+    width: 100%;
+    padding: 10px 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    color: $accent;
+    font-size: $text-xs;
+    &--big {
+      font-weight: 700;
+      font-family: $fontOpenSans;
+      font-size: $text-base-size;
+    }
+  }
+
+  &__type {
+    margin-left: 5px;
+    font-size: $text-sm;
+    color: $purple;
+    text-transform: uppercase;
+  }
+
+  &__rating {
+    .MuiRating-root {
+      color: $purple;
+    }
+    .MuiRating-icon {
+      color: $purple;
+    }
+  }
+
+  &__rentPerDay {
+    font-size: $text-sm;
+    color: $accent50;
+    & span {
+      font-weight: 700;
+    }
+  }
+
   .slick-dotted.slick-slider {
     margin-bottom: 0;
   }
