@@ -30,7 +30,7 @@ const Rooms = () => {
       <Header />
       <Container>
         <div className='rootWrapper' style={{ display: 'flex' }}>
-          <aside className='filters' style={{ width: '325px', paddingTop: '30px', paddingRight: '50px' }}>
+          <aside className='filters'>
             <RoomsFilter />
           </aside>
           <section className='mainContent' style={{ flex: '1' }}>

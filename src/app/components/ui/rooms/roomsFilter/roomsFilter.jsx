@@ -1,12 +1,13 @@
-import { FormControl, FormGroup, Grid } from '@mui/material';
 import queryString from 'query-string';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import CheckBoxList from '../../../common/form/checkBoxList';
-import { Checkbox, DatePickerField, GuestsDropDownField, RangeSliderField } from '../../../common/form/fields';
+import DateOfStayField from '../../../common/form/dateOfStayField';
+import { DatePickerField, GuestsDropDownField, RangeSliderField } from '../../../common/form/fields';
 import MyCheckBox from '../../../common/form/myCheckBox';
-import Title from '../../../common/typography/title';
-import useStyles from './styles';
+import Text from '../../../common/typography/text';
+import RoomsFilterList from './roomsFiltersList';
+import Button from '../../buttons/button';
 
 const initialData = {
   guests: [
@@ -14,8 +15,7 @@ const initialData = {
     { name: 'children', label: 'Дети', value: 0 },
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
-  arrival: new Date(Date.now()).getTime(),
-  departure: new Date(Date.now()).getTime(),
+  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() },
   rentPerDay: [5000, 10000],
   canSmoke: false,
   canPets: false,
@@ -25,7 +25,6 @@ const initialData = {
 };
 
 const RoomsFilter = () => {
-  const classes = useStyles();
   const [filterData, setFilterData] = useState(initialData || {});
   const history = useHistory();
   const querySearchStr = history.location.search;
@@ -39,9 +38,14 @@ const RoomsFilter = () => {
     }));
   }, []);
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(filterData);
+  };
+
   const getQueryData = useCallback(async () => {
     let queryData = queryString.parse(querySearchStr);
-    queryData = { ...queryData, guests: JSON.parse(queryData.guests) };
+    queryData = { ...queryData, guests: JSON.parse(queryData.guests), dateOfStay: JSON.parse(queryData.dateOfStay) };
     return queryData;
   }, [querySearchStr]);
 
@@ -56,87 +60,40 @@ const RoomsFilter = () => {
   }, [querySearchStr, getQueryData]);
 
   return (
-    <Grid container direction='column' className='filters-form'>
-      <Grid item className={classes.filterFormItem}>
-        <Title component='p' variant='subtitle2' isBold className={classes.filterFormTitle}>
-          Дата пребывания в отеле
-        </Title>
-        <DatePickerField
-          label='Дата прибытия'
-          minDate={Date.now()}
-          name='arrival'
-          clearable
-          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-          value={Number(filterData.arrival)}
-          onChange={handleChange}
-        />
-        <DatePickerField
-          label='Дата выезда'
-          minDate={Date.now()}
-          name='departure'
-          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-          value={Number(filterData.departure)}
-          onChange={handleChange}
-        />
-      </Grid>
-      <Grid item className={classes.filterFormItem}>
-        <Title component='p' variant='subtitle2' isBold className={classes.filterFormTitle}>
-          Гости
-        </Title>
-        <GuestsDropDownField value={filterData.guests} setData={setFilterData} name='guests' />
-      </Grid>
-      <Grid item className={classes.filterFormItem}>
+    <section className='filters__wrapper'>
+      <h2 className='visually-hidden'>Поиск отелей</h2>
+      <RoomsFilterList data={filterData} handleChange={handleChange}>
+        <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
+        <GuestsDropDownField title='гости' setData={setFilterData} name='guests' />
         <RangeSliderField
           label='Диапазон цены'
-          value={filterData.rentPerDay}
+          description='Стоимость за сутки пребывания в номере'
           name='rentPerDay'
-          onChange={handleChange}
           min={0}
           max={15000}
         />
-      </Grid>
-      <Grid item className={classes.filterFormItem}>
-        <fieldset className='filters__group'>
-          <legend className='filters__group-title'>Условия размещения</legend>
-          <CheckBoxList>
-            <MyCheckBox label='Можно курить' onChange={handleChange} value={filterData.canSmoke} name='canSmoke' />
-            <MyCheckBox label='Можно c питомцами' onChange={handleChange} value={filterData.canPets} name='canPets' />
-            <MyCheckBox
-              label='Можно пригласить гостей (до 10 человек)'
-              onChange={handleChange}
-              value={filterData.canInvite}
-              name='canInvite'
-            />
-          </CheckBoxList>
-        </fieldset>
-      </Grid>
-
-      <Grid item className={classes.filterFormItem}>
-        <fieldset className='filters__group'>
-          <legend className='filters__group-title'>Доступность</legend>
-          <CheckBoxList>
-            <MyCheckBox
-              label='Широкий коридор'
-              onChange={handleChange}
-              value={filterData.hasWideCorridor}
-              name='hasWideCorridor'
-              labelDetails='Ширина коридоров в номере не менее 91см'
-            />
-            <MyCheckBox
-              label='Помощник для инвалидов'
-              onChange={handleChange}
-              value={filterData.hasDisabledAssistant}
-              name='hasDisabledAssistant'
-              labelDetails='На 1 этаже вас встретит специалист и проводит до номера'
-            />
-          </CheckBoxList>
-        </fieldset>
-      </Grid>
-      <Grid item className={classes.filterFormItem}></Grid>
-      <Grid item className={classes.filterFormItem}>
-        <button onClick={() => console.log(filterData)}>Найти</button>
-      </Grid>
-    </Grid>
+        <CheckBoxList title='Условия размещения'>
+          <MyCheckBox label='Можно курить' name='canSmoke' />
+          <MyCheckBox label='Можно c питомцами' name='canPets' />
+          <MyCheckBox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
+        </CheckBoxList>
+        <CheckBoxList title='Доступность'>
+          <MyCheckBox
+            label='Широкий коридор'
+            name='hasWideCorridor'
+            labelDetails='Ширина коридоров в номере не менее 91см'
+          />
+          <MyCheckBox
+            label='Помощник для инвалидов'
+            name='hasDisabledAssistant'
+            labelDetails='На 1 этаже вас встретит специалист и проводит до номера'
+          />
+        </CheckBoxList>
+        <Button onClick={handleSubmit} size='small' type='submit'>
+          Найти
+        </Button>
+      </RoomsFilterList>
+    </section>
   );
 };
 
