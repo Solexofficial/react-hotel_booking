@@ -7,7 +7,7 @@ const valuetext = value => {
   return `${value}₽`;
 };
 
-const RangeSliderField = ({ label, name, onChange, value, min, max, minDistance = 2000 }) => {
+const RangeSliderField = ({ label, name, description, onChange, value, min, max, minDistance = 2000 }) => {
   const [sliderValue, setSliderValue] = useState(value);
   const [mouseState, setMouseState] = useState(null);
 
@@ -57,9 +57,11 @@ const RangeSliderField = ({ label, name, onChange, value, min, max, minDistance 
           onMouseDown={() => setMouseState('hold')}
           onMouseUp={() => setMouseState('leave')}
         />
-        <Text variant='subtitle2' component='p' sx={{ fontSize: '12px' }}>
-          Стоимость за сутки пребывания в номере
-        </Text>
+        {description && (
+          <Text variant='subtitle2' component='p' sx={{ fontSize: '12px' }}>
+            Стоимость за сутки пребывания в номере
+          </Text>
+        )}
       </div>
     );
   }
