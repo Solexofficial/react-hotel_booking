@@ -32,7 +32,7 @@ const RangeSliderField = ({ label, name, description, onChange, value, min, max,
     if (mouseState === 'leave') {
       onChange({ target: { name, value: sliderValue } });
     }
-  }, [mouseState, name, onChange, sliderValue]);
+  }, [mouseState, name, sliderValue]);
 
   if (value) {
     return (

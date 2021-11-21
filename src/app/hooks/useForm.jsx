@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import { makeStyles } from '@material-ui/core';
 import { validator } from '../utils/validator';
 
 export function useForm(initialData, validateOnChange, validatorConfig) {
@@ -17,6 +16,7 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
 
   const handleInputChange = useCallback(
     ({ target }) => {
+      console.log(target);
       const { name, value } = target;
       setData(prevState => ({
         ...prevState,
@@ -39,7 +39,8 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
     }
   }, []);
 
-  const resetForm = () => {
+  const resetForm = e => {
+    e.preventDefault();
     setData(initialData);
     setErrors({});
   };
@@ -56,20 +57,7 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
   };
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '& .MuiFormControl-root': {
-      width: '100%',
-      marginBottom: '10px',
-      '&:first-child': {
-        marginTop: '20px',
-      },
-    },
-  },
-}));
-
 export function Form({ children, handleChange, data, errors, handleKeyDown, ...rest }) {
-  const classes = useStyles();
   const clonedElements = React.Children.map(children, child => {
     const childType = typeof child.type;
     let config = {};
@@ -84,16 +72,12 @@ export function Form({ children, handleChange, data, errors, handleKeyDown, ...r
         ...child.props,
         onChange: handleChange,
         value: data[child.props.name] || '',
-        error: errors[child.props.name],
+        error: errors?.[child.props.name],
         onKeyDown: handleKeyDown,
       };
     }
     return React.cloneElement(child, config);
   });
 
-  return (
-    <form className={classes.root} {...rest}>
-      {clonedElements}
-    </form>
-  );
+  return <form {...rest}>{clonedElements}</form>;
 }

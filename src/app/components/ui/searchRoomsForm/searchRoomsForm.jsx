@@ -5,7 +5,6 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../hooks/useForm';
 import DateOfStayField from '../../common/form/dateOfStayField';
-import { DatePickerField } from '../../common/form/fields';
 import GuestsDropDownField from '../../common/form/guestsDropDownField';
 import Title from '../../common/typography/title';
 import Button from '../buttons/button';
@@ -31,8 +30,8 @@ const SearchRoomsForm = () => {
     validatorConfig
   );
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
     if (validate(data)) {
       console.log('data##########:', data);
       const queryStr = queryString.stringify({
@@ -40,7 +39,6 @@ const SearchRoomsForm = () => {
         guests: JSON.stringify(data.guests),
         dateOfStay: JSON.stringify(data.dateOfStay),
       });
-      resetForm();
       history.push(`/rooms/?${queryStr}`);
     }
   };

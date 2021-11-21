@@ -1,8 +1,10 @@
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import React from 'react';
 import image1 from '../../../assets/img/room888/1.jpg';
 import image2 from '../../../assets/img/room888/2.jpg';
 import image3 from '../../../assets/img/room888/3.jpg';
-import SlickSlider from '../../common/imageSlider/slickSlider';
+import SlickSlider from '../../common/imageSlider/cardSlickSlider';
 
 const sliderImages = [
   { url: image1, key: 'image1' },
@@ -10,31 +12,28 @@ const sliderImages = [
   { url: image3, key: 'image3' },
 ];
 
-function SamplePrevArrow(props) {
-  const { style, onClick } = props;
+function NextButton(props) {
+  const { onClick } = props;
   return (
-    <>
-      <button
-        style={{
-          ...style,
-          display: 'block',
-          background: 'green',
-          right: 0,
-          position: 'absolute',
-          width: '20px',
-          height: '20px',
-          zIndex: 3,
-        }}
-        onClick={onClick}
-      ></button>
-    </>
+    <button className='room-card__gallery-arrow room-card__gallery-arrow--next' onClick={onClick}>
+      <ChevronRightIcon />
+    </button>
+  );
+}
+
+function PrevButton(props) {
+  const { onClick } = props;
+  return (
+    <button className='room-card__gallery-arrow room-card__gallery-arrow--before' onClick={onClick}>
+      <ChevronLeftIcon />
+    </button>
   );
 }
 
 const sliderSettings = {
   dots: true,
-  nextArrow: <SamplePrevArrow />,
-  prevArrow: <SamplePrevArrow />,
+  nextArrow: <NextButton />,
+  prevArrow: <PrevButton />,
   infinite: true,
   slidesToShow: 1,
   slidesToScroll: 1,

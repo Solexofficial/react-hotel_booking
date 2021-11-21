@@ -3,7 +3,7 @@ import declOfNum from '../../../utils/declOfNum';
 import Accordion from '../../ui/accordion';
 import NumberField from './numberField';
 
-const GuestsDropDownField = ({ value, setData, name }) => {
+const GuestsDropDownField = ({ value, setData, onChange, name }) => {
   const [data, dataKey] = [value, name];
 
   const getAccordionLabel = () => {

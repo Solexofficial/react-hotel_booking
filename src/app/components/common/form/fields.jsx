@@ -7,13 +7,17 @@ import DatePickerField from './datePickerField';
 import Switch from './switch';
 import RangeSliderField from './rangeSliderField';
 import GuestsDropDownField from './guestsDropDownField';
+import CheckBoxList from './checkBoxList';
+import DateOfStayField from './dateOfStayField';
 
 export {
   SelectField,
   NumberField,
   InputField,
+  CheckBoxList,
   Checkbox,
   RadioGroup,
+  DateOfStayField,
   DatePickerField,
   Switch,
   RangeSliderField,

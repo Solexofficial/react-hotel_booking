@@ -1,13 +1,14 @@
 import queryString from 'query-string';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import CheckBoxList from '../../../common/form/checkBoxList';
-import DateOfStayField from '../../../common/form/dateOfStayField';
-import { DatePickerField, GuestsDropDownField, RangeSliderField } from '../../../common/form/fields';
-import MyCheckBox from '../../../common/form/checkBox';
-import Text from '../../../common/typography/text';
+import {
+  Checkbox,
+  CheckBoxList,
+  DateOfStayField,
+  GuestsDropDownField,
+  RangeSliderField,
+} from '../../../common/form/fields';
 import RoomsFilterList from './roomsFiltersList';
-import Button from '../../buttons/button';
 
 const initialData = {
   guests: [
@@ -43,6 +44,11 @@ const RoomsFilter = () => {
     console.log(filterData);
   };
 
+  const handleFilterReset = e => {
+    e.preventDefault();
+    setFilterData(initialData);
+  };
+
   const getQueryData = useCallback(async () => {
     let queryData = queryString.parse(querySearchStr);
     queryData = { ...queryData, guests: JSON.parse(queryData.guests), dateOfStay: JSON.parse(queryData.dateOfStay) };
@@ -72,24 +78,26 @@ const RoomsFilter = () => {
           min={0}
           max={15000}
         />
-        <CheckBoxList title='Условия размещения'>
-          <MyCheckBox label='Можно курить' name='canSmoke' />
-          <MyCheckBox label='Можно c питомцами' name='canPets' />
-          <MyCheckBox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
+        <CheckBoxList title='Условия размещения' data={filterData}>
+          <Checkbox label='Можно курить' name='canSmoke' />
+          <Checkbox label='Можно c питомцами' name='canPets' />
+          <Checkbox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
         </CheckBoxList>
-        <CheckBoxList title='Доступность'>
-          <MyCheckBox
+        <CheckBoxList title='Доступность' data={filterData}>
+          <Checkbox
             label='Широкий коридор'
             name='hasWideCorridor'
             labelDetails='Ширина коридоров в номере не менее 91см'
           />
-          <MyCheckBox
+          <Checkbox
             label='Помощник для инвалидов'
             name='hasDisabledAssistant'
             labelDetails='На 1 этаже вас встретит специалист и проводит до номера'
           />
         </CheckBoxList>
       </RoomsFilterList>
+      <button onClick={handleSubmit}>Найти</button>
+      <button onClick={handleFilterReset}>Сбросить</button>
     </section>
   );
 };
