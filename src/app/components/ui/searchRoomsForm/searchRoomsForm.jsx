@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../hooks/useForm';
+import DateOfStayField from '../../common/form/dateOfStayField';
 import { DatePickerField } from '../../common/form/fields';
 import GuestsDropDownField from '../../common/form/guestsDropDownField';
 import Title from '../../common/typography/title';
@@ -17,8 +18,7 @@ const initialData = {
     { name: 'children', label: 'Дети', value: 0 },
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
-  arrival: new Date(Date.now()).getTime(),
-  departure: new Date(Date.now()).getTime(),
+  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() },
 };
 
 const SearchRoomsForm = () => {
@@ -35,7 +35,11 @@ const SearchRoomsForm = () => {
     e.preventDefault();
     if (validate(data)) {
       console.log('data##########:', data);
-      const queryStr = queryString.stringify({ ...data, guests: JSON.stringify(data.guests) });
+      const queryStr = queryString.stringify({
+        ...data,
+        guests: JSON.stringify(data.guests),
+        dateOfStay: JSON.stringify(data.dateOfStay),
+      });
       resetForm();
       history.push(`/rooms/?${queryStr}`);
     }
@@ -53,19 +57,7 @@ const SearchRoomsForm = () => {
         handleChange={handleInputChange}
         handleKeyDown={handleKeyDown}
       >
-        <DatePickerField
-          label='Дата прибытия'
-          minDate={Date.now()}
-          name='arrival'
-          clearable
-          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-        />
-        <DatePickerField
-          label='Дата выезда'
-          minDate={new Date(data.arrival)}
-          name='departure'
-          inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-        />
+        <DateOfStayField name='dateOfStay' />
         <GuestsDropDownField name='guests' setData={setData} data={data} />
         <Button variant='outlined' type='button' size='small' onClick={resetForm} className={classes.btnReset}>
           Очистить

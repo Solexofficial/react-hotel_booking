@@ -5,7 +5,7 @@ import ruLocale from 'date-fns/locale/ru';
 import DatePicker from '@mui/lab/DatePicker';
 import React from 'react';
 
-const DatePickerField = ({ label, name, value, onChange, ...rest }) => {
+const DatePickerField = ({ label, name, value, minDate, onChange, ...rest }) => {
   const convertToDefEventParam = (name, value) => ({
     target: {
       name,
@@ -19,6 +19,8 @@ const DatePickerField = ({ label, name, value, onChange, ...rest }) => {
         mask='__.__.____'
         label={label}
         value={value}
+        minDate={minDate || Date.now()}
+        inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         onChange={date => {
           onChange(convertToDefEventParam(name, new Date(date).getTime()));
         }}
