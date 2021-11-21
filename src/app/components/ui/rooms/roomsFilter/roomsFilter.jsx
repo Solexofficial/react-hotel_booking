@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import CheckBoxList from '../../../common/form/checkBoxList';
 import DateOfStayField from '../../../common/form/dateOfStayField';
 import { DatePickerField, GuestsDropDownField, RangeSliderField } from '../../../common/form/fields';
-import MyCheckBox from '../../../common/form/myCheckBox';
+import MyCheckBox from '../../../common/form/checkBox';
 import Text from '../../../common/typography/text';
 import RoomsFilterList from './roomsFiltersList';
 import Button from '../../buttons/button';
@@ -89,9 +89,6 @@ const RoomsFilter = () => {
             labelDetails='На 1 этаже вас встретит специалист и проводит до номера'
           />
         </CheckBoxList>
-        <Button onClick={handleSubmit} size='small' type='submit'>
-          Найти
-        </Button>
       </RoomsFilterList>
     </section>
   );
