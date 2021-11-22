@@ -12,7 +12,7 @@
     outline: none;
   }
   &__gallery {
-    height: 129px;
+    height: 151px;
     background-color: #fff;
     position: relative;
     overflow: hidden;
@@ -45,6 +45,17 @@
       }
     }
   }
+
+  &__gallery-item {
+    height: 150px;
+  }
+
+  &__gallery-item--img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
   &__gallery-arrow {
     position: absolute;
     top: 50%;
@@ -66,9 +77,6 @@
     &--before {
       left: 0px;
     }
-  }
-  &__gallery-item {
-    height: 100%;
   }
 
   &__description {
@@ -118,6 +126,10 @@
     & span {
       font-weight: 700;
     }
+  }
+
+  .slick-slide {
+    height: 100%;
   }
 
   .slick-dotted.slick-slider {
