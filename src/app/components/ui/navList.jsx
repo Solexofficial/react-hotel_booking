@@ -5,6 +5,12 @@ import { NavLink } from 'react-router-dom';
 import Title from '../common/typography/title';
 
 const useStyles = makeStyles(theme => ({
+  NavWrapper: {
+    '&.MuiGrid-root.MuiGrid-item': {
+      marginBottom: '10px',
+    },
+  },
+
   NavTitle: {
     '&.MuiTypography-root': {
       marginBottom: '10px',
@@ -13,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   NavLink: {
+    marginBottom: '5px',
     textDecoration: 'none',
     color: 'inherit',
     fontSize: '14px',

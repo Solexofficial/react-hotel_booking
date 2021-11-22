@@ -29,12 +29,12 @@ const Header = () => {
               <NavList routes={navigationRoutes} spacing={2} />
             </Box>
             <Box>
-              <NavLink to='/login' className={classes.headerLink}>
+              <NavLink to='/login/signIn' className={classes.headerLink}>
                 <Button size='small' variant='outlined' className={classes.headerLinkButton}>
                   Войти
                 </Button>
               </NavLink>
-              <NavLink to='/login' className={classes.headerLink}>
+              <NavLink to='/login/signUp' className={classes.headerLink}>
                 <Button size='small'>Зарегистрироваться</Button>
               </NavLink>
             </Box>

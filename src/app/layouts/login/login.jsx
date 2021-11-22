@@ -14,10 +14,11 @@ import useStyles from './styles';
 const Login = () => {
   const classes = useStyles();
   const { type } = useParams();
-  const [formType, setFormType] = useState(type === 'register' ? type : 'signIn');
+  console.log(type);
+  const [formType, setFormType] = useState(type === 'signUp' ? type : 'signIn');
 
   const toggleFormType = () => {
-    setFormType(prevState => (prevState === 'register' ? 'signIn' : 'register'));
+    setFormType(prevState => (prevState === 'signUp' ? 'signIn' : 'signUp'));
   };
 
   return (
@@ -26,7 +27,7 @@ const Login = () => {
       <Container>
         <Box className={classes.rootWrapper}>
           <Card className={classes.formWrapper}>
-            {formType === 'register' ? (
+            {formType === 'signIn' ? (
               <>
                 <Title isBold component='h2' variant='h5'>
                   Войти
