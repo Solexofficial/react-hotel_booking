@@ -1,6 +1,7 @@
 import queryString from 'query-string';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { useForm } from '../../../../hooks/useForm';
 import {
   Checkbox,
   CheckBoxList,
@@ -26,27 +27,14 @@ const initialData = {
 };
 
 const RoomsFilter = () => {
-  const [filterData, setFilterData] = useState(initialData || {});
   const history = useHistory();
   const querySearchStr = history.location.search;
 
-  const handleChange = useCallback(({ target }) => {
-    console.log('new VALUE: ', target);
-    const { name, value } = target;
-    setFilterData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }, []);
+  const { data, setData, handleInputChange, handleResetForm } = useForm(initialData, false, {});
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(filterData);
-  };
-
-  const handleFilterReset = e => {
-    e.preventDefault();
-    setFilterData(initialData);
+    console.log(data);
   };
 
   const getQueryData = useCallback(async () => {
@@ -58,19 +46,19 @@ const RoomsFilter = () => {
   useEffect(() => {
     if (querySearchStr) {
       try {
-        getQueryData().then(data => setFilterData(prevState => ({ ...prevState, ...data })));
+        getQueryData().then(data => setData(prevState => ({ ...prevState, ...data })));
       } catch (error) {
         console.log(error);
       }
     }
-  }, [querySearchStr, getQueryData]);
+  }, [querySearchStr, getQueryData, setData]);
 
   return (
     <section className='filters__wrapper'>
       <h2 className='visually-hidden'>Поиск отелей</h2>
-      <RoomsFilterList data={filterData} handleChange={handleChange}>
+      <RoomsFilterList data={data} handleChange={handleInputChange}>
         <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
-        <GuestsDropDownField title='гости' setData={setFilterData} name='guests' />
+        <GuestsDropDownField title='гости' setData={setData} name='guests' />
         <RangeSliderField
           label='Диапазон цены'
           description='Стоимость за сутки пребывания в номере'
@@ -78,12 +66,12 @@ const RoomsFilter = () => {
           min={0}
           max={15000}
         />
-        <CheckBoxList title='Условия размещения' data={filterData}>
+        <CheckBoxList title='Условия размещения' data={data}>
           <Checkbox label='Можно курить' name='canSmoke' />
           <Checkbox label='Можно c питомцами' name='canPets' />
           <Checkbox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
         </CheckBoxList>
-        <CheckBoxList title='Доступность' data={filterData}>
+        <CheckBoxList title='Доступность' data={data}>
           <Checkbox
             label='Широкий коридор'
             name='hasWideCorridor'
@@ -97,7 +85,7 @@ const RoomsFilter = () => {
         </CheckBoxList>
       </RoomsFilterList>
       <button onClick={handleSubmit}>Найти</button>
-      <button onClick={handleFilterReset}>Сбросить</button>
+      <button onClick={handleResetForm}>Сбросить</button>
     </section>
   );
 };

@@ -39,7 +39,7 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
     }
   }, []);
 
-  const resetForm = e => {
+  const handleResetForm = e => {
     e.preventDefault();
     setData(initialData);
     setErrors({});
@@ -53,7 +53,7 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
     handleInputChange,
     handleKeyDown,
     validate,
-    resetForm,
+    handleResetForm,
   };
 }
 

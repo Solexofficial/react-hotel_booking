@@ -42,11 +42,11 @@ const sliderSettings = {
   slidesToScroll: 1,
 };
 
-const RoomCard = ({ numberRoom, rentPerDay, rate, countReviews, type, images }) => {
+const RoomCard = ({ id, numberRoom, rentPerDay, rate, countReviews, type, images }) => {
   return (
     <div className='room-card'>
       <SlickSlider {...sliderSettings} images={sliderImages} />
-      <Link to='/' className='room-card__description'>
+      <Link to={`/rooms/${id}`} className='room-card__description'>
         <div className='room-card__description-row'>
           <h3 className='room-card__title'>
             № <span className='room-card__title--big'>{numberRoom}</span>
