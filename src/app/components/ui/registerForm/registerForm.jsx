@@ -48,15 +48,9 @@ const LoginForm = () => {
       <InputField autoFocus name='firstName' label='Имя' />
       <InputField name='secondName' label='Фамилия' />
       <RadioGroup name='gender' items={genderItems} />
-      <DatePickerField
-        openTo='year'
-        mask='__.__.____'
-        label='Дата Рождения'
-        name='birthYear'
-        inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
-      />
+      <DatePickerField openTo='year' mask='__.__.____' label='Дата Рождения' name='birthYear' />
       <InputField name='email' label='Почта' />
-      <InputFieldWithPassword name='password' label='Пароль' type='password' inputProps={{ type: 'password' }} />
+      <InputFieldWithPassword name='password' label='Пароль' type='password' />
       <Switch name='subscribe' label='Получать спецпредложения' />
       <Button type='submit' onClick={handleSubmit} fullWidth disabled={Object.keys(errors).length !== 0}>
         Зарегистрироваться
