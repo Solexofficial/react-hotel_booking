@@ -61,7 +61,9 @@ const RoomCard = ({ id, numberRoom, rentPerDay, rate, countReviews, type, images
           <div className='room-card__rating'>
             <Rating name='read-only' value={rate} readOnly />
           </div>
-          <div>Отзывов: {countReviews}</div>
+          <div className='room-card__reviews'>
+            <span className='room-card__reviews-count'>{countReviews}</span> Отзывов
+          </div>
         </div>
       </Link>
     </div>
