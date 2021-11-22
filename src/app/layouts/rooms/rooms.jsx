@@ -1,13 +1,10 @@
 import React from 'react';
-import Container from '../../components/common/container';
-import Footer from '../../components/common/footer/footer';
-import Header from '../../components/common/header/header';
-import RoomsFilter from '../../components/ui/rooms/roomsFilter/roomsFilter';
-import RoomsList from '../../components/ui/rooms/roomsList';
-
+import { useParams } from 'react-router';
 import image1 from '../../assets/img/room888/1.jpg';
 import image2 from '../../assets/img/room888/2.jpg';
 import image3 from '../../assets/img/room888/3.jpg';
+import RoomsListPage from '../../components/pages/roomsListPage';
+import RoomPage from '../../components/pages/roomPage';
 
 const roomsList = [
   {
@@ -33,24 +30,9 @@ const roomsList = [
 ];
 
 const Rooms = () => {
-  return (
-    <>
-      <Header />
-      <Container>
-        <div className='rootWrapper' style={{ display: 'flex' }}>
-          <aside className='filters'>
-            <RoomsFilter />
-          </aside>
-          <section className='mainContent' style={{ flex: '1' }}>
-            <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
-            <RoomsList rooms={roomsList} />
-            <div></div>
-          </section>
-        </div>
-      </Container>
-      <Footer />
-    </>
-  );
+  const { id } = useParams();
+
+  return <>{id ? <RoomPage roomId={id} /> : <RoomsListPage roomsList={roomsList} />}</>;
 };
 
 export default Rooms;

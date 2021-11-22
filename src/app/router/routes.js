@@ -5,7 +5,7 @@ import Dashboard from '../layouts/dashboard';
 
 export const publicRoutes = [
   { path: '/login/:type?', component: Login },
-  { path: '/rooms/:search?/', component: Rooms },
+  { path: '/rooms/:id?/', component: Rooms },
   { path: '/', component: Main, exact: true },
 ];
 
