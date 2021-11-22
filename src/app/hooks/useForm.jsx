@@ -79,5 +79,9 @@ export function Form({ children, handleChange, data, errors, handleKeyDown, ...r
     return React.cloneElement(child, config);
   });
 
-  return <form {...rest}>{clonedElements}</form>;
+  return (
+    <form className='form' {...rest}>
+      {clonedElements}
+    </form>
+  );
 }
