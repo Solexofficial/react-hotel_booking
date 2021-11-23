@@ -1,7 +1,4 @@
-import queryString from 'query-string';
-import React, { useCallback, useEffect } from 'react';
-import { useHistory } from 'react-router';
-import { useForm } from '../../../../hooks/useForm';
+import React, { useState } from 'react';
 import {
   Checkbox,
   CheckBoxList,
@@ -26,32 +23,8 @@ const initialData = {
   hasDisabledAssistant: false,
 };
 
-const RoomsFilter = () => {
-  const history = useHistory();
-  const querySearchStr = history.location.search;
-
-  const { data, setData, handleInputChange, handleResetForm } = useForm(initialData, false, {});
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(data);
-  };
-
-  const getQueryData = useCallback(async () => {
-    let queryData = queryString.parse(querySearchStr);
-    queryData = { ...queryData, guests: JSON.parse(queryData.guests), dateOfStay: JSON.parse(queryData.dateOfStay) };
-    return queryData;
-  }, [querySearchStr]);
-
-  useEffect(() => {
-    if (querySearchStr) {
-      try {
-        getQueryData().then(data => setData(prevState => ({ ...prevState, ...data })));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [querySearchStr, getQueryData, setData]);
+const RoomsFilter = ({ data, setData, handleSubmit, handleResetForm, handleInputChange }) => {
+  console.log('rooms filter render');
 
   return (
     <section className='filters__wrapper'>
@@ -84,7 +57,6 @@ const RoomsFilter = () => {
           />
         </CheckBoxList>
       </RoomsFilterList>
-      <button onClick={handleSubmit}>Найти</button>
       <button onClick={handleResetForm}>Сбросить</button>
     </section>
   );
