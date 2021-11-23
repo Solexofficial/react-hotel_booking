@@ -10,6 +10,7 @@ import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../ui/rooms/roomsList';
+import filterRooms from '../../utils/filterRooms';
 
 const rooms = [
   {
@@ -42,7 +43,7 @@ const filtersList = {
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
   dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() },
-  rentPerDay: [5000, 10000],
+  rentPerDay: [0, 15000],
   canSmoke: false,
   canPets: false,
   canInvite: false,
@@ -54,17 +55,7 @@ const RoomsListPage = () => {
   const [roomsList, setRoomsList] = useState(rooms || []);
   const { data, setData, handleInputChange, handleResetForm } = useForm(filtersList, false, {});
 
-  let filteredData = roomsList;
-
-  if (data.canSmoke) {
-    filteredData = filteredData.filter(room => room.canSmoke);
-  }
-
-  if (data.rentPerDay) {
-    filteredData = filteredData.filter(
-      room => room.rentPerDay >= data.rentPerDay[0] && room.rentPerDay <= data.rentPerDay[1]
-    );
-  }
+  const filteredRoomsList = filterRooms(roomsList, data);
 
   const history = useHistory();
   const querySearchStr = history.location.search;
@@ -106,8 +97,7 @@ const RoomsListPage = () => {
           </aside>
           <section className='mainContent' style={{ flex: '1' }}>
             <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
-            <RoomsList rooms={filteredData} />
-            <div></div>
+            <RoomsList rooms={filteredRoomsList} />
           </section>
         </div>
       </Container>

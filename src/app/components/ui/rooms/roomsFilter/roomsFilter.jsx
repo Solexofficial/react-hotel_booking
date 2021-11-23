@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Checkbox,
   CheckBoxList,
@@ -7,23 +7,9 @@ import {
   RangeSliderField,
 } from '../../../common/form/fields';
 import RoomsFilterList from './roomsFiltersList';
+import Button from '../../buttons/button';
 
-const initialData = {
-  guests: [
-    { name: 'adults', label: 'Взрослые', value: 0 },
-    { name: 'children', label: 'Дети', value: 0 },
-    { name: 'babies', label: 'Младенцы', value: 0 },
-  ],
-  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() },
-  rentPerDay: [5000, 10000],
-  canSmoke: false,
-  canPets: false,
-  canInvite: false,
-  hasWideCorridor: false,
-  hasDisabledAssistant: false,
-};
-
-const RoomsFilter = ({ data, setData, handleSubmit, handleResetForm, handleInputChange }) => {
+const RoomsFilter = ({ data, setData, handleResetForm, handleInputChange }) => {
   console.log('rooms filter render');
 
   return (
@@ -56,8 +42,8 @@ const RoomsFilter = ({ data, setData, handleSubmit, handleResetForm, handleInput
             labelDetails='На 1 этаже вас встретит специалист и проводит до номера'
           />
         </CheckBoxList>
+        <Button onClick={handleResetForm}>Сбросить</Button>
       </RoomsFilterList>
-      <button onClick={handleResetForm}>Сбросить</button>
     </section>
   );
 };

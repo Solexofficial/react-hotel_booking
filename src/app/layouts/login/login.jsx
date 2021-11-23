@@ -14,7 +14,6 @@ import useStyles from './styles';
 const Login = () => {
   const classes = useStyles();
   const { type } = useParams();
-  console.log(type);
   const [formType, setFormType] = useState(type === 'signUp' ? type : 'signIn');
 
   const toggleFormType = () => {

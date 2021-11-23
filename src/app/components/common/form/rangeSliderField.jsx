@@ -7,7 +7,7 @@ const valuetext = value => {
   return `${value}₽`;
 };
 
-const RangeSliderField = ({ label, name, description, onChange, value, min, max, minDistance = 2000 }) => {
+const RangeSliderField = ({ label, name, description, onChange, value, min, max, minDistance = 1500 }) => {
   const [sliderValue, setSliderValue] = useState(value);
   const [mouseState, setMouseState] = useState(null);
 
@@ -56,6 +56,7 @@ const RangeSliderField = ({ label, name, description, onChange, value, min, max,
           step={100}
           onMouseDown={() => setMouseState('hold')}
           onMouseUp={() => setMouseState('leave')}
+          onDrop={() => console.log('drop')}
         />
         {description && (
           <Text variant='subtitle2' component='p' sx={{ fontSize: '12px' }}>
