@@ -11,6 +11,8 @@ import Header from '../common/header/header';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../ui/rooms/roomsList';
 import filterRooms from '../../utils/filterRooms';
+import Pagination from '../common/pagination';
+import { paginate } from '../../utils/paginate';
 
 const rooms = [
   {
@@ -34,6 +36,17 @@ const rooms = [
   { id: '9', numberRoom: '9', rentPerDay: 9990, rate: 2, countReviews: 145 },
   { id: '10', numberRoom: '10', rentPerDay: 9990, rate: 4, countReviews: 145 },
   { id: '11', numberRoom: '11', rentPerDay: 9990, rate: 3, countReviews: 145 },
+  { id: '12', numberRoom: '12', rentPerDay: 15000, rate: 4, countReviews: 145, canSmoke: true },
+  { id: '13', numberRoom: '13', rentPerDay: 1500, rate: 3, countReviews: 145 },
+  { id: '14', numberRoom: '14', rentPerDay: 3000, rate: 2, countReviews: 145 },
+  { id: '15', numberRoom: '15', rentPerDay: 4000, rate: 4, countReviews: 145 },
+  { id: '16', numberRoom: '16', rentPerDay: 9990, rate: 3, countReviews: 145 },
+  { id: '17', numberRoom: '17', rentPerDay: 9990, rate: 2, countReviews: 145 },
+  { id: '18', numberRoom: '18', rentPerDay: 9990, rate: 4, countReviews: 145 },
+  { id: '19', numberRoom: '19', rentPerDay: 9990, rate: 3, countReviews: 145 },
+  { id: '20', numberRoom: '20', rentPerDay: 9990, rate: 2, countReviews: 145 },
+  { id: '21', numberRoom: '21', rentPerDay: 9990, rate: 4, countReviews: 145 },
+  { id: '22', numberRoom: '22', rentPerDay: 13000, rate: 3, countReviews: 145 },
 ];
 
 const filtersList = {
@@ -53,9 +66,15 @@ const filtersList = {
 
 const RoomsListPage = () => {
   const [roomsList, setRoomsList] = useState(rooms || []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 12;
+
   const { data, setData, handleInputChange, handleResetForm } = useForm(filtersList, false, {});
 
   const filteredRoomsList = filterRooms(roomsList, data);
+  const roomsListCrop = paginate(filteredRoomsList, currentPage, pageSize);
+
+  const roomsCount = filteredRoomsList.length;
 
   const history = useHistory();
   const querySearchStr = history.location.search;
@@ -63,6 +82,10 @@ const RoomsListPage = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(data);
+  };
+
+  const handleSetCurrentPage = (event, value) => {
+    setCurrentPage(value);
   };
 
   const getQueryData = useCallback(async () => {
@@ -97,7 +120,8 @@ const RoomsListPage = () => {
           </aside>
           <section className='mainContent' style={{ flex: '1' }}>
             <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
-            <RoomsList rooms={filteredRoomsList} />
+            <RoomsList rooms={roomsListCrop} />
+            <Pagination itemsCount={roomsCount} pageSize={pageSize} onChange={handleSetCurrentPage} />
           </section>
         </div>
       </Container>
