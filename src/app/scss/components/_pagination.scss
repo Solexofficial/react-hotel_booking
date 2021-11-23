@@ -21,6 +21,9 @@
     &.Mui-selected {
       background: $purple;
       color: #fff;
+      &:hover {
+        background: $purple;
+      }
     }
 
     &.MuiPaginationItem-previousNext {
