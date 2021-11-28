@@ -40,7 +40,8 @@
       &:before {
         opacity: 1;
       }
-      .room-card__gallery-arrow {
+      .slick-arrow,
+      .slick-dots {
         opacity: 1;
       }
     }
@@ -143,11 +144,13 @@
     margin-bottom: 0;
   }
   .slick-dots {
+    opacity: 0;
     display: flex !important;
     justify-content: flex-end;
     padding: 0 15px 15px 0;
     z-index: 2;
     bottom: 0;
+    transition: 0.2s linear;
     li {
       width: 8px;
       height: 8px;
