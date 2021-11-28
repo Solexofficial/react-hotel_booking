@@ -1,0 +1,14 @@
+.breadcrumbs {
+  margin: 10px 0;
+}
+
+.MuiBreadcrumbs-li {
+  & .MuiLink-root {
+    color: $blue;
+  }
+}
+.breadcrumbs-item {
+  &--last {
+    color: $accent50;
+  }
+}

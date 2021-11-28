@@ -13,6 +13,7 @@ import RoomsList from '../ui/rooms/roomsList';
 import filterRooms from '../../utils/filterRooms';
 import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
+import Breadcrumbs from '../common/breadcrumbs';
 
 const rooms = [
   {
@@ -108,6 +109,7 @@ const RoomsListPage = () => {
     <>
       <Header />
       <Container>
+        <Breadcrumbs />
         <div className='rootWrapper' style={{ display: 'flex' }}>
           <aside className='filters'>
             <RoomsFilter
