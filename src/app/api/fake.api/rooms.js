@@ -52,8 +52,8 @@ const rooms = [
     id: '2',
     numberRoom: '2',
     rentPerDay: 1500,
-    rate: 400,
-    countReviews: 100,
+    rate: 8,
+    countReviews: 2,
     images: [
       {
         url: image1,

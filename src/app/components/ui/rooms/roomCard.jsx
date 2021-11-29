@@ -35,7 +35,7 @@ const RoomCard = ({ id, numberRoom, rentPerDay, rate, countReviews, type, images
           <div className='room-card__reviews'>
             <span className='room-card__reviews-count'>{`${countReviews} ${declOfNum(countReviews, [
               'Отзыв',
-              'Отзывов',
+              'Отзыва',
               'Отзывов',
             ])}`}</span>
           </div>

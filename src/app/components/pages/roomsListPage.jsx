@@ -15,6 +15,7 @@ import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
 import Breadcrumbs from '../common/breadcrumbs';
 import api from '../../api';
+import Loader from '../common/loader';
 
 const filtersList = {
   guests: [
@@ -92,7 +93,7 @@ const RoomsListPage = () => {
           </aside>
           <section className='mainContent' style={{ flex: '1' }}>
             <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
-            {roomsList.length > 0 ? <RoomsList rooms={roomsListCrop} /> : <h2>Loading...</h2>}
+            {roomsList.length > 0 ? <RoomsList rooms={roomsListCrop} /> : <Loader />}
             <Pagination itemsCount={roomsCount} pageSize={pageSize} onChange={handleSetCurrentPage} />
           </section>
         </div>

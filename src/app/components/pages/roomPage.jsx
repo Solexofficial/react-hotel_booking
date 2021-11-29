@@ -10,6 +10,7 @@ import Divider from '../common/divider';
 import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SlickSlider from '../common/imageSlider/slickSlider';
+import Loader from '../common/loader';
 import Rating from '../common/rating';
 import SearchRoomsForm from '../ui/searchRoomsForm/searchRoomsForm';
 
@@ -27,10 +28,10 @@ const RoomPage = ({ roomId }) => {
     <>
       <Header />
       <Container>
-        {roomData ? (
-          <>
-            <Breadcrumbs />
-            <main>
+        <Breadcrumbs />
+        <main>
+          {roomData ? (
+            <>
               <SlickSlider className='room-page__gallery'>
                 {roomData.images.map(img => (
                   <img key={img.key} className='room-page__gallery-item--img' src={img.url} alt='roomsPhoto' />
@@ -79,7 +80,7 @@ const RoomPage = ({ roomId }) => {
                       <Rating name='read-only' value={getRating(roomData.rate)} readOnly />
                       <span className='room-info__card-rating'>{`${roomData.countReviews} ${declOfNum(
                         roomData.countReviews,
-                        ['Отзыв', 'Отзывов', 'Отзывов']
+                        ['Отзыв', 'Отзыва', 'Отзывов']
                       )}`}</span>
                     </div>
                   </div>
@@ -88,11 +89,11 @@ const RoomPage = ({ roomId }) => {
                   <SearchRoomsForm />
                 </div>
               </div>
-            </main>
-          </>
-        ) : (
-          <h2>Loading...</h2>
-        )}
+            </>
+          ) : (
+            <Loader />
+          )}
+        </main>
       </Container>
       <Footer />
     </>
