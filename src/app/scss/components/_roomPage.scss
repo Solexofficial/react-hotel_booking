@@ -89,3 +89,74 @@
     height: 100%;
   }
 }
+
+.room-info {
+  margin: 70px 0;
+  display: flex;
+  height: 1000px;
+}
+
+.room-info__column {
+  width: 70%;
+}
+
+.room-info__group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.room-info__card {
+  width: 40%;
+  margin-right: 50px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.room-info__form {
+  width: 380px;
+  position: relative;
+  & .MuiPaper-root {
+    top: 50px;
+    position: sticky;
+  }
+}
+
+.features-list__item {
+  margin: 20px 0;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+}
+
+.feature-content {
+  margin-left: 10px;
+}
+
+.feature__title {
+  color: $accent75;
+  font-weight: 700;
+}
+
+.feature__icon {
+  &.MuiSvgIcon-root {
+    fill: $purple;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.feature-separator {
+  &.MuiDivider-root {
+    margin-top: 15px;
+  }
+}
+
+.room-info__card-title {
+  margin-bottom: 20px;
+  font-size: $text-md;
+  font-weight: 700;
+}
