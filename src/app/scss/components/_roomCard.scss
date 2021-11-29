@@ -144,21 +144,10 @@
     margin-bottom: 0;
   }
   .slick-dots {
-    opacity: 0;
-    display: flex !important;
     justify-content: flex-end;
-    padding: 0 15px 15px 0;
-    z-index: 2;
-    bottom: 0;
-    transition: 0.2s linear;
     li {
       width: 8px;
       height: 8px;
-      margin: 0;
-      margin-right: 4px;
-      &:last-child {
-        margin-right: 0;
-      }
     }
     button {
       width: 100%;

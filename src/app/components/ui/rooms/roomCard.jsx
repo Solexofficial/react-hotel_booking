@@ -1,27 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import image1 from '../../../assets/img/room888/1.jpg';
-import image2 from '../../../assets/img/room888/2.jpg';
-import image3 from '../../../assets/img/room888/3.jpg';
+import declOfNum from '../../../utils/declOfNum';
 import Divider from '../../common/divider';
-import SlickSlider from '../../common/imageSlider/cardSlickSlider';
+import SlickSlider from '../../common/imageSlider/slickSlider';
 import Rating from '../../common/rating';
 
-const roomImages = [
-  { url: image1, key: 'image1' },
-  { url: image2, key: 'image2' },
-  { url: image3, key: 'image3' },
-];
-
 const RoomCard = ({ id, numberRoom, rentPerDay, rate, countReviews, type, images }) => {
+  const getRating = rating => +Math.ceil(rating / countReviews).toFixed();
   return (
     <div className='room-card'>
       <SlickSlider className='room-card__gallery'>
-        {roomImages.map(img => (
-          <div className='room-card__gallery-item' key={img.key}>
-            <img className='room-card__gallery-item--img' src={img.url} alt='roomsPhoto' />
-          </div>
-        ))}
+        {images &&
+          images.map(img => (
+            <div className='room-card__gallery-item' key={img.key}>
+              <img className='room-card__gallery-item--img' src={img.url} alt='roomsPhoto' />
+            </div>
+          ))}
       </SlickSlider>
       <Link to={`/rooms/${id}`} className='room-card__description'>
         <div className='room-card__description-row'>
@@ -36,10 +30,14 @@ const RoomCard = ({ id, numberRoom, rentPerDay, rate, countReviews, type, images
         <Divider />
         <div className='room-card__description-row'>
           <div className='room-card__rating'>
-            <Rating name='read-only' value={rate} readOnly />
+            <Rating name='read-only' value={getRating(rate)} readOnly />
           </div>
           <div className='room-card__reviews'>
-            <span className='room-card__reviews-count'>{countReviews}</span> Отзывов
+            <span className='room-card__reviews-count'>{`${countReviews} ${declOfNum(countReviews, [
+              'Отзыв',
+              'Отзывов',
+              'Отзывов',
+            ])}`}</span>
           </div>
         </div>
       </Link>

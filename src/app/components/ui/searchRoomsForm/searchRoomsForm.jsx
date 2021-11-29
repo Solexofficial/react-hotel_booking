@@ -24,7 +24,7 @@ const SearchRoomsForm = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { data, setData, errors, handleInputChange, handleKeyDown, validate, resetForm } = useForm(
+  const { data, setData, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialData,
     true,
     validatorConfig
@@ -57,7 +57,7 @@ const SearchRoomsForm = () => {
       >
         <DateOfStayField name='dateOfStay' />
         <GuestsDropDownField name='guests' setData={setData} data={data} />
-        <Button variant='outlined' type='button' size='small' onClick={resetForm} className={classes.btnReset}>
+        <Button variant='outlined' type='button' size='small' onClick={handleResetForm} className={classes.btnReset}>
           Очистить
         </Button>
         <Button
