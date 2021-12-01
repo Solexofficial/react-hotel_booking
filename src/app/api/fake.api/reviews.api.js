@@ -5,7 +5,7 @@ const reviews = [
     pageId: '888',
     content:
       'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
-    created_at: '1633576399367',
+    created_at: '1633576521057',
     likesCount: 12,
   },
   {
@@ -23,6 +23,7 @@ const reviews = [
     userId: '67rdca3eeb7f6fgeed471815',
     content: 'Lorem ipsum dolor and etc',
     created_at: '1633573058520',
+    likesCount: 5,
   },
 ];
 

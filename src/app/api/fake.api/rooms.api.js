@@ -27,7 +27,7 @@ const rooms = [
     canSmoke: true,
   },
   {
-    id: '1',
+    id: '777',
     numberRoom: '777',
     rentPerDay: 15000,
     rate: 4,
