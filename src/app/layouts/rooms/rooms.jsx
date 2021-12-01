@@ -4,9 +4,9 @@ import RoomPage from '../../components/pages/roomPage';
 import RoomsListPage from '../../components/pages/roomsListPage';
 
 const Rooms = () => {
-  const { id } = useParams();
+  const { roomId } = useParams();
 
-  return <>{id ? <RoomPage roomId={id} /> : <RoomsListPage />}</>;
+  return <>{roomId ? <RoomPage roomId={roomId} /> : <RoomsListPage />}</>;
 };
 
 export default Rooms;
