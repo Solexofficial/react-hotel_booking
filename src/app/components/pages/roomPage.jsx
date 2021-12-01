@@ -11,7 +11,6 @@ import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SlickSlider from '../common/imageSlider/slickSlider';
 import Loader from '../common/loader';
-import Rating from '../common/rating';
 import SearchRoomsForm from '../ui/searchRoomsForm/searchRoomsForm';
 
 const RoomPage = ({ roomId }) => {
@@ -77,11 +76,30 @@ const RoomPage = ({ roomId }) => {
                     </div>
                     <div className='room-info__card'>
                       <h3 className='room-info__card-title'>Впечатления от номера</h3>
-                      <Rating name='read-only' value={getRating(roomData.rate)} readOnly />
+                      Оценок
                       <span className='room-info__card-rating'>{`${roomData.countReviews} ${declOfNum(
                         roomData.countReviews,
                         ['Отзыв', 'Отзыва', 'Отзывов']
                       )}`}</span>
+                    </div>
+                  </div>
+                  <section className='reviews'>reviews</section>
+                  <section className='reviews-form'>reviews form</section>
+                  <div className='room-info__group'>
+                    <div className='room-info__card'>
+                      <h3 className='room-info__card-title'>Правила</h3>
+                      <ul className='bullet-list'>
+                        <li className='bullet-list__item'>Нельзя с питомцами</li>
+                        <li className='bullet-list__item'>Без вечеринок и мероприятий</li>
+                        <li className='bullet-list__item'>Время прибытия — после 13:00, а выезд до 12:00</li>
+                      </ul>
+                    </div>
+                    <div className='room-info__card'>
+                      <h3 className='room-info__card-title'>Отмена</h3>
+                      <p>
+                        Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы
+                        получите полный возврат за вычетом сбора за услуги.
+                      </p>
                     </div>
                   </div>
                 </div>
