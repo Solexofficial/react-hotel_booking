@@ -1,21 +1,18 @@
 import queryString from 'query-string';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import image1 from '../../assets/img/room888/1.jpg';
-import image2 from '../../assets/img/room888/2.jpg';
-import image3 from '../../assets/img/room888/3.jpg';
+import api from '../../api';
 import { useForm } from '../../hooks/useForm';
+import filterRooms from '../../utils/filterRooms';
+import { paginate } from '../../utils/paginate';
+import Breadcrumbs from '../common/breadcrumbs';
 import Container from '../common/container';
 import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
+import Loader from '../common/loader';
+import Pagination from '../common/pagination';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../ui/rooms/roomsList';
-import filterRooms from '../../utils/filterRooms';
-import Pagination from '../common/pagination';
-import { paginate } from '../../utils/paginate';
-import Breadcrumbs from '../common/breadcrumbs';
-import api from '../../api';
-import Loader from '../common/loader';
 
 const filtersList = {
   guests: [

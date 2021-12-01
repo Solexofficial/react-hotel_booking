@@ -1,14 +1,13 @@
 import React from 'react';
 import Review from './review';
 
-const ReviewsList = ({ reviews }) => {
+const ReviewsList = ({ reviews, onRemove }) => {
   return (
-    <div>
-      <h2>Отзывы посетителей</h2>
+    <>
       {reviews.map(review => (
-        <Review key={review.id} review={review} />
+        <Review key={review._id} review={review} onRemove={onRemove} />
       ))}
-    </div>
+    </>
   );
 };
 

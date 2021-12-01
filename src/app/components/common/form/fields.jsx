@@ -1,6 +1,7 @@
 import SelectField from './selectField';
 import NumberField from './numberField';
 import InputField from './inputField';
+import TextAreaField from './textAreaField';
 import Checkbox from './checkBox';
 import RadioGroup from './radioGroupField';
 import DatePickerField from './datePickerField';
@@ -14,6 +15,7 @@ export {
   SelectField,
   NumberField,
   InputField,
+  TextAreaField,
   CheckBoxList,
   Checkbox,
   RadioGroup,

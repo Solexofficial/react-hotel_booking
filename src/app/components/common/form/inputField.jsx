@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField } from '@mui/material';
 
-const InputField = ({ label, type, name, value, onChange, error = null, ...rest }) => {
+const InputField = ({ label, type = 'text', name, value, onChange, error = null, ...rest }) => {
   return (
     <TextField
       variant='outlined'
@@ -16,9 +16,7 @@ const InputField = ({ label, type, name, value, onChange, error = null, ...rest 
     />
   );
 };
-InputField.defaultProps = {
-  type: 'text',
-};
+
 InputField.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,

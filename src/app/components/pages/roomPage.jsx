@@ -11,6 +11,7 @@ import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SlickSlider from '../common/imageSlider/slickSlider';
 import Loader from '../common/loader';
+import Reviews from '../ui/reviews/reviews';
 import SearchRoomsForm from '../ui/searchRoomsForm/searchRoomsForm';
 
 const RoomPage = ({ roomId }) => {
@@ -81,8 +82,7 @@ const RoomPage = ({ roomId }) => {
                       )}`}</span>
                     </div>
                   </div>
-                  <section className='reviews'>reviews</section>
-                  <section className='reviews-form'>reviews form</section>
+                  <Reviews />
                   <div className='room-info__group'>
                     <div className='room-info__card'>
                       <h3 className='room-info__card-title'>Правила</h3>
