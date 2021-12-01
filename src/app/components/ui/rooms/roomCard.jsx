@@ -6,7 +6,6 @@ import SlickSlider from '../../common/imageSlider/slickSlider';
 import Rating from '../../common/rating';
 
 const RoomCard = ({ id, numberRoom, rentPerDay, rate, countReviews, type, images }) => {
-  const getRating = rating => +Math.ceil(rating / countReviews).toFixed();
   return (
     <div className='room-card'>
       <SlickSlider className='room-card__gallery'>
@@ -30,7 +29,7 @@ const RoomCard = ({ id, numberRoom, rentPerDay, rate, countReviews, type, images
         <Divider />
         <div className='room-card__description-row'>
           <div className='room-card__rating'>
-            <Rating name='read-only' value={getRating(rate)} readOnly />
+            <Rating name='read-only' value={rate} totalCount={countReviews} readOnly />
           </div>
           <div className='room-card__reviews'>
             <span className='room-card__reviews-count'>{`${countReviews} ${declOfNum(countReviews, [

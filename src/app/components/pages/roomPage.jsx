@@ -20,8 +20,6 @@ const RoomPage = ({ roomId }) => {
     api.rooms.getById(roomId).then(data => setRoomData(data));
   }, [roomId]);
 
-  const getRating = rating => +Math.ceil(rating / roomData.countReviews).toFixed();
-
   console.log(roomData);
   return (
     <>
