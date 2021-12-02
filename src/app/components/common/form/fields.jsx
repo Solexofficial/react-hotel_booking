@@ -10,6 +10,7 @@ import RangeSliderField from './rangeSliderField';
 import GuestsDropDownField from './guestsDropDownField';
 import CheckBoxList from './checkBoxList';
 import DateOfStayField from './dateOfStayField';
+import RatingField from './ratingField';
 
 export {
   SelectField,
@@ -24,4 +25,5 @@ export {
   Switch,
   RangeSliderField,
   GuestsDropDownField,
+  RatingField,
 };

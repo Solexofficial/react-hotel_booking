@@ -3,16 +3,23 @@
   display: flex;
   align-items: center;
   margin: 0;
+
+  & .MuiRating-root {
+    color: $purple;
+  }
+
+  & .MuiRating-icon {
+    color: $purple;
+  }
 }
 
 .rating-label {
+  margin-right: 10px;
   display: block;
   font-weight: 700;
 }
 
-.MuiRating-root {
-  color: $purple;
-}
-.MuiRating-icon {
-  color: $purple;
+.rating-feedback {
+  margin-left: 5px;
+  color: $accent50;
 }
