@@ -12,7 +12,6 @@ import Header from '../common/header/header';
 import SlickSlider from '../common/imageSlider/slickSlider';
 import Loader from '../common/loader';
 import Reviews from '../ui/reviews/reviews';
-import SearchRoomsForm from '../ui/searchRoomsForm/searchRoomsForm';
 
 const RoomPage = ({ roomId }) => {
   const [roomData, setRoomData] = useState(null);
@@ -101,9 +100,7 @@ const RoomPage = ({ roomId }) => {
                     </div>
                   </div>
                 </div>
-                <div className='room-info__form'>
-                  <SearchRoomsForm />
-                </div>
+                <div className='room-info__form'>{/* <SearchRoomsForm /> */}</div>
               </div>
             </>
           ) : (

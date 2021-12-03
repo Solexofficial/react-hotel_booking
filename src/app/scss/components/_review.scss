@@ -1,0 +1,24 @@
+.review {
+  display: flex;
+}
+
+.review__content {
+  flex: 1;
+}
+
+.review__avatar {
+  margin-right: 10px;
+}
+
+.review__user-name {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.review__date {
+  margin-bottom: 10px;
+}

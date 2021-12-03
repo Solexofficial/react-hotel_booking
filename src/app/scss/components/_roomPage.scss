@@ -11,7 +11,7 @@
     position: absolute;
     top: 0;
     height: 100%;
-    width: 42px;
+    width: 100px;
     z-index: 1;
     transition: opacity 0.2s ease;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 99.99%, rgba(255, 255, 255, 0) 100%);
@@ -109,6 +109,7 @@
 .room-info__card {
   width: 40%;
   margin-right: 50px;
+  margin-bottom: 35px;
 
   &:last-child {
     margin-right: 0;

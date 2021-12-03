@@ -2,12 +2,13 @@
 @import './components/all';
 
 * {
-  min-width: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-size: $text-base-size !important;
-  color: $accent !important;
+  color: $accent75 !important;
 }
 
 h1,
@@ -17,6 +18,7 @@ h4,
 h5,
 h6 {
   margin: 0;
+  color: $accent;
 }
 
 ul,

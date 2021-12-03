@@ -24,11 +24,11 @@ const Reviews = () => {
 
   return (
     <>
-      <h2 className="room-info__card-title">Отзывы посетителей</h2>
       <section className='reviews'>
         {sortedReviews.length > 0 && <ReviewsList reviews={sortedReviews} onRemove={handleRemoveReview} />}
       </section>
       <section className='reviews-form'>
+        <h2>Оставить отзыв</h2>
         <ReviewsForm roomId={roomId} onSubmit={handleSubmit} />
       </section>
     </>

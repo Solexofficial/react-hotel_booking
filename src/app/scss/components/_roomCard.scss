@@ -112,6 +112,15 @@
     text-transform: uppercase;
   }
 
+  &__rating {
+    .MuiRating-root {
+      color: $purple;
+      & .MuiRating-icon {
+        color: $purple;
+      }
+    }
+  }
+
   &__reviews {
     color: $accent50;
     &-count {

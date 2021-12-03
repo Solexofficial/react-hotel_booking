@@ -1,0 +1,12 @@
+.avatar {
+  width: 48px;
+  height: 48px;
+  .MuiAvatar-root {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $accent5;
+
+    overflow: hidden;
+  }
+}

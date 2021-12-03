@@ -4,14 +4,7 @@ import React from 'react';
 const Rating = ({ onChange, name, label, value, totalCount = 1, ...rest }) => {
   const getRating = value => +Math.ceil(value / totalCount).toFixed();
 
-  return label ? (
-    <div className='rating-wrapper' role='group'>
-      <legend className='rating-label'>{label}</legend>
-      <MuiRating name={name} value={getRating(value)} {...rest} onChange={onChange} />
-    </div>
-  ) : (
-    <MuiRating name={name} value={getRating(value)} {...rest} onChange={onChange} />
-  );
+  return <MuiRating name={name} value={getRating(value)} className='rating-wrapper' onChange={onChange} {...rest} />;
 };
 
 export default Rating;

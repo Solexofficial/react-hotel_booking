@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import api from '../../../api';
 import Button from '../buttons/button';
 import { useForm, Form } from '../../../hooks/useForm';
-import { SelectField, TextAreaField } from '../../common/form/fields';
-import Rating from '../../common/rating';
+import { SelectField, TextAreaField, RatingField } from '../../common/form/fields';
 
-const initialData = { content: '', userId: '', rating: 5 };
+const initialData = { content: '', userId: '', likes: [], rating: 5 };
 
 const validatorConfig = {
-  reviewContent: {
+  userId: {
     isRequired: { message: 'Обязательно выберите пользователя' },
   },
   content: {
@@ -18,27 +17,27 @@ const validatorConfig = {
 
 const ReviewsForm = ({ onSubmit }) => {
   const [users, setUsers] = useState({});
-  const { data, errors, handleInputChange, validate, handleResetForm } = useForm(initialData, false, validatorConfig);
+  const { data, errors, handleInputChange, validate, handleResetForm } = useForm(initialData, true, validatorConfig);
 
   useEffect(() => {
     api.users.fetchAll().then(data => setUsers(data));
   }, []);
 
   const handleSubmit = e => {
-    console.log(data);
+    console.log('before submit', data);
     e.preventDefault();
     if (validate(data)) {
       console.log(data);
       onSubmit(data);
-      handleResetForm();
+      handleResetForm(e);
     }
   };
 
   return (
     <Form data={data} errors={errors} handleChange={handleInputChange}>
       <SelectField name='userId' options={users} label={'Выберите пользователя'} />
-      <TextAreaField label='Оставить отзыв' name='reviewContent' />
-      <Rating name='rating' label='Ваша оценка' size='large' />
+      <TextAreaField label='Оставить отзыв' name='content' />
+      <RatingField name='rating' label='Ваша оценка:' size='large' />
       <Button onClick={handleSubmit} type='submit'>
         Опубликовать
       </Button>
