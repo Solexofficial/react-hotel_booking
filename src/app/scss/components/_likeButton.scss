@@ -1,0 +1,46 @@
+.like-button {
+  // &.MuiButtonBase-root {
+  //   border-radius: 50px;
+  // }
+
+  &.MuiIconButton-root {
+    margin-top: 10px;
+    width: 100%;
+    padding: 0;
+    border-radius: 50px;
+    border: 1px solid $accent25;
+    color: $accent75;
+
+    &:hover {
+      background-color: rgba($purple, 0.3);
+    }
+  }
+
+  &--active {
+    &.MuiIconButton-root {
+      background-color: rgba($purple, 0.3);
+      border: 1px solid $purple;
+    }
+    & .MuiIconButton-label {
+      color: $purple;
+    }
+  }
+
+  & .MuiIconButton-label {
+    font-size: $text-sm;
+  }
+
+  & .MuiSvgIcon-root {
+    margin-right: 5px;
+    font-size: $text-sm;
+    color: $purple;
+  }
+}
+
+.like-button__wrapper {
+  padding: 4px 10px 3px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
