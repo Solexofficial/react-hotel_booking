@@ -11,6 +11,7 @@ import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SlickSlider from '../common/imageSlider/slickSlider';
 import Loader from '../common/loader';
+import BookingForm from '../ui/bookingForm/bookingForm';
 import Reviews from '../ui/reviews/reviews';
 
 const RoomPage = ({ roomId }) => {
@@ -20,7 +21,6 @@ const RoomPage = ({ roomId }) => {
     api.rooms.getById(roomId).then(data => setRoomData(data));
   }, [roomId]);
 
-  console.log(roomData);
   return (
     <>
       <Header />
@@ -100,7 +100,9 @@ const RoomPage = ({ roomId }) => {
                     </div>
                   </div>
                 </div>
-                <div className='room-info__form'>{/* <SearchRoomsForm /> */}</div>
+                <div className='room-info__form'>
+                  <BookingForm room={roomData} />
+                </div>
               </div>
             </>
           ) : (

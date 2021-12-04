@@ -11,14 +11,13 @@
 }
 
 .review__user-name {
-  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
   font-weight: 700;
 }
 
 .review__date {
   margin-bottom: 10px;
+  color: $accent50;
 }

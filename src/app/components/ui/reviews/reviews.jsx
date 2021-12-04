@@ -10,7 +10,7 @@ const Reviews = () => {
 
   useEffect(() => {
     api.reviews.fetchReviewsForRoom(roomId).then(data => setReviews(data));
-  }, []);
+  }, [roomId]);
 
   const handleRemoveReview = id => {
     api.reviews.remove(id).then(data => setReviews(prevState => prevState.filter(comment => comment._id !== data)));

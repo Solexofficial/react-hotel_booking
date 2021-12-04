@@ -8,7 +8,6 @@ const LikeButton = ({ likes, onToggle }) => {
 
   useEffect(() => {
     const currentUser = localStorage.getItem('currentUser');
-    console.log(likes.some(el => el.userId === currentUser));
     setStatus(likes.some(el => el.userId === currentUser));
   }, [likes]);
 

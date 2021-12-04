@@ -1,0 +1,67 @@
+.booking-form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-form__numberRoom-text {
+  font-size: $text-md;
+  font-weight: 700;
+}
+
+.booking-form__numberRoom-type {
+  margin-left: 5px;
+
+  text-transform: uppercase;
+  font-weight: 700;
+  color: $purple;
+}
+
+.booking-form__cost {
+  color: $accent50;
+  font-weight: 700;
+}
+
+.booking-form__price-item {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-form__tooltip-icon {
+  margin-left: 5px;
+  &.MuiSvgIcon-root {
+    fill: $accent25;
+    &:hover {
+      fill: $purple;
+      cursor: pointer;
+    }
+  }
+}
+
+.price-item__with-tooltip {
+  display: flex;
+  align-items: center;
+}
+
+.price-item__result {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-item__totalPrice {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+
+  font-size: $text-md;
+  font-weight: 700;
+}
+
+.totalPrice__dots {
+  margin: 0 5px 5px 5px;
+  flex-grow: 1;
+  border-bottom: 1px dotted $accent25;
+}

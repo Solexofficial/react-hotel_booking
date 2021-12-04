@@ -7,16 +7,21 @@ const DateOfStayField = ({ onChange, value, name }) => {
   };
 
   return (
-    <>
-      <DatePickerField label='Дата прибытия' name='arrival' onChange={handleChange} value={value.arrival} />
-      <DatePickerField
-        label='Дата выезда'
-        name='departure'
-        minDate={value.arrival}
-        onChange={handleChange}
-        value={value.departure}
-      />
-    </>
+    <div className='dateOfStay-wrapper'>
+      <div className='dateOfStay'>
+        <DatePickerField label='Дата прибытия' name='arrival' onChange={handleChange} value={value.arrival} />
+      </div>
+      <div className='dateOfStay'>
+        <DatePickerField
+          label='Дата выезда'
+          name='departure'
+          minDate={value.arrival}
+          onChange={handleChange}
+          value={value.departure}
+          className='dateOfStay'
+        />
+      </div>
+    </div>
   );
 };
 

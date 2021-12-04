@@ -1,7 +1,17 @@
 .form {
   margin-top: 15px;
+
   .MuiFormControl-root {
     width: 100%;
     margin-bottom: 10px;
+  }
+
+  .dateOfStay-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dateOfStay {
+    width: 47%;
   }
 }
