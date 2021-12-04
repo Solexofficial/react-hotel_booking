@@ -6,7 +6,6 @@ const reviews = [
     content:
       'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
     created_at: '1633576521057',
-    likes: ['67rdca3eeb7f6fgeed471815', '67rdca3eeb7f6fgeed471816'],
     rating: 5,
   },
   {
@@ -16,7 +15,6 @@ const reviews = [
     content:
       'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент',
     created_at: '1633573058520',
-    likes: ['67rdca3eeb7f6fgeed471815'],
     rating: 4,
   },
   {
@@ -25,7 +23,6 @@ const reviews = [
     userId: '67rdca3eeb7f6fgeed471815',
     content: 'Lorem ipsum dolor and etc',
     created_at: '1633573058520',
-    likes: ['67rdca3eeb7f6fgeed471815'],
     rating: 4,
   },
 ];
