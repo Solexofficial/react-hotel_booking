@@ -1,7 +1,6 @@
 import { Card, Container } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { useParams } from 'react-router';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Text from '../../components/common/typography/text';
@@ -13,8 +12,8 @@ import useStyles from './styles';
 
 const Login = () => {
   const classes = useStyles();
-  const { type } = useParams();
-  const [formType, setFormType] = useState(type === 'signUp' ? type : 'signIn');
+
+  const [formType, setFormType] = useState('signIn');
 
   const toggleFormType = () => {
     setFormType(prevState => (prevState === 'signUp' ? 'signIn' : 'signUp'));
