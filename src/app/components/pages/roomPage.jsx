@@ -17,8 +17,10 @@ import Reviews from '../ui/reviews/reviews';
 const RoomPage = ({ roomId }) => {
   const [roomData, setRoomData] = useState(null);
 
+
   useEffect(() => {
     api.rooms.getById(roomId).then(data => setRoomData(data));
+    
   }, [roomId]);
 
   return (

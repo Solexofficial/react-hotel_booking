@@ -1,8 +1,7 @@
-import queryString from 'query-string';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 import api from '../../api';
 import { useForm } from '../../hooks/useForm';
+import sessionStorageService from '../../services/sessionStorage.service';
 import filterRooms from '../../utils/filterRooms';
 import { paginate } from '../../utils/paginate';
 import Breadcrumbs from '../common/breadcrumbs';
@@ -14,7 +13,7 @@ import Pagination from '../common/pagination';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../ui/rooms/roomsList';
 
-const filtersList = {
+const filtersInitialData = {
   guests: [
     { name: 'adults', label: 'Взрослые', value: 0 },
     { name: 'children', label: 'Дети', value: 0 },
@@ -38,15 +37,25 @@ const RoomsListPage = () => {
     api.rooms.fetchAll().then(data => setRoomsList(data));
   }, []);
 
-  const { data, setData, handleInputChange, handleResetForm } = useForm(filtersList, false, {});
+  const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
+
+  useEffect(() => {
+    const dateOfStay = sessionStorageService.getDateOfStayData();
+    const guestsCount = sessionStorageService.getCountGuestsData();
+
+    setData(prevState => ({
+      ...prevState,
+      dateOfStay: dateOfStay,
+      guests: guestsCount,
+    }));
+
+    console.log(dateOfStay, guestsCount);
+  }, []);
 
   const filteredRoomsList = filterRooms(roomsList, data);
   const roomsListCrop = paginate(filteredRoomsList, currentPage, pageSize);
 
   const roomsCount = filteredRoomsList.length;
-
-  const history = useHistory();
-  const querySearchStr = history.location.search;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -57,21 +66,14 @@ const RoomsListPage = () => {
     setCurrentPage(value);
   };
 
-  const getQueryData = useCallback(async () => {
-    let queryData = queryString.parse(querySearchStr);
-    queryData = { ...queryData, guests: JSON.parse(queryData.guests), dateOfStay: JSON.parse(queryData.dateOfStay) };
-    return queryData;
-  }, [querySearchStr]);
+  const setSessionStorageData = useCallback(async () => {
+    const { dateOfStay, guests } = data;
+    sessionStorageService.setSessionStorageData(dateOfStay, guests);
+  }, [data]);
 
   useEffect(() => {
-    if (querySearchStr) {
-      try {
-        getQueryData().then(data => setData(prevState => ({ ...prevState, ...data })));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [querySearchStr, getQueryData, setData]);
+    setSessionStorageData();
+  }, [data, setSessionStorageData]);
 
   return (
     <>

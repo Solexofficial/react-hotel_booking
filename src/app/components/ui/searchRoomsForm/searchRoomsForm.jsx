@@ -1,9 +1,9 @@
 import { ArrowRight } from '@mui/icons-material';
 import { Paper } from '@mui/material';
-import queryString from 'query-string';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../hooks/useForm';
+import sessionStorageService from '../../../services/sessionStorage.service';
 import DateOfStayField from '../../common/form/dateOfStayField';
 import GuestsDropDownField from '../../common/form/guestsDropDownField';
 import Title from '../../common/typography/title';
@@ -34,12 +34,9 @@ const SearchRoomsForm = () => {
     event.preventDefault();
     if (validate(data)) {
       console.log('data##########:', data);
-      const queryStr = queryString.stringify({
-        ...data,
-        guests: JSON.stringify(data.guests),
-        dateOfStay: JSON.stringify(data.dateOfStay),
-      });
-      history.push(`/rooms/?${queryStr}`);
+      const { guests, dateOfStay } = data;
+      sessionStorageService.setSessionStorageData(dateOfStay, guests);
+      history.push(`/rooms`);
     }
   };
 

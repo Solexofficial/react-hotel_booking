@@ -1,7 +1,6 @@
 import { ArrowRight } from '@mui/icons-material';
 import { Paper } from '@mui/material';
-import queryString from 'query-string';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../hooks/useForm';
 import DateOfStayField from '../../common/form/dateOfStayField';
@@ -12,6 +11,7 @@ import Button from '../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import sessionStorageService from '../../../services/sessionStorage.service';
 
 const oneDayMs = 86000000;
 
@@ -28,13 +28,25 @@ const initialData = {
 const BookingForm = ({ room }) => {
   const classes = useStyles();
   const history = useHistory();
-  console.log(room);
 
   const { data, setData, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialData,
     true,
     validatorConfig
   );
+
+  useEffect(() => {
+    const dateOfStay = sessionStorageService.getDateOfStayData();
+    const guestsCount = sessionStorageService.getCountGuestsData();
+
+    setData(prevState => ({
+      ...prevState,
+      dateOfStay: dateOfStay,
+      guests: guestsCount,
+    }));
+
+    console.log(dateOfStay, guestsCount);
+  }, []);
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
   const discount = 2179;
@@ -44,11 +56,6 @@ const BookingForm = ({ room }) => {
     event.preventDefault();
     if (validate(data)) {
       console.log('data##########:', data);
-      const queryStr = queryString.stringify({
-        ...data,
-        guests: JSON.stringify(data.guests),
-        dateOfStay: JSON.stringify(data.dateOfStay),
-      });
       console.log(history);
       // history.push(`/rooms/?${queryStr}`);
     }
