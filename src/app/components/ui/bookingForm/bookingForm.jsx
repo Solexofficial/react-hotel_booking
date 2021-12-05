@@ -44,8 +44,6 @@ const BookingForm = ({ room }) => {
       dateOfStay: dateOfStay,
       guests: guestsCount,
     }));
-
-    console.log(dateOfStay, guestsCount);
   }, []);
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
@@ -55,9 +53,8 @@ const BookingForm = ({ room }) => {
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
-      console.log('data##########:', data);
+      console.log('data booking room', data);
       console.log(history);
-      // history.push(`/rooms/?${queryStr}`);
     }
   };
   if (room) {
