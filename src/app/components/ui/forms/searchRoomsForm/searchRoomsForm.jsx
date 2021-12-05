@@ -2,12 +2,12 @@ import { ArrowRight } from '@mui/icons-material';
 import { Paper } from '@mui/material';
 import React from 'react';
 import { useHistory } from 'react-router';
-import { Form, useForm } from '../../../hooks/useForm';
-import sessionStorageService from '../../../services/sessionStorage.service';
-import DateOfStayField from '../../common/form/dateOfStayField';
-import GuestsDropDownField from '../../common/form/guestsDropDownField';
-import Title from '../../common/typography/title';
-import Button from '../buttons/button';
+import { Form, useForm } from '../../../../hooks/useForm';
+import sessionStorageService from '../../../../services/sessionStorage.service';
+import DateOfStayField from '../../../common/form/dateOfStayField';
+import GuestsDropDownField from '../../../common/form/guestsDropDownField';
+import Title from '../../../common/typography/title';
+import Button from '../../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
 

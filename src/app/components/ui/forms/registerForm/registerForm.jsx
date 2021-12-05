@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { Form, useForm } from '../../../hooks/useForm';
-import { DatePickerField, InputField, RadioGroup, Switch } from '../../common/form/fields';
-import withPassword from '../../common/form/withPassword';
-import Button from '.././buttons/button';
+import { Form, useForm } from '../../../../hooks/useForm';
+import { DatePickerField, InputField, RadioGroup, Switch } from '../../../common/form/fields';
+import withPassword from '../../../common/form/withPassword';
+import Button from '../../buttons/button';
 import validatorConfig from './validatorConfig';
 
 const genderItems = [
@@ -20,7 +20,7 @@ const initialData = {
   subscribe: false,
 };
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const { data, errors, handleInputChange, handleKeyDown, validate, resetForm } = useForm(
     initialData,
     true,
@@ -59,4 +59,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

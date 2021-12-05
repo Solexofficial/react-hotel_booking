@@ -6,8 +6,8 @@ import Header from '../../components/common/header/header';
 import Text from '../../components/common/typography/text';
 import Title from '../../components/common/typography/title';
 import Button from '../../components/ui/buttons/button';
-import LoginForm from '../../components/ui/loginForm/loginForm';
-import RegisterForm from '../../components/ui/registerForm/registerForm';
+import LoginForm from '../../components/ui/forms/loginForm/loginForm';
+import RegisterForm from '../../components/ui/forms/registerForm/registerForm';
 import useStyles from './styles';
 
 const Login = () => {

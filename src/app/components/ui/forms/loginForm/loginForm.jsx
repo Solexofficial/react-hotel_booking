@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { useForm, Form } from '../../../hooks/useForm';
-import { InputField } from '../../common/form/fields';
-import withPassword from '../../common/form/withPassword';
-import Button from '../buttons/button';
+import { useForm, Form } from '../../../../hooks/useForm';
+import { InputField } from '../../../common/form/fields';
+import withPassword from '../../../common/form/withPassword';
+import Button from '../../buttons/button';
 import validatorConfig from './validatorConfig';
 
 const initialData = {

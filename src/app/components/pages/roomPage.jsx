@@ -11,16 +11,14 @@ import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SlickSlider from '../common/imageSlider/slickSlider';
 import Loader from '../common/loader';
-import BookingForm from '../ui/bookingForm/bookingForm';
+import BookingForm from '../ui/forms/bookingForm/bookingForm';
 import Reviews from '../ui/reviews/reviews';
 
 const RoomPage = ({ roomId }) => {
   const [roomData, setRoomData] = useState(null);
 
-
   useEffect(() => {
     api.rooms.getById(roomId).then(data => setRoomData(data));
-    
   }, [roomId]);
 
   return (

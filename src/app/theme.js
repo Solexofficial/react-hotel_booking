@@ -11,8 +11,8 @@ import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 // const warningDark = 'rgba(253, 200, 69, .7)';
 
 // // border
-// const borderWidth = 2;
-// const borderColor = 'rgba(0, 0, 0, 0.13)';
+const borderWidth = 2;
+const borderColor = 'rgba(0, 0, 0, 0.13)';
 
 // // breakpoints
 // const xl = 1920;
@@ -26,7 +26,12 @@ import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 const theme = createTheme({
   // palette: {
-  //   primary: { main: primary },
+  //   primary: { main: '#bc9cff' },
+  //   text: {
+  //     primary: 'rgba(#1f2041, 0.75)',
+  //   },
+  // },
+
   //   secondary: { main: secondary },
   //   common: {
   //     black,

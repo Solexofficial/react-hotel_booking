@@ -2,16 +2,16 @@ import { ArrowRight } from '@mui/icons-material';
 import { Paper } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Form, useForm } from '../../../hooks/useForm';
-import DateOfStayField from '../../common/form/dateOfStayField';
-import GuestsDropDownField from '../../common/form/guestsDropDownField';
-import Loader from '../../common/loader';
-import Tooltip from '../../common/tooltip';
-import Button from '../buttons/button';
+import { Form, useForm } from '../../../../hooks/useForm';
+import DateOfStayField from '../../../common/form/dateOfStayField';
+import GuestsDropDownField from '../../../common/form/guestsDropDownField';
+import Loader from '../../../common/loader';
+import Tooltip from '../../../common/tooltip';
+import Button from '../../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import sessionStorageService from '../../../services/sessionStorage.service';
+import sessionStorageService from '../../../../services/sessionStorage.service';
 
 const oneDayMs = 86000000;
 
