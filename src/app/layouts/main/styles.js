@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
   contentWrapper: {
-    height: '87vh',
     display: 'flex',
     flexDirection: 'column',
+    background: "url('../../assets/img/slide1.jpg') no-repeat",
   },
   textWishes: {
     padding: '10px 25px',

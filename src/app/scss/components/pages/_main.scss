@@ -1,0 +1,21 @@
+.main-home__page {
+  background: url('../../../assets/img/slide3.jpg') no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.main-home__wrapper {
+  min-height: 90vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main__text-wishes {
+  color: $accent;
+  margin-bottom: 20px;
+  max-width: 300px;
+  text-align: right;
+  align-self: flex-end;
+}

@@ -1,9 +1,9 @@
-@import './roomsList.scss';
+@import './roomsList';
 @import './roomCard';
 @import './roomPage';
 @import './reviews';
-@import './checkBoxList.scss';
-@import './filters.scss';
+@import './checkBoxList';
+@import './filters';
 @import './form';
 @import './pagination';
 @import './breadcrumbs';
@@ -14,3 +14,4 @@
 @import './review';
 @import './reviewsForm';
 @import './bookingForm';
+@import './pages/main.scss';
