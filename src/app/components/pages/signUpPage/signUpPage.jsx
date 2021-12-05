@@ -12,7 +12,7 @@ const LoginPage = () => {
     <>
       <Header />
       <Container>
-        <h1 class='visually-hidden'>Отель Toxin Регистрация</h1>
+        <h1 className='visually-hidden'>Отель Toxin Регистрация</h1>
         <div className='login-form__wrapper'>
           <Card className='login-form__card'>
             <h2>Регистрация</h2>
