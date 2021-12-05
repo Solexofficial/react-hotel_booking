@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../common/header/header';
 import Container from '../common/container';
-import SearchRoomsForm from '../ui/forms/searchRoomsForm/searchRoomsForm';
+import SearchRoomsForm from '../ui/forms/searchRoomsForm';
 import Footer from '../common/footer/footer';
 
 const HomePage = () => {

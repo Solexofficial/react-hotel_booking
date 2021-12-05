@@ -11,7 +11,7 @@ import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SlickSlider from '../common/imageSlider/slickSlider';
 import Loader from '../common/loader';
-import BookingForm from '../ui/forms/bookingForm/bookingForm';
+import BookingForm from '../ui/forms/bookingForm';
 import Reviews from '../ui/reviews/reviews';
 
 const RoomPage = ({ roomId }) => {
@@ -34,7 +34,6 @@ const RoomPage = ({ roomId }) => {
                   <img key={img.key} className='room-page__gallery-item--img' src={img.url} alt='roomsPhoto' />
                 ))}
               </SlickSlider>
-              <h1>Room page id: {roomId}</h1>
               <div className='room-info'>
                 <div className='room-info__column'>
                   <div className='room-info__group'>
