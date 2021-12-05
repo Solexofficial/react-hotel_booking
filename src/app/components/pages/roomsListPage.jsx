@@ -43,13 +43,13 @@ const RoomsListPage = () => {
     const dateOfStay = sessionStorageService.getDateOfStayData();
     const guestsCount = sessionStorageService.getCountGuestsData();
 
-    setData(prevState => ({
-      ...prevState,
-      dateOfStay: dateOfStay,
-      guests: guestsCount,
-    }));
-
-    console.log(dateOfStay, guestsCount);
+    if (dateOfStay && guestsCount) {
+      setData(prevState => ({
+        ...prevState,
+        dateOfStay: dateOfStay,
+        guests: guestsCount,
+      }));
+    }
   }, []);
 
   const filteredRoomsList = filterRooms(roomsList, data);

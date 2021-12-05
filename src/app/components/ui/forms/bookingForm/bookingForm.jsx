@@ -39,11 +39,13 @@ const BookingForm = ({ room }) => {
     const dateOfStay = sessionStorageService.getDateOfStayData();
     const guestsCount = sessionStorageService.getCountGuestsData();
 
-    setData(prevState => ({
-      ...prevState,
-      dateOfStay: dateOfStay,
-      guests: guestsCount,
-    }));
+    if (dateOfStay && guestsCount) {
+      setData(prevState => ({
+        ...prevState,
+        dateOfStay: dateOfStay,
+        guests: guestsCount,
+      }));
+    }
   }, []);
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
