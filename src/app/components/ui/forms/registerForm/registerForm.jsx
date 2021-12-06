@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks/useForm';
 import { DatePickerField, InputField, RadioGroup, Switch } from '../../../common/form/fields';
 import withPassword from '../../../common/form/withPassword';
@@ -21,17 +22,24 @@ const initialData = {
 };
 
 const RegisterForm = () => {
-  const { data, errors, handleInputChange, handleKeyDown, validate, resetForm } = useForm(
+  const { data, errors, setErrors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialData,
     true,
     validatorConfig
   );
 
-  const handleSubmit = e => {
+  const { signUp } = useAuth();
+
+  const handleSubmit = async e => {
     e.preventDefault();
     if (validate(data)) {
       console.log(data);
-      resetForm();
+      try {
+        await signUp(data);
+      } catch (error) {
+        setErrors(error);
+      }
+      handleResetForm(e);
     }
   };
 

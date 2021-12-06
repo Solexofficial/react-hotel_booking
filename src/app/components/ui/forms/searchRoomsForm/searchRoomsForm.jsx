@@ -1,5 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
-import { Menu, MenuItem, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks/useForm';
@@ -10,6 +10,7 @@ import Title from '../../../common/typography/title';
 import Button from '../../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
+import { useAuth } from '../../../../hooks/useAuth';
 
 const initialData = {
   guests: [
