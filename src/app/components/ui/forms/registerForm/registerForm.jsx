@@ -56,7 +56,13 @@ const RegisterForm = () => {
       <InputField autoFocus name='firstName' label='Имя' />
       <InputField name='secondName' label='Фамилия' />
       <RadioGroup name='gender' items={genderItems} />
-      <DatePickerField openTo='year' mask='__.__.____' label='Дата Рождения' name='birthYear' />
+      <DatePickerField
+        openTo='year'
+        mask='__.__.____'
+        label='Дата Рождения'
+        name='birthYear'
+        minDate={new Date('1950-01-01')}
+      />
       <InputField name='email' label='Почта' />
       <InputFieldWithPassword name='password' label='Пароль' type='password' />
       <Switch name='subscribe' label='Получать спецпредложения' />
