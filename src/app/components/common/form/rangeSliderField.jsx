@@ -1,7 +1,9 @@
 import { Slider } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Text from '../typography/text';
 import Title from '../typography/title';
+import Loader from '../../common/loader';
+import { InputField } from './fields';
 
 const valuetext = value => {
   return `${value}₽`;
@@ -9,7 +11,6 @@ const valuetext = value => {
 
 const RangeSliderField = ({ label, name, description, onChange, value, min, max, minDistance = 1500 }) => {
   const [sliderValue, setSliderValue] = useState(value);
-  const [mouseState, setMouseState] = useState(null);
 
   const handleChange = useCallback(
     (event, newValue, activeThumb) => {
@@ -28,11 +29,19 @@ const RangeSliderField = ({ label, name, description, onChange, value, min, max,
     [max, minDistance]
   );
 
-  useEffect(() => {
-    if (mouseState === 'leave') {
-      onChange({ target: { name, value: sliderValue } });
+  const handleInputChange = ({ target }) => {
+    console.log(target.value);
+    if (target.name === 'max') {
+      onChange({ target: { name, value: [sliderValue[0], +target.value] } });
     }
-  }, [mouseState, name, sliderValue]);
+    if (target.name === 'min') {
+      onChange({ target: { name, value: [+target.value, sliderValue[1]] } });
+    }
+  };
+
+  useEffect(() => {
+    setSliderValue(value);
+  }, [value]);
 
   if (value) {
     return (
@@ -54,10 +63,28 @@ const RangeSliderField = ({ label, name, description, onChange, value, min, max,
           min={min}
           max={max}
           step={100}
-          onMouseDown={() => setMouseState('hold')}
-          onMouseUp={() => setMouseState('leave')}
-          onDrop={() => console.log('drop')}
+          onChangeCommitted={() => onChange({ target: { name, value: sliderValue } })}
         />
+        <div className='range-slider__inputs' style={{ display: 'flex', gap: 10 }}>
+          <InputField
+            inputProps={{ min: min }}
+            label='От'
+            name='min'
+            type='number'
+            min={min}
+            value={value[0]}
+            onChange={handleInputChange}
+          />
+          <InputField
+            name='max'
+            label='До'
+            type='number'
+            inputProps={{ max: max }}
+            value={value[1]}
+            onChange={handleInputChange}
+          />
+        </div>
+
         {description && (
           <Text variant='subtitle2' component='p' sx={{ fontSize: '12px' }}>
             Стоимость за сутки пребывания в номере
@@ -66,7 +93,7 @@ const RangeSliderField = ({ label, name, description, onChange, value, min, max,
       </div>
     );
   }
-  return <p>Loading...</p>;
+  return <Loader />;
 };
 
 export default React.memo(RangeSliderField);
