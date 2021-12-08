@@ -19,14 +19,18 @@ http.interceptors.request.use(
   }
 );
 
-function TransformData(data) {
-  return data ? Object.values(data) : [];
+function transformData(data) {
+  return data && !data._id
+    ? Object.keys(data).map(key => ({
+        ...data[key],
+      }))
+    : data;
 }
 
 http.interceptors.response.use(
   res => {
     if (configFile.isFireBase) {
-      res.data = { content: TransformData(res.data) };
+      res.data = { content: transformData(res.data) };
     }
     return res;
   },
