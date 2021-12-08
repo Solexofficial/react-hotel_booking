@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { useAuth } from '../../../../hooks/useAuth';
-import { useForm, Form } from '../../../../hooks/useForm';
+import { Form, useForm } from '../../../../hooks/useForm';
 import { InputField } from '../../../common/form/fields';
 import withPassword from '../../../common/form/withPassword';
 import Button from '../../buttons/button';
@@ -13,11 +13,17 @@ const initialData = {
 };
 
 const LoginForm = () => {
-  const { data, errors, setErrors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
-    initialData,
-    false,
-    validatorConfig
-  );
+  const {
+    data,
+    errors,
+    setErrors,
+    enterError,
+    setEnterError,
+    handleInputChange,
+    handleKeyDown,
+    validate,
+    handleResetForm,
+  } = useForm(initialData, false, validatorConfig);
 
   const { signIn } = useAuth();
   const history = useHistory();
@@ -25,13 +31,13 @@ const LoginForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (validate(data)) {
-      console.log(data);
       try {
         await signIn(data);
-        handleResetForm(e);
         history.push('/');
       } catch (error) {
         setErrors(error);
+        setEnterError(error.message);
+        handleResetForm(e);
       }
     }
   };
@@ -49,10 +55,11 @@ const LoginForm = () => {
       >
         <InputField name='email' label='Email' autoFocus />
         <InputFieldWithPassword name='password' label='Пароль' type='password' />
-        <Button onClick={handleSubmit} fullWidth type='submit'>
+        <Button onClick={handleSubmit} fullWidth type='submit' disabled={enterError}>
           Войти
         </Button>
       </Form>
+      {enterError && <p className='form__enter-error'>{enterError || errors}</p>}
     </>
   );
 };

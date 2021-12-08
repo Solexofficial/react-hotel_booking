@@ -4,6 +4,7 @@ import { validator } from '../utils/validator';
 export function useForm(initialData, validateOnChange, validatorConfig) {
   const [data, setData] = useState(initialData || {});
   const [errors, setErrors] = useState({});
+  const [enterError, setEnterError] = useState(null);
 
   const validate = useCallback(
     data => {
@@ -17,11 +18,12 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
   const handleInputChange = useCallback(
     ({ target }) => {
       const { name, value } = target;
-      console.log(name, value);
       setData(prevState => ({
         ...prevState,
         [name]: value,
       }));
+      setEnterError(null);
+      setErrors({});
       if (validateOnChange) validate({ [name]: value });
     },
     [validateOnChange, validate]
@@ -50,6 +52,8 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
     setData,
     errors,
     setErrors,
+    enterError,
+    setEnterError,
     handleInputChange,
     handleKeyDown,
     validate,

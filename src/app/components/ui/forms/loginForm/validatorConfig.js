@@ -9,7 +9,7 @@ const validatorConfig = {
   },
   password: {
     isRequired: {
-      message: 'Неверный пароль',
+      message: 'Поле "Пароль" обязательно для заполнения',
     },
   },
 };
