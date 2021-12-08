@@ -16,7 +16,7 @@ const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState({});
 
   async function signUp({ email, password, ...rest }) {
@@ -49,6 +49,8 @@ const AuthProvider = ({ children }) => {
         returnSecureToken: true,
       });
       setTokens(data);
+      const { content } = await userService.getById(data.localId);
+      setCurrentUser(content);
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
@@ -69,8 +71,7 @@ const AuthProvider = ({ children }) => {
 
   async function createUser(data) {
     try {
-      const { content } = await userService.create(data);
-      setCurrentUser(content);
+      userService.create(data);
     } catch (error) {
       errorCatcher(error);
     }
@@ -88,7 +89,9 @@ const AuthProvider = ({ children }) => {
     setError(message);
   }
 
-  return <AuthContext.Provider value={{ signUp, signIn, currentUser }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ signUp, signIn, currentUser, setCurrentUser }}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
