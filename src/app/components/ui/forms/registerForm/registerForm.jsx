@@ -46,10 +46,6 @@ const RegisterForm = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-
   const InputFieldWithPassword = useMemo(() => withPassword(InputField), []);
 
   return (

@@ -55,11 +55,11 @@ const LoginForm = () => {
       >
         <InputField name='email' label='Email' autoFocus />
         <InputFieldWithPassword name='password' label='Пароль' type='password' />
-        <Button onClick={handleSubmit} fullWidth type='submit' disabled={enterError}>
+        <Button onClick={handleSubmit} fullWidth type='submit' disabled={enterError ? true : false}>
           Войти
         </Button>
       </Form>
-      {enterError && <p className='form__enter-error'>{enterError || errors}</p>}
+      {enterError && <p className='form__enter-error'>{enterError}</p>}
     </>
   );
 };
