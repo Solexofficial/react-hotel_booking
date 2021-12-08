@@ -1,4 +1,6 @@
 import React, { useMemo } from 'react';
+import { useHistory } from 'react-router';
+import { useAuth } from '../../../../hooks/useAuth';
 import { useForm, Form } from '../../../../hooks/useForm';
 import { InputField } from '../../../common/form/fields';
 import withPassword from '../../../common/form/withPassword';
@@ -11,17 +13,26 @@ const initialData = {
 };
 
 const LoginForm = () => {
-  const { data, errors, handleInputChange, handleKeyDown, validate, resetForm } = useForm(
+  const { data, errors, setErrors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialData,
     false,
     validatorConfig
   );
 
-  const handleSubmit = e => {
+  const { signIn } = useAuth();
+  const history = useHistory();
+
+  const handleSubmit = async e => {
     e.preventDefault();
     if (validate(data)) {
       console.log(data);
-      resetForm();
+      try {
+        await signIn(data);
+        handleResetForm(e);
+        history.push('/');
+      } catch (error) {
+        setErrors(error);
+      }
     }
   };
 

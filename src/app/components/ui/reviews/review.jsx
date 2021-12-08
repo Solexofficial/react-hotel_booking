@@ -10,7 +10,7 @@ const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);
   const [likes, setLikes] = useState([]);
 
-  const fakeUserId = '67rdca3eeb7f6fgeed471816';
+  const fakeUserId = '67rdca3eeb7f6fgeed471815';
 
   useEffect(() => {
     api.users.getById(review.userId).then(data => setUser(data));

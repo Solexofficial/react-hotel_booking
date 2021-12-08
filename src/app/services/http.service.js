@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import configFile from '../config.json';
 
 const http = axios.create({
-  baseURL: configFile.baseURL,
+  baseURL: configFile.apiEndPoint,
 });
 
 http.interceptors.request.use(

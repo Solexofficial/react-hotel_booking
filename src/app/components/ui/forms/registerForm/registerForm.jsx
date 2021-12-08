@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useHistory } from 'react-router';
 import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks/useForm';
 import { DatePickerField, InputField, RadioGroup, Switch } from '../../../common/form/fields';
@@ -28,6 +29,7 @@ const RegisterForm = () => {
     validatorConfig
   );
 
+  const history = useHistory();
   const { signUp } = useAuth();
 
   const handleSubmit = async e => {
@@ -36,12 +38,17 @@ const RegisterForm = () => {
       console.log(data);
       try {
         await signUp(data);
+        handleResetForm(e);
+        history.push('./signIn');
       } catch (error) {
         setErrors(error);
       }
-      handleResetForm(e);
     }
   };
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   const InputFieldWithPassword = useMemo(() => withPassword(InputField), []);
 
