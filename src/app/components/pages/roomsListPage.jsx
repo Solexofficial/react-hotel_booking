@@ -62,7 +62,7 @@ const RoomsListPage = () => {
     console.log(data);
   };
 
-  const handleSetCurrentPage = (event, value) => {
+  const handleSetCurrentPage = (_, value) => {
     setCurrentPage(value);
   };
 

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import api from '../../../api';
+import { useAuth } from '../../../hooks/useAuth';
 import ReviewsForm from './reviewsForm';
 import ReviewsList from './reviewsList';
 
 const Reviews = () => {
   const { roomId } = useParams();
   const [reviews, setReviews] = useState([]);
+
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     api.reviews.fetchReviewsForRoom(roomId).then(data => setReviews(data));
@@ -27,10 +30,12 @@ const Reviews = () => {
       <section className='reviews'>
         {sortedReviews.length > 0 && <ReviewsList reviews={sortedReviews} onRemove={handleRemoveReview} />}
       </section>
-      <section className='reviews-form'>
-        <h2>Оставить отзыв</h2>
-        <ReviewsForm roomId={roomId} onSubmit={handleSubmit} />
-      </section>
+      {currentUser && (
+        <section className='reviews-form'>
+          <h2>Оставить отзыв</h2>
+          <ReviewsForm roomId={roomId} onSubmit={handleSubmit} />
+        </section>
+      )}
     </>
   );
 };

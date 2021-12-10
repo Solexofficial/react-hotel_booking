@@ -13,6 +13,8 @@ const Review = ({ review, onRemove }) => {
 
   const { currentUser } = useAuth();
 
+  const isAdmin = currentUser?.role === 'admin';
+
   useEffect(() => {
     api.users.getById(review.userId).then(data => setUser(data));
     api.likes.getByReviewId(review._id).then(data => setLikes(data));
@@ -45,6 +47,7 @@ const Review = ({ review, onRemove }) => {
             <p className='review__message'>{review.content}</p>
           </div>
         </div>
+        {isAdmin && <button onClick={() => onRemove(review._id)}>Delete review</button>}
       </li>
     );
   }

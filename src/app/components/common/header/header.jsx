@@ -12,6 +12,10 @@ import useStyles from './styles';
 
 const Header = () => {
   const { currentUser, handleLogout } = useAuth();
+  console.log('current user', currentUser);
+  if (currentUser?.role === 'admin') {
+    console.log('ПРИВЕТ АДМИНУШКА');
+  }
   const classes = useStyles();
 
   return (
