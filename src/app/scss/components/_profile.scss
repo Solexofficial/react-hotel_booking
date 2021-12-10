@@ -1,0 +1,51 @@
+.profile-wrapper {
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.profile-avatar__btn {
+  &.MuiButtonBase-root {
+    background: $accent5;
+    margin-right: 10px;
+    &:hover {
+      box-shadow: 0 0 15px 1px rgba($accent75, 0.2);
+    }
+    transition: box-shadow 0.2s linear;
+  }
+}
+
+.profile-username__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-username__greeting {
+  color: $accent50;
+  font-size: $text-xs;
+}
+
+.profile-username__name {
+  font-weight: 700;
+  font-size: $text-sm;
+  text-transform: uppercase;
+}
+
+.profile-menu {
+  margin-top: 45px;
+}
+
+.profile-menu__item {
+  &.MuiMenuItem-root {
+    font-size: $text-sm;
+    color: $accent75;
+    & a {
+      color: inherit;
+      text-decoration: none;
+    }
+    & .MuiSvgIcon-root {
+      margin-right: 5px;
+      fill: $purple;
+    }
+  }
+}

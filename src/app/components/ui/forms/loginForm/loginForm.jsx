@@ -13,17 +13,11 @@ const initialData = {
 };
 
 const LoginForm = () => {
-  const {
-    data,
-    errors,
-    setErrors,
-    enterError,
-    setEnterError,
-    handleInputChange,
-    handleKeyDown,
-    validate,
-    handleResetForm,
-  } = useForm(initialData, false, validatorConfig);
+  const { data, errors, setErrors, enterError, setEnterError, handleInputChange, validate, handleResetForm } = useForm(
+    initialData,
+    false,
+    validatorConfig
+  );
 
   const { signIn } = useAuth();
   const history = useHistory();
@@ -46,13 +40,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form
-        onSubmit={handleSubmit}
-        data={data}
-        errors={errors}
-        handleChange={handleInputChange}
-        handleKeyDown={handleKeyDown}
-      >
+      <Form onSubmit={handleSubmit} data={data} errors={errors} handleChange={handleInputChange}>
         <InputField name='email' label='Email' autoFocus />
         <InputFieldWithPassword name='password' label='Пароль' type='password' />
         <Button onClick={handleSubmit} fullWidth type='submit' disabled={enterError ? true : false}>

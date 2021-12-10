@@ -1,10 +1,10 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import React from 'react';
-import AppRouter from './components/appRouter';
-import theme from './theme';
-import './scss/app.scss';
-import AuthProvider from './hooks/useAuth';
 import { ToastContainer } from 'react-toastify';
+import AppRouter from './components/appRouter';
+import AuthProvider from './hooks/useAuth';
+import './scss/app.scss';
+import theme from './theme';
 
 const App = () => {
   return (

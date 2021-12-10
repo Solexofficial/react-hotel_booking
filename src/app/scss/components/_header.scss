@@ -1,0 +1,33 @@
+.header {
+  height: 70px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #fff;
+  box-shadow: 0 10px 20px $accent5;
+  z-index: 10;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__divider {
+  &.MuiDivider-root {
+    margin-right: 15px;
+  }
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.header-buttons-button {
+  text-decoration: none;
+}

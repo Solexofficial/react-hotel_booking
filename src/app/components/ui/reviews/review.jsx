@@ -5,12 +5,13 @@ import formatDate from '../../../utils/formatDate';
 import Loader from '../../common/loader';
 import LikeButton from '../buttons/likeButton';
 import Rating from '../../common/rating';
+import { useAuth } from '../../../hooks/useAuth';
 
 const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);
   const [likes, setLikes] = useState([]);
 
-  const fakeUserId = '67rdca3eeb7f6fgeed471815';
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     api.users.getById(review.userId).then(data => setUser(data));
@@ -18,10 +19,10 @@ const Review = ({ review, onRemove }) => {
   }, [review]);
 
   const toggleLike = () => {
-    if (likes.some(el => el.userId === fakeUserId)) {
-      api.likes.remove(fakeUserId).then(data => setLikes(prevState => prevState.filter(el => el.userId !== data)));
+    if (likes.some(el => el.userId === currentUser.id)) {
+      api.likes.remove(currentUser.id).then(data => setLikes(prevState => prevState.filter(el => el.userId !== data)));
     } else {
-      api.likes.add(fakeUserId, review._id).then(data => setLikes(prevState => [...prevState, data]));
+      api.likes.add(currentUser.id, review._id).then(data => setLikes(prevState => [...prevState, data]));
     }
   };
 

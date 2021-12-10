@@ -65,11 +65,12 @@ const theme = createTheme({
   //   borderWidth: borderWidth,
   // },
   // overrides: {
-  //   MuiExpansionPanel: {
+  //   MuiButtonBase: {
   //     root: {
-  //       position: 'static',
+  //       padding: '15px 25px',
   //     },
   //   },
+  // },
   //   MuiTableCell: {
   //     root: {
   //       paddingLeft: spacing * 2,
@@ -121,7 +122,7 @@ const theme = createTheme({
   // },
   typography: {
     useNextVariants: true,
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "'Montserrat', sans-serif !important",
     fontSize: 14,
   },
 });

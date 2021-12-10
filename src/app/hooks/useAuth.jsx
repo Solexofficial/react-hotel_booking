@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { setTokens } from '../services/localStorage.service';
+import { setTokens, setCurrentUser, getCurrentUser, removeCurrentUser } from '../services/localStorage.service';
 import userService from '../services/user.service';
 
 const httpAuth = axios.create({
@@ -16,8 +16,13 @@ const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setUser] = useState(getCurrentUser() || null);
   const [error, setError] = useState({});
+
+  const handleLogout = () => {
+    setUser(null);
+    removeCurrentUser();
+  };
 
   async function signUp({ email, password, ...rest }) {
     try {
@@ -28,7 +33,6 @@ const AuthProvider = ({ children }) => {
       });
       setTokens(data);
       await createUser({ _id: data.localId, email, ...rest });
-      console.log(data);
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
@@ -50,6 +54,7 @@ const AuthProvider = ({ children }) => {
       });
       setTokens(data);
       const { content } = await userService.getById(data.localId);
+      setUser(content);
       setCurrentUser(content);
     } catch (error) {
       errorCatcher(error);
@@ -90,7 +95,9 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ signUp, signIn, currentUser, setCurrentUser }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ signUp, signIn, currentUser, setUser, handleLogout }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

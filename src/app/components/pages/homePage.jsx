@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../common/header/header';
 import Container from '../common/container';
-import SearchRoomsForm from '../ui/forms/searchRoomsForm';
 import Footer from '../common/footer/footer';
+import Header from '../common/header/header';
+import SearchRoomsForm from '../ui/forms/searchRoomsForm';
 
 const HomePage = () => {
   return (
