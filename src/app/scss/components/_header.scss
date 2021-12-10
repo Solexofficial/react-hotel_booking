@@ -16,6 +16,34 @@
   justify-content: space-between;
 }
 
+.header__logo {
+  margin-right: 50px;
+}
+
+.header-nav {
+  &.MuiGrid-root {
+    margin-left: 50px;
+    & .nav-item {
+      padding: 0;
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.nav-item__link {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: $blue;
+  }
+
+  transition: color 0.1s linear;
+}
+
 .header__divider {
   &.MuiDivider-root {
     margin-right: 15px;

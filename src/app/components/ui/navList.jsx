@@ -29,17 +29,15 @@ import Title from '../common/typography/title';
 //   },
 // }));
 
-const NavList = ({ label, routes, direction = 'row', spacing }) => {
+const NavList = ({ label, routes, direction = 'row', spacing, ...rest }) => {
   return (
-    <Grid container direction={direction} spacing={spacing}>
-      {label && (
-        <Title isBold component='h3' variant='subtitle2'>
-          {label}
-        </Title>
-      )}
+    <Grid container component='nav' direction={direction} spacing={spacing} {...rest}>
+      {label && <h3>{label}</h3>}
       {routes.map(route => (
-        <Grid item key={route.name}>
-          <NavLink to={route.path}>{route.name}</NavLink>
+        <Grid item key={route.name} className='nav-item'>
+          <NavLink className='nav-item__link' to={route.path}>
+            {route.name}
+          </NavLink>
         </Grid>
       ))}
     </Grid>

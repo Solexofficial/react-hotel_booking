@@ -18,8 +18,8 @@ const Header = () => {
     <header className='header'>
       <Container>
         <div className='header__inner'>
-          <Logo />
-          <NavList routes={navigationRoutes} spacing={2} />
+          <Logo className='header__logo' />
+          <NavList routes={navigationRoutes} spacing={2} className='header-nav' />
           {currentUser ? (
             <>
               <Divider orientation='vertical' flexItem className='header__divider' />
