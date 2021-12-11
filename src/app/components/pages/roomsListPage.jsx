@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../api';
 import { useForm } from '../../hooks/useForm';
+import roomsService from '../../services/rooms.service';
 import sessionStorageService from '../../services/sessionStorage.service';
 import filterRooms from '../../utils/filterRooms';
 import Breadcrumbs from '../common/breadcrumbs';
@@ -31,8 +32,18 @@ const RoomsListPage = () => {
   const pageSize = 12;
 
   useEffect(() => {
-    api.rooms.fetchAll().then(data => setRoomsList(data));
+    getRooms();
   }, []);
+
+  const getRooms = async () => {
+    try {
+      const { content } = await roomsService.getAll();
+      console.log(content);
+      setRoomsList(content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
 

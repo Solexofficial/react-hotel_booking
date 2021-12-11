@@ -3,6 +3,7 @@ import MoodIcon from '@mui/icons-material/Mood';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import React, { useEffect, useState } from 'react';
 import api from '../../api';
+import roomsService from '../../services/rooms.service';
 import declOfNum from '../../utils/declOfNum';
 import Breadcrumbs from '../common/breadcrumbs';
 import Container from '../common/container';
@@ -17,8 +18,14 @@ import Reviews from '../ui/reviews/reviews';
 const RoomPage = ({ roomId }) => {
   const [roomData, setRoomData] = useState(null);
 
-  useEffect(() => {
+  const getRoomData = async id => {
     api.rooms.getById(roomId).then(data => setRoomData(data));
+    const { content } = await roomsService.getById(id);
+    setRoomData(content);
+  };
+
+  useEffect(() => {
+    getRoomData(roomId);
   }, [roomId]);
 
   return (
@@ -30,8 +37,8 @@ const RoomPage = ({ roomId }) => {
           {roomData ? (
             <>
               <SlickSlider className='room-page__gallery'>
-                {roomData.images.map(img => (
-                  <img key={img.key} className='room-page__gallery-item--img' src={img.url} alt='roomsPhoto' />
+                {Object.keys(roomData.images).map(img => (
+                  <img key={img} className='room-page__gallery-item--img' src={roomData.images[img]} alt='roomsPhoto' />
                 ))}
               </SlickSlider>
               <div className='room-info'>

@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import Avatar from '../common/avatar';
 import Tooltip from '../common/tooltip';
 
-const Profile = ({ user, settingsRoutes, onLogout }) => {
+const Profile = ({ user, settingsRoutes = [], onLogout }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = event => {
