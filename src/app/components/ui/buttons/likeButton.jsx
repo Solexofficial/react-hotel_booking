@@ -11,7 +11,7 @@ const LikeButton = ({ likes, onToggle }) => {
 
   useEffect(() => {
     if (currentUser) {
-      setStatus(likes.some(el => el.userId === currentUser?.id));
+      setStatus(likes.some(el => el.userId === currentUser?._id));
     }
   }, [likes, currentUser]);
 
