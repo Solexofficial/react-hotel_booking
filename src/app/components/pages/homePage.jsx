@@ -1,10 +1,18 @@
 import React from 'react';
+import useMockData from '../../hooks/useMockData';
 import Container from '../common/container';
 import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SearchRoomsForm from '../ui/forms/searchRoomsForm';
 
 const HomePage = () => {
+  const { error, initialize, progress, status } = useMockData();
+
+  const handleClick = () => {
+    console.log('clicked');
+    initialize();
+  };
+
   return (
     <>
       <Header />
@@ -15,6 +23,15 @@ const HomePage = () => {
             <SearchRoomsForm />
             <p className='main__text-wishes'>Лучшие номера для вашей работы, отдыха и просто вдохновения</p>
           </div>
+          <h3>Инициализация данных в FireBase</h3>
+          <ul>
+            <li>Status: {status}</li>
+            <li>Progress: {progress}%</li>
+            {error && <li>error: {error}</li>}
+          </ul>
+          <button className='btn btn-primary' onClick={handleClick}>
+            Инициализировать
+          </button>
         </Container>
       </main>
       <Footer />
