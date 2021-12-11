@@ -1,15 +1,13 @@
-import React from 'react';
 import { Pagination as MuiPagination } from '@mui/material';
+import React from 'react';
 
-const Pagination = ({ itemsCount, pageSize, onChange, ...rest }) => {
-  const pageCount = Math.ceil(itemsCount / pageSize);
-  if (pageCount === 1) return null;
+const Pagination = ({ items, pageSize, currentPage, onChange, ...rest }) => {
+  const itemsCount = items.length;
+  const pagesCount = Math.ceil(itemsCount / pageSize);
+  if (pagesCount === 1 || itemsCount === 0) return null;
 
   return (
-    <div className='pagination'>
-      <MuiPagination count={pageCount} defaultPage={1} onChange={onChange} size='large' variant='outlined' {...rest} />
-      <p className='pagination__info'>{`1 - ${pageSize} из ${itemsCount} вариантов аренды`}</p>
-    </div>
+    <MuiPagination count={pagesCount} defaultPage={1} onChange={onChange} size='large' variant='outlined' {...rest} />
   );
 };
 

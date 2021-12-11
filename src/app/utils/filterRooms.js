@@ -1,4 +1,5 @@
 export default function useFilters(data, filters) {
+  if (!data) return;
   let filteredData = data;
 
   if (filters.canSmoke) {

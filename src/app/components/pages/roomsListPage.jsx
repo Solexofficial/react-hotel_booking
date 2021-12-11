@@ -3,15 +3,13 @@ import api from '../../api';
 import { useForm } from '../../hooks/useForm';
 import sessionStorageService from '../../services/sessionStorage.service';
 import filterRooms from '../../utils/filterRooms';
-import { paginate } from '../../utils/paginate';
 import Breadcrumbs from '../common/breadcrumbs';
 import Container from '../common/container';
 import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
-import Loader from '../common/loader';
-import Pagination from '../common/pagination';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../ui/rooms/roomsList';
+import RoomsListSkeleton from '../ui/rooms/roomsListSkeleton';
 
 const filtersInitialData = {
   guests: [
@@ -29,8 +27,7 @@ const filtersInitialData = {
 };
 
 const RoomsListPage = () => {
-  const [roomsList, setRoomsList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [roomsList, setRoomsList] = useState(null);
   const pageSize = 12;
 
   useEffect(() => {
@@ -53,18 +50,6 @@ const RoomsListPage = () => {
   }, []);
 
   const filteredRoomsList = filterRooms(roomsList, data);
-  const roomsListCrop = paginate(filteredRoomsList, currentPage, pageSize);
-
-  const roomsCount = filteredRoomsList.length;
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(data);
-  };
-
-  const handleSetCurrentPage = (_, value) => {
-    setCurrentPage(value);
-  };
 
   const setSessionStorageData = useCallback(async () => {
     const { dateOfStay, guests } = data;
@@ -87,13 +72,15 @@ const RoomsListPage = () => {
               setData={setData}
               handleInputChange={handleInputChange}
               handleResetForm={handleResetForm}
-              handleSubmit={handleSubmit}
             />
           </aside>
           <section className='mainContent' style={{ flex: '1' }}>
             <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
-            {roomsList.length > 0 ? <RoomsList rooms={roomsListCrop} /> : <Loader />}
-            <Pagination itemsCount={roomsCount} pageSize={pageSize} onChange={handleSetCurrentPage} />
+            {roomsList ? (
+              <RoomsList rooms={filteredRoomsList} pageSize={pageSize} />
+            ) : (
+              <RoomsListSkeleton pageSize={pageSize} />
+            )}
           </section>
         </div>
       </Container>
