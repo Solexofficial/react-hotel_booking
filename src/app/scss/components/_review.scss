@@ -12,12 +12,38 @@
 
 .review__user-name {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   font-weight: 700;
+}
+
+.review__rating {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
 
 .review__date {
   margin-bottom: 10px;
   color: $accent50;
+}
+
+.review__delete-btn {
+  display: flex;
+  justify-content: flex-end;
+
+  & .MuiButtonBase-root {
+    padding: 0;
+    margin-left: 5px;
+    background: $red;
+
+    &:hover {
+      background: $red;
+    }
+  }
+
+  & .MuiSvgIcon-root {
+    width: 18px;
+    height: 18px;
+    fill: white;
+  }
 }

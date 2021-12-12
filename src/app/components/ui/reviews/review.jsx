@@ -7,6 +7,10 @@ import LikeButton from '../buttons/likeButton';
 import Rating from '../../common/rating';
 import { useAuth } from '../../../hooks/useAuth';
 import userService from '../../../services/user.service';
+import Button from '../buttons/button';
+import ClearIcon from '@mui/icons-material/Clear';
+import { IconButton } from '@mui/material';
+import Tooltip from '../../common/tooltip';
 
 const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);
@@ -47,13 +51,23 @@ const Review = ({ review, onRemove }) => {
           <div className='review__content'>
             <p className='review__user-name'>
               {`${user.firstName} ${user.secondName}`}
-              <Rating value={review.rating} readOnly />
+              <div className='review__rating'>
+                <Rating value={review.rating} readOnly />
+              </div>
+              {isAdmin && (
+                <div className='review__delete-btn'>
+                  <Tooltip title='Удалить отзыв'>
+                    <IconButton>
+                      <ClearIcon />
+                    </IconButton>
+                  </Tooltip>
+                </div>
+              )}
             </p>
             <p className='review__date'>{formatDate(review.created_at)}</p>
             <p className='review__message'>{review.content}</p>
           </div>
         </div>
-        {isAdmin && <button onClick={() => onRemove(review._id)}>Delete review</button>}
       </li>
     );
   }
