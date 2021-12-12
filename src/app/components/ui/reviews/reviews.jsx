@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useAuth } from '../../../hooks/useAuth';
 import reviewsService from '../../../services/reviews.service';
-import ReviewsForm from './reviewsForm';
+import ReviewsForm from '../forms/reviewsForm/reviewsForm';
 import ReviewsList from './reviewsList';
 
 const Reviews = () => {

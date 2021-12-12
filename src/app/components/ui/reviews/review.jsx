@@ -1,7 +1,7 @@
 import ClearIcon from '@mui/icons-material/Clear';
+import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import api from '../../../api';
 import { useAuth } from '../../../hooks/useAuth';
 import likesService from '../../../services/likes.service';
 import userService from '../../../services/user.service';
@@ -19,6 +19,8 @@ const Review = ({ review, onRemove }) => {
   const { currentUser } = useAuth();
 
   const isAdmin = currentUser?.role === 'admin';
+  const isAuthor = review.userId === currentUser._id;
+  const showEditBtns = isAdmin || isAuthor;
 
   const getUser = async id => {
     const { content } = await userService.getById(id);
@@ -80,18 +82,27 @@ const Review = ({ review, onRemove }) => {
           <div className='review__content'>
             <p className='review__user-name'>
               {`${user.firstName} ${user.secondName}`}
+              {showEditBtns && (
+                <>
+                  <div className='review__edit-btn'>
+                    <Tooltip title='Редактировать'>
+                      <IconButton onClick={() => console.log('edit review')}>
+                        <EditIcon fontSize='small' />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                  <div className='review__delete-btn'>
+                    <Tooltip title='Удалить отзыв'>
+                      <IconButton onClick={() => onRemove(review._id)}>
+                        <ClearIcon fontSize='small' />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                </>
+              )}
               <div className='review__rating'>
                 <Rating value={review.rating} readOnly />
               </div>
-              {isAdmin && (
-                <div className='review__delete-btn'>
-                  <Tooltip title='Удалить отзыв'>
-                    <IconButton onClick={() => onRemove(review._id)}>
-                      <ClearIcon />
-                    </IconButton>
-                  </Tooltip>
-                </div>
-              )}
             </p>
             <p className='review__date'>{formatDate(review.created_at)}</p>
             <p className='review__message'>{review.content}</p>

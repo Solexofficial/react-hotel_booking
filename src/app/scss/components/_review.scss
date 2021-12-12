@@ -28,13 +28,10 @@
 }
 
 .review__delete-btn {
-  display: flex;
-  justify-content: flex-end;
-
   & .MuiButtonBase-root {
-    padding: 0;
+    padding: 5px;
     margin-left: 5px;
-    background: $red;
+    background: $accent25;
 
     &:hover {
       background: $red;
@@ -42,8 +39,26 @@
   }
 
   & .MuiSvgIcon-root {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
+    fill: white;
+  }
+}
+
+.review__edit-btn {
+  & .MuiButtonBase-root {
+    padding: 5px;
+    margin-left: 10px;
+    background: $accent25;
+
+    &:hover {
+      background: $blue;
+    }
+  }
+
+  & .MuiSvgIcon-root {
+    width: 14px;
+    height: 14px;
     fill: white;
   }
 }
