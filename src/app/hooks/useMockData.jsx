@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import rooms from '../mockData/rooms.json';
 import users from '../mockData/users.json';
 import reviews from '../mockData/reviews.json';
+import likes from '../mockData/likes.json';
 import httpService from '../services/http.service';
 
 const useMockData = () => {
@@ -15,7 +16,7 @@ const useMockData = () => {
   const [status, setStatus] = useState(statusMap.idle);
   const [progress, setProgress] = useState(0);
   const [count, setCount] = useState(0);
-  const summaryCount = [rooms, reviews, users].reduce((acc, cur) => acc + cur.length, 0);
+  const summaryCount = [rooms, reviews, users, likes].reduce((acc, cur) => acc + cur.length, 0);
 
   const incrementCount = () => {
     setCount(prevState => prevState + 1);
@@ -50,6 +51,10 @@ const useMockData = () => {
       }
       for (const review of reviews) {
         await httpService.put('reviews/' + review._id, review);
+        incrementCount();
+      }
+      for (const like of likes) {
+        await httpService.put('likes/' + like._id, like);
         incrementCount();
       }
     } catch (error) {

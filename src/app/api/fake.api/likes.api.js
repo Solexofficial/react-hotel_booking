@@ -56,29 +56,6 @@ const add = (userId, reviewId) =>
     }, 200);
   });
 
-// const toggle = ({ userId, reviewId }) =>
-//   new Promise(resolve => {
-//     window.setTimeout(function () {
-//       const likes = JSON.parse(localStorage.getItem('likes'));
-//       const reviewLikes = likes.filter(el => el.reviewId === reviewId);
-//       const userLike = reviewLikes.find(el => el.userId === userId);
-//       console.log(userLike);
-//       if (userLike) {
-//         likes.filter(el => el._id !== userLike._id);
-//         console.log(likes.filter(el => el._id !== userLike._id));
-//       } else {
-//         const newLike = {
-//           userId,
-//           reviewId,
-//           _id: Math.random().toString(36).substr(2, 9),
-//         };
-//         likes.push(newLike);
-//       }
-//       localStorage.setItem('likes', JSON.stringify(likes));
-//       resolve(likes);
-//     }, 200);
-//   });
-
 const remove = userId =>
   new Promise(resolve => {
     window.setTimeout(function () {
@@ -93,6 +70,5 @@ export default {
   fetchAll,
   getByReviewId,
   add,
-  // toggle,
   remove,
 };
