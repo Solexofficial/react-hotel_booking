@@ -12,10 +12,11 @@ const likesService = {
     const { content } = data;
     return content.filter(like => like.reviewId === reviewId);
   },
-  create: async payload => {
+  create: async (userId, reviewId) => {
     const newLike = {
       _id: Math.random().toString(36).substr(2, 9),
-      ...payload,
+      userId,
+      reviewId,
     };
     const { data } = await httpService.put(likesEndPoint + newLike._id, newLike);
     return data;

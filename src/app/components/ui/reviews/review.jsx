@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../../api';
-import Avatar from './../../common/avatar';
-import formatDate from '../../../utils/formatDate';
-import Loader from '../../common/loader';
-import LikeButton from '../buttons/likeButton';
-import Rating from '../../common/rating';
-import { useAuth } from '../../../hooks/useAuth';
-import userService from '../../../services/user.service';
-import Button from '../buttons/button';
 import ClearIcon from '@mui/icons-material/Clear';
 import { IconButton } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import api from '../../../api';
+import { useAuth } from '../../../hooks/useAuth';
+import likesService from '../../../services/likes.service';
+import userService from '../../../services/user.service';
+import formatDate from '../../../utils/formatDate';
+import Loader from '../../common/loader';
+import Rating from '../../common/rating';
 import Tooltip from '../../common/tooltip';
+import LikeButton from '../buttons/likeButton';
+import Avatar from './../../common/avatar';
 
 const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);
@@ -25,16 +25,45 @@ const Review = ({ review, onRemove }) => {
     setUser(content);
   };
 
+  const getLikes = async reviewId => {
+    try {
+      const likes = await likesService.getByReviewId(reviewId);
+      setLikes(likes);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeLike = async user => {
+    try {
+      const userLike = likes.find(like => like.userId === user._id);
+      const likeId = await likesService.remove(userLike._id);
+      setLikes(prevState => prevState.filter(like => like._id !== likeId));
+      console.log(likes);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addLike = async user => {
+    try {
+      const { content } = await likesService.create(user._id, review._id);
+      setLikes(prevState => [...prevState, content]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUser(review.userId);
-    api.likes.getByReviewId(review._id).then(data => setLikes(data));
+    getLikes(review._id);
   }, [review]);
 
   const toggleLike = () => {
     if (likes.some(el => el.userId === currentUser._id)) {
-      api.likes.remove(currentUser._id).then(data => setLikes(prevState => prevState.filter(el => el.userId !== data)));
+      removeLike(currentUser);
     } else {
-      api.likes.add(currentUser._id, review._id).then(data => setLikes(prevState => [...prevState, data]));
+      addLike(currentUser);
     }
   };
 
@@ -57,7 +86,7 @@ const Review = ({ review, onRemove }) => {
               {isAdmin && (
                 <div className='review__delete-btn'>
                   <Tooltip title='Удалить отзыв'>
-                    <IconButton>
+                    <IconButton onClick={() => onRemove(review._id)}>
                       <ClearIcon />
                     </IconButton>
                   </Tooltip>
