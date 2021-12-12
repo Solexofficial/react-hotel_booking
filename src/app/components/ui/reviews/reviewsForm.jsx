@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../../api';
-import { useAuth } from '../../../hooks/useAuth';
+import React from 'react';
 import { Form, useForm } from '../../../hooks/useForm';
 import { RatingField, TextAreaField } from '../../common/form/fields';
 import Button from '../buttons/button';
@@ -12,8 +10,7 @@ const validatorConfig = {
 };
 
 const ReviewsForm = ({ onSubmit }) => {
-  const { currentUser } = useAuth();
-  const initialData = { content: '', userId: currentUser._id, likes: [], rating: 5 };
+  const initialData = { content: '', likes: [], rating: 5 };
   const { data, errors, handleInputChange, validate, handleResetForm } = useForm(initialData, true, validatorConfig);
 
   const handleSubmit = e => {

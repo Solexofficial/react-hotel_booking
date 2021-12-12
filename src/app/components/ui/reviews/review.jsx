@@ -35,7 +35,6 @@ const Review = ({ review, onRemove }) => {
   };
 
   if (user) {
-    console.log(user);
     return (
       <li className='reviews-list__item'>
         <div className='review'>

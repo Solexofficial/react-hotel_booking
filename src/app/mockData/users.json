@@ -1,7 +1,8 @@
 [
   {
     "_id": "67rdca3eeb7f6fgeed471815",
-    "name": "Мурад Сарафанов",
+    "firstName": "Мурад",
+    "secondName": "Сарафанов",
     "email": "muradSafranov@vmschool.ru",
     "avatarPhoto": "https://avatars.dicebear.com/api/avataaars/32.svg",
     "sex": "male",
@@ -11,7 +12,8 @@
   },
   {
     "_id": "67rdca3eeb7f6fgeed471816",
-    "name": "Патрисия Стёклышкова",
+    "firstName": "Патрисия",
+    "secondName": "Стёклышкова",
     "email": "patrisiya@vmschool.ru",
     "avatarPhoto": "https://avatars.dicebear.com/api/avataaars/10.svg",
     "sex": "female",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import api from '../../../api';
 import { useAuth } from '../../../hooks/useAuth';
+import reviewsService from '../../../services/reviews.service';
 import ReviewsForm from './reviewsForm';
 import ReviewsList from './reviewsList';
 
@@ -11,16 +11,48 @@ const Reviews = () => {
 
   const { currentUser } = useAuth();
 
+  const getReviews = async roomId => {
+    try {
+      const reviews = await reviewsService.getByRoomId(roomId);
+      setReviews(reviews);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createReview = async payload => {
+    try {
+      const { content } = await reviewsService.create(payload);
+      setReviews(prevState => [...prevState, content]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeReview = async id => {
+    try {
+      const reviewId = await reviewsService.remove(id);
+      setReviews(prevState => prevState.filter(review => review._id !== reviewId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    api.reviews.fetchReviewsForRoom(roomId).then(data => setReviews(data));
+    getReviews(roomId);
   }, [roomId]);
 
   const handleRemoveReview = id => {
-    api.reviews.remove(id).then(data => setReviews(prevState => prevState.filter(comment => comment._id !== data)));
+    removeReview(id);
   };
 
   const handleSubmit = data => {
-    api.reviews.add({ ...data, pageId: roomId }).then(data => setReviews(prevState => [data, ...prevState]));
+    const payload = {
+      ...data,
+      roomId,
+      userId: currentUser._id,
+    };
+    createReview(payload);
   };
 
   const sortedReviews = reviews.sort((a, b) => b.created_at - a.created_at);
@@ -33,7 +65,7 @@ const Reviews = () => {
       {currentUser && (
         <section className='reviews-form'>
           <h2>Оставить отзыв</h2>
-          <ReviewsForm roomId={roomId} onSubmit={handleSubmit} />
+          <ReviewsForm onSubmit={handleSubmit} />
         </section>
       )}
     </>

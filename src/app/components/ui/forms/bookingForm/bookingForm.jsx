@@ -1,6 +1,6 @@
 import { ArrowRight } from '@mui/icons-material';
 import { Paper } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks/useForm';
 import DateOfStayField from '../../../common/form/dateOfStayField';
@@ -12,6 +12,8 @@ import useStyles from './styles';
 import validatorConfig from './validatorConfig';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import sessionStorageService from '../../../../services/sessionStorage.service';
+import { getCurrentUser } from '../../../../services/localStorage.service';
+import { useAuth } from '../../../../hooks/useAuth';
 
 const oneDayMs = 86000000;
 
@@ -26,8 +28,11 @@ const initialData = {
 };
 
 const BookingForm = ({ room }) => {
+  const [totalPrice, setTotalPrice] = useState(0);
   const classes = useStyles();
   const history = useHistory();
+
+  const { currentUser } = useAuth();
 
   const { data, setData, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialData,
@@ -44,23 +49,34 @@ const BookingForm = ({ room }) => {
         ...prevState,
         dateOfStay: dateOfStay,
         guests: guestsCount,
+        totalCost: totalPrice,
       }));
     }
   }, []);
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
-  const discount = 2179;
-  const tips = 300;
 
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
+      if (!currentUser) return history.push('../login/signIn');
+      console.log({
+        [currentUser._id]: {
+          ...data,
+          totalCost: totalPrice,
+        },
+      });
       console.log('data booking room', data);
       console.log(history);
     }
   };
   if (room) {
     const { numberRoom, rentPerDay, type } = room;
+    const DISCOUNT_PERCENT = 10;
+    const PRICE_RENT = rentPerDay * countDays;
+    const PRICE_RENT_WITH_DISCOUNT = (rentPerDay * countDays * DISCOUNT_PERCENT) / 100;
+    const PRICE_SERVICE = 300;
+    const TOTAL_PRICE = PRICE_RENT - PRICE_RENT_WITH_DISCOUNT + PRICE_SERVICE;
     return (
       <Paper elevation={3} className={classes.root}>
         <div className='booking-form__header'>
@@ -85,18 +101,18 @@ const BookingForm = ({ room }) => {
             <div className='booking-form__price-item'>
               <div className='price-item__result'>
                 <span>{`${rentPerDay}₽ x ${countDays} суток`}</span>
-                <span>{rentPerDay * countDays}&#8381;</span>
+                <span>{PRICE_RENT}&#8381;</span>
               </div>
             </div>
             <div className='booking-form__price-item'>
               <div className='price-item__with-tooltip'>
-                <span>Сбор за услуги: скидка {discount}&#8381;</span>
+                <span>Сбор за услуги: скидка {DISCOUNT_PERCENT}%</span>
                 <Tooltip title='Скидка на первую бронь'>
                   <InfoOutlinedIcon className='booking-form__tooltip-icon' />
                 </Tooltip>
               </div>
 
-              <span>-{discount}&#8381;</span>
+              <span>-{PRICE_RENT_WITH_DISCOUNT}&#8381;</span>
             </div>
             <div className='booking-form__price-item'>
               <div className='price-item__with-tooltip'>
@@ -105,13 +121,13 @@ const BookingForm = ({ room }) => {
                   <InfoOutlinedIcon className='booking-form__tooltip-icon' />
                 </Tooltip>
               </div>
-              <span>{tips}&#8381;</span>
+              <span>{PRICE_SERVICE}&#8381;</span>
             </div>
             <div className='booking-form__price-item'>
               <div className='price-item__totalPrice'>
                 <span className='totalPrice__text'>Итого</span>
                 <span className='totalPrice__dots'></span>
-                <span className='totalPrice__cell'>{rentPerDay * countDays}&#8381;</span>
+                <span className='totalPrice__cell'>{TOTAL_PRICE}&#8381;</span>
               </div>
             </div>
           </div>

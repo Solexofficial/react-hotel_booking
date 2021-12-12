@@ -12,7 +12,7 @@ const RoomsList = ({ rooms, pageSize }) => {
         <>
           <ul className='rooms__list'>
             {itemsListCrop.map(room => (
-              <li key={room.id} className='rooms__list-item'>
+              <li key={room._id} className='rooms__list-item'>
                 <RoomCard {...room} />
               </li>
             ))}

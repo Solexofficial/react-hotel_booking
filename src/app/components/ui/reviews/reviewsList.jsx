@@ -4,6 +4,7 @@ import Review from './review';
 
 const ReviewsList = ({ reviews, onRemove }) => {
   const totalReviewsCount = reviews.length;
+  console.log(reviews);
 
   return (
     <>
