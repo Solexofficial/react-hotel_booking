@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
-import { navigationRoutes, profileSettingsRoutes } from '../../../router/routes';
+import { navigationRoutes } from '../../../router/routes';
 import Button from '../../ui/buttons/button';
 import NavList from '../../ui/navList';
-import Profile from '../../ui/profile';
+import Profile from '../../ui/userProfileMenu';
 import Container from '../container';
 import Divider from '../divider';
 import Logo from '../logo/logo';
@@ -24,7 +24,7 @@ const Header = () => {
           {currentUser ? (
             <>
               <Divider orientation='vertical' flexItem className='header__divider' />
-              <Profile user={currentUser} settingsRoutes={profileSettingsRoutes} onLogout={handleLogout} />
+              <Profile user={currentUser} onLogout={handleLogout} />
             </>
           ) : (
             <div className='header-buttons'>

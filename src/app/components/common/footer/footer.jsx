@@ -16,7 +16,7 @@ const Footer = () => {
   const classes = useStyles();
 
   const navigationRoutes = [
-    { path: '/', name: 'О нас' },
+    { path: '/', name: 'О нас', exact: true },
     { path: '/', name: 'Новости' },
     { path: '/', name: 'Служба поддержки' },
     { path: '/', name: 'Услуги' },
@@ -47,7 +47,7 @@ const Footer = () => {
           </Grid>
           <Grid item xs={6} component='nav' className={classes.footerNav}>
             <NavList label='Навигация' routes={navigationRoutes} direction='column' />
-            <NavList label='О нас' routes={aboutRoutes} direction='column'  />
+            <NavList label='О нас' routes={aboutRoutes} direction='column' />
             <NavList label='Служба поддержки' routes={supportRoutes} direction='column' />
           </Grid>
           <Grid item xs={3}>
