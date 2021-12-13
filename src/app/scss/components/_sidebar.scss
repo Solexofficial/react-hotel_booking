@@ -1,0 +1,42 @@
+.sidebar {
+  height: 100%;
+  background: #fff;
+
+  &.MuiList-root {
+    background: #f5f5f5;
+    border-right: 3px solid $accent10;
+  }
+}
+
+.sidebar-menu__item {
+  &.MuiMenuItem-root {
+    & .MuiSvgIcon-root {
+      margin-right: 10px;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 100%;
+      opacity: 0;
+      background: $purple;
+      position: absolute;
+      top: 0;
+      right: -3px;
+      z-index: 1;
+    }
+  }
+  &.MuiMenuItem-root.active {
+    position: relative;
+    color: $purple;
+    background: $purple15;
+
+    &:after {
+      opacity: 1;
+      transition: opacity 0.1s linear;
+    }
+  }
+  transition: all 0.1s linear;
+}
+
