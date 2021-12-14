@@ -1,8 +1,11 @@
 import { ArrowRight } from '@mui/icons-material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks/useForm';
+import sessionStorageService from '../../../../services/sessionStorage.service';
 import DateOfStayField from '../../../common/form/dateOfStayField';
 import GuestsDropDownField from '../../../common/form/guestsDropDownField';
 import Loader from '../../../common/loader';
@@ -10,10 +13,6 @@ import Tooltip from '../../../common/tooltip';
 import Button from '../../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import sessionStorageService from '../../../../services/sessionStorage.service';
-import { getCurrentUser } from '../../../../services/localStorage.service';
-import { useAuth } from '../../../../hooks/useAuth';
 
 const oneDayMs = 86000000;
 

@@ -10,7 +10,8 @@ import Title from '../../../common/typography/title';
 import Button from '../../buttons/button';
 import useStyles from './styles';
 import validatorConfig from './validatorConfig';
-import { useAuth } from '../../../../hooks/useAuth';
+
+const oneDayMs = 86000000;
 
 const initialData = {
   guests: [
@@ -18,7 +19,7 @@ const initialData = {
     { name: 'children', label: 'Дети', value: 0 },
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
-  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() },
+  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() + oneDayMs },
 };
 
 const SearchRoomsForm = () => {

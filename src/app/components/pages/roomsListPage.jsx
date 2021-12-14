@@ -12,13 +12,15 @@ import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../ui/rooms/roomsList';
 import RoomsListSkeleton from '../ui/rooms/roomsListSkeleton';
 
+const oneDayMs = 86000000;
+
 const filtersInitialData = {
   guests: [
     { name: 'adults', label: 'Взрослые', value: 0 },
     { name: 'children', label: 'Дети', value: 0 },
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
-  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() },
+  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() + oneDayMs },
   rentPerDay: [0, 15000],
   canSmoke: false,
   canPets: false,
