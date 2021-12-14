@@ -14,9 +14,11 @@ import SlickSlider from '../common/imageSlider/slickSlider';
 import Loader from '../common/loader';
 import BookingForm from '../ui/forms/bookingForm';
 import Reviews from '../ui/reviews/reviews';
+import RoomInfoCard from '../ui/room/cards/roomInfoCard';
 
 const RoomPage = ({ roomId }) => {
   const [roomData, setRoomData] = useState(null);
+  console.log('room render');
 
   const getRoomData = async id => {
     api.rooms.getById(roomId).then(data => setRoomData(data));
@@ -44,40 +46,7 @@ const RoomPage = ({ roomId }) => {
               <div className='room-info'>
                 <div className='room-info__column'>
                   <div className='room-info__group'>
-                    <div className='room-info__card'>
-                      <h3 className='room-info__card-title'>Сведения о номере</h3>
-                      <ul className='features-list'>
-                        <li className='features-list__item'>
-                          <div className='feature'>
-                            <MoodIcon className='feature__icon' />
-                            <div className='feature-content'>
-                              <div className='feature__title'>Комфорт</div>
-                              <div className='feature__subtitle'>Шумопоглащающие стены</div>
-                            </div>
-                          </div>
-                          <Divider className='feature-separator' />
-                        </li>
-                        <li className='features-list__item'>
-                          <div className='feature'>
-                            <LocationCityIcon className='feature__icon' />
-                            <div className='feature-content'>
-                              <div className='feature__title'>Удобство</div>
-                              <div className='feature__subtitle'>Окно в каждой из спален</div>
-                            </div>
-                          </div>
-                          <Divider className='feature-separator' />
-                        </li>
-                        <li className='features-list__item'>
-                          <div className='feature'>
-                            <WhatshotIcon className='feature__icon' />
-                            <div className='feature-content'>
-                              <div className='feature__title'>Уют</div>
-                              <div className='feature__subtitle'>Номер оснащен камином</div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
+                    <RoomInfoCard />
                     <div className='room-info__card'>
                       <h3 className='room-info__card-title'>Впечатления от номера</h3>
                       Оценок

@@ -17,15 +17,13 @@ const ReviewsForm = ({ onSubmit }) => {
   };
 
   return (
-    <>
-      <Form data={data} errors={errors} handleChange={handleInputChange}>
-        <TextAreaField label='Оставить отзыв' name='content' />
-        <RatingField name='rating' label='Ваша оценка:' size='large' />
-        <Button onClick={handleSubmit} type='submit'>
-          Опубликовать
-        </Button>
-      </Form>
-    </>
+    <Form data={data} errors={errors} handleChange={handleInputChange}>
+      <TextAreaField label='Оставить отзыв' name='content' />
+      <RatingField name='rating' label='Ваша оценка:' size='large' />
+      <Button onClick={handleSubmit} type='submit'>
+        Опубликовать
+      </Button>
+    </Form>
   );
 };
 

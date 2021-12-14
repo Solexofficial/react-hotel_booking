@@ -1,4 +1,4 @@
-import { Card } from '@mui/material';
+import { Paper } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../../common/container';
@@ -14,7 +14,7 @@ const LoginPage = () => {
       <Container>
         <h1 className='visually-hidden'>Отель Toxin Войти в личный кабинет</h1>
         <div className='login-form__wrapper'>
-          <Card className='login-form__card'>
+          <Paper elevation={3} className='form-card login-form__card'>
             <h2>Войти</h2>
             <LoginForm />
             <div className='login-form__footer'>
@@ -25,7 +25,7 @@ const LoginPage = () => {
                 </Button>
               </Link>
             </div>
-          </Card>
+          </Paper>
         </div>
       </Container>
       <Footer />

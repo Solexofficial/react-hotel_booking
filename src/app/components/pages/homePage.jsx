@@ -4,6 +4,7 @@ import Container from '../common/container';
 import Footer from '../common/footer/footer';
 import Header from '../common/header/header';
 import SearchRoomsForm from '../ui/forms/searchRoomsForm';
+import { Paper } from '@mui/material';
 
 const HomePage = () => {
   const { error, initialize, progress, status } = useMockData();
@@ -20,7 +21,10 @@ const HomePage = () => {
         <Container>
           <div className='main-home__wrapper'>
             <h1 className='visually-hidden'>Поиск номеров в отеле toxin result school</h1>
-            <SearchRoomsForm />
+            <Paper elevation={3} className='form-card searchRooms-form'>
+              <h2>Найдём номера под ваши пожелания</h2>
+              <SearchRoomsForm />
+            </Paper>
             <p className='main__text-wishes'>Лучшие номера для вашей работы, отдыха и просто вдохновения</p>
           </div>
           <h3>Инициализация данных в FireBase</h3>

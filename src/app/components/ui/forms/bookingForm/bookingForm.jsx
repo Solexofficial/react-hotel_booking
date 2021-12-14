@@ -11,7 +11,6 @@ import GuestsDropDownField from '../../../common/form/guestsDropDownField';
 import Loader from '../../../common/loader';
 import Tooltip from '../../../common/tooltip';
 import Button from '../../buttons/button';
-import useStyles from './styles';
 import validatorConfig from './validatorConfig';
 
 const oneDayMs = 86000000;
@@ -28,7 +27,6 @@ const initialData = {
 
 const BookingForm = ({ room }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const classes = useStyles();
   const history = useHistory();
 
   const { currentUser } = useAuth();
@@ -77,7 +75,7 @@ const BookingForm = ({ room }) => {
     const PRICE_SERVICE = 300;
     const TOTAL_PRICE = PRICE_RENT - PRICE_RENT_WITH_DISCOUNT + PRICE_SERVICE;
     return (
-      <Paper elevation={3} className={classes.root}>
+      <Paper elevation={3} className='booking-form'>
         <div className='booking-form__header'>
           <div className='booking-form__numberRoom'>
             <span className='booking-form__numberRoom-text'>№ {numberRoom}</span>
@@ -131,13 +129,13 @@ const BookingForm = ({ room }) => {
             </div>
           </div>
 
-          <Button variant='outlined' type='button' size='small' onClick={handleResetForm} className={classes.btnReset}>
+          <Button variant='outlined' type='button' size='small' onClick={handleResetForm} className='form-btn__reset'>
             Очистить
           </Button>
           <Button
             endIcon={<ArrowRight />}
             type='submit'
-            className={classes.btnSubmit}
+            className='form-btn__submit'
             onClick={handleSubmit}
             disabled={Object.keys(errors).length > 0}
             fullWidth

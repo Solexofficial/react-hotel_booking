@@ -1,6 +1,5 @@
 import React from 'react';
-import { FormControl, Switch as MuiSwitch } from '@mui/material';
-import { FormControlLabel } from '@material-ui/core';
+import { FormControl, FormControlLabel, Switch as MuiSwitch } from '@mui/material';
 
 const Switch = ({ label, value, name, onChange, ...rest }) => {
   const convertToDefEventParam = (name, value) => ({

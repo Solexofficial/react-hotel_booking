@@ -16,6 +16,25 @@
   }
 }
 
+.form-card {
+  &.MuiPaper-root {
+    padding: 30px;
+    background: #fff;
+  }
+}
+
+.form-btn__reset {
+  &.MuiButtonBase-root {
+    margin-top: 15px;
+  }
+}
+
+.form-btn__submit {
+  &.MuiButtonBase-root {
+    margin-top: 30px;
+  }
+}
+
 .form__enter-error {
   margin: 5px;
   text-align: center;
