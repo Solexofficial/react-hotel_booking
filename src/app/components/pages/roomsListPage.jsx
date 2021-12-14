@@ -38,7 +38,9 @@ const RoomsListPage = () => {
   const getRooms = async () => {
     try {
       const { content } = await roomsService.getAll();
-      setRoomsList(content);
+      setTimeout(() => {
+        setRoomsList(content);
+      }, 1000);
     } catch (error) {
       console.log(error);
     }

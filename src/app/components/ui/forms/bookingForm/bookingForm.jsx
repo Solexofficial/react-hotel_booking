@@ -50,7 +50,6 @@ const BookingForm = ({ rentPerDay }) => {
     }
   }, []);
 
-  // !FIX countDays bug when change input value
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
 
   const handleTotalPriceChange = value => {
