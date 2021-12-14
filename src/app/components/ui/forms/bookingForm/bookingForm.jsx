@@ -1,16 +1,12 @@
 import { ArrowRight } from '@mui/icons-material';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks/useForm';
 import sessionStorageService from '../../../../services/sessionStorage.service';
-import DateOfStayField from '../../../common/form/dateOfStayField';
-import GuestsDropDownField from '../../../common/form/guestsDropDownField';
-import Loader from '../../../common/loader';
-import Tooltip from '../../../common/tooltip';
+import { DateOfStayField, GuestsDropDownField } from '../../../common/form/fields';
 import Button from '../../buttons/button';
+import BookingFormPriceInfo from './bookingFormPriceInfo';
 import validatorConfig from './validatorConfig';
 
 const oneDayMs = 86000000;
@@ -25,13 +21,13 @@ const initialData = {
   totalCost: 0,
 };
 
-const BookingForm = ({ room }) => {
+const BookingForm = ({ rentPerDay }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const history = useHistory();
 
   const { currentUser } = useAuth();
 
-  const { data, setData, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
+  const { data, setData, errors, handleInputChange, handleKeyDown, validate } = useForm(
     initialData,
     true,
     validatorConfig
@@ -51,7 +47,12 @@ const BookingForm = ({ room }) => {
     }
   }, []);
 
+  // !FIX countDays bug when change input value
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
+
+  const handleTotalPriceChange = value => {
+    setTotalPrice(value);
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -67,86 +68,35 @@ const BookingForm = ({ room }) => {
       console.log(history);
     }
   };
-  if (room) {
-    const { numberRoom, rentPerDay, type } = room;
-    const DISCOUNT_PERCENT = 10;
-    const PRICE_RENT = rentPerDay * countDays;
-    const PRICE_RENT_WITH_DISCOUNT = (rentPerDay * countDays * DISCOUNT_PERCENT) / 100;
-    const PRICE_SERVICE = 300;
-    const TOTAL_PRICE = PRICE_RENT - PRICE_RENT_WITH_DISCOUNT + PRICE_SERVICE;
-    return (
-      <Paper elevation={3} className='booking-form'>
-        <div className='booking-form__header'>
-          <div className='booking-form__numberRoom'>
-            <span className='booking-form__numberRoom-text'>№ {numberRoom}</span>
-            {type && <span className='booking-form__numberRoom-type'>{type}</span>}
-          </div>
-          <div className='booking-form__cost'>
-            <span>{rentPerDay}&#8381;</span> в сутки
-          </div>
-        </div>
-        <Form
-          onSubmit={handleSubmit}
-          data={data}
-          errors={errors}
-          handleChange={handleInputChange}
-          handleKeyDown={handleKeyDown}
-        >
-          <DateOfStayField name='dateOfStay' className='booking-form' />
-          <GuestsDropDownField name='guests' setData={setData} data={data} />
-          <div className='booking-form__price'>
-            <div className='booking-form__price-item'>
-              <div className='price-item__result'>
-                <span>{`${rentPerDay}₽ x ${countDays} суток`}</span>
-                <span>{PRICE_RENT}&#8381;</span>
-              </div>
-            </div>
-            <div className='booking-form__price-item'>
-              <div className='price-item__with-tooltip'>
-                <span>Сбор за услуги: скидка {DISCOUNT_PERCENT}%</span>
-                <Tooltip title='Скидка на первую бронь'>
-                  <InfoOutlinedIcon className='booking-form__tooltip-icon' />
-                </Tooltip>
-              </div>
-
-              <span>-{PRICE_RENT_WITH_DISCOUNT}&#8381;</span>
-            </div>
-            <div className='booking-form__price-item'>
-              <div className='price-item__with-tooltip'>
-                <span>Сбор за доп. услуги</span>
-                <Tooltip title='Чаевые для персонала уже включены в счет'>
-                  <InfoOutlinedIcon className='booking-form__tooltip-icon' />
-                </Tooltip>
-              </div>
-              <span>{PRICE_SERVICE}&#8381;</span>
-            </div>
-            <div className='booking-form__price-item'>
-              <div className='price-item__totalPrice'>
-                <span className='totalPrice__text'>Итого</span>
-                <span className='totalPrice__dots'></span>
-                <span className='totalPrice__cell'>{TOTAL_PRICE}&#8381;</span>
-              </div>
-            </div>
-          </div>
-
-          <Button variant='outlined' type='button' size='small' onClick={handleResetForm} className='form-btn__reset'>
-            Очистить
-          </Button>
-          <Button
-            endIcon={<ArrowRight />}
-            type='submit'
-            className='form-btn__submit'
-            onClick={handleSubmit}
-            disabled={Object.keys(errors).length > 0}
-            fullWidth
-          >
-            Забронировать
-          </Button>
-        </Form>
-      </Paper>
-    );
-  }
-  return <Loader />;
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      data={data}
+      errors={errors}
+      handleChange={handleInputChange}
+      handleKeyDown={handleKeyDown}
+    >
+      <DateOfStayField name='dateOfStay' className='booking-form' />
+      <GuestsDropDownField name='guests' setData={setData} data={data} />
+      <BookingFormPriceInfo
+        name='price'
+        rentPerDay={rentPerDay}
+        countDays={countDays}
+        onPriceChange={handleTotalPriceChange}
+        totalPrice={totalPrice}
+      />
+      <Button
+        endIcon={<ArrowRight />}
+        type='submit'
+        className='form-btn__submit mt-0'
+        onClick={handleSubmit}
+        disabled={Object.keys(errors).length > 0}
+        fullWidth
+      >
+        Забронировать
+      </Button>
+    </Form>
+  );
 };
 
 export default BookingForm;

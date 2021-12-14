@@ -1,13 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import api from '../../api';
 import { useForm } from '../../hooks/useForm';
 import roomsService from '../../services/rooms.service';
 import sessionStorageService from '../../services/sessionStorage.service';
 import filterRooms from '../../utils/filterRooms';
-import Breadcrumbs from '../common/breadcrumbs';
-import Container from '../common/container';
-import Footer from '../common/footer/footer';
-import Header from '../common/header/header';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsList from '../ui/rooms/roomsList';
 import RoomsListSkeleton from '../ui/rooms/roomsListSkeleton';
@@ -40,7 +35,6 @@ const RoomsListPage = () => {
   const getRooms = async () => {
     try {
       const { content } = await roomsService.getAll();
-      console.log(content);
       setRoomsList(content);
     } catch (error) {
       console.log(error);
@@ -74,31 +68,24 @@ const RoomsListPage = () => {
   }, [data, setSessionStorageData]);
 
   return (
-    <>
-      <Header />
-      <Container>
-        <Breadcrumbs />
-        <div className='rootWrapper' style={{ display: 'flex' }}>
-          <aside className='filters'>
-            <RoomsFilter
-              data={data}
-              setData={setData}
-              handleInputChange={handleInputChange}
-              handleResetForm={handleResetForm}
-            />
-          </aside>
-          <section className='mainContent' style={{ flex: '1' }}>
-            <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
-            {roomsList ? (
-              <RoomsList rooms={filteredRoomsList} pageSize={pageSize} />
-            ) : (
-              <RoomsListSkeleton pageSize={pageSize} />
-            )}
-          </section>
-        </div>
-      </Container>
-      <Footer />
-    </>
+    <div className='rootWrapper' style={{ display: 'flex' }}>
+      <aside className='filters'>
+        <RoomsFilter
+          data={data}
+          setData={setData}
+          handleInputChange={handleInputChange}
+          handleResetForm={handleResetForm}
+        />
+      </aside>
+      <section className='mainContent' style={{ flex: '1' }}>
+        <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
+        {roomsList ? (
+          <RoomsList rooms={filteredRoomsList} pageSize={pageSize} />
+        ) : (
+          <RoomsListSkeleton pageSize={pageSize} />
+        )}
+      </section>
+    </div>
   );
 };
 

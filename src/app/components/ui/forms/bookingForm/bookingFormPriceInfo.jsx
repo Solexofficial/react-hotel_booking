@@ -1,0 +1,59 @@
+import React from 'react';
+import Tooltip from '../../../common/tooltip';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useEffect } from 'react';
+
+const BookingFormPriceInfo = ({ rentPerDay, countDays, totalPrice, onPriceChange }) => {
+  const DISCOUNT_PERCENT = 10;
+  const PRICE_SERVICE = 300;
+  const PRICE_RENT = rentPerDay * countDays;
+  const PRICE_RENT_WITH_DISCOUNT = (rentPerDay * countDays * DISCOUNT_PERCENT) / 100;
+
+  const getTotalPrice = () => {
+    return PRICE_RENT - PRICE_RENT_WITH_DISCOUNT + PRICE_SERVICE;
+  };
+
+  useEffect(() => {
+    const totalPrice = getTotalPrice();
+    onPriceChange(totalPrice);
+  }, [rentPerDay, countDays]);
+
+  return (
+    <div className='booking-form__price'>
+      <div className='booking-form__price-item'>
+        <div className='price-item__result'>
+          <span>{`${rentPerDay}₽ x ${countDays} суток`}</span>
+          <span>{PRICE_RENT}&#8381;</span>
+        </div>
+      </div>
+      <div className='booking-form__price-item'>
+        <div className='price-item__with-tooltip'>
+          <span>Сбор за услуги: скидка {DISCOUNT_PERCENT}%</span>
+          <Tooltip title='Скидка на первую бронь'>
+            <InfoOutlinedIcon className='booking-form__tooltip-icon' />
+          </Tooltip>
+        </div>
+
+        <span>-{PRICE_RENT_WITH_DISCOUNT}&#8381;</span>
+      </div>
+      <div className='booking-form__price-item'>
+        <div className='price-item__with-tooltip'>
+          <span>Сбор за доп. услуги</span>
+          <Tooltip title='Чаевые для персонала уже включены в счет'>
+            <InfoOutlinedIcon className='booking-form__tooltip-icon' />
+          </Tooltip>
+        </div>
+        <span>{PRICE_SERVICE}&#8381;</span>
+      </div>
+      <div className='booking-form__price-item'>
+        <div className='price-item__totalPrice'>
+          <span className='totalPrice__text'>Итого</span>
+          <span className='totalPrice__dots'></span>
+          <span className='totalPrice__cell'>{totalPrice}&#8381;</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BookingFormPriceInfo;

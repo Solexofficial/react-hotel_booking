@@ -33,6 +33,12 @@
   &.MuiButtonBase-root {
     margin-top: 30px;
   }
+
+  &.mt-0 {
+    &.MuiButtonBase-root {
+      margin-top: 0;
+    }
+  }
 }
 
 .form__enter-error {
