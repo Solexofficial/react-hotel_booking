@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useAuth } from '../../../hooks/useAuth';
 import reviewsService from '../../../services/reviews.service';
+import declOfNum from '../../../utils/declOfNum';
 import ReviewsForm from '../forms/reviewsForm/reviewsForm';
 import ReviewsList from './reviewsList';
 
@@ -56,11 +57,16 @@ const Reviews = () => {
   };
 
   const sortedReviews = reviews.sort((a, b) => b.created_at - a.created_at);
+  const totalReviewsCount = sortedReviews.length;
 
   return (
     <>
       <section className='reviews'>
-        {sortedReviews.length > 0 && <ReviewsList reviews={sortedReviews} onRemove={handleRemoveReview} />}
+        <div className='reviews-title'>
+          <h2 className='room-info__card-title'>Отзывы посетителей номера</h2>
+          <span>{`${totalReviewsCount} ${declOfNum(totalReviewsCount, ['отзыв', 'отзыва', 'отзывов'])}`}</span>
+        </div>
+        {totalReviewsCount > 0 && <ReviewsList reviews={sortedReviews} onRemove={handleRemoveReview} />}
       </section>
       {currentUser && (
         <section className='reviews-form'>

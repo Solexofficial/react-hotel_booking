@@ -80,7 +80,7 @@ const Review = ({ review, onRemove }) => {
             <LikeButton likes={likes} onToggle={toggleLike} />
           </div>
           <div className='review__content'>
-            <p className='review__user-name'>
+            <div className='review__user-name'>
               {`${user.firstName} ${user.secondName}`}
               {isAuthor && (
                 <div className='review__edit-btn'>
@@ -103,7 +103,7 @@ const Review = ({ review, onRemove }) => {
               <div className='review__rating'>
                 <Rating value={review.rating} readOnly />
               </div>
-            </p>
+            </div>
             <p className='review__date'>{formatDate(review.created_at)}</p>
             <p className='review__message'>{review.content}</p>
           </div>

@@ -9,9 +9,11 @@ import SideBar from '../components/common/sidebar';
 import ProfileBooking from '../components/ui/profile/ProfileBooking';
 import ProfileLikes from '../components/ui/profile/ProfileLikes';
 import ProfileFavorites from '../components/ui/profile/ProfileFavorites';
+import { useAuth } from '../hooks/useAuth';
 
 const Profile = () => {
   const { route } = useParams();
+  const { currentUser } = useAuth();
 
   const renderComponent = route => {
     switch (route) {
@@ -20,7 +22,7 @@ const Profile = () => {
       case 'booking':
         return <ProfileBooking />;
       case 'likes':
-        return <ProfileLikes />;
+        return <ProfileLikes currentUser={currentUser} />;
       case 'favorites':
         return <ProfileFavorites />;
       default:
