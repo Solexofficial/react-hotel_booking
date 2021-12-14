@@ -4,6 +4,11 @@ import { Link as RouterLink, Route, useHistory } from 'react-router-dom';
 
 const breadcrumbsMap = {
   '/rooms': 'Доступные номера',
+  '/profile': 'Мой профиль',
+  '/profile/booking': 'Мои Бронирования',
+  '/profile/likes': 'Понравилось',
+  '/profile/favorites': 'Избранное',
+  '/profile/edit': 'Редактировать профиль',
 };
 
 const LinkRouter = props => <Link {...props} className='breadcrumbs-item' underline='hover' component={RouterLink} />;

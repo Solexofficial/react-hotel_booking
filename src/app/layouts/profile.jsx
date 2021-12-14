@@ -10,6 +10,7 @@ import ProfileBooking from '../components/ui/profile/ProfileBooking';
 import ProfileLikes from '../components/ui/profile/ProfileLikes';
 import ProfileFavorites from '../components/ui/profile/ProfileFavorites';
 import { useAuth } from '../hooks/useAuth';
+import Breadcrumbs from '../components/common/breadcrumbs';
 
 const Profile = () => {
   const { route } = useParams();
@@ -34,6 +35,7 @@ const Profile = () => {
     <>
       <Header />
       <Container>
+        <Breadcrumbs />
         <div className='profile-page__wrapper'>
           <aside className='sidebar-profile'>
             <SideBar />
