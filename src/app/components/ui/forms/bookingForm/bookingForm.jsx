@@ -17,7 +17,10 @@ const initialData = {
     { name: 'children', label: 'Дети', value: 0 },
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
-  dateOfStay: { arrival: new Date(Date.now()).getTime(), departure: new Date(Date.now()).getTime() + oneDayMs },
+  dateOfStay: {
+    arrival: new Date(new Date().toISOString().slice(0, 10)).getTime(),
+    departure: new Date(new Date().toISOString().slice(0, 10)).getTime() + oneDayMs,
+  },
   totalCost: 0,
 };
 
