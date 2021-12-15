@@ -37,6 +37,7 @@ const useMockData = () => {
 
   useEffect(() => {
     updateProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   async function initialize() {

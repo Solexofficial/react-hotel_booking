@@ -1,13 +1,3 @@
-import image1 from '../../assets/img/room888/1.jpg';
-import image2 from '../../assets/img/room888/2.jpg';
-import image3 from '../../assets/img/room888/3.jpg';
-
-const images = {
-  img1: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-  img2: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-  img3: 'https://images.unsplash.com/photo-1584132905271-512c958d674a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-};
-
 const rooms = [
   {
     _id: '888',
@@ -305,6 +295,7 @@ const getById = id =>
     }, 1000);
   });
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   fetchAll,
   getById,

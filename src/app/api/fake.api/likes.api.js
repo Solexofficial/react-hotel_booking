@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 const likes = [
   {
     _id: '67456878693fghg',

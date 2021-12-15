@@ -48,7 +48,7 @@ const BookingForm = ({ rentPerDay }) => {
         totalCost: totalPrice,
       }));
     }
-  }, []);
+  }, [setData]);
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
 

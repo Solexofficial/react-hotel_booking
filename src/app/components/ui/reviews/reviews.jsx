@@ -61,13 +61,15 @@ const Reviews = () => {
 
   return (
     <>
-      <section className='reviews'>
-        <div className='reviews-title'>
-          <h2 className='room-info__card-title'>Отзывы посетителей номера</h2>
-          <span>{`${totalReviewsCount} ${declOfNum(totalReviewsCount, ['отзыв', 'отзыва', 'отзывов'])}`}</span>
-        </div>
-        {totalReviewsCount > 0 && <ReviewsList reviews={sortedReviews} onRemove={handleRemoveReview} />}
-      </section>
+      {reviews.length > 0 && (
+        <section className='reviews'>
+          <div className='reviews-title'>
+            <h2 className='room-info__card-title'>Отзывы посетителей номера</h2>
+            <span>{`${totalReviewsCount} ${declOfNum(totalReviewsCount, ['отзыв', 'отзыва', 'отзывов'])}`}</span>
+          </div>
+          {totalReviewsCount > 0 && <ReviewsList reviews={sortedReviews} onRemove={handleRemoveReview} />}
+        </section>
+      )}
       {currentUser && (
         <section className='reviews-form'>
           <h2>Оставить отзыв</h2>

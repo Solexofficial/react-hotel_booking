@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 const reviews = [
   {
     _id: '67rdca3eeb7f6fg',

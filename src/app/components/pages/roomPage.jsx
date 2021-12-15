@@ -1,5 +1,5 @@
 import { Paper } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../api';
 import roomsService from '../../services/rooms.service';
 import SlickSlider from '../common/imageSlider/slickSlider';

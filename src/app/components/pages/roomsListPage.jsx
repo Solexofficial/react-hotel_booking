@@ -59,7 +59,7 @@ const RoomsListPage = () => {
         guests: guestsCount,
       }));
     }
-  }, []);
+  }, [setData]);
 
   const filteredRoomsList = filterRooms(roomsList, data);
 
