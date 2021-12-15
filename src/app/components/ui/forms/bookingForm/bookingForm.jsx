@@ -1,5 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks/useForm';
@@ -25,7 +25,6 @@ const initialData = {
 };
 
 const BookingForm = ({ rentPerDay }) => {
-  const [totalPrice, setTotalPrice] = useState(0);
   const history = useHistory();
 
   const { currentUser } = useAuth();
@@ -45,26 +44,19 @@ const BookingForm = ({ rentPerDay }) => {
         ...prevState,
         dateOfStay: dateOfStay,
         guests: guestsCount,
-        totalCost: totalPrice,
       }));
     }
   }, [setData]);
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
 
-  const handleTotalPriceChange = value => {
-    setTotalPrice(value);
-  };
-
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
       if (!currentUser) return history.push('../login/signIn');
       console.log({
-        [currentUser._id]: {
-          ...data,
-          totalCost: totalPrice,
-        },
+        userId: currentUser._id,
+        ...data,
       });
       console.log('data booking room', data);
       console.log(history);
@@ -80,13 +72,7 @@ const BookingForm = ({ rentPerDay }) => {
     >
       <DateOfStayField name='dateOfStay' className='booking-form' />
       <GuestsDropDownField name='guests' setData={setData} data={data} />
-      <BookingFormPriceInfo
-        name='price'
-        rentPerDay={rentPerDay}
-        countDays={countDays}
-        onPriceChange={handleTotalPriceChange}
-        totalPrice={totalPrice}
-      />
+      <BookingFormPriceInfo name='price' rentPerDay={rentPerDay} countDays={countDays} />
       <Button
         endIcon={<ArrowRight />}
         type='submit'

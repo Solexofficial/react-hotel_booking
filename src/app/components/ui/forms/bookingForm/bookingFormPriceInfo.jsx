@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Tooltip from '../../../common/tooltip';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useEffect } from 'react';
 
-const BookingFormPriceInfo = ({ rentPerDay, countDays, totalPrice, onPriceChange }) => {
+const BookingFormPriceInfo = ({ rentPerDay, countDays }) => {
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const DISCOUNT_PERCENT = 10;
   const PRICE_SERVICE = 300;
   const PRICE_RENT = rentPerDay * countDays;
@@ -15,8 +17,8 @@ const BookingFormPriceInfo = ({ rentPerDay, countDays, totalPrice, onPriceChange
 
   useEffect(() => {
     const totalPrice = getTotalPrice();
-    onPriceChange(totalPrice);
-  }, [rentPerDay, countDays]);
+    setTotalPrice(totalPrice);
+  }, [countDays]);
 
   return (
     <div className='booking-form__price'>
