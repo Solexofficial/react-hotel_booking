@@ -1,0 +1,15 @@
+.modal-title {
+  display: flex;
+  align-items: center;
+  &.MuiTypography-root {
+    font-weight: 700;
+  }
+}
+
+.modal-btn__close {
+  &.MuiButtonBase-root {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+}
