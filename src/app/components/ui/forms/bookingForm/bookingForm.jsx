@@ -1,12 +1,12 @@
 import { ArrowRight } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { useAuth } from '../../../../hooks/useAuth';
+import useFetching from '../../../../hooks/useFetching';
 import { Form, useForm } from '../../../../hooks/useForm';
 import { useModal } from '../../../../hooks/useModal';
 import roomsService from '../../../../services/rooms.service';
 import sessionStorageService from '../../../../services/sessionStorage.service';
-import Backdrop from '../../../common/backdrop';
 import { DateOfStayField, GuestsDropDownField } from '../../../common/form/fields';
 import Button from '../../buttons/button';
 import SuccessBookingModal from '../../modals/successBookingModal';
@@ -28,10 +28,9 @@ const initialData = {
 };
 
 const BookingForm = ({ rentPerDay }) => {
-  const [open, setOpen] = useState(false);
   const history = useHistory();
   const { roomId } = useParams();
-  const { showModal, handleOpenModal, handleCloseModal } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const { currentUser } = useAuth();
 
   const { data, setData, errors, handleInputChange, handleKeyDown, validate } = useForm(
@@ -55,22 +54,16 @@ const BookingForm = ({ rentPerDay }) => {
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
 
-  const setBooking = async (roomId, payload) => {
-    try {
-      setOpen(true);
-      await roomsService.setBooking(roomId, payload);
-      setOpen(false);
-      handleOpenModal();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [setBooking, isBookingLoading] = useFetching(async (roomId, payload) => {
+    await roomsService.setBooking(roomId, payload);
+    handleOpenModal();
+  });
 
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
       if (!currentUser) return history.push('../login/signIn');
-      const payload = { userId: currentUser._id, ...data };
+      const payload = { isBooked: { userId: currentUser._id, ...data } };
       setBooking(roomId, payload);
     }
   };
@@ -98,8 +91,7 @@ const BookingForm = ({ rentPerDay }) => {
           Забронировать
         </Button>
       </Form>
-      <SuccessBookingModal open={showModal} onClose={handleCloseModal} />
-      <Backdrop open={open} />
+      <SuccessBookingModal open={isOpen} onClose={handleCloseModal} isLoading={isBookingLoading} />
     </>
   );
 };
