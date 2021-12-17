@@ -2,9 +2,9 @@ import { Backdrop as MuiBackdrop } from '@mui/material';
 import React from 'react';
 import Loader from './loader';
 
-const Backdrop = ({ open }) => {
+const Backdrop = ({ isOpen }) => {
   return (
-    <MuiBackdrop open={open}>
+    <MuiBackdrop open={isOpen}>
       <Loader />
     </MuiBackdrop>
   );
