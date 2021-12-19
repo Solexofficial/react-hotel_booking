@@ -25,6 +25,9 @@ const filtersInitialData = {
   canInvite: false,
   hasWideCorridor: false,
   hasDisabledAssistant: false,
+  hasWifi: false,
+  hasConditioner: false,
+  hasWorkSpace: false,
 };
 
 const RoomsListPage = () => {

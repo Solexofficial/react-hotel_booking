@@ -1,14 +1,13 @@
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import ComputerIcon from '@mui/icons-material/Computer';
+import WifiIcon from '@mui/icons-material/Wifi';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import declOfNum from '../../../utils/declOfNum';
+import Badge from '../../common/badge';
 import Divider from '../../common/divider';
 import SlickSlider from '../../common/imageSlider/slickSlider';
 import Rating from '../../common/rating';
-import MailIcon from '@mui/icons-material/Mail';
-import WifiIcon from '@mui/icons-material/Wifi';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-import ComputerIcon from '@mui/icons-material/Computer';
-import Badge from '../../common/badge';
 
 const comfortIconsMap = {
   hasWifi: <WifiIcon />,
@@ -19,27 +18,7 @@ const comfortIconsMap = {
 const RoomCard = ({ _id, numberRoom, rentPerDay, rate, countReviews, type, images, comforts }) => {
   return (
     <div className='room-card'>
-      {/* <Badge
-        color='secondary'
-        badgeContent={0}
-        style={{
-          position: 'absolute',
-          zIndex: 2,
-          right: '2px',
-          top: '5px',
-        }}
-      >
-        <MailIcon style={{ fill: 'white', background: '#8ba4f9', borderRadius: '50%', padding: '2px' }} />
-        <MailIcon style={{ fill: 'white' }} />
-        <MailIcon style={{ fill: 'white' }} />
-      </Badge> */}
-      {comforts && (
-        <Badge color='secondary' badgeContent={0} className='badge'>
-          {comforts.map(comfort => (
-            <div className='badge-icon'>{comfortIconsMap[comfort]}</div>
-          ))}
-        </Badge>
-      )}
+      {comforts && <Badge className='badge'>{comforts.map(comfort => comfortIconsMap[comfort])}</Badge>}
       <SlickSlider className='room-card__gallery'>
         {images &&
           Object.keys(images).map(img => (

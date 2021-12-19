@@ -27,7 +27,8 @@
       "img3": "https://images.unsplash.com/photo-1584132905271-512c958d674a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
     },
     "isBooked": false,
-    "canSmoke": true
+    "canSmoke": true,
+    "comforts": ["hasWifi", "hasWorkSpace"]
   },
   {
     "_id": "2",
@@ -40,7 +41,8 @@
       "img2": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "img3": "https://images.unsplash.com/photo-1584132905271-512c958d674a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
     },
-    "isBooked": false
+    "isBooked": false,
+    "comforts": ["hasWorkSpace"]
   },
   {
     "_id": "3",

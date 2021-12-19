@@ -3,9 +3,20 @@ export default function useFilters(data, filters) {
   // let filteredData = data.filter(el => el.isBooked === 'false');
   let filteredData = data;
   console.log(filteredData);
+  console.log(filters);
 
   if (filters.isBooked) {
     filteredData = filteredData.filter(el => el.isBooked);
+  }
+
+  if (filters.hasWifi) {
+    filteredData = filteredData.filter(el => (el.comforts ? el.comforts.includes('hasWifi') : false));
+  }
+  if (filters.hasConditioner) {
+    filteredData = filteredData.filter(el => (el.comforts ? el.comforts.includes('hasConditioner') : false));
+  }
+  if (filters.hasWorkSpace) {
+    filteredData = filteredData.filter(el => (el.comforts ? el.comforts.includes('hasWorkSpace') : false));
   }
 
   if (filters.canSmoke) {
