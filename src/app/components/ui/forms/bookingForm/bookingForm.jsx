@@ -5,6 +5,7 @@ import { useAuth } from '../../../../hooks/useAuth';
 import useFetching from '../../../../hooks/useFetching';
 import { Form, useForm } from '../../../../hooks/useForm';
 import { useModal } from '../../../../hooks/useModal';
+import bookingService from '../../../../services/booking.service';
 import roomsService from '../../../../services/rooms.service';
 import sessionStorageService from '../../../../services/sessionStorage.service';
 import { DateOfStayField, GuestsDropDownField } from '../../../common/form/fields';
@@ -33,7 +34,7 @@ const BookingForm = ({ rentPerDay }) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const { currentUser } = useAuth();
 
-  const { data, setData, errors, handleInputChange, handleKeyDown, validate } = useForm(
+  const { data, setData, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
     initialData,
     true,
     validatorConfig
@@ -54,8 +55,13 @@ const BookingForm = ({ rentPerDay }) => {
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
 
-  const [setBooking, isBookingLoading] = useFetching(async (roomId, payload) => {
-    await roomsService.setBooking(roomId, payload);
+  const [setBooking] = useFetching(async roomId => {
+    await roomsService.setBooking(roomId, { isBooked: true });
+    setEnterError('Вы забронировали этот номер');
+  });
+
+  const [createBooking, isCreateBookingLoading] = useFetching(async payload => {
+    await bookingService.create(payload);
     handleOpenModal();
   });
 
@@ -63,8 +69,14 @@ const BookingForm = ({ rentPerDay }) => {
     event.preventDefault();
     if (validate(data)) {
       if (!currentUser) return history.push('../login/signIn');
-      const payload = { isBooked: { userId: currentUser._id, ...data } };
-      setBooking(roomId, payload);
+      const payload = {
+        _id: Math.random().toString(36).substring(2, 9),
+        userId: currentUser._id,
+        roomId: roomId,
+        ...data,
+      };
+      setBooking(roomId);
+      createBooking(payload);
     }
   };
 
@@ -85,13 +97,19 @@ const BookingForm = ({ rentPerDay }) => {
           type='submit'
           className='form-btn__submit mt-0'
           onClick={handleSubmit}
-          disabled={Object.keys(errors).length > 0}
+          disabled={Object.keys(errors).length > 0 || !!enterError}
           fullWidth
         >
           Забронировать
         </Button>
       </Form>
-      <SuccessBookingModal open={isOpen} onClose={handleCloseModal} isLoading={isBookingLoading} />
+      {enterError && <p className='form__enter-error'>{enterError}</p>}
+      <SuccessBookingModal
+        open={isOpen}
+        onClose={handleCloseModal}
+        isLoading={isCreateBookingLoading}
+        bookingData={data}
+      />
     </>
   );
 };

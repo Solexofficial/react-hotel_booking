@@ -6,7 +6,6 @@ import React from 'react';
 import Backdrop from './backdrop';
 
 const Modal = ({ open, onClose, title, isLoading = false, children }) => {
-  console.log(isLoading);
   return (
     <>
       <Dialog className='modal' onClose={onClose} open={open} keepMounted>

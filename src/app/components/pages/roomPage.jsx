@@ -12,7 +12,6 @@ import RoomRulesCard from '../ui/room/cards/roomRulesCard.jsx';
 
 const RoomPage = ({ roomId }) => {
   const [currentRoom, setRoom] = useState(null);
-
   console.log('room render');
 
   const getRoomData = async id => {
@@ -25,18 +24,19 @@ const RoomPage = ({ roomId }) => {
   }, []);
 
   if (currentRoom) {
+    const { images, countReviews, type, rentPerDay, isBooked } = currentRoom;
     return (
       <main>
         <SlickSlider className='room-page__gallery'>
-          {Object.keys(currentRoom.images).map(img => (
-            <img key={img} className='room-page__gallery-item--img' src={currentRoom.images[img]} alt='roomsPhoto' />
+          {Object.keys(images).map(img => (
+            <img key={img} className='room-page__gallery-item--img' src={images[img]} alt='roomsPhoto' />
           ))}
         </SlickSlider>
         <div className='room-info'>
           <div className='room-info__column'>
             <div className='room-info__group'>
               <RoomInfoCard />
-              <RoomReviewsCard countReviews={currentRoom.countReviews} />
+              <RoomReviewsCard countReviews={countReviews} />
             </div>
             <Reviews />
             <div className='room-info__group'>
@@ -49,14 +49,14 @@ const RoomPage = ({ roomId }) => {
               <div className='booking-form__header'>
                 <div className='booking-form__numberRoom'>
                   <span className='booking-form__numberRoom-text'>№ {currentRoom.numberRoom}</span>
-                  {currentRoom.type && <span className='booking-form__numberRoom-type'>{currentRoom.type}</span>}
+                  {type && <span className='booking-form__numberRoom-type'>{type}</span>}
                 </div>
                 <div className='booking-form__cost'>
-                  <span>{currentRoom.rentPerDay}&#8381;</span> в сутки
+                  <span>{rentPerDay}&#8381;</span> в сутки
                 </div>
               </div>
 
-              <BookingForm rentPerDay={currentRoom.rentPerDay} />
+              <BookingForm rentPerDay={rentPerDay} isBooked={isBooked} />
             </Paper>
           </div>
         </div>

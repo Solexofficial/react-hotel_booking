@@ -1,33 +1,44 @@
 import declOfNum from './declOfNum';
 
-export default function formatDate(value) {
-  if (typeof value === 'string') {
-    value = Number(value);
+const months = [
+  'Января',
+  'Февраля',
+  'Марта',
+  'Апреля',
+  'Мая',
+  'Июня',
+  'Июля',
+  'Августа',
+  'Сентября',
+  'Октября',
+  'Ноября',
+  'Декабря',
+];
+
+export function decomposeDate(date) {
+  if (typeof date === 'string') {
+    date = Number(date);
   }
+  const year = new Date(date).getFullYear();
+  const month = new Date(date).getMonth();
+  const day = new Date(date).getDate();
+  const hours = new Date(date).getHours();
+  const min = new Date(date).getMinutes();
+
+  return { date, year, month, day, hours, min };
+}
+
+export function getDateDDMMYYYY(date) {
+  const { day, month, year } = decomposeDate(date);
+  return `${day} ${months[month]} ${year}`;
+}
+
+export default function formatDate(value) {
+  const { year, month, day, hours, min } = decomposeDate(value);
+
   const currentDateTime = Date.now();
   const postCreatedTime = Number(value);
   const diffTime = Math.abs(currentDateTime - postCreatedTime);
-
-  const year = new Date(value).getFullYear();
-  const month = new Date(value).getMonth();
-  const day = new Date(value).getDate();
-  const hours = new Date(value).getHours();
-  const min = new Date(value).getMinutes();
-
-  const months = [
-    'Января',
-    'Февраля',
-    'Марта',
-    'Апреля',
-    'Мая',
-    'Июня',
-    'Июля',
-    'Августа',
-    'Сентября',
-    'Октября',
-    'Ноября',
-    'Декабря',
-  ];
 
   const checkLeapYear = year => {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;

@@ -53,7 +53,7 @@ const add = data =>
       const newReview = {
         ...data,
         created_at: Date.now(),
-        _id: Math.random().toString(36).substr(2, 9),
+        _id: Math.random().toString(36).substring(2, 9),
       };
       reviews.push(newReview);
       localStorage.setItem('reviews', JSON.stringify(reviews));

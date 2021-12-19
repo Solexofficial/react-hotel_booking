@@ -1,0 +1,26 @@
+.booking-modal__text {
+  display: flex;
+  align-items: center;
+}
+
+.booking-modal__text-icon {
+  margin-left: 5px;
+  &.MuiSvgIcon-root {
+    width: 30px;
+    height: 30px;
+    fill: green;
+  }
+}
+
+.booking-modal__info {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.booking-modal__info-dateText {
+  font-weight: 700;
+}
+
+.booking-modal__info-date {
+  margin-left: 10px;
+}
