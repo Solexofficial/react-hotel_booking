@@ -14,7 +14,7 @@ const RoomsFilter = ({ data, setData, handleResetForm, handleInputChange }) => {
 
   return (
     <section className='filters__wrapper'>
-      <h2 className='visually-hidden'>Поиск отелей</h2>
+      <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
       <RoomsFilterList data={data} handleChange={handleInputChange}>
         <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
         <GuestsDropDownField title='гости' setData={setData} name='guests' />
@@ -29,6 +29,11 @@ const RoomsFilter = ({ data, setData, handleResetForm, handleInputChange }) => {
           <Checkbox label='Можно курить' name='canSmoke' />
           <Checkbox label='Можно c питомцами' name='canPets' />
           <Checkbox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
+        </CheckBoxList>
+        <CheckBoxList title='Удобства' data={data}>
+          <Checkbox label='Wi-Fi' name='hasWifi' />
+          <Checkbox label='Кондиционер' name='hasConditioner' />
+          <Checkbox label='Рабочее место' name='hasWorkSpace' />
         </CheckBoxList>
         <CheckBoxList title='Доступность' data={data}>
           <Checkbox
