@@ -49,7 +49,7 @@ const add = (userId, reviewId) =>
       const newLike = {
         userId,
         reviewId,
-        _id: Math.random().toString(36).substr(2, 9),
+        _id: Math.random().toString(36).substring(2, 9),
       };
       likes.push(newLike);
       localStorage.setItem('likes', JSON.stringify(likes));

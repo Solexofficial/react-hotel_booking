@@ -17,7 +17,6 @@ const roomsService = {
   },
   setBooking: async (roomId, payload) => {
     const { data } = await httpService.patch(roomsEndPoint + roomId, payload);
-    console.log('data', data);
     return data;
   },
 };
