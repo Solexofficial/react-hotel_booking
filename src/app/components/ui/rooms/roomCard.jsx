@@ -18,7 +18,13 @@ const comfortIconsMap = {
 const RoomCard = ({ _id, numberRoom, rentPerDay, rate, countReviews, type, images, comforts }) => {
   return (
     <div className='room-card'>
-      {comforts && <Badge className='badge'>{comforts.map(comfort => comfortIconsMap[comfort])}</Badge>}
+      {comforts && (
+        <Badge className='badge'>
+          {comforts.map(comfort => (
+            <div key={comfort}>{comfortIconsMap[comfort]}</div>
+          ))}
+        </Badge>
+      )}
       <SlickSlider className='room-card__gallery'>
         {images &&
           Object.keys(images).map(img => (

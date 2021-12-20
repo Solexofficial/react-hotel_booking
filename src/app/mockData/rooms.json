@@ -1,7 +1,7 @@
 [
   {
     "_id": "888",
-    "numberRoom": "888",
+    "numberRoom": 888,
     "rentPerDay": 9990,
     "rate": 725,
     "countReviews": 145,
@@ -17,7 +17,7 @@
   },
   {
     "_id": "777",
-    "numberRoom": "777",
+    "numberRoom": 777,
     "rentPerDay": 15000,
     "rate": 4,
     "countReviews": 1,
@@ -32,7 +32,7 @@
   },
   {
     "_id": "2",
-    "numberRoom": "2",
+    "numberRoom": 2,
     "rentPerDay": 1500,
     "rate": 8,
     "countReviews": 2,
@@ -46,7 +46,7 @@
   },
   {
     "_id": "3",
-    "numberRoom": "3",
+    "numberRoom": 3,
     "rentPerDay": 3000,
     "rate": 322,
     "countReviews": 120,
@@ -59,7 +59,7 @@
   },
   {
     "_id": "4",
-    "numberRoom": "4",
+    "numberRoom": 4,
     "rentPerDay": 4000,
     "rate": 500,
     "countReviews": 131,
@@ -72,7 +72,7 @@
   },
   {
     "_id": "5",
-    "numberRoom": "5",
+    "numberRoom": 5,
     "rentPerDay": 9990,
     "rate": 700,
     "countReviews": 70,
@@ -85,7 +85,7 @@
   },
   {
     "_id": "6",
-    "numberRoom": "6",
+    "numberRoom": 6,
     "rentPerDay": 9990,
     "rate": 620,
     "countReviews": 50,
@@ -98,7 +98,7 @@
   },
   {
     "_id": "7",
-    "numberRoom": "7",
+    "numberRoom": 7,
     "rentPerDay": 9990,
     "rate": 4,
     "countReviews": 145,
@@ -111,7 +111,7 @@
   },
   {
     "_id": "8",
-    "numberRoom": "8",
+    "numberRoom": 8,
     "rentPerDay": 9990,
     "rate": 3,
     "countReviews": 145,
@@ -124,7 +124,7 @@
   },
   {
     "_id": "9",
-    "numberRoom": "9",
+    "numberRoom": 9,
     "rentPerDay": 9990,
     "rate": 2,
     "countReviews": 145,
@@ -137,7 +137,7 @@
   },
   {
     "_id": "10",
-    "numberRoom": "10",
+    "numberRoom": 10,
     "rentPerDay": 9990,
     "rate": 4,
     "countReviews": 145,
@@ -150,7 +150,7 @@
   },
   {
     "_id": "11",
-    "numberRoom": "11",
+    "numberRoom": 11,
     "rentPerDay": 9990,
     "rate": 3,
     "countReviews": 145,
@@ -163,7 +163,7 @@
   },
   {
     "_id": "12",
-    "numberRoom": "12",
+    "numberRoom": 12,
     "rentPerDay": 15000,
     "rate": 4,
     "countReviews": 145,
@@ -177,7 +177,7 @@
   },
   {
     "_id": "13",
-    "numberRoom": "13",
+    "numberRoom": 13,
     "rentPerDay": 1500,
     "rate": 3,
     "countReviews": 145,
@@ -190,7 +190,7 @@
   },
   {
     "_id": "14",
-    "numberRoom": "14",
+    "numberRoom": 14,
     "rentPerDay": 3000,
     "rate": 2,
     "countReviews": 145,
@@ -203,7 +203,7 @@
   },
   {
     "_id": "15",
-    "numberRoom": "15",
+    "numberRoom": 15,
     "rentPerDay": 4000,
     "rate": 4,
     "countReviews": 145,
@@ -216,7 +216,7 @@
   },
   {
     "_id": "16",
-    "numberRoom": "16",
+    "numberRoom": 16,
     "rentPerDay": 9990,
     "rate": 3,
     "countReviews": 145,
@@ -229,7 +229,7 @@
   },
   {
     "_id": "17",
-    "numberRoom": "17",
+    "numberRoom": 17,
     "rentPerDay": 9990,
     "rate": 2,
     "countReviews": 145,
@@ -242,7 +242,7 @@
   },
   {
     "_id": "18",
-    "numberRoom": "18",
+    "numberRoom": 18,
     "rentPerDay": 9990,
     "rate": 4,
     "countReviews": 145,
@@ -255,7 +255,7 @@
   },
   {
     "_id": "19",
-    "numberRoom": "19",
+    "numberRoom": 19,
     "rentPerDay": 9990,
     "rate": 3,
     "countReviews": 145,
@@ -268,7 +268,7 @@
   },
   {
     "_id": "20",
-    "numberRoom": "20",
+    "numberRoom": 20,
     "rentPerDay": 9990,
     "rate": 2,
     "countReviews": 145,
@@ -281,7 +281,7 @@
   },
   {
     "_id": "21",
-    "numberRoom": "21",
+    "numberRoom": 21,
     "rentPerDay": 9990,
     "rate": 4,
     "countReviews": 145,
@@ -294,7 +294,7 @@
   },
   {
     "_id": "22",
-    "numberRoom": "22",
+    "numberRoom": 22,
     "rentPerDay": 13000,
     "rate": 3,
     "countReviews": 145,

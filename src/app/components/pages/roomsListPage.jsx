@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
+import { useSort } from '../../hooks/useSort';
 import roomsService from '../../services/rooms.service';
 import sessionStorageService from '../../services/sessionStorage.service';
 import filterRooms from '../../utils/filterRooms';
+import { SelectField } from '../common/form/fields';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
+import RoomsSort from '../ui/rooms/roomsFilter/roomsSort';
 import RoomsList from '../ui/rooms/roomsList';
 import RoomsListSkeleton from '../ui/rooms/roomsListSkeleton';
 
@@ -32,6 +35,14 @@ const filtersInitialData = {
 
 const RoomsListPage = () => {
   const [roomsList, setRoomsList] = useState(null);
+  const [sortBy, setSortBy] = useState({ path: 'numberRoom', order: 'desc' });
+
+  const { sortedItems } = useSort(roomsList, sortBy);
+
+  const handleSort = ({ target }) => {
+    setSortBy(JSON.parse(target.value));
+  };
+
   const pageSize = 12;
 
   useEffect(() => {
@@ -64,7 +75,7 @@ const RoomsListPage = () => {
     }
   }, [setData]);
 
-  const filteredRoomsList = filterRooms(roomsList, data);
+  const filteredRoomsList = filterRooms(sortedItems, data);
 
   const setSessionStorageData = useCallback(async () => {
     const { dateOfStay, guests } = data;
@@ -86,6 +97,7 @@ const RoomsListPage = () => {
         />
       </aside>
       <section className='mainContent' style={{ flex: '1' }}>
+        <RoomsSort sortBy={sortBy} onSort={handleSort} />
         <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
         {roomsList ? (
           <RoomsList rooms={filteredRoomsList} pageSize={pageSize} />

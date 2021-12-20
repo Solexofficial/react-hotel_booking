@@ -1,23 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText } from '@material-ui/core';
+import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText } from '@mui/material';
 
-const SelectField = ({ label, name, value, defaultValue, onChange, options, error }) => {
-  const optionsArray =
-    !Array.isArray(options) && typeof options === 'object'
-      ? Object.keys(options).map(optionName => ({
-          name: options[optionName].name,
-          value: options[optionName]._id,
-        }))
-      : options.map(optionName => ({
-          name: optionName.name,
-          value: optionName._id,
-        }));
+const SelectField = ({ label, name, value, defaultValue, onChange, options, error, ...rest }) => {
+  // const optionsArray =
+  //   !Array.isArray(options) && typeof options === 'object'
+  //     ? Object.keys(options).map(optionName => ({
+  //         name: options[optionName].name,
+  //         value: options[optionName]._id,
+  //       }))
+  //     : options.map(optionName => ({
+  //         name: optionName.name,
+  //         value: optionName._id,
+  //       }));
+
+  const optionsArray = Object.keys(options).map(option => ({
+    name: options[option].name,
+    value: typeof options[option].value === 'object' ? JSON.stringify(options[option].value) : options[option].value,
+  }));
 
   return (
     <FormControl variant='outlined' {...(error && { error: true })}>
       <InputLabel>{label}</InputLabel>
-      <MuiSelect label={label} name={name} value={value} onChange={onChange}>
+      <MuiSelect label={label} name={name} value={value} onChange={onChange} {...rest}>
         <MenuItem value='' disabled>
           {defaultValue || label}
         </MenuItem>
