@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import useFetching from '../../hooks/useFetching';
 import { useForm } from '../../hooks/useForm';
+import { usePagination } from '../../hooks/usePagination';
+import { useRoomsFilter } from '../../hooks/useRoomsFilter';
 import { useSort } from '../../hooks/useSort';
 import roomsService from '../../services/rooms.service';
 import sessionStorageService from '../../services/sessionStorage.service';
-import filterRooms from '../../utils/filterRooms';
 import { SelectField } from '../common/form/fields';
+import Pagination from '../common/pagination';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsSort from '../ui/rooms/roomsFilter/roomsSort';
 import RoomsList from '../ui/rooms/roomsList';
@@ -34,33 +37,25 @@ const filtersInitialData = {
 };
 
 const RoomsListPage = () => {
-  const [roomsList, setRoomsList] = useState(null);
+  const [rooms, setRoomsList] = useState(null);
   const [sortBy, setSortBy] = useState({ path: 'numberRoom', order: 'desc' });
+  const [pageSize, setPageSize] = useState(12);
+  
+  const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
+  const { sortedItems } = useSort(rooms, sortBy);
+  const { filteredItems } = useRoomsFilter(sortedItems, data);
+  const { currentPage, handleChangePage, itemsListCrop } = usePagination(filteredItems || [], pageSize);
 
-  const { sortedItems } = useSort(roomsList, sortBy);
+  const [fetchingRooms, roomsIsLoading] = useFetching(async () => {
+    const { content } = await roomsService.getAll();
+    setRoomsList(content);
+  });
 
-  const handleSort = ({ target }) => {
-    setSortBy(JSON.parse(target.value));
-  };
-
-  const pageSize = 12;
+  console.log(roomsIsLoading);
 
   useEffect(() => {
-    getRooms();
+    fetchingRooms();
   }, []);
-
-  const getRooms = async () => {
-    try {
-      const { content } = await roomsService.getAll();
-      setTimeout(() => {
-        setRoomsList(content);
-      }, 1000);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
 
   useEffect(() => {
     const dateOfStay = sessionStorageService.getDateOfStayData();
@@ -75,8 +70,6 @@ const RoomsListPage = () => {
     }
   }, [setData]);
 
-  const filteredRoomsList = filterRooms(sortedItems, data);
-
   const setSessionStorageData = useCallback(async () => {
     const { dateOfStay, guests } = data;
     sessionStorageService.setSessionStorageData(dateOfStay, guests);
@@ -85,6 +78,10 @@ const RoomsListPage = () => {
   useEffect(() => {
     setSessionStorageData();
   }, [data, setSessionStorageData]);
+
+  const handleSort = ({ target }) => {
+    setSortBy(JSON.parse(target.value));
+  };
 
   return (
     <div className='rootWrapper' style={{ display: 'flex' }}>
@@ -98,11 +95,33 @@ const RoomsListPage = () => {
       </aside>
       <section className='mainContent' style={{ flex: '1' }}>
         <RoomsSort sortBy={sortBy} onSort={handleSort} />
+        <SelectField
+          style={{ minWidth: '140px' }}
+          autoWidth={true}
+          label='Отображать по'
+          value={pageSize}
+          onChange={({ target }) => setPageSize(target.value)}
+          options={[
+            { name: '6', value: 6 },
+            { name: '12', value: 12 },
+            { name: '18', value: 18 },
+            { name: '24', value: 24 },
+          ]}
+        />
         <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
-        {roomsList ? (
-          <RoomsList rooms={filteredRoomsList} pageSize={pageSize} />
-        ) : (
-          <RoomsListSkeleton pageSize={pageSize} />
+        {roomsIsLoading ? <RoomsListSkeleton pageSize={pageSize} /> : <RoomsList rooms={itemsListCrop} />}
+        {itemsListCrop.length === 0 && <h2>Мы не нашли для вас подходящих номеров по вашим параметрам &#128577;</h2>}
+
+        {filteredItems.length > pageSize && (
+          <div className='pagination'>
+            <Pagination
+              items={filteredItems}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onChange={handleChangePage}
+            />
+            <p className='pagination__info'>{`1 - ${pageSize} из ${rooms?.length} вариантов аренды`}</p>
+          </div>
         )}
       </section>
     </div>

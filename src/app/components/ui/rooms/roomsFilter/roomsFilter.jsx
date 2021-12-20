@@ -53,4 +53,4 @@ const RoomsFilter = ({ data, setData, handleResetForm, handleInputChange }) => {
   );
 };
 
-export default RoomsFilter;
+export default React.memo(RoomsFilter);
