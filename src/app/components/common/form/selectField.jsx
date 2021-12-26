@@ -3,17 +3,6 @@ import PropTypes from 'prop-types';
 import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText } from '@mui/material';
 
 const SelectField = ({ label, name, value, defaultValue, onChange, options, error, ...rest }) => {
-  // const optionsArray =
-  //   !Array.isArray(options) && typeof options === 'object'
-  //     ? Object.keys(options).map(optionName => ({
-  //         name: options[optionName].name,
-  //         value: options[optionName]._id,
-  //       }))
-  //     : options.map(optionName => ({
-  //         name: optionName.name,
-  //         value: optionName._id,
-  //       }));
-
   const optionsArray = Object.keys(options).map(option => ({
     name: options[option].name,
     value: typeof options[option].value === 'object' ? JSON.stringify(options[option].value) : options[option].value,
@@ -38,7 +27,7 @@ const SelectField = ({ label, name, value, defaultValue, onChange, options, erro
 };
 SelectField.propTypes = {
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   error: PropTypes.string,
   name: PropTypes.string,

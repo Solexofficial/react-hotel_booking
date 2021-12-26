@@ -5,7 +5,7 @@
 @import './checkBoxList';
 @import './filters';
 @import './form';
-@import './pagination';
+@import '../../components/common/Pagination/styles/pagination';
 @import './breadcrumbs';
 @import './slickSlider';
 @import './rating';
@@ -15,7 +15,6 @@
 @import './reviewsForm';
 @import './bookingForm';
 @import './pages/main';
-@import './pages/profilePage';
 @import './header';
 @import './loginForm';
 @import './logo';
@@ -25,3 +24,5 @@
 @import './modal';
 @import './successBookingModal';
 @import './badge';
+@import './profileDashboard';
+@import '../../components/common/Footer/styles/footer';

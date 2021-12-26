@@ -1,0 +1,41 @@
+.pagination {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & .MuiPagination-ul {
+    justify-content: center;
+  }
+
+  & .MuiButtonBase-root {
+    color: $accent50;
+    font-weight: 700;
+    border-color: $purple;
+    &:hover {
+      background: $purple;
+      color: #fff;
+    }
+
+    &.Mui-selected {
+      background: $purple;
+      color: #fff;
+      &:hover {
+        background: $purple;
+      }
+    }
+
+    &.MuiPaginationItem-previousNext {
+      color: $purple;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.pagination__info {
+  margin-top: 10px;
+  pointer-events: none;
+}

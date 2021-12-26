@@ -56,7 +56,7 @@ const BookingForm = ({ rentPerDay }) => {
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
 
   const [setBooking] = useFetching(async roomId => {
-    await roomsService.setBooking(roomId, { isBooked: true });
+    await roomsService.setBooking(roomId, { isBooked: [data.dateOfStay.arrival, data.dateOfStay.departure] });
     setEnterError('Вы забронировали этот номер');
   });
 

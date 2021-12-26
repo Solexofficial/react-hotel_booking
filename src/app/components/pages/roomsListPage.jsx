@@ -7,7 +7,7 @@ import { useSort } from '../../hooks/useSort';
 import roomsService from '../../services/rooms.service';
 import sessionStorageService from '../../services/sessionStorage.service';
 import { SelectField } from '../common/form/fields';
-import Pagination from '../common/pagination';
+import Pagination from '../common/Pagination/Pagination';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsSort from '../ui/rooms/roomsFilter/roomsSort';
 import RoomsList from '../ui/rooms/roomsList';
@@ -40,7 +40,7 @@ const RoomsListPage = () => {
   const [rooms, setRoomsList] = useState(null);
   const [sortBy, setSortBy] = useState({ path: 'numberRoom', order: 'desc' });
   const [pageSize, setPageSize] = useState(12);
-  
+
   const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
   const { sortedItems } = useSort(rooms, sortBy);
   const { filteredItems } = useRoomsFilter(sortedItems, data);
@@ -50,8 +50,6 @@ const RoomsListPage = () => {
     const { content } = await roomsService.getAll();
     setRoomsList(content);
   });
-
-  console.log(roomsIsLoading);
 
   useEffect(() => {
     fetchingRooms();
