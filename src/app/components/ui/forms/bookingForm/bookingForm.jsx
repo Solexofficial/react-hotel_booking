@@ -8,7 +8,7 @@ import { useModal } from '../../../../hooks/useModal';
 import bookingService from '../../../../services/booking.service';
 import roomsService from '../../../../services/rooms.service';
 import sessionStorageService from '../../../../services/sessionStorage.service';
-import { DateOfStayField, GuestsDropDownField } from '../../../common/form/fields';
+import { DateOfStayField, GuestsDropDownField } from '../../../common/Fields/fields';
 import Button from '../../buttons/button';
 import SuccessBookingModal from '../../modals/successBookingModal';
 import BookingFormPriceInfo from './bookingFormPriceInfo';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tooltip from '../../../common/tooltip';
+import Tooltip from '../../../common/Tooltip/Tooltip';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useEffect } from 'react';
 

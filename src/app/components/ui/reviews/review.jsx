@@ -6,11 +6,11 @@ import { useAuth } from '../../../hooks/useAuth';
 import likesService from '../../../services/likes.service';
 import userService from '../../../services/user.service';
 import formatDate from '../../../utils/formatDate';
-import Loader from '../../common/loader';
-import Rating from '../../common/rating';
-import Tooltip from '../../common/tooltip';
+import Loader from '../../common/Loader/Loader';
+import Rating from '../../common/Rating/Rating';
+import Tooltip from '../../common/Tooltip/Tooltip';
 import LikeButton from '../buttons/likeButton';
-import Avatar from './../../common/avatar';
+import Avatar from '../../common/Avatar/Avatar';
 
 const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);

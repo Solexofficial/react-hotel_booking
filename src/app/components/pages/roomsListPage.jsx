@@ -6,7 +6,7 @@ import { useRoomsFilter } from '../../hooks/useRoomsFilter';
 import { useSort } from '../../hooks/useSort';
 import roomsService from '../../services/rooms.service';
 import sessionStorageService from '../../services/sessionStorage.service';
-import { SelectField } from '../common/form/fields';
+import { SelectField } from '../common/Fields/fields';
 import Pagination from '../common/Pagination/Pagination';
 import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
 import RoomsSort from '../ui/rooms/roomsFilter/roomsSort';

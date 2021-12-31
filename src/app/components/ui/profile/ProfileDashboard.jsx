@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { useAuth } from '../../../hooks/useAuth';
-import SideBar from '../../common/sidebar';
+import Sidebar from '../../common/Sidebar';
 import ProfileEditPage from '../../pages/profileEditPage';
 import ProfilePage from '../../pages/profilePage';
 import ProfileBooking from './ProfileBooking';
@@ -30,7 +30,7 @@ const ProfileDashboard = () => {
   return (
     <div className='profile-dashboard'>
       <aside className='profile-sidebar'>
-        <SideBar />
+        <Sidebar />
       </aside>
       {renderComponent(route)}
     </div>

@@ -3,8 +3,8 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks/useForm';
 import sessionStorageService from '../../../../services/sessionStorage.service';
-import DateOfStayField from '../../../common/form/dateOfStayField';
-import GuestsDropDownField from '../../../common/form/guestsDropDownField';
+import DateOfStayField from '../../../common/Fields/DateOfStay/DateOfStay';
+import GuestsDropDownField from '../../../common/Fields/guestsDropDownField';
 import Button from '../../buttons/button';
 import validatorConfig from './validatorConfig';
 

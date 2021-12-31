@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks/useForm';
-import { DatePickerField, InputField, RadioGroup, Switch } from '../../../common/form/fields';
-import withPassword from '../../../common/form/withPassword';
+import { DatePickerField, InputField, RadioGroup, Switch } from '../../../common/Fields/fields';
+import withPassword from '../../../common/Fields/withPassword';
 import Button from '../../buttons/button';
 import validatorConfig from './validatorConfig';
 

@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { navigationRoutes } from '../../../router/routes';
 import Button from '../../ui/buttons/button';
-import NavList from '../../ui/navList';
-import Profile from '../../ui/userProfileMenu';
-import Container from '../container';
-import Divider from '../divider';
-import Logo from '../logo/logo';
+import NavList from '../navList';
+import NavProfile from '../../ui/navProfile';
+import Container from '../Container/Container';
+import Divider from '../Divider/Divider';
+import Logo from '../Logo';
 import useStyles from './styles';
 
 const Header = () => {
@@ -24,7 +24,7 @@ const Header = () => {
           {currentUser ? (
             <>
               <Divider orientation='vertical' flexItem className='header__divider' />
-              <Profile user={currentUser} onLogout={handleLogout} />
+              <NavProfile user={currentUser} onLogout={handleLogout} />
             </>
           ) : (
             <div className='header-buttons'>

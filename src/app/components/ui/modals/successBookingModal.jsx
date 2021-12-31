@@ -3,7 +3,7 @@ import { DialogContent, DialogActions } from '@mui/material';
 import React from 'react';
 import { getDateDDMMYYYY } from '../../../utils/formatDate';
 import { useHistory } from 'react-router';
-import Modal from '../../common/modal';
+import Modal from '../../common/Modal/Modal';
 import Button from '../buttons/button';
 
 const SuccessBookingModal = ({ open, onClose, isLoading, bookingData }) => {

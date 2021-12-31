@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoImage from './logoImage';
+import LogoImage from './LogoImage';
 
 const Logo = ({ className }) => {
   return (

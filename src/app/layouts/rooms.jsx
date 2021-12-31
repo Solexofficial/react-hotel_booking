@@ -1,9 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import Breadcrumbs from '../components/common/breadcrumbs';
-import Container from '../components/common/container';
-import Footer from '../components/common/Footer/Footer';
-import Header from '../components/common/header/header';
+import Breadcrumbs from '../components/common/Breadcrumbs';
+import Container from '../components/common/Container';
+import Footer from '../components/common/Footer';
+import Header from '../components/common/Header';
 import RoomPage from '../components/pages/roomPage';
 import RoomsListPage from '../components/pages/roomsListPage';
 

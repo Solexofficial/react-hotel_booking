@@ -1,8 +1,8 @@
 import { Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import roomsService from '../../services/rooms.service';
-import SlickSlider from '../common/imageSlider/slickSlider';
-import Loader from '../common/loader';
+import SlickSlider from '../common/ImageSlider/ImageSlider';
+import Loader from '../common/Loader/Loader';
 import BookingForm from '../ui/forms/bookingForm';
 import Reviews from '../ui/reviews/reviews';
 import RoomCancelCard from '../ui/room/cards/roomCancelCard';

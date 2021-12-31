@@ -1,0 +1,9 @@
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.checkbox-list__item {
+  margin-bottom: 11px;
+}

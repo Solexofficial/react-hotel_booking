@@ -1,7 +1,7 @@
 import { Paper } from '@mui/material';
 import React from 'react';
 import useMockData from '../../hooks/useMockData';
-import Container from '../common/container';
+import Container from '../common/Container/Container';
 import SearchRoomsForm from '../ui/forms/searchRoomsForm';
 
 const HomePage = () => {

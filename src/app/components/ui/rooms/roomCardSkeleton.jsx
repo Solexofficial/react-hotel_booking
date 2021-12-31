@@ -1,6 +1,6 @@
 import React from 'react';
 import Skeleton from '@mui/material/Skeleton';
-import Divider from '../../common/divider';
+import Divider from '../../common/Divider/Divider';
 
 const RoomCardSkeleton = () => {
   return (

@@ -1,11 +1,11 @@
 import { Link } from '@material-ui/core';
 import { GitHub } from '@mui/icons-material';
 import React from 'react';
-import Container from '../container';
-import Divider from '../divider';
-import { InputField } from '../form/fields';
-import withSubscribe from '../form/withSubscribe';
-import Logo from '../logo/logo';
+import Container from '../Container/Container';
+import Divider from '../Divider/Divider';
+import { InputField } from '../Fields/fields';
+import withSubscribe from '../Fields/withSubscribe';
+import Logo from '../Logo/Logo';
 
 const Footer = () => {
   const SubscribeInput = withSubscribe(InputField);

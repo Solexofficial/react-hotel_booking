@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectField } from '../../../common/form/fields';
+import { SelectField } from '../../../common/Fields/fields';
 
 const roomsSortArray = [
   { name: 'По убыванию', value: { path: 'numberRoom', order: 'desc' } },

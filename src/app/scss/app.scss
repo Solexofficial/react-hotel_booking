@@ -7,16 +7,13 @@
   min-height: 100vh;
   flex-direction: column;
   justify-content: space-between;
+  font-size: $text-base-size;
+  color: $accent75;
 }
 
 * {
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-size: $text-base-size !important;
-  color: $accent75 !important;
 }
 
 h1,

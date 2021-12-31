@@ -5,7 +5,7 @@ import {
   DateOfStayField,
   GuestsDropDownField,
   RangeSliderField,
-} from '../../../common/form/fields';
+} from '../../../common/Fields/fields';
 import RoomsFilterList from './roomsFiltersList';
 import Button from '../../buttons/button';
 

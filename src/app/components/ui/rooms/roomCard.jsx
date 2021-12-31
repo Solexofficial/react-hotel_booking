@@ -4,10 +4,10 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import declOfNum from '../../../utils/declOfNum';
-import Badge from '../../common/badge';
-import Divider from '../../common/divider';
-import SlickSlider from '../../common/imageSlider/slickSlider';
-import Rating from '../../common/rating';
+import Badge from '../../common/Badge';
+import Divider from '../../common/Divider/Divider';
+import SlickSlider from '../../common/ImageSlider';
+import Rating from '../../common/Rating/Rating';
 
 const comfortIconsMap = {
   hasWifi: <WifiIcon />,

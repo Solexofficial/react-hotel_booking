@@ -1,8 +1,8 @@
 import React from 'react';
-import Breadcrumbs from '../components/common/breadcrumbs';
-import Container from '../components/common/container';
+import Breadcrumbs from '../components/common/Breadcrumbs';
+import Container from '../components/common/Container';
 import Footer from '../components/common/Footer/Footer';
-import Header from '../components/common/header/header';
+import Header from '../components/common/Header/Header';
 import ProfileDashboard from '../components/ui/profile/ProfileDashboard';
 
 const Profile = () => {

@@ -1,9 +1,9 @@
 import { Paper } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Container from '../../common/container';
-import Footer from '../../common/Footer/Footer';
-import Header from '../../common/header/header';
+import Container from '../../common/Container';
+import Footer from '../../common/Footer';
+import Header from '../../common/Header';
 import Button from '../../ui/buttons/button';
 import RegisterForm from '../../ui/forms/registerForm';
 
