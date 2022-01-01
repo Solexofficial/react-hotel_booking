@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useAuth } from '../../../hooks/useAuth';
 import reviewsService from '../../../services/reviews.service';
 import declOfNum from '../../../utils/declOfNum';
-import ReviewsForm from '../forms/reviewsForm/reviewsForm';
+import ReviewsForm from '../forms/ReviewsForm';
 import ReviewsList from './reviewsList';
 
 const Reviews = () => {

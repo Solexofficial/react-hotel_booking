@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import roomsService from '../../services/rooms.service';
 import SlickSlider from '../common/ImageSlider/ImageSlider';
 import Loader from '../common/Loader/Loader';
-import BookingForm from '../ui/forms/bookingForm';
+import BookingForm from '../ui/forms/BookingForm';
 import Reviews from '../ui/reviews/reviews';
 import RoomCancelCard from '../ui/room/cards/roomCancelCard';
 import RoomInfoCard from '../ui/room/cards/roomInfoCard';

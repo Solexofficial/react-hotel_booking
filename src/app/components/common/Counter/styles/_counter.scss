@@ -1,0 +1,18 @@
+.counter-wrapper {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.counter-input {
+  all: unset;
+  padding: 5px;
+  width: 40px;
+  height: 20px;
+  background: none;
+  border: none;
+  outline: none;
+
+  text-align: center;
+}

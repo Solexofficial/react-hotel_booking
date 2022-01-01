@@ -1,3 +1,3 @@
-import CheckboxList from './CheckboxList';
+import CheckBoxList from "./CheckBoxList";
 
-export default CheckboxList;
+export default CheckBoxList;

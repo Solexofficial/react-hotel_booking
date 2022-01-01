@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, useForm } from '../../../../hooks/useForm';
-import { RatingField, TextAreaField } from '../../../common/Fields/fields';
+import { Form, useForm } from '../../../../hooks';
+import { RatingField, TextAreaField } from '../../../common/Fields';
 import validatorConfig from './validatorConfig';
 import Button from '../../buttons/button';
 

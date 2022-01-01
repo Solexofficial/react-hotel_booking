@@ -1,7 +1,7 @@
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup as MuiRadioGroup } from '@mui/material';
 import React from 'react';
 
-export default function RadioGroup({ name, label, value, onChange, items }) {
+const RadioGroupField = ({ name, label, value, onChange, items }) => {
   return (
     <FormControl component='fieldset'>
       <FormLabel component='legend'>{label}</FormLabel>
@@ -12,4 +12,6 @@ export default function RadioGroup({ name, label, value, onChange, items }) {
       </MuiRadioGroup>
     </FormControl>
   );
-}
+};
+
+export default RadioGroupField;

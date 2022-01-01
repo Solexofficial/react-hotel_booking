@@ -1,3 +1,3 @@
-import BookingForm from './bookingForm';
+import BookingForm from './BookingForm';
 
 export default BookingForm;

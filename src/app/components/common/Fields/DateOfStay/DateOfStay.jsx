@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePickerField from '../datePickerField';
+import DatePickerField from '../DatePickerField';
 
 const DateOfStay = ({ onChange, value, name }) => {
   const handleChange = ({ target }) => {

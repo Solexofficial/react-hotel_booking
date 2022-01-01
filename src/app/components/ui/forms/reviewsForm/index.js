@@ -1,3 +1,3 @@
-import ReviewsForm from './reviewsForm';
+import ReviewsForm from './ReviewsForm';
 
 export default ReviewsForm;

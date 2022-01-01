@@ -5,7 +5,7 @@ import Container from '../../common/Container/Container';
 import Footer from '../../common/Footer/Footer';
 import Header from '../../common/Header/Header';
 import Button from '../../ui/buttons/button';
-import LoginForm from '../../ui/forms/loginForm';
+import LoginForm from '../../ui/forms/LoginForm';
 
 const LoginPage = () => {
   return (

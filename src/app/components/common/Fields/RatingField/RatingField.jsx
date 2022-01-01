@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Rating from '../Rating';
+import Rating from '../../Rating';
 
 const labels = {
   1: 'Разочарован',

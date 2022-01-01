@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { navigationRoutes } from '../../../router/routes';
 import Button from '../../ui/buttons/button';
-import NavList from '../navList';
 import NavProfile from '../../ui/navProfile';
 import Container from '../Container/Container';
 import Divider from '../Divider/Divider';
 import Logo from '../Logo';
+import NavList from '../NavList/NavList';
 import useStyles from './styles';
 
 const Header = () => {

@@ -13,7 +13,7 @@ const httpAuth = axios.create({
 
 const AuthContext = React.createContext();
 
-export const useAuth = () => useContext(AuthContext);
+const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setUser] = useState(getCurrentUser() || null);
@@ -101,4 +101,4 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-export default AuthProvider;
+export { useAuth, AuthProvider };

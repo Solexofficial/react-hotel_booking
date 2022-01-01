@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { validator } from '../utils/validator';
 
-export function useForm(initialData, validateOnChange, validatorConfig) {
+function useForm(initialData, validateOnChange, validatorConfig) {
   const [data, setData] = useState(initialData || {});
   const [errors, setErrors] = useState({});
   const [enterError, setEnterError] = useState(null);
@@ -61,7 +61,7 @@ export function useForm(initialData, validateOnChange, validatorConfig) {
   };
 }
 
-export function Form({ children, handleChange, data, errors, handleKeyDown, ...rest }) {
+function Form({ children, handleChange, data, errors, handleKeyDown, ...rest }) {
   const clonedElements = React.Children.map(children, child => {
     const childType = typeof child.type;
     let config = {};
@@ -75,7 +75,7 @@ export function Form({ children, handleChange, data, errors, handleKeyDown, ...r
       config = {
         ...child.props,
         onChange: handleChange,
-        value: data[child.props.name] || '',
+        value: data[child.props.name],
         error: errors?.[child.props.name],
         onKeyDown: handleKeyDown,
       };
@@ -89,3 +89,5 @@ export function Form({ children, handleChange, data, errors, handleKeyDown, ...r
     </form>
   );
 }
+
+export { useForm, Form };

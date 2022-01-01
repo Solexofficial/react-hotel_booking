@@ -1,3 +1,3 @@
-import RegisterForm from './registerForm';
+import RegisterForm from './RegisterForm';
 
 export default RegisterForm;

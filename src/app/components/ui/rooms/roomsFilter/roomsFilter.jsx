@@ -1,15 +1,25 @@
-import React from 'react';
-import {
-  Checkbox,
-  CheckBoxList,
-  DateOfStayField,
-  GuestsDropDownField,
-  RangeSliderField,
-} from '../../../common/Fields/fields';
+import React, { useCallback } from 'react';
+import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
 import RoomsFilterList from './roomsFiltersList';
 import Button from '../../buttons/button';
+import Counter from '../../../common/Counter';
+import declOfNum from '../../../../utils/declOfNum';
 
 const RoomsFilter = ({ data, setData, handleResetForm, handleInputChange }) => {
+  const getGuestsLabel = useCallback(() => {
+    const guests = [data.adults, data.children, data.babies];
+    const countGuests = guests.reduce((acc, cur) => acc + cur, 0);
+    const countBabies = Number(data.babies);
+
+    const guestsStr = `${countGuests} ${declOfNum(countGuests, ['гость', 'гостя', 'гостей'])}`;
+    const babiesStr = `${countBabies} ${declOfNum(countBabies, ['младенец', 'младенца', 'младенцев'])}`;
+
+    if (countGuests > 0 && countBabies > 0) {
+      return `${guestsStr} ${babiesStr}`;
+    }
+
+    return countGuests > 0 ? guestsStr : 'Сколько гостей';
+  }, []);
   console.log('rooms filter render');
 
   return (
@@ -17,7 +27,10 @@ const RoomsFilter = ({ data, setData, handleResetForm, handleInputChange }) => {
       <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
       <RoomsFilterList data={data} handleChange={handleInputChange}>
         <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
-        <GuestsDropDownField title='гости' setData={setData} name='guests' />
+        <p className='search-form__guests-label'>{getGuestsLabel()}</p>
+        <Counter name='adults' label='Взрослые' min={0} max={10} />
+        <Counter name='children' label='Дети' min={0} max={10} />
+        <Counter name='babies' label='Младенцы' min={0} max={10} />
         <RangeSliderField
           label='Диапазон цены'
           description='Стоимость за сутки пребывания в номере'
@@ -25,6 +38,11 @@ const RoomsFilter = ({ data, setData, handleResetForm, handleInputChange }) => {
           min={0}
           max={15000}
         />
+        <CheckBoxList title='Условия размещения' data={data}>
+          <Checkbox label='Можно c питомцами' name='canPets' />
+          <Checkbox label='Можно курить' name='canSmoke' />
+          <Checkbox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
+        </CheckBoxList>
         <CheckBoxList title='Условия размещения' data={data}>
           <Checkbox label='Можно курить' name='canSmoke' />
           <Checkbox label='Можно c питомцами' name='canPets' />

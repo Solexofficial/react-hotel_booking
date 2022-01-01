@@ -1,4 +1,4 @@
-export const useRoomsFilter = (items, filters) => {
+const useRoomsFilter = (items, filters) => {
   if (!items) return;
 
   let filteredItems = JSON.parse(JSON.stringify(items));
@@ -31,3 +31,5 @@ export const useRoomsFilter = (items, filters) => {
 
   return { filteredItems };
 };
+
+export default useRoomsFilter;

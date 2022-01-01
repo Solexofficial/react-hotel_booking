@@ -1,7 +1,7 @@
 import { Slider } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
-import Loader from '../Loader/Loader';
-import { InputField } from './fields';
+import Loader from '../../Loader';
+import { InputField } from '..';
 
 const valuetext = value => {
   return `${value}₽`;

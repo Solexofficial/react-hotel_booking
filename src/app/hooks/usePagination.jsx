@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { paginate } from '../utils/paginate';
 
-export function usePagination(items, pageSize) {
+function usePagination(items, pageSize) {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -18,3 +18,5 @@ export function usePagination(items, pageSize) {
 
   return { currentPage, handleChangePage, itemsListCrop };
 }
+
+export default usePagination;

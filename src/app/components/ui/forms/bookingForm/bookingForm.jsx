@@ -1,17 +1,14 @@
 import { ArrowRight } from '@mui/icons-material';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { useAuth } from '../../../../hooks/useAuth';
-import useFetching from '../../../../hooks/useFetching';
-import { Form, useForm } from '../../../../hooks/useForm';
-import { useModal } from '../../../../hooks/useModal';
+import { useAuth, useFetching, useModal, useForm, Form } from '../../../../hooks';
 import bookingService from '../../../../services/booking.service';
 import roomsService from '../../../../services/rooms.service';
 import sessionStorageService from '../../../../services/sessionStorage.service';
-import { DateOfStayField, GuestsDropDownField } from '../../../common/Fields/fields';
+import { DateOfStayField, GuestsDropdownField } from '../../../common/Fields';
 import Button from '../../buttons/button';
 import SuccessBookingModal from '../../modals/successBookingModal';
-import BookingFormPriceInfo from './bookingFormPriceInfo';
+import BookingFormPriceInfo from './BookingFormPriceInfo';
 import validatorConfig from './validatorConfig';
 
 const oneDayMs = 86000000;
@@ -90,7 +87,7 @@ const BookingForm = ({ rentPerDay }) => {
         handleKeyDown={handleKeyDown}
       >
         <DateOfStayField name='dateOfStay' className='booking-form' />
-        <GuestsDropDownField name='guests' setData={setData} data={data} />
+        <GuestsDropdownField name='guests' setData={setData} data={data} />
         <BookingFormPriceInfo name='price' rentPerDay={rentPerDay} countDays={countDays} />
         <Button
           endIcon={<ArrowRight />}

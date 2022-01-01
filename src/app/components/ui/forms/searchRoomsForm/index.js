@@ -1,3 +1,3 @@
-import SearchRoomsForm from './searchRoomsForm';
+import SearchRoomsForm from './SearchRoomsForm';
 
 export default SearchRoomsForm;

@@ -1,10 +1,11 @@
 import { ArrowRight } from '@mui/icons-material';
 import React from 'react';
 import { useHistory } from 'react-router';
-import { Form, useForm } from '../../../../hooks/useForm';
+import { Form, useForm } from '../../../../hooks';
 import sessionStorageService from '../../../../services/sessionStorage.service';
-import DateOfStayField from '../../../common/Fields/DateOfStay/DateOfStay';
-import GuestsDropDownField from '../../../common/Fields/guestsDropDownField';
+import declOfNum from '../../../../utils/declOfNum';
+import Counter from '../../../common/Counter';
+import { DateOfStayField } from '../../../common/Fields';
 import Button from '../../buttons/button';
 import validatorConfig from './validatorConfig';
 
@@ -20,6 +21,9 @@ const initialData = {
     arrival: new Date(new Date().toISOString().slice(0, 10)).getTime(),
     departure: new Date(new Date().toISOString().slice(0, 10)).getTime() + oneDayMs,
   },
+  adults: 0,
+  children: 0,
+  babies: 0,
 };
 
 const SearchRoomsForm = () => {
@@ -37,8 +41,24 @@ const SearchRoomsForm = () => {
       console.log('data##########:', data);
       const { guests, dateOfStay } = data;
       sessionStorageService.setSessionStorageData(dateOfStay, guests);
-      history.push(`/rooms`);
+      // history.push(`/rooms`);
+      console.log(history);
     }
+  };
+
+  const getGuestsLabel = () => {
+    const guests = [data.adults, data.children, data.babies];
+    const countGuests = guests.reduce((acc, cur) => acc + cur, 0);
+    const countBabies = Number(data.babies);
+
+    const guestsStr = `${countGuests} ${declOfNum(countGuests, ['гость', 'гостя', 'гостей'])}`;
+    const babiesStr = `${countBabies} ${declOfNum(countBabies, ['младенец', 'младенца', 'младенцев'])}`;
+
+    if (countGuests > 0 && countBabies > 0) {
+      return `${guestsStr} ${babiesStr}`;
+    }
+
+    return countGuests > 0 ? guestsStr : 'Сколько гостей';
   };
 
   return (
@@ -50,8 +70,18 @@ const SearchRoomsForm = () => {
       handleKeyDown={handleKeyDown}
     >
       <DateOfStayField name='dateOfStay' />
-      <GuestsDropDownField name='guests' setData={setData} data={data} />
-      <Button variant='outlined' type='button' size='small' onClick={handleResetForm} className='form-btn__reset'>
+      <p className='search-form__guests-label'>{getGuestsLabel()}</p>
+      <Counter name='adults' label='Взрослые' min={0} max={10} />
+      <Counter name='children' label='Дети' min={0} max={10} />
+      <Counter name='babies' label='Младенцы' min={0} max={10} />
+      <Button
+        variant='outlined'
+        type='button'
+        size='small'
+        onClick={handleResetForm}
+        className='form-btn__reset'
+        fullWidth
+      >
         Очистить
       </Button>
       <Button

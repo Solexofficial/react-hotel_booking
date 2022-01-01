@@ -1,10 +1,12 @@
 import { Paper } from '@mui/material';
 import React from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import useMockData from '../../hooks/useMockData';
-import Container from '../common/Container/Container';
-import SearchRoomsForm from '../ui/forms/searchRoomsForm';
+import Container from '../common/Container';
+import { SearchRoomsForm } from '../ui/forms';
 
 const HomePage = () => {
+  const { currentUser } = useAuth();
   const { error, initialize, progress, status } = useMockData();
 
   const handleClick = () => {
@@ -23,15 +25,19 @@ const HomePage = () => {
           </Paper>
           <p className='main__text-wishes'>Лучшие номера для вашей работы, отдыха и просто вдохновения</p>
         </div>
-        <h3>Инициализация данных в FireBase</h3>
-        <ul>
-          <li>Status: {status}</li>
-          <li>Progress: {progress}%</li>
-          {error && <li>error: {error}</li>}
-        </ul>
-        <button className='btn btn-primary' onClick={handleClick}>
-          Инициализировать
-        </button>
+        {currentUser?.role === 'admin' && (
+          <>
+            <h3>Инициализация данных в FireBase</h3>
+            <ul>
+              <li>Status: {status}</li>
+              <li>Progress: {progress}%</li>
+              {error && <li>error: {error}</li>}
+            </ul>
+            <button className='btn btn-primary' onClick={handleClick}>
+              Инициализировать
+            </button>
+          </>
+        )}
       </Container>
     </main>
   );
