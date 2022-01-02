@@ -43,10 +43,6 @@ const Reviews = () => {
     getReviews(roomId);
   }, [roomId]);
 
-  const handleRemoveReview = id => {
-    removeReview(id);
-  };
-
   const handleSubmit = data => {
     const payload = {
       ...data,
@@ -67,7 +63,7 @@ const Reviews = () => {
             <h2 className='room-info__card-title'>Отзывы посетителей номера</h2>
             <span>{`${totalReviewsCount} ${declOfNum(totalReviewsCount, ['отзыв', 'отзыва', 'отзывов'])}`}</span>
           </div>
-          {totalReviewsCount > 0 && <ReviewsList reviews={sortedReviews} onRemove={handleRemoveReview} />}
+          {totalReviewsCount > 0 && <ReviewsList reviews={sortedReviews} handleRemove={removeReview} />}
         </section>
       )}
       {currentUser && (

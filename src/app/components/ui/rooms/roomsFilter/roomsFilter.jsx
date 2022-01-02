@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
 import RoomsFilterList from './roomsFiltersList';
-import Button from '../../buttons/button';
+import Button from '../../../common/Button';
 import Counter from '../../../common/Counter';
 import declOfNum from '../../../../utils/declOfNum';
 

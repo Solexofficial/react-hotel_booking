@@ -4,7 +4,7 @@ import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks';
 import { InputField } from '../../../common/Fields';
 import withPassword from '../../../common/Fields/HOC/withPassword';
-import Button from '../../buttons/button';
+import Button from '../../../common/Button/Button';
 import validatorConfig from './validatorConfig';
 
 const initialData = {

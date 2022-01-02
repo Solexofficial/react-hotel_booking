@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import CircleButton from '../../ui/buttons/circleButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Button from '../Button';
 
 const Counter = ({ name, label, value, min, max, onChange }) => {
   const [counterValue, setValue] = useState(+value || 0);
@@ -27,13 +27,13 @@ const Counter = ({ name, label, value, min, max, onChange }) => {
     <div className='counter-wrapper'>
       {label && <p className='counter-label'>{label}</p>}
       <div className='counter-buttons__wrapper'>
-        <CircleButton variant='contained' size='small' aria-label='reduce' onClick={handleDecrease}>
+        <Button type='circle' variant='contained' size='small' aria-label='reduce' onClick={handleDecrease}>
           <RemoveIcon fontSize='small' />
-        </CircleButton>
+        </Button>
         <input className='counter-input' type='text' value={+counterValue} readOnly />
-        <CircleButton variant='contained' size='small' aria-label='increase' onClick={handleIncrease}>
+        <Button type='circle' variant='contained' size='small' aria-label='increase' onClick={handleIncrease}>
           <AddIcon fontSize='small' />
-        </CircleButton>
+        </Button>
       </div>
     </div>
   );

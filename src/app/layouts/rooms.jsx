@@ -4,8 +4,8 @@ import Breadcrumbs from '../components/common/Breadcrumbs';
 import Container from '../components/common/Container';
 import Footer from '../components/common/Footer';
 import Header from '../components/common/Header';
-import RoomPage from '../components/pages/roomPage';
-import RoomsListPage from '../components/pages/roomsListPage';
+import RoomPage from '../components/pages/RoomPage';
+import RoomsPage from '../components/pages/RoomsPage';
 
 const Rooms = () => {
   const { roomId } = useParams();
@@ -15,7 +15,7 @@ const Rooms = () => {
       <Header />
       <Container>
         <Breadcrumbs />
-        {roomId ? <RoomPage roomId={roomId} /> : <RoomsListPage />}
+        {roomId ? <RoomPage roomId={roomId} /> : <RoomsPage />}
       </Container>
       <Footer />
     </>

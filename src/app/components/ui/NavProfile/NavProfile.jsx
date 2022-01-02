@@ -1,10 +1,10 @@
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
-import Avatar from '../common/Avatar/Avatar';
-import Tooltip from '../common/Tooltip/Tooltip';
+import Avatar from '../../common/Avatar/Avatar';
+import Tooltip from '../../common/Tooltip/Tooltip';
 import { useHistory } from 'react-router';
-import { userProfileRoutes } from '../../router/routes';
+import { userProfileRoutes } from '../../../router/routes';
 
 const NavProfile = ({ user, onLogout }) => {
   const history = useHistory();

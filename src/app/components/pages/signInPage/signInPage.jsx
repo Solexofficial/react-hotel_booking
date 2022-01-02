@@ -1,7 +1,7 @@
 import { Paper } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../ui/buttons/button';
+import Button from '../../common/Button/Button';
 import LoginForm from '../../ui/forms/LoginForm';
 
 const SignInPage = () => {

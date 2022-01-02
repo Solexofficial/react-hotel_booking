@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { usePagination, useRoomsFilter, useSort, useForm, useFetching } from '../../hooks';
-import roomsService from '../../services/rooms.service';
-import sessionStorageService from '../../services/sessionStorage.service';
-import { SelectField } from '../common/Fields';
-import Pagination from '../common/Pagination/Pagination';
-import RoomsFilter from '../ui/rooms/roomsFilter/roomsFilter';
-import RoomsSort from '../ui/rooms/roomsFilter/roomsSort';
-import RoomsList from '../ui/rooms/roomsList';
-import RoomsListSkeleton from '../ui/rooms/roomsListSkeleton';
+import { useFetching, useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
+import roomsService from '../../../services/rooms.service';
+import sessionStorageService from '../../../services/sessionStorage.service';
+import { SelectField } from '../../common/Fields';
+import Pagination from '../../common/Pagination';
+import RoomsFilter from '../../ui/rooms/roomsFilter/roomsFilter';
+import RoomsSort from '../../ui/rooms/roomsFilter/roomsSort';
+import RoomsList from '../../ui/rooms/roomsList';
+import RoomsListSkeleton from '../../ui/rooms/roomsListSkeleton';
 
 const oneDayMs = 86000000;
 
@@ -35,7 +35,7 @@ const filtersInitialData = {
   hasWorkSpace: false,
 };
 
-const RoomsListPage = () => {
+const RoomsPage = () => {
   const [rooms, setRoomsList] = useState(null);
   const [sortBy, setSortBy] = useState({ path: 'numberRoom', order: 'desc' });
   const [pageSize, setPageSize] = useState(12);
@@ -125,4 +125,4 @@ const RoomsListPage = () => {
   );
 };
 
-export default RoomsListPage;
+export default RoomsPage;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, useForm } from '../../../../hooks';
 import { RatingField, TextAreaField } from '../../../common/Fields';
 import validatorConfig from './validatorConfig';
-import Button from '../../buttons/button';
+import Button from '../../../common/Button/Button';
 
 const ReviewsForm = ({ onSubmit }) => {
   const initialData = { content: '', likes: [], rating: 5 };

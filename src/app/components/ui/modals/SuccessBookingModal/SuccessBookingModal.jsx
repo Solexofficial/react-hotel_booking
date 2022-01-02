@@ -1,10 +1,10 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { DialogContent, DialogActions } from '@mui/material';
 import React from 'react';
-import { getDateDDMMYYYY } from '../../../utils/formatDate';
+import { getDateDDMMYYYY } from '../../../../utils/formatDate';
 import { useHistory } from 'react-router';
-import Modal from '../../common/Modal/Modal';
-import Button from '../buttons/button';
+import Button from '../../../common/Button';
+import Modal from '../../../common/Modal';
 
 const SuccessBookingModal = ({ open, onClose, isLoading, bookingData }) => {
   const history = useHistory();

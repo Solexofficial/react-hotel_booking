@@ -1,5 +1,5 @@
 import React from 'react';
-import declOfNum from '../../../../utils/declOfNum';
+import declOfNum from '../../../utils/declOfNum';
 
 const RoomReviewsCard = ({ countReviews }) => {
   return (

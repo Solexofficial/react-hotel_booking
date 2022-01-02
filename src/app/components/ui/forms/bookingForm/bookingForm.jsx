@@ -6,8 +6,8 @@ import bookingService from '../../../../services/booking.service';
 import roomsService from '../../../../services/rooms.service';
 import sessionStorageService from '../../../../services/sessionStorage.service';
 import { DateOfStayField, GuestsDropdownField } from '../../../common/Fields';
-import Button from '../../buttons/button';
-import SuccessBookingModal from '../../modals/successBookingModal';
+import Button from '../../../common/Button/Button';
+import { SuccessBookingModal } from '../../modals';
 import BookingFormPriceInfo from './BookingFormPriceInfo';
 import validatorConfig from './validatorConfig';
 

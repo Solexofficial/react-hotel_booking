@@ -9,8 +9,8 @@ import formatDate from '../../../utils/formatDate';
 import Loader from '../../common/Loader/Loader';
 import Rating from '../../common/Rating/Rating';
 import Tooltip from '../../common/Tooltip/Tooltip';
-import LikeButton from '../buttons/likeButton';
 import Avatar from '../../common/Avatar/Avatar';
+import ButtonLike from '../../common/ButtonLike';
 
 const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);
@@ -77,7 +77,7 @@ const Review = ({ review, onRemove }) => {
             <div className='avatar'>
               <Avatar alt='пользователя' src={user.avatarPhoto} className='avatar__img' />
             </div>
-            <LikeButton likes={likes} onToggle={toggleLike} />
+            <ButtonLike likes={likes} onToggle={toggleLike} />
           </div>
           <div className='review__content'>
             <div className='review__user-name'>

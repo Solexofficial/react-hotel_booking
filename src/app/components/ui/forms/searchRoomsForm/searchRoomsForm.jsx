@@ -6,7 +6,7 @@ import sessionStorageService from '../../../../services/sessionStorage.service';
 import declOfNum from '../../../../utils/declOfNum';
 import Counter from '../../../common/Counter';
 import { DateOfStayField } from '../../../common/Fields';
-import Button from '../../buttons/button';
+import Button from '../../../common/Button/Button';
 import validatorConfig from './validatorConfig';
 
 const oneDayMs = 86000000;

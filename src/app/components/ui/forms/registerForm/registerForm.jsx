@@ -5,7 +5,7 @@ import { Form, useForm } from '../../../../hooks';
 import { DatePickerField, InputField, RadioGroup } from '../../../common/Fields';
 import withPassword from '../../../common/Fields/HOC/withPassword';
 import Switch from '../../../common/Switch';
-import Button from '../../buttons/button';
+import Button from '../../../common/Button/Button';
 import validatorConfig from './validatorConfig';
 
 const genderItems = [

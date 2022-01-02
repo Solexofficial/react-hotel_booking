@@ -1,14 +1,14 @@
 import { Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import roomsService from '../../services/rooms.service';
-import SlickSlider from '../common/ImageSlider/ImageSlider';
-import Loader from '../common/Loader/Loader';
-import BookingForm from '../ui/forms/BookingForm';
-import Reviews from '../ui/reviews/reviews';
-import RoomCancelCard from '../ui/room/cards/roomCancelCard';
-import RoomInfoCard from '../ui/room/cards/roomInfoCard';
-import RoomReviewsCard from '../ui/room/cards/roomReviewsCard';
-import RoomRulesCard from '../ui/room/cards/roomRulesCard.jsx';
+import roomsService from '../../../services/rooms.service';
+import ImageSlider from '../../common/ImageSlider';
+import Loader from '../../common/Loader';
+import { BookingForm } from '../../ui/forms';
+import Reviews from '../../ui/reviews/reviews';
+import RoomInfoCard from '../../ui/RoomCards/RoomInfoCard';
+import RoomReviewsCard from '../../ui/RoomCards/RoomReviewsCard';
+import RoomRulesCard from '../../ui/RoomCards/RoomRulesCard';
+import RoomCancelCard from '../../ui/RoomCards/RoomCancelCard';
 
 const RoomPage = ({ roomId }) => {
   const [currentRoom, setRoom] = useState(null);
@@ -27,11 +27,11 @@ const RoomPage = ({ roomId }) => {
     const { images, countReviews, type, rentPerDay, isBooked } = currentRoom;
     return (
       <main>
-        <SlickSlider className='room-page__gallery'>
+        <ImageSlider className='room-page__gallery'>
           {Object.keys(images).map(img => (
             <img key={img} className='room-page__gallery-item--img' src={images[img]} alt='roomsPhoto' />
           ))}
-        </SlickSlider>
+        </ImageSlider>
         <div className='room-info'>
           <div className='room-info__column'>
             <div className='room-info__group'>

@@ -28,7 +28,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className='profile-dashboard'>
+    <div className='profile-page'>
       <aside className='profile-sidebar'>
         <Sidebar />
       </aside>

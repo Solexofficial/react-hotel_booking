@@ -2,7 +2,7 @@ import React from 'react';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import MoodIcon from '@mui/icons-material/Mood';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
-import Divider from '../../../common/Divider/Divider';
+import Divider from '../../common/Divider/Divider';
 
 const RoomInfoCard = () => {
   return (
