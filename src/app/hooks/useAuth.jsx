@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
-import { setTokens, setCurrentUser, getCurrentUser, removeCurrentUser } from '../services/localStorage.service';
+import localStorageService, { setTokens } from '../services/localStorage.service';
+import Loader from '../components/common/Loader';
 import userService from '../services/user.service';
+import Backdrop from '../components/common/Backdrop';
 
-const httpAuth = axios.create({
+export const httpAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
   params: {
     key: process.env.REACT_APP_FIREBASE_KEY,
@@ -16,12 +19,15 @@ const AuthContext = React.createContext();
 const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setUser] = useState(getCurrentUser() || null);
+  const [currentUser, setUser] = useState();
   const [error, setError] = useState({});
+  const [isLoading, setLoading] = useState(true);
+  const history = useHistory();
 
   const handleLogout = () => {
+    localStorageService.removeAuthData();
     setUser(null);
-    removeCurrentUser();
+    history.push('/');
   };
 
   async function signUp({ email, password, ...rest }) {
@@ -53,9 +59,7 @@ const AuthProvider = ({ children }) => {
         returnSecureToken: true,
       });
       setTokens(data);
-      const { content } = await userService.getById(data.localId);
-      setUser(content);
-      setCurrentUser(content);
+      await getUserData();
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
@@ -76,11 +80,31 @@ const AuthProvider = ({ children }) => {
 
   async function createUser(data) {
     try {
-      userService.create(data);
+      const { content } = await userService.create(data);
+      setUser(content);
     } catch (error) {
       errorCatcher(error);
     }
   }
+
+  const getUserData = async () => {
+    try {
+      const { content } = await userService.getCurrentUser();
+      setUser(content);
+    } catch (error) {
+      errorCatcher(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (localStorageService.getAccessToken()) {
+      getUserData();
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (error !== null) {
@@ -96,7 +120,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ signUp, signIn, currentUser, setUser, handleLogout }}>
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 };
