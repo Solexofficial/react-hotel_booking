@@ -1,23 +1,25 @@
-@import './roomsList';
-@import './roomCard';
-@import './roomPage';
-@import './reviews';
-@import './filters';
-@import '../../components/ui/forms/styles/form';
-@import './likeButton';
-@import './review';
+@import '../../components/pages/RoomPage/styles/roomPage';
 @import '../../components/pages/HomePage/styles/homePage';
 @import '../../components/pages/ProfilePage/styles/profilePage';
-@import '../../components/ui/NavProfile/styles/navProfile';
+
+@import '../../components/ui/rooms/RoomsList/styles/roomsList';
+@import '../../components/ui/rooms/RoomsFilters/styles/roomsFilters';
+@import '../../components/ui/rooms/RoomCard/styles/roomCard';
+@import '../../components/ui/reviews/Review/styles/review';
+@import '../../components/ui/reviews/Reviews/styles/reviews';
 @import '../../components/ui/modals/SuccessBookingModal/styles/successBookingModal';
+@import '../../components/ui/forms/styles/form';
 @import '../../components/ui/forms/SearchRoomsForm/styles/searchRoomsForm';
 @import '../../components/ui/forms/LoginForm/styles/loginForm';
 @import '../../components/ui/forms/BookingForm/styles/bookingForm';
 @import '../../components/ui/forms/ReviewsForm/styles/reviewsForm';
+@import '../../components/ui/NavProfile/styles/navProfile';
+
 @import '../../components/common/Avatar/styles/avatar';
 @import '../../components/common/Badge/styles/badge';
 @import '../../components/common/Breadcrumbs/styles/breadcrumbs';
 @import '../../components/common/Button/styles/button';
+@import '../../components/common/ButtonLike/styles/buttonLike';
 @import '../../components/common/Footer/styles/footer';
 @import '../../components/common/Header/styles/header';
 @import '../../components/common/ImageSlider/styles/imageSlider';

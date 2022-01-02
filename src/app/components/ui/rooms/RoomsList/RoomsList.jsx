@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomCard from './roomCard';
+import RoomCard from '../RoomCard';
 
 const RoomsList = ({ rooms }) => {
   return (

@@ -4,10 +4,10 @@ import roomsService from '../../../services/rooms.service';
 import sessionStorageService from '../../../services/sessionStorage.service';
 import { SelectField } from '../../common/Fields';
 import Pagination from '../../common/Pagination';
-import RoomsFilter from '../../ui/rooms/roomsFilter/roomsFilter';
-import RoomsSort from '../../ui/rooms/roomsFilter/roomsSort';
-import RoomsList from '../../ui/rooms/roomsList';
-import RoomsListSkeleton from '../../ui/rooms/roomsListSkeleton';
+import RoomsFilter from '../../ui/rooms/RoomsFilters/roomsFilter';
+import RoomsSort from '../../ui/rooms/RoomsFilters/roomsSort';
+import RoomsList from '../../ui/rooms/RoomsList';
+import RoomsListSkeleton from '../../ui/rooms/RoomsList/RoomsListSkeleton';
 
 const oneDayMs = 86000000;
 

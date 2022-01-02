@@ -3,11 +3,11 @@ import ComputerIcon from '@mui/icons-material/Computer';
 import WifiIcon from '@mui/icons-material/Wifi';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import declOfNum from '../../../utils/declOfNum';
-import Badge from '../../common/Badge';
-import Divider from '../../common/Divider/Divider';
-import SlickSlider from '../../common/ImageSlider';
-import Rating from '../../common/Rating/Rating';
+import Badge from '../../../common/Badge';
+import Divider from '../../../common/Divider';
+import ImageSlider from '../../../common/ImageSlider';
+import Rating from '../../../common/Rating';
+import declOfNum from '../../../../utils/declOfNum';
 
 const comfortIconsMap = {
   hasWifi: <WifiIcon />,
@@ -25,14 +25,14 @@ const RoomCard = ({ _id, numberRoom, rentPerDay, rate, countReviews, type, image
           ))}
         </Badge>
       )}
-      <SlickSlider className='room-card__gallery'>
+      <ImageSlider className='room-card__gallery'>
         {images &&
           Object.keys(images).map(img => (
             <div className='room-card__gallery-item' key={img}>
               <img className='room-card__gallery-item--img' src={images[img]} alt='roomsPhoto' />
             </div>
           ))}
-      </SlickSlider>
+      </ImageSlider>
       <Link to={`/rooms/${_id}`} className='room-card__description'>
         <div className='room-card__description-row'>
           <h3 className='room-card__title'>

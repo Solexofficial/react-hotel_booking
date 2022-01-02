@@ -2,15 +2,15 @@ import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../../hooks/useAuth';
-import likesService from '../../../services/likes.service';
-import userService from '../../../services/user.service';
-import formatDate from '../../../utils/formatDate';
-import Loader from '../../common/Loader/Loader';
-import Rating from '../../common/Rating/Rating';
-import Tooltip from '../../common/Tooltip/Tooltip';
-import Avatar from '../../common/Avatar/Avatar';
-import ButtonLike from '../../common/ButtonLike';
+import { useAuth } from '../../../../hooks';
+import likesService from '../../../../services/likes.service';
+import userService from '../../../../services/user.service';
+import formatDate from '../../../../utils/formatDate';
+import Loader from '../../../common/Loader';
+import Rating from '../../../common/Rating';
+import Tooltip from '../../../common/Tooltip';
+import Avatar from '../../../common/Avatar';
+import ButtonLike from '../../../common/ButtonLike';
 
 const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);

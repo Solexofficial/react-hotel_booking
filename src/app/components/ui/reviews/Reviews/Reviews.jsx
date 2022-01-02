@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { useAuth } from '../../../hooks/useAuth';
-import reviewsService from '../../../services/reviews.service';
-import declOfNum from '../../../utils/declOfNum';
-import ReviewsForm from '../forms/ReviewsForm';
-import ReviewsList from './reviewsList';
+import { useAuth } from '../../../../hooks';
+import reviewsService from '../../../../services/reviews.service';
+import declOfNum from '../../../../utils/declOfNum';
+import { ReviewsForm } from '../../forms';
+import ReviewsList from '../ReviewsList';
 
 const Reviews = () => {
   const { roomId } = useParams();

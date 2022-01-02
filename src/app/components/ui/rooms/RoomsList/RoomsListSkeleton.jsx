@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomCardSkeleton from './roomCardSkeleton';
+import RoomCardSkeleton from '../RoomCard/RoomCardSkeleton';
 
 const RoomsListSkeleton = ({ pageSize }) => {
   const roomsSkeletonArray = Array(pageSize).fill('');

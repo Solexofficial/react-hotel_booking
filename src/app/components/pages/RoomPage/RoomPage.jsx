@@ -4,11 +4,11 @@ import roomsService from '../../../services/rooms.service';
 import ImageSlider from '../../common/ImageSlider';
 import Loader from '../../common/Loader';
 import { BookingForm } from '../../ui/forms';
-import Reviews from '../../ui/reviews/reviews';
-import RoomInfoCard from '../../ui/RoomCards/RoomInfoCard';
-import RoomReviewsCard from '../../ui/RoomCards/RoomReviewsCard';
-import RoomRulesCard from '../../ui/RoomCards/RoomRulesCard';
-import RoomCancelCard from '../../ui/RoomCards/RoomCancelCard';
+import Reviews from '../../ui/reviews/Reviews';
+import RoomInfoCard from '../../ui/RoomPageCards/RoomInfoCard';
+import RoomReviewsCard from '../../ui/RoomPageCards/RoomReviewsCard';
+import RoomRulesCard from '../../ui/RoomPageCards/RoomRulesCard';
+import RoomCancelCard from '../../ui/RoomPageCards/RoomCancelCard';
 
 const RoomPage = ({ roomId }) => {
   const [currentRoom, setRoom] = useState(null);
