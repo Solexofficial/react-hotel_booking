@@ -1,7 +1,7 @@
 import React from 'react';
-import { publicRoutes, privateRoutes } from '../router/routes';
+import { publicRoutes, privateRoutes } from '../routes';
 import { Switch, Route, Redirect } from 'react-router';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks';
 
 const AppRouter = () => {
   const { currentUser } = useAuth();

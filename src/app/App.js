@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
-import AppRouter from './components/appRouter';
+import AppRouter from './router/AppRouter';
 import { AuthProvider } from './hooks';
 import './scss/app.scss';
 import theme from './theme';

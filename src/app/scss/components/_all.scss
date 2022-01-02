@@ -6,14 +6,14 @@
 @import './form';
 @import './likeButton';
 @import './review';
-@import './reviewsForm';
 @import './bookingForm';
-@import './pages/main';
+@import '../../components/pages/HomePage/styles/homePage';
 @import './loginForm';
 @import './profile';
 @import './forms/searchRoomsForm';
 @import './successBookingModal';
 @import './profileDashboard';
+@import '../../components/ui/forms/ReviewsForm/styles/reviewsForm';
 @import '../../components/common/Avatar/styles/avatar';
 @import '../../components/common/Badge/styles/badge';
 @import '../../components/common/Breadcrumbs/styles/breadcrumbs';

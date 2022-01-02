@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import likesService from '../../../services/likes.service';
-import reviewsService from '../../../services/reviews.service';
-import ReviewsList from '../reviews/reviewsList';
+import likesService from '../../../../services/likes.service';
+import reviewsService from '../../../../services/reviews.service';
+import ReviewsList from '../../reviews/reviewsList';
 
 const ProfileLikes = ({ currentUser }) => {
   console.log('render');

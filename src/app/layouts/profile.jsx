@@ -3,7 +3,7 @@ import Breadcrumbs from '../components/common/Breadcrumbs';
 import Container from '../components/common/Container';
 import Footer from '../components/common/Footer/Footer';
 import Header from '../components/common/Header/Header';
-import ProfileDashboard from '../components/ui/profile/ProfileDashboard';
+import ProfilePage from '../components/pages/ProfilePage';
 
 const Profile = () => {
   return (
@@ -11,7 +11,7 @@ const Profile = () => {
       <Header />
       <Container>
         <Breadcrumbs />
-        <ProfileDashboard />
+        <ProfilePage />
       </Container>
       <Footer />
     </>

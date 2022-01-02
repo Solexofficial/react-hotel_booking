@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../../../hooks';
 
-const ProfilePage = () => {
+const UserProfile = () => {
   const { currentUser } = useAuth();
   const { firstName, secondName } = currentUser;
 
@@ -13,4 +13,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default UserProfile;

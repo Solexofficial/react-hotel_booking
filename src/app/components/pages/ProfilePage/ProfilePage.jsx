@@ -1,21 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '../../../hooks';
 import Sidebar from '../../common/Sidebar';
-import ProfileEditPage from '../../pages/profileEditPage';
-import ProfilePage from '../../pages/profilePage';
-import ProfileBooking from './ProfileBooking';
-import ProfileFavorites from './ProfileFavorites';
-import ProfileLikes from './ProfileLikes';
+import ProfileBooking from '../../ui/profile/ProfileBooking';
+import ProfileEdit from '../../ui/profile/ProfileEdit';
+import ProfileFavorites from '../../ui/profile/ProfileFavorites';
+import ProfileLikes from '../../ui/profile/ProfileLikes';
+import UserProfile from '../../ui/profile/UserProfile';
 
-const ProfileDashboard = () => {
+const ProfilePage = () => {
   const { route } = useParams();
   const { currentUser } = useAuth();
 
   const renderComponent = route => {
     switch (route) {
       case 'edit':
-        return <ProfileEditPage />;
+        return <ProfileEdit />;
       case 'booking':
         return <ProfileBooking />;
       case 'likes':
@@ -23,7 +23,7 @@ const ProfileDashboard = () => {
       case 'favorites':
         return <ProfileFavorites />;
       default:
-        return <ProfilePage />;
+        return <UserProfile />;
     }
   };
 
@@ -37,4 +37,4 @@ const ProfileDashboard = () => {
   );
 };
 
-export default ProfileDashboard;
+export default ProfilePage;

@@ -1,9 +1,9 @@
 import { Paper } from '@mui/material';
 import React from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import useMockData from '../../hooks/useMockData';
-import Container from '../common/Container';
-import { SearchRoomsForm } from '../ui/forms';
+import { useAuth } from '../../../hooks/useAuth';
+import useMockData from '../../../hooks/useMockData';
+import Container from '../../common/Container';
+import { SearchRoomsForm } from '../../ui/forms';
 
 const HomePage = () => {
   const { currentUser } = useAuth();
