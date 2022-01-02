@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFetching, useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
 import roomsService from '../../../services/rooms.service';
-import sessionStorageService from '../../../services/sessionStorage.service';
 import { SelectField } from '../../common/Fields';
 import Pagination from '../../common/Pagination';
 import RoomsFilter from '../../ui/rooms/RoomsFilters/roomsFilter';
@@ -12,14 +11,9 @@ import RoomsListSkeleton from '../../ui/rooms/RoomsList/RoomsListSkeleton';
 const oneDayMs = 86000000;
 
 const filtersInitialData = {
-  guests: [
-    { name: 'adults', label: 'Взрослые', value: 0 },
-    { name: 'children', label: 'Дети', value: 0 },
-    { name: 'babies', label: 'Младенцы', value: 0 },
-  ],
   dateOfStay: {
-    arrival: new Date(new Date().toISOString().slice(0, 10)).getTime(),
-    departure: new Date(new Date().toISOString().slice(0, 10)).getTime() + oneDayMs,
+    arrival: Date.now(),
+    departure: Date.now() + oneDayMs,
   },
   adults: 0,
   children: 0,
@@ -53,28 +47,6 @@ const RoomsPage = () => {
   useEffect(() => {
     fetchingRooms();
   }, []);
-
-  useEffect(() => {
-    const dateOfStay = sessionStorageService.getDateOfStayData();
-    const guestsCount = sessionStorageService.getCountGuestsData();
-
-    if (dateOfStay && guestsCount) {
-      setData(prevState => ({
-        ...prevState,
-        dateOfStay: dateOfStay,
-        guests: guestsCount,
-      }));
-    }
-  }, [setData]);
-
-  const setSessionStorageData = useCallback(async () => {
-    const { dateOfStay, guests } = data;
-    sessionStorageService.setSessionStorageData(dateOfStay, guests);
-  }, [data]);
-
-  useEffect(() => {
-    setSessionStorageData();
-  }, [data, setSessionStorageData]);
 
   const handleSort = ({ target }) => {
     setSortBy(JSON.parse(target.value));

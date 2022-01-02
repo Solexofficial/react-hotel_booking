@@ -6,10 +6,11 @@ import bookingService from '../../../../services/booking.service';
 import roomsService from '../../../../services/rooms.service';
 import sessionStorageService from '../../../../services/sessionStorage.service';
 import { DateOfStayField, GuestsDropdownField } from '../../../common/Fields';
-import Button from '../../../common/Button/Button';
+import Button from '../../../common/Button';
 import { SuccessBookingModal } from '../../modals';
 import BookingFormPriceInfo from './BookingFormPriceInfo';
 import validatorConfig from './validatorConfig';
+import GuestsCounter from '../../GuestsCounter';
 
 const oneDayMs = 86000000;
 
@@ -20,9 +21,12 @@ const initialData = {
     { name: 'babies', label: 'Младенцы', value: 0 },
   ],
   dateOfStay: {
-    arrival: new Date(new Date().toISOString().slice(0, 10)).getTime(),
-    departure: new Date(new Date().toISOString().slice(0, 10)).getTime() + oneDayMs,
+    arrival: Date.now(),
+    departure: Date.now() + oneDayMs,
   },
+  adults: 0,
+  children: 0,
+  babies: 0,
 };
 
 const BookingForm = ({ rentPerDay }) => {
@@ -31,24 +35,11 @@ const BookingForm = ({ rentPerDay }) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const { currentUser } = useAuth();
 
-  const { data, setData, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
+  const { data, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
     initialData,
     true,
     validatorConfig
   );
-
-  useEffect(() => {
-    const dateOfStay = sessionStorageService.getDateOfStayData();
-    const guestsCount = sessionStorageService.getCountGuestsData();
-
-    if (dateOfStay && guestsCount) {
-      setData(prevState => ({
-        ...prevState,
-        dateOfStay: dateOfStay,
-        guests: guestsCount,
-      }));
-    }
-  }, [setData]);
 
   const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
 
@@ -87,7 +78,7 @@ const BookingForm = ({ rentPerDay }) => {
         handleKeyDown={handleKeyDown}
       >
         <DateOfStayField name='dateOfStay' className='booking-form' />
-        <GuestsDropdownField name='guests' setData={setData} data={data} />
+        <GuestsCounter name='guests' data={data} />
         <BookingFormPriceInfo name='price' rentPerDay={rentPerDay} countDays={countDays} />
         <Button
           endIcon={<ArrowRight />}

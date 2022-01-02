@@ -14,11 +14,13 @@ const Counter = ({ name, label, value, min, max, onChange }) => {
     onChange({ target: { name, value: +counterValue } });
   }, [counterValue, name]);
 
-  const handleIncrease = () => {
+  const handleIncrease = e => {
+    e.preventDefault();
     if (counterValue >= max) return;
     setValue(counterValue + 1);
   };
-  const handleDecrease = () => {
+  const handleDecrease = e => {
+    e.preventDefault();
     if (counterValue <= min) return;
     setValue(counterValue - 1);
   };
@@ -30,7 +32,7 @@ const Counter = ({ name, label, value, min, max, onChange }) => {
         <Button type='circle' variant='contained' size='small' aria-label='reduce' onClick={handleDecrease}>
           <RemoveIcon fontSize='small' />
         </Button>
-        <input className='counter-input' type='text' value={+counterValue} readOnly />
+        <input className='counter-input' type='text' value={counterValue} readOnly />
         <Button type='circle' variant='contained' size='small' aria-label='increase' onClick={handleIncrease}>
           <AddIcon fontSize='small' />
         </Button>

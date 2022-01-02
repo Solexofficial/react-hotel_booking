@@ -1,6 +1,3 @@
-.booking-form__card {
-}
-
 .booking-form__header {
   display: flex;
   justify-content: space-between;
@@ -23,6 +20,10 @@
 .booking-form__cost {
   color: $accent50;
   font-weight: 700;
+}
+
+.booking-form__price {
+  margin-top: 30px;
 }
 
 .booking-form__price-item {
