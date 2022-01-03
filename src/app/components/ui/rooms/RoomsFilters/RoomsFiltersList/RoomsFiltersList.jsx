@@ -11,6 +11,7 @@ const RoomsFiltersList = ({ handleChange, data, children }) => {
     ) {
       config = {
         ...child.props,
+        data,
         onChange: handleChange,
         value: data[child.props.name] || '',
       };

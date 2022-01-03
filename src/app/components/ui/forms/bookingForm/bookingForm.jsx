@@ -1,29 +1,21 @@
 import { ArrowRight } from '@mui/icons-material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory, useParams } from 'react-router';
-import { useAuth, useFetching, useModal, useForm, Form } from '../../../../hooks';
+import { Form, useAuth, useFetching, useForm, useModal } from '../../../../hooks';
 import bookingService from '../../../../services/booking.service';
 import roomsService from '../../../../services/rooms.service';
-import sessionStorageService from '../../../../services/sessionStorage.service';
-import { DateOfStayField, GuestsDropdownField } from '../../../common/Fields';
 import Button from '../../../common/Button';
+import { DateOfStayField } from '../../../common/Fields';
+import GuestsCounter from '../../GuestsCounter';
 import { SuccessBookingModal } from '../../modals';
 import BookingFormPriceInfo from './BookingFormPriceInfo';
 import validatorConfig from './validatorConfig';
-import GuestsCounter from '../../GuestsCounter';
 
 const oneDayMs = 86000000;
 
 const initialData = {
-  guests: [
-    { name: 'adults', label: 'Взрослые', value: 0 },
-    { name: 'children', label: 'Дети', value: 0 },
-    { name: 'babies', label: 'Младенцы', value: 0 },
-  ],
-  dateOfStay: {
-    arrival: Date.now(),
-    departure: Date.now() + oneDayMs,
-  },
+  arrivalDate: Date.now(),
+  departureDate: Date.now() + oneDayMs,
   adults: 0,
   children: 0,
   babies: 0,
@@ -41,10 +33,10 @@ const BookingForm = ({ rentPerDay }) => {
     validatorConfig
   );
 
-  const countDays = Math.max(1, Math.round((data.dateOfStay.departure - data.dateOfStay.arrival) / oneDayMs));
+  const countDays = Math.max(1, Math.round((data.departureDate - data.arrivalDate) / oneDayMs));
 
   const [setBooking] = useFetching(async roomId => {
-    await roomsService.setBooking(roomId, { isBooked: [data.dateOfStay.arrival, data.dateOfStay.departure] });
+    await roomsService.setBooking(roomId, { isBooked: [data.arrivalDate, data.departureDate] });
     setEnterError('Вы забронировали этот номер');
   });
 
@@ -77,7 +69,7 @@ const BookingForm = ({ rentPerDay }) => {
         handleChange={handleInputChange}
         handleKeyDown={handleKeyDown}
       >
-        <DateOfStayField name='dateOfStay' className='booking-form' />
+        <DateOfStayField name='dateOfStay' className='booking-form' data={data} />
         <GuestsCounter name='guests' data={data} />
         <BookingFormPriceInfo name='price' rentPerDay={rentPerDay} countDays={countDays} />
         <Button

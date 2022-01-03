@@ -8,8 +8,8 @@ import Modal from '../../../common/Modal';
 
 const SuccessBookingModal = ({ open, onClose, isLoading, bookingData }) => {
   const history = useHistory();
-  const dateArrival = getDateDDMMYYYY(bookingData.dateOfStay.arrival);
-  const dateDeparture = getDateDDMMYYYY(bookingData.dateOfStay.departure);
+  const dateArrival = getDateDDMMYYYY(bookingData.arrivalDate);
+  const dateDeparture = getDateDDMMYYYY(bookingData.departureDate);
 
   const handleGoBack = () => {
     history.goBack();

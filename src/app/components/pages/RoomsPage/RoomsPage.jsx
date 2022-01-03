@@ -15,6 +15,8 @@ const filtersInitialData = {
     arrival: Date.now(),
     departure: Date.now() + oneDayMs,
   },
+  arrivalDate: Date.now(),
+  departureDate: Date.now() + oneDayMs,
   adults: 0,
   children: 0,
   babies: 0,

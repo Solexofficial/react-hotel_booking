@@ -12,7 +12,7 @@ const RoomsFilter = ({ data, handleResetForm, handleInputChange }) => {
       <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
       <RoomsFilterList data={data} handleChange={handleInputChange}>
         <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
-        <GuestsCounter data={data} />
+        <GuestsCounter />
         <RangeSliderField
           label='Диапазон цены'
           description='Стоимость за сутки пребывания в номере'
@@ -20,17 +20,17 @@ const RoomsFilter = ({ data, handleResetForm, handleInputChange }) => {
           min={0}
           max={15000}
         />
-        <CheckBoxList title='Удобства' data={data}>
+        <CheckBoxList title='Удобства'>
           <Checkbox label='Wi-Fi' name='hasWifi' />
           <Checkbox label='Кондиционер' name='hasConditioner' />
           <Checkbox label='Рабочее место' name='hasWorkSpace' />
         </CheckBoxList>
-        <CheckBoxList title='Условия размещения' data={data}>
+        <CheckBoxList title='Условия размещения'>
           <Checkbox label='Можно c питомцами' name='canPets' />
           <Checkbox label='Можно курить' name='canSmoke' />
           <Checkbox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
         </CheckBoxList>
-        <CheckBoxList title='Доступность' data={data}>
+        <CheckBoxList title='Доступность'>
           <Checkbox
             label='Широкий коридор'
             name='hasWideCorridor'

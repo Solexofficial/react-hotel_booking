@@ -10,10 +10,6 @@ import validatorConfig from './validatorConfig';
 const oneDayMs = 86000000;
 
 const initialData = {
-  dateOfStay: {
-    arrival: Date.now(),
-    departure: Date.now() + oneDayMs,
-  },
   arrivalDate: Date.now(),
   departureDate: Date.now() + oneDayMs,
   adults: 0,
@@ -47,7 +43,7 @@ const SearchRoomsForm = () => {
       handleChange={handleInputChange}
       handleKeyDown={handleKeyDown}
     >
-      <DateOfStayField name='dateOfStay' />
+      <DateOfStayField name='dateOfStay' data={data} />
       <GuestsCounter name='guests' data={data} />
       <Button
         variant='outlined'
