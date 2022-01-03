@@ -15,6 +15,15 @@ const bookingService = {
     const { data } = await httpService.get(bookingEndPoint + id);
     return data;
   },
+  getUserBookings: async userId => {
+    const { data } = await httpService.get(bookingEndPoint, {
+      params: {
+        orderBy: '"userId"',
+        equalTo: `"${userId}"`,
+      },
+    });
+    return data;
+  },
 };
 
 export default bookingService;

@@ -1,5 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Form, useAuth, useFetching, useForm, useModal } from '../../../../hooks';
 import bookingService from '../../../../services/booking.service';
@@ -19,9 +19,11 @@ const initialData = {
   adults: 0,
   children: 0,
   babies: 0,
+  totalPrice: 0,
 };
 
 const BookingForm = ({ rentPerDay }) => {
+  const [totalPrice, setTotalPrice] = useState(0);
   const history = useHistory();
   const { roomId } = useParams();
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
@@ -54,6 +56,7 @@ const BookingForm = ({ rentPerDay }) => {
         userId: currentUser._id,
         roomId: roomId,
         ...data,
+        totalPrice,
       };
       setBooking(roomId);
       createBooking(payload);
@@ -71,7 +74,13 @@ const BookingForm = ({ rentPerDay }) => {
       >
         <DateOfStayField name='dateOfStay' className='booking-form' data={data} />
         <GuestsCounter name='guests' data={data} />
-        <BookingFormPriceInfo name='price' rentPerDay={rentPerDay} countDays={countDays} />
+        <BookingFormPriceInfo
+          name='totalPrice'
+          totalPrice={totalPrice}
+          rentPerDay={rentPerDay}
+          countDays={countDays}
+          setTotalPrice={setTotalPrice}
+        />
         <Button
           endIcon={<ArrowRight />}
           type='submit'

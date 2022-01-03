@@ -1,14 +1,14 @@
 .room-card {
   position: relative;
-  
+
   border-radius: 4px;
-  box-shadow: 0 10px 20px $accent5;
+  box-shadow: 0 10px 10px $accent15;
 
   background: #ffffff;
   overflow: hidden;
   transition: box-shadow 0.2s ease;
   &:hover {
-    box-shadow: 0 10px 30px $accent15;
+    box-shadow: 0 10px 30px $accent25;
   }
   &:focus {
     box-shadow: 0 0px 3px red;
