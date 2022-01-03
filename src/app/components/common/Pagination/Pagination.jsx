@@ -7,7 +7,9 @@ const Pagination = ({ items, pageSize, currentPage, onChange, ...rest }) => {
   if (pagesCount === 1 || itemsCount === 0) return null;
 
   return (
-    <MuiPagination count={pagesCount} defaultPage={1} onChange={onChange} size='large' variant='outlined' {...rest} />
+    <div className='pagination'>
+      <MuiPagination count={pagesCount} defaultPage={1} onChange={onChange} size='large' variant='outlined' {...rest} />
+    </div>
   );
 };
 

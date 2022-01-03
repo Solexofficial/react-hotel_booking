@@ -1,5 +1,4 @@
 .pagination {
-  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,9 +32,4 @@
       }
     }
   }
-}
-
-.pagination__info {
-  margin-top: 10px;
-  pointer-events: none;
 }

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useFetching, useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
 import roomsService from '../../../services/rooms.service';
-import { SelectField } from '../../common/Fields';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
-import RoomsFilter from '../../ui/rooms/RoomsFilters/RoomsFilters';
-import RoomsSort from '../../ui/rooms/RoomsSort/RoomsSort';
+import RoomsFilter from '../../ui/rooms/RoomsFilters';
 import RoomsList from '../../ui/rooms/RoomsList';
 import RoomsListSkeleton from '../../ui/rooms/RoomsList/RoomsListSkeleton';
+import RoomsSort from '../../ui/rooms/RoomsSort';
 
 const oneDayMs = 86000000;
 
@@ -54,8 +53,8 @@ const RoomsPage = () => {
   };
 
   return (
-    <div className='rootWrapper' style={{ display: 'flex' }}>
-      <aside className='filters'>
+    <main className='rooms-page'>
+      <aside className='rooms-page__filters'>
         <RoomsFilter
           data={data}
           setData={setData}
@@ -63,26 +62,26 @@ const RoomsPage = () => {
           handleResetForm={handleResetForm}
         />
       </aside>
-      <section className='mainContent' style={{ flex: '1' }}>
+      <section className='rooms-page__rooms'>
         <RoomsSort sortBy={sortBy} onSort={handleSort} />
         <RoomsDisplayCount count={pageSize} setCount={setPageSize} />
-        <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
+        <h2 className='rooms__title'>Номера, которые мы для вас подобрали</h2>
         {roomsIsLoading ? <RoomsListSkeleton pageSize={pageSize} /> : <RoomsList rooms={itemsListCrop} />}
         {itemsListCrop.length === 0 && <h2>Мы не нашли для вас подходящих номеров по вашим параметрам &#128577;</h2>}
 
         {filteredItems.length > pageSize && (
-          <div className='pagination'>
+          <div className='rooms-page__pagination'>
             <Pagination
               items={filteredItems}
               pageSize={pageSize}
               currentPage={currentPage}
               onChange={handleChangePage}
             />
-            <p className='pagination__info'>{`1 - ${pageSize} из ${rooms?.length} вариантов аренды`}</p>
+            <p className='rooms-page__pagination-info'>{`1 - ${pageSize} из ${rooms?.length} вариантов аренды`}</p>
           </div>
         )}
       </section>
-    </div>
+    </main>
   );
 };
 
