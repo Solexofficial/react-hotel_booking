@@ -1,7 +1,7 @@
 import React from 'react';
-import RoomsFilterItem from './roomsFilterItem';
+import RoomsFilterItem from '../RoomsFiltersItem';
 
-const RoomsFilterList = ({ handleChange, data, children }) => {
+const RoomsFiltersList = ({ handleChange, data, children }) => {
   const clonedElements = React.Children.map(children, child => {
     const childType = typeof child.type;
     let config = {};
@@ -22,4 +22,4 @@ const RoomsFilterList = ({ handleChange, data, children }) => {
   return <form className='filters__form'>{clonedElements}</form>;
 };
 
-export default RoomsFilterList;
+export default RoomsFiltersList;

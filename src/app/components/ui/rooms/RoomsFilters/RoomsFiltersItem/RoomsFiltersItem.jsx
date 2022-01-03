@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RoomsFilterItem = ({ title, children }) => {
+const RoomsFiltersItem = ({ title, children }) => {
   return (
     <div className='filters__item'>
       <fieldset className='filters__group'>
@@ -11,4 +11,4 @@ const RoomsFilterItem = ({ title, children }) => {
   );
 };
 
-export default RoomsFilterItem;
+export default RoomsFiltersItem;

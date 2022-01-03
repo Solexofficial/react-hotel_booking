@@ -3,8 +3,9 @@ import { useFetching, useForm, usePagination, useRoomsFilter, useSort } from '..
 import roomsService from '../../../services/rooms.service';
 import { SelectField } from '../../common/Fields';
 import Pagination from '../../common/Pagination';
-import RoomsFilter from '../../ui/rooms/RoomsFilters/roomsFilter';
-import RoomsSort from '../../ui/rooms/RoomsFilters/roomsSort';
+import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
+import RoomsFilter from '../../ui/rooms/RoomsFilters/RoomsFilters';
+import RoomsSort from '../../ui/rooms/RoomsSort/RoomsSort';
 import RoomsList from '../../ui/rooms/RoomsList';
 import RoomsListSkeleton from '../../ui/rooms/RoomsList/RoomsListSkeleton';
 
@@ -64,19 +65,7 @@ const RoomsPage = () => {
       </aside>
       <section className='mainContent' style={{ flex: '1' }}>
         <RoomsSort sortBy={sortBy} onSort={handleSort} />
-        <SelectField
-          style={{ minWidth: '140px' }}
-          autoWidth={true}
-          label='Отображать по'
-          value={pageSize}
-          onChange={({ target }) => setPageSize(target.value)}
-          options={[
-            { name: '6', value: 6 },
-            { name: '12', value: 12 },
-            { name: '18', value: 18 },
-            { name: '24', value: 24 },
-          ]}
-        />
+        <RoomsDisplayCount count={pageSize} setCount={setPageSize} />
         <h2 style={{ margin: '30px 0 20px' }}>Номера, которые мы для вас подобрали</h2>
         {roomsIsLoading ? <RoomsListSkeleton pageSize={pageSize} /> : <RoomsList rooms={itemsListCrop} />}
         {itemsListCrop.length === 0 && <h2>Мы не нашли для вас подходящих номеров по вашим параметрам &#128577;</h2>}

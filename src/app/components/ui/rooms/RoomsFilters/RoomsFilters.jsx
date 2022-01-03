@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../../common/Button';
 import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter/GuestsCounter';
-import RoomsFilterList from './roomsFiltersList';
+import RoomsFilterList from './RoomsFiltersList/RoomsFiltersList';
 
 const RoomsFilter = ({ data, handleResetForm, handleInputChange }) => {
   console.log('rooms filter render');
