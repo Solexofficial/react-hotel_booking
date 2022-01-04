@@ -1,7 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { Redirect, useParams } from 'react-router';
 import { useAuth } from '../../../hooks';
 import Sidebar from '../../common/Sidebar';
+import AdminDashboard from '../../ui/profile/AdminDashboard';
 import ProfileBooking from '../../ui/profile/ProfileBooking';
 import ProfileEdit from '../../ui/profile/ProfileEdit';
 import ProfileFavorites from '../../ui/profile/ProfileFavorites';
@@ -12,6 +13,8 @@ const ProfilePage = () => {
   const { route } = useParams();
   const { currentUser } = useAuth();
 
+  console.log(currentUser.role);
+
   const renderComponent = route => {
     switch (route) {
       case 'edit':
@@ -19,9 +22,15 @@ const ProfilePage = () => {
       case 'booking':
         return <ProfileBooking />;
       case 'likes':
-        return <ProfileLikes currentUser={currentUser} />;
+        return <ProfileLikes />;
       case 'favorites':
         return <ProfileFavorites />;
+      case 'dashboard':
+        if (currentUser.role === 'admin') {
+          return <AdminDashboard />;
+        } else {
+          return <Redirect to='/profile' />;
+        }
       default:
         return <UserProfile />;
     }

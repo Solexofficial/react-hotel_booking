@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Avatar from '../../common/Avatar/Avatar';
 import Tooltip from '../../common/Tooltip/Tooltip';
 import { useHistory } from 'react-router';
-import { userProfileRoutes } from '../../../router/routes';
+import { adminRoutes, userProfileRoutes } from '../../../router/routes';
 
 const NavProfile = ({ user, onLogout }) => {
   const history = useHistory();
@@ -23,8 +23,10 @@ const NavProfile = ({ user, onLogout }) => {
     history.push(path);
     handleCloseUserMenu();
   };
+
   if (user) {
     const { avatarPhoto, firstName, secondName } = user;
+    const routes = user.role === 'admin' ? adminRoutes : userProfileRoutes;
     return (
       <div className='profile-wrapper'>
         <Tooltip title='Открыть меню' placement='bottom'>
@@ -51,7 +53,7 @@ const NavProfile = ({ user, onLogout }) => {
           onClose={handleCloseUserMenu}
           className='profile-menu'
         >
-          {userProfileRoutes.map(setting => (
+          {routes.map(setting => (
             <MenuItem
               key={setting.path}
               name={setting.name}

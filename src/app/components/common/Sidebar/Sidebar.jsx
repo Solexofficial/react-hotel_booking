@@ -2,12 +2,16 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { MenuItem, MenuList } from '@mui/material';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { userProfileRoutes } from '../../../router/routes';
+import { useAuth } from '../../../hooks';
+import { userProfileRoutes, adminRoutes } from '../../../router/routes';
 
 const Sidebar = () => {
+  const { currentUser } = useAuth();
+
+  const routes = currentUser.role === 'admin' ? adminRoutes : userProfileRoutes;
   return (
     <MenuList className='sidebar'>
-      {userProfileRoutes.map(route => (
+      {routes.map(route => (
         <MenuItem
           key={route.path}
           name={route.name}

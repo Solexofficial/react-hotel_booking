@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../../../hooks';
 import likesService from '../../../../services/likes.service';
 import reviewsService from '../../../../services/reviews.service';
 import ReviewsList from '../../reviews/ReviewsList';
 
-const ProfileLikes = ({ currentUser }) => {
+const ProfileLikes = () => {
   console.log('render');
   const [likes, setLikes] = useState();
   const [reviews, setReviews] = useState([]);
+  const { currentUser } = useAuth();
 
   const getLikes = async userId => {
     try {

@@ -3,9 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import localStorageService, { setTokens } from '../services/localStorage.service';
-import Loader from '../components/common/Loader';
 import userService from '../services/user.service';
-import Backdrop from '../components/common/Backdrop';
 
 export const httpAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -38,7 +36,7 @@ const AuthProvider = ({ children }) => {
         returnSecureToken: true,
       });
       setTokens(data);
-      await createUser({ _id: data.localId, email, ...rest });
+      await createUser({ _id: data.localId, role: 'user', ...rest });
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;

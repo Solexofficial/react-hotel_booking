@@ -41,7 +41,7 @@ const RegisterForm = () => {
       try {
         await signUp(data);
         handleResetForm(e);
-        history.push('./signIn');
+        history.push('/');
       } catch (error) {
         setErrors(error);
       }

@@ -9,6 +9,7 @@ const breadcrumbsMap = {
   '/profile/likes': 'Понравилось',
   '/profile/favorites': 'Избранное',
   '/profile/edit': 'Редактировать профиль',
+  '/profile/dashboard': 'Панель администратора',
 };
 
 const LinkRouter = props => <Link {...props} className='breadcrumbs-item' underline='hover' component={RouterLink} />;
