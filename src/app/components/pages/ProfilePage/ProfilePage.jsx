@@ -13,8 +13,6 @@ const ProfilePage = () => {
   const { route } = useParams();
   const { currentUser } = useAuth();
 
-  console.log(currentUser.role);
-
   const renderComponent = route => {
     switch (route) {
       case 'edit':

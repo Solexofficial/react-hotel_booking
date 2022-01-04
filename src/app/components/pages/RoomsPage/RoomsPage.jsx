@@ -79,7 +79,11 @@ const RoomsPage = () => {
               currentPage={currentPage}
               onChange={handleChangePage}
             />
-            <p className='rooms-page__pagination-info'>{`1 - ${pageSize} из ${rooms?.length} вариантов аренды`}</p>
+            <p className='rooms-page__pagination-info'>
+              {`${(currentPage - 1) * pageSize || 1} - 
+              ${pageSize * currentPage > rooms.length ? rooms.length : pageSize * currentPage}
+              из ${rooms?.length} вариантов аренды`}
+            </p>
           </div>
         )}
       </section>
