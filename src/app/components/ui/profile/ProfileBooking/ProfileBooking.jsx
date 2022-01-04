@@ -17,15 +17,21 @@ const ProfileBooking = () => {
     getUserBookings();
   }, []);
 
-  if (!userBookingsLoading) {
-    console.log(bookings);
-  }
+  const handleRemoveBooking = async bookingId => {
+    try {
+      const id = await bookingService.remove(bookingId);
+      setBookings(prevState => prevState.filter(booking => booking._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div style={{ width: '100%' }}>
       <h1 style={{ marginBottom: '20px' }}>Мои бронирования</h1>
       <div className='booking-list' style={{ width: '100%' }}>
-        {!userBookingsLoading && bookings.map(booking => <BookingCard key={booking._id} {...booking} />)}
+        {!userBookingsLoading &&
+          bookings.map(booking => <BookingCard key={booking._id} {...booking} onRemove={handleRemoveBooking} />)}
       </div>
     </div>
   );

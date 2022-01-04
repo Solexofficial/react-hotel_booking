@@ -1,5 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Form, useAuth, useFetching, useForm, useModal } from '../../../../hooks';
 import bookingService from '../../../../services/booking.service';
@@ -22,7 +22,7 @@ const initialData = {
   totalPrice: 0,
 };
 
-const BookingForm = ({ rentPerDay }) => {
+const BookingForm = ({ rentPerDay, isBooked }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const history = useHistory();
   const { roomId } = useParams();
@@ -35,6 +35,12 @@ const BookingForm = ({ rentPerDay }) => {
     validatorConfig
   );
 
+  useEffect(() => {
+    if (isBooked) {
+      setEnterError('Номер забронирован');
+    }
+  }, []);
+  
   const countDays = Math.max(1, Math.round((data.departureDate - data.arrivalDate) / oneDayMs));
 
   const [setBooking] = useFetching(async roomId => {

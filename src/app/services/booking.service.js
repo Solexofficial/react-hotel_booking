@@ -11,6 +11,10 @@ const bookingService = {
     const { data } = await httpService.put(bookingEndPoint + payload._id, payload);
     return data;
   },
+  remove: async id => {
+    await httpService.delete(bookingEndPoint + id);
+    return id;
+  },
   getById: async id => {
     const { data } = await httpService.get(bookingEndPoint + id);
     return data;

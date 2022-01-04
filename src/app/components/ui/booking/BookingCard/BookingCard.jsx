@@ -9,7 +9,7 @@ import roomsService from '../../../../services/rooms.service';
 import { useEffect } from 'react';
 import RoomCard from '../../rooms/RoomCard';
 
-const BookingCard = ({ arrivalDate, departureDate, adults, children, babies, totalPrice, roomId }) => {
+const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies, totalPrice, roomId, onRemove }) => {
   const [room, setRoom] = useState();
 
   const [fetchRoom, roomIsLoading] = useFetching(async roomId => {
@@ -67,7 +67,7 @@ const BookingCard = ({ arrivalDate, departureDate, adults, children, babies, tot
               Перейти на страницу номера
             </Button>
           </Link>
-          <Button size='small' variant='outlined' color='error'>
+          <Button size='small' variant='outlined' color='error' onClick={() => onRemove(_id)}>
             Отменить бронирование
           </Button>
         </div>
