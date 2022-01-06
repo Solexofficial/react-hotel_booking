@@ -28,6 +28,15 @@ const bookingService = {
     });
     return data;
   },
+  getRoomBookings: async roomId => {
+    const { data } = await httpService.get(bookingEndPoint, {
+      params: {
+        orderBy: '"roomId"',
+        equalTo: `"${roomId}"`,
+      },
+    });
+    return data;
+  },
 };
 
 export default bookingService;

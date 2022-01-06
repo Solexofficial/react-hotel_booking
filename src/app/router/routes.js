@@ -16,7 +16,7 @@ export const userProfileRoutes = [
 ];
 
 export const adminRoutes = [
-  { path: '/profile', name: 'Профиль', icon: <AccountCircleIcon /> },
+  { path: '/profile/', name: 'Профиль', icon: <AccountCircleIcon /> },
   { path: '/profile/dashboard', name: 'Панель администратора', icon: <AdminPanelSettingsIcon /> },
   { path: '/profile/booking', name: 'Мои бронирования', icon: <StarBorderIcon /> },
   { path: '/profile/likes', name: 'Понравилось', icon: <FavoriteBorderIcon /> },

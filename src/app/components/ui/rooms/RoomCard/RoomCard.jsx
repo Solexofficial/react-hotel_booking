@@ -37,7 +37,7 @@ const RoomCard = ({ _id, numberRoom, rentPerDay, rate, countReviews, type, image
         <div className='room-card__description-row'>
           <h3 className='room-card__title'>
             № <span className='room-card__title--big'>{numberRoom}</span>
-            {type && <span className='room-card__type'>{type}</span>}
+            {type === 'Люкс' && <span className='room-card__type'>{type}</span>}
           </h3>
           <div className='room-card__rentPerDay'>
             <span>{rentPerDay}&#8381;</span> в сутки

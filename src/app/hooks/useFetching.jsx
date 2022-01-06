@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function useFetching(callback) {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetching = async (...args) => {

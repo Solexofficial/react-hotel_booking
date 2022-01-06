@@ -40,11 +40,11 @@ const BookingForm = ({ rentPerDay, isBooked }) => {
       setEnterError('Номер забронирован');
     }
   }, []);
-  
+
   const countDays = Math.max(1, Math.round((data.departureDate - data.arrivalDate) / oneDayMs));
 
-  const [setBooking] = useFetching(async roomId => {
-    await roomsService.setBooking(roomId, { isBooked: [data.arrivalDate, data.departureDate] });
+  const [setBooking] = useFetching(async (roomId, payload) => {
+    await roomsService.setBooking(roomId, { isBooked: payload });
     setEnterError('Вы забронировали этот номер');
   });
 
@@ -64,7 +64,7 @@ const BookingForm = ({ rentPerDay, isBooked }) => {
         ...data,
         totalPrice,
       };
-      setBooking(roomId);
+      setBooking(roomId, payload._id);
       createBooking(payload);
     }
   };
@@ -102,7 +102,7 @@ const BookingForm = ({ rentPerDay, isBooked }) => {
       <SuccessBookingModal
         open={isOpen}
         onClose={handleCloseModal}
-        isLoading={isCreateBookingLoading}
+        isLoading={!isCreateBookingLoading}
         bookingData={data}
       />
     </>

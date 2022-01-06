@@ -9,8 +9,9 @@ import ProfileFavorites from '../../ui/profile/ProfileFavorites';
 import ProfileLikes from '../../ui/profile/ProfileLikes';
 import UserProfile from '../../ui/profile/UserProfile';
 
-const ProfilePage = () => {
+const ProfilePage = userId => {
   const { route } = useParams();
+  console.log(route);
   const { currentUser } = useAuth();
 
   const renderComponent = route => {
@@ -27,7 +28,7 @@ const ProfilePage = () => {
         if (currentUser.role === 'admin') {
           return <AdminDashboard />;
         } else {
-          return <Redirect to='/profile' />;
+          return <Redirect to={`/profile/${currentUser._id}`} />;
         }
       default:
         return <UserProfile />;
