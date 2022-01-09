@@ -31,15 +31,26 @@ const filtersInitialData = {
   hasWorkSpace: false,
 };
 
+const setPageSizeOptions = [
+  { name: '6', value: 6 },
+  { name: '12', value: 12 },
+  { name: '18', value: 18 },
+  { name: '24', value: 24 },
+];
+
 const RoomsPage = () => {
-  const [rooms, setRoomsList] = useState(null);
-  const [sortBy, setSortBy] = useState({ path: 'numberRoom', order: 'desc' });
-  const [pageSize, setPageSize] = useState(12);
+  const [rooms, setRoomsList] = useState([]);
 
   const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
-  const { sortedItems } = useSort(rooms, sortBy);
+  const { sortedItems, sortBy, setSortBy } = useSort(rooms, { path: 'roomNumber', order: 'desc' });
   const { filteredItems } = useRoomsFilter(sortedItems, data);
-  const { currentPage, handleChangePage, itemsListCrop } = usePagination(filteredItems || [], pageSize);
+  const {
+    itemsListCrop: roomsListCrop,
+    currentPage,
+    pageSize,
+    handleChangePage,
+    handleChangePageSize,
+  } = usePagination(filteredItems || [], setPageSizeOptions[1].value);
 
   const [fetchingRooms, roomsIsLoading] = useFetching(async () => {
     const { content } = await roomsService.getAll();
@@ -54,6 +65,19 @@ const RoomsPage = () => {
     setSortBy(JSON.parse(target.value));
   };
 
+  console.log(data.arrivalDate, data.departureDate);
+
+  const bookings = [
+    { arrivalDate: 1641763565000, departureDate: 1641936365000, time: '10,12' }, // 10-12
+    { arrivalDate: 1642022765000, departureDate: 1642281965000, time: '13,16' }, // 13-16
+  ];
+
+  console.log(
+    bookings.filter(booking => {
+      return data.arrivalDate >= booking.departureDate;
+    })
+  );
+
   return (
     <main className='rooms-page'>
       <aside className='rooms-page__filters'>
@@ -66,10 +90,10 @@ const RoomsPage = () => {
       </aside>
       <section className='rooms-page__rooms'>
         <RoomsSort sortBy={sortBy} onSort={handleSort} />
-        <RoomsDisplayCount count={pageSize} setCount={setPageSize} />
+        <RoomsDisplayCount count={pageSize} setCount={handleChangePageSize} options={setPageSizeOptions} />
         <h2 className='rooms__title'>Номера, которые мы для вас подобрали</h2>
-        {roomsIsLoading ? <RoomsListSkeleton pageSize={pageSize} /> : <RoomsList rooms={itemsListCrop} />}
-        {itemsListCrop.length === 0 && <h2>Мы не нашли для вас подходящих номеров по вашим параметрам &#128577;</h2>}
+        {roomsIsLoading ? <RoomsListSkeleton pageSize={pageSize} /> : <RoomsList rooms={roomsListCrop} />}
+        {roomsListCrop.length === 0 && <h2>Мы не нашли для вас подходящих номеров по вашим параметрам &#128577;</h2>}
 
         {filteredItems.length > pageSize && (
           <div className='rooms-page__pagination'>
@@ -82,7 +106,7 @@ const RoomsPage = () => {
             <p className='rooms-page__pagination-info'>
               {`${(currentPage - 1) * pageSize || 1} - 
               ${pageSize * currentPage > rooms.length ? rooms.length : pageSize * currentPage}
-              из ${rooms?.length} вариантов аренды`}
+              из ${rooms.length} вариантов аренды`}
             </p>
           </div>
         )}

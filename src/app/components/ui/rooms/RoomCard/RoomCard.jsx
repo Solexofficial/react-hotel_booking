@@ -15,7 +15,7 @@ const comfortIconsMap = {
   hasWorkSpace: <ComputerIcon />,
 };
 
-const RoomCard = ({ _id, numberRoom, rentPerDay, rate, countReviews, type, images, comforts }) => {
+const RoomCard = ({ _id, roomNumber, rentPerDay, rate, countReviews, type, images, comforts }) => {
   return (
     <div className='room-card'>
       {comforts && (
@@ -36,7 +36,7 @@ const RoomCard = ({ _id, numberRoom, rentPerDay, rate, countReviews, type, image
       <Link to={`/rooms/${_id}`} className='room-card__description'>
         <div className='room-card__description-row'>
           <h3 className='room-card__title'>
-            № <span className='room-card__title--big'>{numberRoom}</span>
+            № <span className='room-card__title--big'>{roomNumber}</span>
             {type === 'Люкс' && <span className='room-card__type'>{type}</span>}
           </h3>
           <div className='room-card__rentPerDay'>

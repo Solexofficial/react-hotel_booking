@@ -1,5 +1,5 @@
 const useRoomsFilter = (items, filters) => {
-  if (!items) return;
+  if (!items && items.length === 0) return;
 
   let filteredItems = JSON.parse(JSON.stringify(items));
 

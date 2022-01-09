@@ -1,4 +1,7 @@
-const useSort = (items, sortBy) => {
+import { useState } from 'react';
+
+const useSort = (items, initialSortBy) => {
+  const [sortBy, setSortBy] = useState(initialSortBy || {});
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
       return -1;
@@ -27,9 +30,14 @@ const useSort = (items, sortBy) => {
     return stabilizedThis.map(el => el[0]);
   }
 
+  const handleRequestSort = (event, property) => {
+    const isAsc = sortBy.path === property && sortBy.order === 'asc';
+    setSortBy({ path: property, order: isAsc ? 'desc' : 'asc' });
+  };
+
   const sortedItems = stableSort(items, getComparator(sortBy.order, sortBy.path));
 
-  return sortedItems;
+  return { sortedItems, sortBy, setSortBy, handleRequestSort };
 };
 
 export default useSort;

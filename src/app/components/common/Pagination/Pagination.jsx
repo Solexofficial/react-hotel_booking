@@ -8,7 +8,15 @@ const Pagination = ({ items, pageSize, currentPage, onChange, ...rest }) => {
 
   return (
     <div className='pagination'>
-      <MuiPagination count={pagesCount} defaultPage={1} onChange={onChange} size='large' variant='outlined' {...rest} />
+      <MuiPagination
+        count={pagesCount}
+        onChange={onChange}
+        page={currentPage}
+        defaultPage={0}
+        size='large'
+        variant='outlined'
+        {...rest}
+      />
     </div>
   );
 };

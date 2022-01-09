@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { paginate } from '../utils/paginate';
 
-function usePagination(items, pageSize) {
-  const [currentPage, setCurrentPage] = useState(1);
+function usePagination(items, defaultPageSize, defaultCurrentPage) {
+  const [currentPage, setCurrentPage] = useState(defaultCurrentPage || 1);
+  const [pageSize, setPageSize] = useState(defaultPageSize || 5);
 
   useEffect(() => {
     if (items.length < pageSize) {
@@ -10,13 +10,18 @@ function usePagination(items, pageSize) {
     }
   }, [items, pageSize]);
 
-  const handleChangePage = (_, value) => {
+  const handleChangePage = (event, value) => {
     setCurrentPage(value);
   };
 
-  const itemsListCrop = paginate(items, currentPage, pageSize);
+  const handleChangePageSize = event => {
+    setPageSize(parseInt(event.target.value, 10));
+    setCurrentPage(1);
+  };
 
-  return { currentPage, handleChangePage, itemsListCrop };
+  const itemsListCrop = items.slice((currentPage - 1) * pageSize, (currentPage - 1) * pageSize + pageSize);
+
+  return { itemsListCrop, currentPage, pageSize, handleChangePage, handleChangePageSize };
 }
 
 export default usePagination;

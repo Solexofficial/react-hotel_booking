@@ -1,7 +1,7 @@
 [
   {
     "_id": "888",
-    "numberRoom": 888,
+    "roomNumber": 888,
     "rentPerDay": 9990,
     "rate": 725,
     "countReviews": 145,
@@ -17,7 +17,7 @@
   },
   {
     "_id": "777",
-    "numberRoom": 777,
+    "roomNumber": 777,
     "type": "Стандарт",
     "rentPerDay": 15000,
     "rate": 4,
@@ -33,7 +33,7 @@
   },
   {
     "_id": "2",
-    "numberRoom": 2,
+    "roomNumber": 2,
     "type": "Стандарт",
     "rentPerDay": 1500,
     "rate": 8,
@@ -48,7 +48,7 @@
   },
   {
     "_id": "3",
-    "numberRoom": 3,
+    "roomNumber": 3,
     "type": "Стандарт",
     "rentPerDay": 3000,
     "rate": 322,
@@ -62,7 +62,7 @@
   },
   {
     "_id": "4",
-    "numberRoom": 4,
+    "roomNumber": 4,
     "type": "Стандарт",
     "rentPerDay": 4000,
     "rate": 500,
@@ -76,7 +76,7 @@
   },
   {
     "_id": "5",
-    "numberRoom": 5,
+    "roomNumber": 5,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 700,
@@ -90,7 +90,7 @@
   },
   {
     "_id": "6",
-    "numberRoom": 6,
+    "roomNumber": 6,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 620,
@@ -104,7 +104,7 @@
   },
   {
     "_id": "7",
-    "numberRoom": 7,
+    "roomNumber": 7,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 4,
@@ -118,7 +118,7 @@
   },
   {
     "_id": "8",
-    "numberRoom": 8,
+    "roomNumber": 8,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 3,
@@ -132,7 +132,7 @@
   },
   {
     "_id": "9",
-    "numberRoom": 9,
+    "roomNumber": 9,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 2,
@@ -146,7 +146,7 @@
   },
   {
     "_id": "10",
-    "numberRoom": 10,
+    "roomNumber": 10,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 4,
@@ -160,7 +160,7 @@
   },
   {
     "_id": "11",
-    "numberRoom": 11,
+    "roomNumber": 11,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 3,
@@ -174,7 +174,7 @@
   },
   {
     "_id": "12",
-    "numberRoom": 12,
+    "roomNumber": 12,
     "type": "Стандарт",
     "rentPerDay": 15000,
     "rate": 4,
@@ -189,7 +189,7 @@
   },
   {
     "_id": "13",
-    "numberRoom": 13,
+    "roomNumber": 13,
     "type": "Стандарт",
     "rentPerDay": 1500,
     "rate": 3,
@@ -203,7 +203,7 @@
   },
   {
     "_id": "14",
-    "numberRoom": 14,
+    "roomNumber": 14,
     "type": "Стандарт",
     "rentPerDay": 3000,
     "rate": 2,
@@ -217,7 +217,7 @@
   },
   {
     "_id": "15",
-    "numberRoom": 15,
+    "roomNumber": 15,
     "type": "Стандарт",
     "rentPerDay": 4000,
     "rate": 4,
@@ -231,7 +231,7 @@
   },
   {
     "_id": "16",
-    "numberRoom": 16,
+    "roomNumber": 16,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 3,
@@ -245,7 +245,7 @@
   },
   {
     "_id": "17",
-    "numberRoom": 17,
+    "roomNumber": 17,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 2,
@@ -259,7 +259,7 @@
   },
   {
     "_id": "18",
-    "numberRoom": 18,
+    "roomNumber": 18,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 4,
@@ -273,7 +273,7 @@
   },
   {
     "_id": "19",
-    "numberRoom": 19,
+    "roomNumber": 19,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 3,
@@ -287,7 +287,7 @@
   },
   {
     "_id": "20",
-    "numberRoom": 20,
+    "roomNumber": 20,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 2,
@@ -301,7 +301,7 @@
   },
   {
     "_id": "21",
-    "numberRoom": 21,
+    "roomNumber": 21,
     "type": "Стандарт",
     "rentPerDay": 9990,
     "rate": 4,
@@ -315,7 +315,7 @@
   },
   {
     "_id": "22",
-    "numberRoom": 22,
+    "roomNumber": 22,
     "type": "Стандарт",
     "rentPerDay": 13000,
     "rate": 3,

@@ -48,7 +48,7 @@ const RoomPage = ({ roomId }) => {
             <Paper elevation={3} className='form-card booking-form__card'>
               <div className='booking-form__header'>
                 <div className='booking-form__numberRoom'>
-                  <span className='booking-form__numberRoom-text'>№ {currentRoom.numberRoom}</span>
+                  <span className='booking-form__numberRoom-text'>№ {currentRoom.roomNumber}</span>
                   {type && <span className='booking-form__numberRoom-type'>{type}</span>}
                 </div>
                 <div className='booking-form__cost'>

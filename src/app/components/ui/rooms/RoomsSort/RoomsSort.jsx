@@ -2,8 +2,8 @@ import React from 'react';
 import { SelectField } from '../../../common/Fields';
 
 const roomsSortArray = [
-  { name: 'По убыванию', value: { path: 'numberRoom', order: 'desc' } },
-  { name: 'По возрастанию', value: { path: 'numberRoom', order: 'asc' } },
+  { name: 'По убыванию', value: { path: 'roomNumber', order: 'desc' } },
+  { name: 'По возрастанию', value: { path: 'roomNumber', order: 'asc' } },
   { name: 'Популярное', value: { path: 'countReviews', order: 'desc' } },
   { name: 'Высокий рейтинг', value: { path: 'rate', order: 'desc' } },
   { name: 'Сначала дешёвые', value: { path: 'rentPerDay', order: 'asc' } },

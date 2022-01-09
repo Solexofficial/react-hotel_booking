@@ -11,7 +11,6 @@ import UserProfile from '../../ui/profile/UserProfile';
 
 const ProfilePage = userId => {
   const { route } = useParams();
-  console.log(route);
   const { currentUser } = useAuth();
 
   const renderComponent = route => {

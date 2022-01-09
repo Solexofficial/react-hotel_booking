@@ -22,7 +22,7 @@ const initialData = {
   totalPrice: 0,
 };
 
-const BookingForm = ({ rentPerDay, isBooked }) => {
+const BookingForm = ({ rentPerDay }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const history = useHistory();
   const { roomId } = useParams();
@@ -34,12 +34,6 @@ const BookingForm = ({ rentPerDay, isBooked }) => {
     true,
     validatorConfig
   );
-
-  useEffect(() => {
-    if (isBooked) {
-      setEnterError('Номер забронирован');
-    }
-  }, []);
 
   const countDays = Math.max(1, Math.round((data.departureDate - data.arrivalDate) / oneDayMs));
 
