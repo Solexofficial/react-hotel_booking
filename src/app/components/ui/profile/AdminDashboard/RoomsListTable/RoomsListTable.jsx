@@ -1,7 +1,8 @@
 import { TablePagination } from '@mui/material';
-import React from 'react';
-import { useFetching, usePagination, useSort } from '../../../../../hooks';
-import roomsService from '../../../../../services/rooms.service';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { usePagination, useSort } from '../../../../../hooks';
+import { getRooms, getRoomsLoadingStatus, loadRoomsList } from '../../../../../store/rooms';
 import { Table, TableBody, TableHeader } from '../../../../common/Table';
 import RoomsListTableRow from './RoomsListTableRow';
 
@@ -40,15 +41,12 @@ const headCells = [
 
 const RoomsListTable = () => {
   const rowsPerPageOptions = [5, 10, 25];
+  const dispatch = useDispatch();
+  const rooms = useSelector(getRooms());
+  const roomsIsLoading = useSelector(getRoomsLoadingStatus());
 
-  const [rooms, setRoomsList] = React.useState([]);
-  const [fetchingRooms, roomsIsLoading] = useFetching(async () => {
-    const { content } = await roomsService.getAll();
-    setRoomsList(content);
-  });
-
-  React.useEffect(() => {
-    fetchingRooms();
+  useEffect(() => {
+    dispatch(loadRoomsList());
   }, []);
 
   const { sortedItems, sortBy, handleRequestSort } = useSort(rooms, { path: 'roomNumber', order: 'desc' });

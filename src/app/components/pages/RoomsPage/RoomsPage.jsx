@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFetching, useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
 import roomsService from '../../../services/rooms.service';
+import { getRooms, getRoomsLoadingStatus, loadRoomsList } from '../../../store/rooms';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
 import RoomsFilter from '../../ui/rooms/RoomsFilters';
@@ -39,10 +41,12 @@ const setPageSizeOptions = [
 ];
 
 const RoomsPage = () => {
-  const [rooms, setRoomsList] = useState([]);
+  const dispatch = useDispatch();
+  const rooms = useSelector(getRooms());
+  const roomsIsLoading = useSelector(getRoomsLoadingStatus());
 
   const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
-  const { sortedItems, sortBy, setSortBy } = useSort(rooms, { path: 'roomNumber', order: 'desc' });
+  const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
   const { filteredItems } = useRoomsFilter(sortedItems, data);
   const {
     itemsListCrop: roomsListCrop,
@@ -52,13 +56,8 @@ const RoomsPage = () => {
     handleChangePageSize,
   } = usePagination(filteredItems || [], setPageSizeOptions[1].value);
 
-  const [fetchingRooms, roomsIsLoading] = useFetching(async () => {
-    const { content } = await roomsService.getAll();
-    setRoomsList(content);
-  });
-
   useEffect(() => {
-    fetchingRooms();
+    dispatch(loadRoomsList());
   }, []);
 
   const handleSort = ({ target }) => {
