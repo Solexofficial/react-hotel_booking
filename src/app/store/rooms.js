@@ -45,5 +45,10 @@ export const loadRoomsList = () => async (dispatch, getState) => {
 
 export const getRooms = () => state => state.rooms.entities;
 export const getRoomsLoadingStatus = () => state => state.rooms.isLoading;
+export const getRoomById = roomId => state => {
+  if (state.rooms.entities) {
+    return state.rooms.entities.find(room => room._id === roomId);
+  }
+};
 
 export default roomsReducer;

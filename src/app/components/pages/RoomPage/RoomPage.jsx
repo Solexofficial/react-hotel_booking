@@ -1,30 +1,23 @@
 import { Paper } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import roomsService from '../../../services/rooms.service';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { getRoomById } from '../../../store/rooms';
 import ImageSlider from '../../common/ImageSlider';
 import Loader from '../../common/Loader';
 import { BookingForm } from '../../ui/forms';
 import Reviews from '../../ui/reviews/Reviews';
+import RoomCancelCard from '../../ui/RoomPageCards/RoomCancelCard';
 import RoomInfoCard from '../../ui/RoomPageCards/RoomInfoCard';
 import RoomReviewsCard from '../../ui/RoomPageCards/RoomReviewsCard';
 import RoomRulesCard from '../../ui/RoomPageCards/RoomRulesCard';
-import RoomCancelCard from '../../ui/RoomPageCards/RoomCancelCard';
 
 const RoomPage = ({ roomId }) => {
-  const [currentRoom, setRoom] = useState(null);
+  const room = useSelector(getRoomById(roomId));
+
   console.log('room render');
 
-  const getRoomData = async id => {
-    const { content } = await roomsService.getById(id);
-    setRoom(content);
-  };
-
-  useEffect(() => {
-    getRoomData(roomId);
-  }, []);
-
-  if (currentRoom) {
-    const { images, countReviews, type, rentPerDay, isBooked } = currentRoom;
+  if (room) {
+    const { roomNumber, images, countReviews, type, rentPerDay, isBooked } = room;
     return (
       <main>
         <ImageSlider className='room-page__gallery'>
@@ -48,7 +41,7 @@ const RoomPage = ({ roomId }) => {
             <Paper elevation={3} className='form-card booking-form__card'>
               <div className='booking-form__header'>
                 <div className='booking-form__numberRoom'>
-                  <span className='booking-form__numberRoom-text'>№ {currentRoom.roomNumber}</span>
+                  <span className='booking-form__numberRoom-text'>№ {roomNumber}</span>
                   {type && <span className='booking-form__numberRoom-type'>{type}</span>}
                 </div>
                 <div className='booking-form__cost'>

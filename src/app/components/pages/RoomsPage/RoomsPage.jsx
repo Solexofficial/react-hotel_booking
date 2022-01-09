@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFetching, useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
-import roomsService from '../../../services/rooms.service';
+import { useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
 import { getRooms, getRoomsLoadingStatus, loadRoomsList } from '../../../store/rooms';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
@@ -41,7 +40,6 @@ const setPageSizeOptions = [
 ];
 
 const RoomsPage = () => {
-  const dispatch = useDispatch();
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
 
@@ -55,10 +53,6 @@ const RoomsPage = () => {
     handleChangePage,
     handleChangePageSize,
   } = usePagination(filteredItems || [], setPageSizeOptions[1].value);
-
-  useEffect(() => {
-    dispatch(loadRoomsList());
-  }, []);
 
   const handleSort = ({ target }) => {
     setSortBy(JSON.parse(target.value));
