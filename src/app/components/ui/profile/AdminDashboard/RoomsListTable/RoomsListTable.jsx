@@ -1,8 +1,8 @@
 import { TablePagination } from '@mui/material';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { usePagination, useSort } from '../../../../../hooks';
-import { getRooms, getRoomsLoadingStatus, loadRoomsList } from '../../../../../store/rooms';
+import { getRooms, getRoomsLoadingStatus } from '../../../../../store/rooms';
 import { Table, TableBody, TableHeader } from '../../../../common/Table';
 import RoomsListTableRow from './RoomsListTableRow';
 
@@ -41,15 +41,10 @@ const headCells = [
 
 const RoomsListTable = () => {
   const rowsPerPageOptions = [5, 10, 25];
-  const dispatch = useDispatch();
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
 
-  useEffect(() => {
-    dispatch(loadRoomsList());
-  }, []);
-
-  const { sortedItems, sortBy, handleRequestSort } = useSort(rooms, { path: 'roomNumber', order: 'desc' });
+  const { sortedItems, sortBy, handleRequestSort } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
   const {
     itemsListCrop: roomsCroppedList,
     currentPage,
@@ -78,6 +73,7 @@ const RoomsListTable = () => {
             page={currentPage - 1}
             onPageChange={(event, value) => handleChangePage(event, value + 1)}
             onRowsPerPageChange={handleChangePageSize}
+            labelRowsPerPage='Номеров на странице'
           />
         </>
       )}

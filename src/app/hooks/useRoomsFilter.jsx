@@ -5,6 +5,7 @@ const useRoomsFilter = (items, filters) => {
 
   // if (filters.isBooked) {
   //   filteredItems = filteredItems.filter(el => el.isBooked);
+  // !TODO: create booking filters by arrivalDate & departureDate
   // }
 
   if (filters.hasWifi) {

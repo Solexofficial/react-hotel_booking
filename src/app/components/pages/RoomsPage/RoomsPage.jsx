@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
-import { getRooms, getRoomsLoadingStatus, loadRoomsList } from '../../../store/rooms';
+import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
+import { getFilters } from '../../../store/filters';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
 import RoomsFilter from '../../ui/rooms/RoomsFilters';
@@ -42,8 +43,10 @@ const setPageSizeOptions = [
 const RoomsPage = () => {
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
+  const filters = useSelector(getFilters());
+  console.log('filters: ', filters);
 
-  const { data, setData, handleInputChange, handleResetForm } = useForm(filtersInitialData, false, {});
+  const { data, setData, handleInputChange, handleResetForm } = useForm(filters, false, {});
   const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
   const { filteredItems } = useRoomsFilter(sortedItems, data);
   const {
@@ -58,18 +61,15 @@ const RoomsPage = () => {
     setSortBy(JSON.parse(target.value));
   };
 
-  console.log(data.arrivalDate, data.departureDate);
+  //   var arrivalDate = moment("2022-01-12, 13:00:00"),
+  //   bookingArrivalDate = moment("2022-01-08, 12:00:00"),
+  //   bookingDepartureDate = moment("2022-01-12, 12:00:00");
 
-  const bookings = [
-    { arrivalDate: 1641763565000, departureDate: 1641936365000, time: '10,12' }, // 10-12
-    { arrivalDate: 1642022765000, departureDate: 1642281965000, time: '13,16' }, // 13-16
-  ];
-
-  console.log(
-    bookings.filter(booking => {
-      return data.arrivalDate >= booking.departureDate;
-    })
-  );
+  // if (arrivalDate.isBetween(bookingArrivalDate, bookingDepartureDate)) {
+  //   console.log("is between");
+  // } else {
+  //   console.log("is not between");
+  // }
 
   return (
     <main className='rooms-page'>

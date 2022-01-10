@@ -1,27 +1,21 @@
 import { ArrowRight } from '@mui/icons-material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
+import { getFilters } from '../../../../store/filters';
 import Button from '../../../common/Button/Button';
 import { DateOfStayField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter';
 import validatorConfig from './validatorConfig';
 
-const oneDayMs = 86000000;
-
-const initialData = {
-  arrivalDate: Date.now(),
-  departureDate: Date.now() + oneDayMs,
-  adults: 0,
-  children: 0,
-  babies: 0,
-};
-
 const SearchRoomsForm = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const filters = useSelector(getFilters());
 
   const { data, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
-    initialData,
+    filters,
     true,
     validatorConfig
   );
@@ -29,10 +23,13 @@ const SearchRoomsForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
-      // history.push(`/rooms`);
-      console.log(history);
-      console.log(data);
+      history.push(`/rooms`);
     }
+  };
+
+  const handleTestChange = ({ target }) => {
+    handleInputChange({ target });
+    dispatch({ type: 'filters/statusFilterChanged', payload: target });
   };
 
   return (
@@ -40,7 +37,7 @@ const SearchRoomsForm = () => {
       onSubmit={handleSubmit}
       data={data}
       errors={errors}
-      handleChange={handleInputChange}
+      handleChange={handleTestChange}
       handleKeyDown={handleKeyDown}
     >
       <DateOfStayField name='dateOfStay' data={data} />

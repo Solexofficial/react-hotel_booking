@@ -1,3 +1,5 @@
+import { isDate } from 'date-fns';
+
 export function validator(data, config) {
   const errors = {};
   function validate(validateMethod, data, config) {
@@ -31,7 +33,7 @@ export function validator(data, config) {
         break;
       }
       case 'isValidDate': {
-        statusValidate = data === 0;
+        statusValidate = !isDate(data);
         break;
       }
       default:

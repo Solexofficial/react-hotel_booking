@@ -1,10 +1,10 @@
 const validatorConfig = {
-  arrival: {
+  arrivalDate: {
     isValidDate: {
       message: 'Поле "Дата прибытия" не корректна',
     },
   },
-  departure: {
+  departureDate: {
     isValidDate: {
       message: 'Поле "Дата прибытия" не корректна',
     },

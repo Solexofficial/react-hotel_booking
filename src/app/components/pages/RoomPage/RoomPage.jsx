@@ -17,7 +17,7 @@ const RoomPage = ({ roomId }) => {
   console.log('room render');
 
   if (room) {
-    const { roomNumber, images, countReviews, type, rentPerDay, isBooked } = room;
+    const { roomNumber, images, countReviews, type, rentPerDay } = room;
     return (
       <main>
         <ImageSlider className='room-page__gallery'>
@@ -49,7 +49,7 @@ const RoomPage = ({ roomId }) => {
                 </div>
               </div>
 
-              <BookingForm rentPerDay={rentPerDay} isBooked={isBooked} />
+              <BookingForm rentPerDay={rentPerDay} />
             </Paper>
           </div>
         </div>
