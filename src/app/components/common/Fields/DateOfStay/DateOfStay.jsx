@@ -1,18 +1,27 @@
 import React from 'react';
 import DatePickerField from '../DatePickerField';
 
-const DateOfStay = ({ onChange, data }) => {
+const DateOfStay = ({ onChange, data, errors }) => {
   const { arrivalDate, departureDate } = data;
+
+  console.log(errors);
 
   return (
     <div className='dateOfStay-wrapper'>
       <div className='dateOfStay'>
-        <DatePickerField label='Дата прибытия' name='arrivalDate' onChange={onChange} value={arrivalDate} />
+        <DatePickerField
+          label='Дата прибытия'
+          name='arrivalDate'
+          error={errors?.arrivalDate}
+          onChange={onChange}
+          value={arrivalDate}
+        />
       </div>
       <div className='dateOfStay'>
         <DatePickerField
           label='Дата выезда'
           name='departureDate'
+          error={errors?.departureDate}
           minDate={arrivalDate}
           onChange={onChange}
           value={departureDate}

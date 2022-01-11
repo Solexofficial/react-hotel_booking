@@ -10,29 +10,6 @@ import RoomsList from '../../ui/rooms/RoomsList';
 import RoomsListSkeleton from '../../ui/rooms/RoomsList/RoomsListSkeleton';
 import RoomsSort from '../../ui/rooms/RoomsSort';
 
-const oneDayMs = 86000000;
-
-const filtersInitialData = {
-  dateOfStay: {
-    arrival: Date.now(),
-    departure: Date.now() + oneDayMs,
-  },
-  arrivalDate: Date.now(),
-  departureDate: Date.now() + oneDayMs,
-  adults: 0,
-  children: 0,
-  babies: 0,
-  rentPerDay: [0, 15000],
-  canSmoke: false,
-  canPets: false,
-  canInvite: false,
-  hasWideCorridor: false,
-  hasDisabledAssistant: false,
-  hasWifi: false,
-  hasConditioner: false,
-  hasWorkSpace: false,
-};
-
 const setPageSizeOptions = [
   { name: '6', value: 6 },
   { name: '12', value: 12 },
@@ -40,13 +17,26 @@ const setPageSizeOptions = [
   { name: '24', value: 24 },
 ];
 
+const validatorConfig = {
+  arrivalDate: {
+    isValidDate: {
+      message: 'Дата не корректна',
+    },
+  },
+  departureDate: {
+    isValidDate: {
+      message: 'Дата не корректна',
+    },
+  },
+};
+
 const RoomsPage = () => {
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
   const filters = useSelector(getFilters());
   console.log('filters: ', filters);
 
-  const { data, setData, handleInputChange, handleResetForm } = useForm(filters, false, {});
+  const { data, setData, errors, handleInputChange, handleResetForm } = useForm(filters, false, validatorConfig);
   const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
   const { filteredItems } = useRoomsFilter(sortedItems, data);
   const {
@@ -77,6 +67,7 @@ const RoomsPage = () => {
         <RoomsFilter
           data={data}
           setData={setData}
+          errors={errors}
           handleInputChange={handleInputChange}
           handleResetForm={handleResetForm}
         />

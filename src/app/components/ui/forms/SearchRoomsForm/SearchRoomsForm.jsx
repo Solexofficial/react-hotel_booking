@@ -1,5 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
@@ -40,8 +40,8 @@ const SearchRoomsForm = () => {
       handleChange={handleTestChange}
       handleKeyDown={handleKeyDown}
     >
-      <DateOfStayField name='dateOfStay' data={data} />
-      <GuestsCounter name='guests' data={data} />
+      <DateOfStayField name='dateOfStay' errors={errors} />
+      <GuestsCounter name='guests' />
       <Button
         variant='outlined'
         type='button'

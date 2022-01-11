@@ -5,7 +5,7 @@ import ruLocale from 'date-fns/locale/ru';
 import DatePicker from '@mui/lab/DatePicker';
 import React from 'react';
 
-const DatePickerField = ({ label, name, value, minDate, onChange, ...rest }) => {
+const DatePickerField = ({ label, name, value, minDate, onChange, error, ...rest }) => {
   const convertToDefEventParam = (name, value) => ({
     target: {
       name,
@@ -25,7 +25,7 @@ const DatePickerField = ({ label, name, value, minDate, onChange, ...rest }) => 
           onChange(convertToDefEventParam(name, new Date(date).getTime()));
         }}
         {...rest}
-        renderInput={params => <TextField {...params} />}
+        renderInput={params => <TextField {...params} {...(error && { error: true, helperText: error })} />}
       />
     </LocalizationProvider>
   );

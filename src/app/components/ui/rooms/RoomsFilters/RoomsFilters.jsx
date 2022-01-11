@@ -4,14 +4,14 @@ import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../..
 import GuestsCounter from '../../GuestsCounter/GuestsCounter';
 import RoomsFilterList from './RoomsFiltersList/RoomsFiltersList';
 
-const RoomsFilter = ({ data, handleResetForm, handleInputChange }) => {
+const RoomsFilter = ({ data, errors, handleResetForm, handleInputChange }) => {
   console.log('rooms filter render');
 
   return (
     <section className='filters__wrapper'>
       <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
       <RoomsFilterList data={data} handleChange={handleInputChange}>
-        <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
+        <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' errors={errors} />
         <GuestsCounter />
         <RangeSliderField
           label='Диапазон цены'

@@ -74,6 +74,7 @@ function Form({ children, handleChange, data, errors, handleKeyDown, ...rest }) 
       }
       config = {
         ...child.props,
+        data: data,
         onChange: handleChange,
         value: data[child.props.name],
         error: errors?.[child.props.name],
