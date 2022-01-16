@@ -1,0 +1,28 @@
+.nav-wrapper {
+  display: flex;
+}
+
+.nav-item {
+  margin-right: 5px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.nav-item__link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+
+  &.active {
+    color: $blue;
+  }
+
+  &:hover {
+    color: $blue;
+  }
+
+  transition: all 0.1s linear;
+}

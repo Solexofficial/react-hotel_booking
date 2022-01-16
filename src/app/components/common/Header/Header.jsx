@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { navigationRoutes } from '../../../router/routes';
 import { getIsLoggedIn } from '../../../store/users';
 import NavProfile from '../../ui/NavProfile';
-import Button from '../Button/Button';
+import Button from '../Button';
 import Container from '../Container';
 import Divider from '../Divider';
 import Logo from '../Logo';

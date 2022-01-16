@@ -13,7 +13,6 @@
 .header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .header__logo {
@@ -21,38 +20,20 @@
 }
 
 .header-nav {
-  &.MuiGrid-root {
-    margin-left: 50px;
-    & .nav-item {
-      padding: 0;
-      margin-right: 10px;
-      &:last-child {
-        margin-right: 0;
-      }
+  margin-left: 50px;
+  & .nav-item {
+    padding: 0;
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
     }
   }
-}
-
-.nav-item__link {
-  position: relative;
-  text-decoration: none;
-  color: inherit;
-  font-weight: 700;
-
-  &.active {
-    color: $blue;
-  }
-
-  &:hover {
-    color: $blue;
-  }
-
-  transition: all 0.1s linear;
 }
 
 .header__divider {
   &.MuiDivider-root {
     margin-right: 15px;
+    margin-left: auto;
   }
 }
 

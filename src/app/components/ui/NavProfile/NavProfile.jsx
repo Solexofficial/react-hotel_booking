@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import { adminRoutes, userProfileRoutes } from '../../../router/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserData, logOut } from '../../../store/users';
+import NavProfileSkeleton from './NavProfileSkeleton';
 
 const NavProfile = () => {
   const history = useHistory();
@@ -80,7 +81,7 @@ const NavProfile = () => {
       </div>
     );
   }
-  return <h1>Loading</h1>;
+  return <NavProfileSkeleton />;
 };
 
 export default NavProfile;
