@@ -2,13 +2,31 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
-import { getFilters } from '../../../store/filters';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
 import RoomsFilter from '../../ui/rooms/RoomsFilters';
 import RoomsList from '../../ui/rooms/RoomsList';
 import RoomsListSkeleton from '../../ui/rooms/RoomsList/RoomsListSkeleton';
 import RoomsSort from '../../ui/rooms/RoomsSort';
+
+const oneDayMs = 86000000;
+
+const initialState = {
+  arrivalDate: Date.now(),
+  departureDate: Date.now() + oneDayMs,
+  adults: 1,
+  children: 0,
+  babies: 0,
+  rentPerDay: [0, 15000],
+  canSmoke: false,
+  canPets: false,
+  canInvite: false,
+  hasWideCorridor: false,
+  hasDisabledAssistant: false,
+  hasWifi: false,
+  hasConditioner: false,
+  hasWorkSpace: false,
+};
 
 const setPageSizeOptions = [
   { name: '6', value: 6 },
@@ -33,10 +51,8 @@ const validatorConfig = {
 const RoomsPage = () => {
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
-  const filters = useSelector(getFilters());
-  console.log('filters: ', filters);
 
-  const { data, setData, errors, handleInputChange, handleResetForm } = useForm(filters, false, validatorConfig);
+  const { data, setData, errors, handleInputChange, handleResetForm } = useForm(initialState, false, validatorConfig);
   const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
   const { filteredItems } = useRoomsFilter(sortedItems, data);
   const {

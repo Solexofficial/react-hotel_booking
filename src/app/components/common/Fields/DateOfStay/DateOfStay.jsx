@@ -4,8 +4,6 @@ import DatePickerField from '../DatePickerField';
 const DateOfStay = ({ onChange, data, errors }) => {
   const { arrivalDate, departureDate } = data;
 
-  console.log(errors);
-
   return (
     <div className='dateOfStay-wrapper'>
       <div className='dateOfStay'>
