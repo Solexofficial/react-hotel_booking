@@ -1,6 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router';
-import { useAuth } from '../../../hooks';
+import { getCurrentUserData } from '../../../store/users';
 import Sidebar from '../../common/Sidebar';
 import AdminDashboard from '../../ui/profile/AdminDashboard';
 import ProfileBooking from '../../ui/profile/ProfileBooking';
@@ -9,9 +10,9 @@ import ProfileFavorites from '../../ui/profile/ProfileFavorites';
 import ProfileLikes from '../../ui/profile/ProfileLikes';
 import UserProfile from '../../ui/profile/UserProfile';
 
-const ProfilePage = userId => {
+const ProfilePage = () => {
   const { route } = useParams();
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
 
   const renderComponent = route => {
     switch (route) {

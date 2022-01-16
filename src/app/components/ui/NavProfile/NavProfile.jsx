@@ -5,9 +5,13 @@ import Avatar from '../../common/Avatar/Avatar';
 import Tooltip from '../../common/Tooltip/Tooltip';
 import { useHistory } from 'react-router';
 import { adminRoutes, userProfileRoutes } from '../../../router/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentUserData, logOut } from '../../../store/users';
 
-const NavProfile = ({ user, onLogout }) => {
+const NavProfile = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const currentUser = useSelector(getCurrentUserData());
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -24,9 +28,13 @@ const NavProfile = ({ user, onLogout }) => {
     handleCloseUserMenu();
   };
 
-  if (user) {
-    const { avatarPhoto, firstName, secondName } = user;
-    const routes = user.role === 'admin' ? adminRoutes : userProfileRoutes;
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
+
+  if (currentUser) {
+    const { avatarPhoto, firstName, secondName } = currentUser;
+    const routes = currentUser.role === 'admin' ? adminRoutes : userProfileRoutes;
     return (
       <div className='profile-wrapper'>
         <Tooltip title='Открыть меню' placement='bottom'>
@@ -64,7 +72,7 @@ const NavProfile = ({ user, onLogout }) => {
               {setting.name}
             </MenuItem>
           ))}
-          <MenuItem className='profile-menu__item' name='logout' onClick={onLogout}>
+          <MenuItem className='profile-menu__item' name='logout' onClick={handleLogOut}>
             <ExitToAppIcon />
             Выйти
           </MenuItem>
@@ -72,6 +80,7 @@ const NavProfile = ({ user, onLogout }) => {
       </div>
     );
   }
+  return <h1>Loading</h1>;
 };
 
 export default NavProfile;

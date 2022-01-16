@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useAuth } from '../../../../hooks';
 import reviewsService from '../../../../services/reviews.service';
+import { getCurrentUserId } from '../../../../store/users';
 import declOfNum from '../../../../utils/declOfNum';
 import { ReviewsForm } from '../../forms';
 import ReviewsList from '../ReviewsList';
@@ -9,8 +10,7 @@ import ReviewsList from '../ReviewsList';
 const Reviews = () => {
   const { roomId } = useParams();
   const [reviews, setReviews] = useState([]);
-
-  const { currentUser } = useAuth();
+  const currentUserId = useSelector(getCurrentUserId());
 
   const getReviews = async roomId => {
     try {
@@ -47,7 +47,7 @@ const Reviews = () => {
     const payload = {
       ...data,
       roomId,
-      userId: currentUser._id,
+      userId: currentUserId,
     };
     createReview(payload);
   };
@@ -66,7 +66,7 @@ const Reviews = () => {
           {totalReviewsCount > 0 && <ReviewsList reviews={sortedReviews} handleRemove={removeReview} />}
         </section>
       )}
-      {currentUser && (
+      {currentUserId && (
         <section className='reviews-form'>
           <h2>Оставить отзыв</h2>
           <ReviewsForm onSubmit={handleSubmit} />

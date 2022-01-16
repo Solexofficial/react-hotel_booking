@@ -1,9 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../../hooks';
 import { navigationRoutes } from '../../../router/routes';
-import Button from '../Button/Button';
+import { getIsLoggedIn } from '../../../store/users';
 import NavProfile from '../../ui/NavProfile';
+import Button from '../Button/Button';
 import Container from '../Container';
 import Divider from '../Divider';
 import Logo from '../Logo';
@@ -11,8 +12,7 @@ import NavList from '../NavList';
 import useStyles from './styles';
 
 const Header = () => {
-  const { currentUser, handleLogout } = useAuth();
-
+  const isLoggedIn = useSelector(getIsLoggedIn());
   const classes = useStyles();
 
   return (
@@ -21,10 +21,10 @@ const Header = () => {
         <div className='header__inner'>
           <Logo className='header__logo' />
           <NavList routes={navigationRoutes} spacing={2} className='header-nav' />
-          {currentUser ? (
+          {isLoggedIn ? (
             <>
               <Divider orientation='vertical' flexItem className='header__divider' />
-              <NavProfile user={currentUser} onLogout={handleLogout} />
+              <NavProfile />
             </>
           ) : (
             <div className='header-buttons'>

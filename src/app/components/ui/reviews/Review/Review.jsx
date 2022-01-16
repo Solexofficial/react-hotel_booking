@@ -2,7 +2,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../../../hooks';
 import likesService from '../../../../services/likes.service';
 import userService from '../../../../services/user.service';
 import formatDate from '../../../../utils/formatDate';
@@ -11,12 +10,13 @@ import Rating from '../../../common/Rating';
 import Tooltip from '../../../common/Tooltip';
 import Avatar from '../../../common/Avatar';
 import ButtonLike from '../../../common/ButtonLike';
+import { useSelector } from 'react-redux';
+import { getCurrentUserData } from '../../../../store/users';
 
 const Review = ({ review, onRemove }) => {
   const [user, setUser] = useState(null);
   const [likes, setLikes] = useState([]);
-
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
 
   const isAdmin = currentUser?.role === 'admin';
   const isAuthor = review.userId === currentUser?._id;

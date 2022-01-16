@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../../../hooks/useAuth';
+import { useSelector } from 'react-redux';
 import useFetching from '../../../../hooks/useFetching';
 import bookingService from '../../../../services/booking.service';
+import { getCurrentUserId } from '../../../../store/users';
 import BookingCard from '../../booking/BookingCard/BookingCard';
 
 const ProfileBooking = () => {
   const [bookings, setBookings] = useState([]);
-  const { currentUser } = useAuth();
+  const currentUserId = useSelector(getCurrentUserId());
 
   const [getUserBookings, userBookingsLoading] = useFetching(async () => {
-    const { content } = await bookingService.getUserBookings(currentUser._id);
+    const { content } = await bookingService.getUserBookings(currentUserId);
     setBookings(content);
   });
 

@@ -1,6 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
 import Button from '../../../common/Button/Button';
@@ -29,7 +28,6 @@ const initialState = {
 
 const SearchRoomsForm = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const { data, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialState,
@@ -44,17 +42,12 @@ const SearchRoomsForm = () => {
     }
   };
 
-  const handleTestChange = ({ target }) => {
-    handleInputChange({ target });
-    dispatch({ type: 'filters/statusFilterChanged', payload: target });
-  };
-
   return (
     <Form
       onSubmit={handleSubmit}
       data={data}
       errors={errors}
-      handleChange={handleTestChange}
+      handleChange={handleInputChange}
       handleKeyDown={handleKeyDown}
     >
       <DateOfStayField name='dateOfStay' errors={errors} />

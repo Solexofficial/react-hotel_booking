@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { useAuth } from '../../../../hooks/useAuth';
 import { Form, useForm } from '../../../../hooks';
+import { getAuthErrors, signIn } from '../../../../store/users';
+import Button from '../../../common/Button/Button';
 import { InputField } from '../../../common/Fields';
 import withPassword from '../../../common/Fields/HOC/withPassword';
-import Button from '../../../common/Button/Button';
 import validatorConfig from './validatorConfig';
 
 const initialData = {
@@ -13,26 +14,22 @@ const initialData = {
 };
 
 const LoginForm = () => {
-  const { data, errors, setErrors, enterError, setEnterError, handleInputChange, validate, handleResetForm } = useForm(
+  const { data, errors, enterError, handleInputChange, validate, handleResetForm } = useForm(
     initialData,
     false,
     validatorConfig
   );
-
-  const { signIn } = useAuth();
+  const loginError = useSelector(getAuthErrors());
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (validate(data)) {
-      try {
-        await signIn(data);
-        history.push('/');
-      } catch (error) {
-        setErrors(error);
-        setEnterError(error.message);
-        handleResetForm(e);
-      }
+      signIn(data);
+      const redirect = history.location.state ? history.location.state.from.pathname : '/';
+      dispatch(signIn({ payload: data, redirect }));
+      handleResetForm(e);
     }
   };
 
@@ -47,7 +44,7 @@ const LoginForm = () => {
           Войти
         </Button>
       </Form>
-      {enterError && <p className='form__enter-error'>{enterError}</p>}
+      {loginError && <p className='form__enter-error'>{loginError}</p>}
     </>
   );
 };

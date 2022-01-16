@@ -1,9 +1,12 @@
 import { ArrowRight } from '@mui/icons-material';
 import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { Form, useAuth, useFetching, useForm, useModal } from '../../../../hooks';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { Form, useFetching, useForm, useModal } from '../../../../hooks';
 import bookingService from '../../../../services/booking.service';
 import roomsService from '../../../../services/rooms.service';
+import { getCurrentUserId } from '../../../../store/users';
 import Button from '../../../common/Button';
 import { DateOfStayField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter';
@@ -24,11 +27,9 @@ const initialData = {
 
 const BookingForm = ({ rentPerDay }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const history = useHistory();
   const { roomId } = useParams();
+  const currentUserId = useSelector(getCurrentUserId());
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-  const { currentUser } = useAuth();
-
   const { data, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
     initialData,
     true,
@@ -36,6 +37,12 @@ const BookingForm = ({ rentPerDay }) => {
   );
 
   const countDays = Math.max(1, Math.round((data.departureDate - data.arrivalDate) / oneDayMs));
+
+  useEffect(() => {
+    if (!currentUserId) {
+      setEnterError('Войдите, чтобы забронировать номер');
+    }
+  }, [data, currentUserId]);
 
   const [setBooking] = useFetching(async (roomId, payload) => {
     await roomsService.setBooking(roomId, payload);
@@ -50,10 +57,9 @@ const BookingForm = ({ rentPerDay }) => {
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
-      if (!currentUser) return history.push('../login/signIn');
       const payload = {
         _id: Math.random().toString(36).substring(2, 9),
-        userId: currentUser._id,
+        userId: currentUserId,
         roomId: roomId,
         ...data,
         totalPrice,
