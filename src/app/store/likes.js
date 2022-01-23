@@ -80,12 +80,13 @@ export const createLike = (userId, reviewId) => async dispatch => {
   }
 };
 
-export const removeLike = userId => async (dispatch, getState) => {
+export const removeLike = (userId, reviewId) => async (dispatch, getState) => {
   dispatch(likesRemoveRequested());
   try {
     const { entities } = getState().likes;
-    const userLike = entities.find(like => like.userId === userId);
-    const likeId = await likesService.remove(userLike._id);
+    const userLikes = entities.filter(like => like.userId === userId);
+    const currentLike = userLikes.find(like => like.reviewId === reviewId);
+    const likeId = await likesService.remove(currentLike._id);
     dispatch(likesRemoved(likeId));
   } catch (error) {
     dispatch(likesRemoveRequestedFailed());

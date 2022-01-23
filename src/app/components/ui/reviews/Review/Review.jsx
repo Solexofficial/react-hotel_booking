@@ -25,8 +25,8 @@ const Review = ({ review }) => {
   const currentUser = useSelector(getCurrentUserData());
   const currentUserId = useSelector(getCurrentUserId());
 
-  const isAdmin = currentUser?.role === 'admin';
-  const isAuthor = review.userId === currentUser?._id;
+  const isAdmin = currentUser.role === 'admin';
+  const isAuthor = review.userId === currentUser._id;
   const showDeleteBtn = isAdmin || isAuthor;
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Review = ({ review }) => {
 
   const toggleLike = () => {
     if (likes.some(el => el.userId === currentUserId)) {
-      dispatch(removeLike(currentUserId));
+      dispatch(removeLike(currentUserId, review._id));
     } else {
       dispatch(createLike(currentUserId, review._id));
     }

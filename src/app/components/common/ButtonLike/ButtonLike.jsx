@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { getCurrentUserId, getIsLoggedIn } from '../../../store/users';
 
 const ButtonLike = ({ likes, onToggle }) => {
+  console.log(likes);
   const [status, setStatus] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn());
   const currentUserId = useSelector(getCurrentUserId());
