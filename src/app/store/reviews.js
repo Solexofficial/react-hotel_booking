@@ -43,7 +43,7 @@ export const loadReviewsList = () => async dispatch => {
   dispatch(reviewsRequested());
   try {
     const { content } = await reviewsService.getAll();
-    dispatch(reviewsReceived(content));
+    dispatch(reviewsReceived(content || []));
   } catch (error) {
     reviewsRequestFailed(error);
   }

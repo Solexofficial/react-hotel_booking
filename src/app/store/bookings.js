@@ -62,7 +62,7 @@ export const loadBookingsList = () => async (dispatch, getState) => {
     dispatch(bookingsRequested());
     try {
       const { content } = await bookingService.getAll();
-      dispatch(bookingsReceived(content));
+      dispatch(bookingsReceived(content || []));
     } catch (error) {
       dispatch(bookingsRequestFailed(error.message));
     }

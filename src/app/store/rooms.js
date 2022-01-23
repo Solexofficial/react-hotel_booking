@@ -40,7 +40,7 @@ export const loadRoomsList = () => async (dispatch, getState) => {
     dispatch(roomsRequested());
     try {
       const { content } = await roomsService.getAll();
-      dispatch(roomsReceived(content));
+      dispatch(roomsReceived(content || []));
     } catch (error) {
       dispatch(roomsRequestFailed(error.message));
     }

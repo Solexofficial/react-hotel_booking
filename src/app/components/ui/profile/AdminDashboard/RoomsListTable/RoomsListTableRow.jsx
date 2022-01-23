@@ -2,7 +2,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Collapse, IconButton, TableCell, TableRow } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getBookingsByRoomId } from '../../../../../store/bookings';
@@ -13,6 +13,12 @@ import BookingTable from '../BookingTable/BookingTable';
 const RoomsListTableRow = ({ row }) => {
   const [open, setOpen] = useState(false);
   const bookings = useSelector(getBookingsByRoomId(row._id));
+
+  useEffect(() => {
+    if (bookings.length === 0) {
+      setOpen(false);
+    }
+  }, [bookings]);
 
   return (
     <>

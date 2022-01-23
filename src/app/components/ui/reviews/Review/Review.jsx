@@ -21,8 +21,8 @@ const Review = ({ review }) => {
   const user = useSelector(getUserById(review.userId));
   const currentUser = useSelector(getCurrentUserData());
 
-  const isAdmin = currentUser.role === 'admin';
-  const isAuthor = review.userId === currentUser._id;
+  const isAdmin = currentUser?.role === 'admin';
+  const isAuthor = review.userId === currentUser?._id;
   const showDeleteBtn = isAdmin || isAuthor;
 
   useEffect(() => {

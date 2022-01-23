@@ -74,7 +74,7 @@ export const createLike = (userId, reviewId) => async dispatch => {
   dispatch(likeCreateRequested());
   try {
     const { content } = await likesService.create(userId, reviewId);
-    dispatch(likeCreated(content));
+    dispatch(likeCreated(content || []));
   } catch (error) {
     dispatch(likeCreateRequestedFailed());
   }
