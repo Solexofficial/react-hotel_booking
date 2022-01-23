@@ -17,7 +17,7 @@ const Modal = ({ open, onClose, title, isLoading = false, children }) => {
         </DialogTitle>
         {children}
       </Dialog>
-      {isLoading && <Backdrop isOpen={isLoading} />}
+      {isLoading && <Backdrop isOpen={true} />}
     </>
   );
 };

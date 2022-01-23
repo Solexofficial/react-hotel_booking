@@ -1,14 +1,16 @@
 import { Paper } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { removeBooking } from '../../../../store/bookings';
 import { getRoomById } from '../../../../store/rooms';
 import { getDateDDMMYYYY } from '../../../../utils/formatDate';
 import Button from '../../../common/Button';
 import { getGuestsLabel } from '../../GuestsCounter/GuestsCounter';
 import RoomCard from '../../rooms/RoomCard';
 
-const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies, totalPrice, roomId, onRemove }) => {
+const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies, totalPrice, roomId }) => {
+  const dispatch = useDispatch();
   const room = useSelector(getRoomById(roomId));
 
   return (
@@ -57,7 +59,7 @@ const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies
               Перейти на страницу номера
             </Button>
           </Link>
-          <Button size='small' variant='outlined' color='error' onClick={() => onRemove(_id)}>
+          <Button size='small' variant='outlined' color='error' onClick={() => dispatch(removeBooking(_id))}>
             Отменить бронирование
           </Button>
         </div>

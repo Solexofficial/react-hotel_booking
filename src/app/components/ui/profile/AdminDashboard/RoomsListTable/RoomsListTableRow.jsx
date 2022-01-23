@@ -2,26 +2,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Collapse, IconButton, TableCell, TableRow } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useFetching } from '../../../../../hooks';
-import bookingService from '../../../../../services/booking.service';
+import { getBookingsByRoomId } from '../../../../../store/bookings';
 import Chip from '../../../../common/Chip/Chip';
 import Tooltip from '../../../../common/Tooltip';
 import BookingTable from '../BookingTable/BookingTable';
 
 const RoomsListTableRow = ({ row }) => {
   const [open, setOpen] = useState(false);
-  const [bookings, setBookings] = useState([]);
-
-  const [getBookings] = useFetching(async roomId => {
-    const { content } = await bookingService.getRoomBookings(roomId);
-    setBookings(content);
-  });
-
-  useEffect(() => {
-    getBookings(row._id);
-  }, []);
+  const bookings = useSelector(getBookingsByRoomId(row._id));
 
   return (
     <>

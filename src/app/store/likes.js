@@ -23,10 +23,10 @@ const likesSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
-    likesCreated: (state, action) => {
+    likeCreated: (state, action) => {
       state.entities.push(action.payload);
     },
-    likesRemoved: (state, action) => {
+    likeRemoved: (state, action) => {
       state.entities = state.entities.filter(like => like._id !== action.payload);
     },
   },
@@ -34,13 +34,13 @@ const likesSlice = createSlice({
 
 const { actions, reducer: likesReducer } = likesSlice;
 
-const { likesRequested, likesReceived, likesRequestFailed, likesCreated, likesRemoved } = actions;
+const { likesRequested, likesReceived, likesRequestFailed, likeCreated, likeRemoved } = actions;
 
-const likesCreateRequested = createAction('likes/likesCreateRequested');
-const likesCreateRequestedFailed = createAction('likes/likesCreateRequestedFailed');
+const likeCreateRequested = createAction('likes/likeCreateRequested');
+const likeCreateRequestedFailed = createAction('likes/likeCreateRequestedFailed');
 
-const likesRemoveRequested = createAction('likes/likesRemoveRequested');
-const likesRemoveRequestedFailed = createAction('likes/likesRemoveRequestedFailed');
+const likeRemoveRequested = createAction('likes/likeRemoveRequested');
+const likeRemoveRequestedFailed = createAction('likes/likeRemoveRequestedFailed');
 
 export const loadLikesList = () => async (dispatch, getState) => {
   const { lastFetch } = getState().likes;
@@ -71,25 +71,25 @@ export const getLikesByUserId = userId => state => {
 };
 
 export const createLike = (userId, reviewId) => async dispatch => {
-  dispatch(likesCreateRequested());
+  dispatch(likeCreateRequested());
   try {
     const { content } = await likesService.create(userId, reviewId);
-    dispatch(likesCreated(content));
+    dispatch(likeCreated(content));
   } catch (error) {
-    dispatch(likesCreateRequestedFailed());
+    dispatch(likeCreateRequestedFailed());
   }
 };
 
 export const removeLike = (userId, reviewId) => async (dispatch, getState) => {
-  dispatch(likesRemoveRequested());
+  dispatch(likeRemoveRequested());
   try {
     const { entities } = getState().likes;
     const userLikes = entities.filter(like => like.userId === userId);
     const currentLike = userLikes.find(like => like.reviewId === reviewId);
     const likeId = await likesService.remove(currentLike._id);
-    dispatch(likesRemoved(likeId));
+    dispatch(likeRemoved(likeId));
   } catch (error) {
-    dispatch(likesRemoveRequestedFailed());
+    dispatch(likeRemoveRequestedFailed());
   }
 };
 

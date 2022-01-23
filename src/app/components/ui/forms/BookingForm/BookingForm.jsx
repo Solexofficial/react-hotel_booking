@@ -2,8 +2,8 @@ import { ArrowRight } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { Form, useFetching, useForm, useModal } from '../../../../hooks';
-import bookingService from '../../../../services/booking.service';
+import { Form, useForm, useModal } from '../../../../hooks';
+import { createBooking, getBookingCreatedStatus } from '../../../../store/bookings';
 import { addBooking } from '../../../../store/rooms';
 import { getCurrentUserId } from '../../../../store/users';
 import Button from '../../../common/Button';
@@ -18,7 +18,7 @@ const oneDayMs = 86000000;
 const initialData = {
   arrivalDate: Date.now(),
   departureDate: Date.now() + oneDayMs,
-  adults: 0,
+  adults: 1,
   children: 0,
   babies: 0,
   totalPrice: 0,
@@ -29,6 +29,7 @@ const BookingForm = () => {
   const dispatch = useDispatch();
   const { roomId } = useParams();
   const currentUserId = useSelector(getCurrentUserId());
+  const bookingCreateStatusLoading = useSelector(getBookingCreatedStatus());
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const { data, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
     initialData,
@@ -44,11 +45,6 @@ const BookingForm = () => {
     }
   }, [data, currentUserId]);
 
-  const [createBooking, isCreateBookingLoading] = useFetching(async payload => {
-    await bookingService.create(payload);
-    handleOpenModal();
-  });
-
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
@@ -59,8 +55,9 @@ const BookingForm = () => {
         ...data,
         totalPrice,
       };
-      dispatch(addBooking(roomId, payload));
-      createBooking(payload);
+      dispatch(addBooking(roomId, payload))
+        .then(dispatch(createBooking(payload)))
+        .then(() => handleOpenModal());
     }
   };
 
@@ -97,7 +94,7 @@ const BookingForm = () => {
       <SuccessBookingModal
         open={isOpen}
         onClose={handleCloseModal}
-        isLoading={!isCreateBookingLoading}
+        isLoading={bookingCreateStatusLoading}
         bookingData={data}
       />
     </>
