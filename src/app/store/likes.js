@@ -86,7 +86,6 @@ export const removeLike = userId => async (dispatch, getState) => {
     const { entities } = getState().likes;
     const userLike = entities.find(like => like.userId === userId);
     const likeId = await likesService.remove(userLike._id);
-    console.log(likeId);
     dispatch(likesRemoved(likeId));
   } catch (error) {
     dispatch(likesRemoveRequestedFailed());

@@ -4,6 +4,7 @@ import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createLike, getLikesByReviewId, getLikesLoadingStatus, removeLike } from '../../../../store/likes';
+import { removeReview } from '../../../../store/reviews';
 import { getCurrentUserData, getCurrentUserId, getUserById } from '../../../../store/users';
 import formatDate from '../../../../utils/formatDate';
 import Avatar from '../../../common/Avatar';
@@ -14,7 +15,7 @@ import Loader from '../../../common/Loader';
 import Rating from '../../../common/Rating';
 import Tooltip from '../../../common/Tooltip';
 
-const Review = ({ review, onRemove }) => {
+const Review = ({ review }) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState(null);
   const [editMode, setEditMode] = useState(false);
@@ -69,7 +70,7 @@ const Review = ({ review, onRemove }) => {
               {showDeleteBtn && (
                 <div className='review__delete-btn'>
                   <Tooltip title='Удалить отзыв'>
-                    <IconButton onClick={() => onRemove(review._id)}>
+                    <IconButton onClick={() => dispatch(removeReview(review._id))}>
                       <ClearIcon fontSize='small' />
                     </IconButton>
                   </Tooltip>

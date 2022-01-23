@@ -7,19 +7,9 @@ const reviewsService = {
     const { data } = await httpService.get(reviewsEndPoint);
     return data;
   },
-  getByRoomId: async roomId => {
-    const { data } = await httpService.get(reviewsEndPoint);
-    const { content } = data;
-    return content.filter(review => review.roomId === roomId);
-  },
   getById: async reviewId => {
     const { data } = await httpService.get(reviewsEndPoint + reviewId);
     return data;
-  },
-  getByReviewsIds: async reviewsIds => {
-    const { data } = await httpService.get(reviewsEndPoint);
-    const { content } = data;
-    return content.filter(el => reviewsIds.includes(el._id));
   },
   create: async payload => {
     const newReview = {
