@@ -1,8 +1,11 @@
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getRoomById } from '../../../../store/rooms';
 import Tooltip from '../../../common/Tooltip/Tooltip';
 
-const BookingFormPriceInfo = ({ rentPerDay, countDays, setTotalPrice, totalPrice }) => {
+const BookingFormPriceInfo = ({ roomId, countDays, setTotalPrice, totalPrice }) => {
+  const { rentPerDay } = useSelector(getRoomById(roomId));
   const DISCOUNT_PERCENT = 10;
   const PRICE_SERVICE = 300;
   const PRICE_RENT = rentPerDay * countDays;

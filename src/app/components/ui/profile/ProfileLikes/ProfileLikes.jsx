@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import likesService from '../../../../services/likes.service';
 import reviewsService from '../../../../services/reviews.service';
+import { getLikesByUserId } from '../../../../store/likes';
 import { getCurrentUserId } from '../../../../store/users';
 import ReviewsList from '../../reviews/ReviewsList';
 
 const ProfileLikes = () => {
   console.log('render');
-  const [likes, setLikes] = useState();
   const [reviews, setReviews] = useState([]);
   const currentUserId = useSelector(getCurrentUserId());
+  const likes = useSelector(getLikesByUserId(currentUserId));
 
-  const getLikes = async userId => {
+  const getReviews = async () => {
     try {
-      const likes = await likesService.getByUserId(userId);
-      setLikes(likes);
       const reviewIds = likes.map(el => el.reviewId);
       const reviews = await reviewsService.getByReviewsIds(reviewIds);
       setReviews(reviews);
@@ -33,8 +31,8 @@ const ProfileLikes = () => {
   };
 
   useEffect(() => {
-    getLikes(currentUserId);
-  }, [currentUserId]);
+    getReviews();
+  }, []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>

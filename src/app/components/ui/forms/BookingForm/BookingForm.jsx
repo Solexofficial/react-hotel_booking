@@ -1,11 +1,10 @@
 import { ArrowRight } from '@mui/icons-material';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Form, useFetching, useForm, useModal } from '../../../../hooks';
 import bookingService from '../../../../services/booking.service';
-import roomsService from '../../../../services/rooms.service';
+import { addBooking } from '../../../../store/rooms';
 import { getCurrentUserId } from '../../../../store/users';
 import Button from '../../../common/Button';
 import { DateOfStayField } from '../../../common/Fields';
@@ -25,8 +24,9 @@ const initialData = {
   totalPrice: 0,
 };
 
-const BookingForm = ({ rentPerDay }) => {
+const BookingForm = () => {
   const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
   const { roomId } = useParams();
   const currentUserId = useSelector(getCurrentUserId());
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
@@ -44,11 +44,6 @@ const BookingForm = ({ rentPerDay }) => {
     }
   }, [data, currentUserId]);
 
-  const [setBooking] = useFetching(async (roomId, payload) => {
-    await roomsService.setBooking(roomId, payload);
-    setEnterError('Вы забронировали этот номер');
-  });
-
   const [createBooking, isCreateBookingLoading] = useFetching(async payload => {
     await bookingService.create(payload);
     handleOpenModal();
@@ -64,7 +59,7 @@ const BookingForm = ({ rentPerDay }) => {
         ...data,
         totalPrice,
       };
-      setBooking(roomId, payload);
+      dispatch(addBooking(roomId, payload));
       createBooking(payload);
     }
   };
@@ -82,8 +77,8 @@ const BookingForm = ({ rentPerDay }) => {
         <GuestsCounter name='guests' data={data} />
         <BookingFormPriceInfo
           name='totalPrice'
+          roomId={roomId}
           totalPrice={totalPrice}
-          rentPerDay={rentPerDay}
           countDays={countDays}
           setTotalPrice={setTotalPrice}
         />

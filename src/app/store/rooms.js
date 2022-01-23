@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import isOutDated from '../utils/isOutDated';
 import roomsService from '../services/rooms.service';
 
@@ -30,6 +30,10 @@ const { actions, reducer: roomsReducer } = roomsSlice;
 
 const { roomsRequested, roomsReceived, roomsRequestFailed } = actions;
 
+const addBookingRequested = createAction('rooms/addBookingRequested');
+const addBookingRequestedSuccess = createAction('rooms/addBookingRequestedSuccess');
+const addBookingRequestedFailed = createAction('rooms/addBookingRequestedFailed');
+
 export const loadRoomsList = () => async (dispatch, getState) => {
   const { lastFetch } = getState().rooms;
   if (isOutDated(lastFetch)) {
@@ -40,6 +44,16 @@ export const loadRoomsList = () => async (dispatch, getState) => {
     } catch (error) {
       dispatch(roomsRequestFailed(error.message));
     }
+  }
+};
+
+export const addBooking = (roomId, payload) => async dispatch => {
+  dispatch(addBookingRequested());
+  try {
+    roomsService.setBooking(roomId, payload);
+    dispatch(addBookingRequestedSuccess());
+  } catch (error) {
+    dispatch(addBookingRequestedFailed(error.message));
   }
 };
 

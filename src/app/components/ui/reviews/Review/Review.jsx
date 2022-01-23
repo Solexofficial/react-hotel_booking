@@ -2,74 +2,49 @@ import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import likesService from '../../../../services/likes.service';
-import userService from '../../../../services/user.service';
+import { useDispatch, useSelector } from 'react-redux';
+import { createLike, getLikesByReviewId, getLikesLoadingStatus, removeLike } from '../../../../store/likes';
+import { getCurrentUserData, getCurrentUserId, getUserById } from '../../../../store/users';
 import formatDate from '../../../../utils/formatDate';
+import Avatar from '../../../common/Avatar';
+import Button from '../../../common/Button';
+import ButtonLike from '../../../common/ButtonLike';
+import { TextAreaField } from '../../../common/Fields';
 import Loader from '../../../common/Loader';
 import Rating from '../../../common/Rating';
 import Tooltip from '../../../common/Tooltip';
-import Avatar from '../../../common/Avatar';
-import ButtonLike from '../../../common/ButtonLike';
-import { useSelector } from 'react-redux';
-import { getCurrentUserData } from '../../../../store/users';
 
 const Review = ({ review, onRemove }) => {
-  const [user, setUser] = useState(null);
-  const [likes, setLikes] = useState([]);
+  const dispatch = useDispatch();
+  const [content, setContent] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const user = useSelector(getUserById(review.userId));
+  const likes = useSelector(getLikesByReviewId(review._id));
+  const likesStatusLoading = useSelector(getLikesLoadingStatus());
   const currentUser = useSelector(getCurrentUserData());
+  const currentUserId = useSelector(getCurrentUserId());
 
   const isAdmin = currentUser?.role === 'admin';
   const isAuthor = review.userId === currentUser?._id;
   const showDeleteBtn = isAdmin || isAuthor;
 
-  const getUser = async id => {
-    const { content } = await userService.getById(id);
-    setUser(content);
-  };
-
-  const getLikes = async reviewId => {
-    try {
-      const likes = await likesService.getByReviewId(reviewId);
-      setLikes(likes);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const removeLike = async user => {
-    try {
-      const userLike = likes.find(like => like.userId === user._id);
-      const likeId = await likesService.remove(userLike._id);
-      setLikes(prevState => prevState.filter(like => like._id !== likeId));
-      console.log(likes);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const addLike = async user => {
-    try {
-      const { content } = await likesService.create(user._id, review._id);
-      setLikes(prevState => [...prevState, content]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getUser(review.userId);
-    getLikes(review._id);
+    setContent(review.content);
   }, [review]);
 
   const toggleLike = () => {
-    if (likes.some(el => el.userId === currentUser._id)) {
-      removeLike(currentUser);
+    if (likes.some(el => el.userId === currentUserId)) {
+      dispatch(removeLike(currentUserId));
     } else {
-      addLike(currentUser);
+      dispatch(createLike(currentUserId, review._id));
     }
   };
 
-  if (user) {
+  const handleChange = e => {
+    setContent(e.target.value);
+  };
+
+  if (user && !likesStatusLoading) {
     return (
       <li className='reviews-list__item'>
         <div className='review'>
@@ -85,7 +60,7 @@ const Review = ({ review, onRemove }) => {
               {isAuthor && (
                 <div className='review__edit-btn'>
                   <Tooltip title='Редактировать'>
-                    <IconButton onClick={() => console.log('edit review')}>
+                    <IconButton onClick={() => setEditMode(true)}>
                       <EditIcon fontSize='small' />
                     </IconButton>
                   </Tooltip>
@@ -105,7 +80,17 @@ const Review = ({ review, onRemove }) => {
               </div>
             </div>
             <p className='review__date'>{formatDate(review.created_at)}</p>
-            <p className='review__message'>{review.content}</p>
+            {/* !TODO: Сделать форму обновления контента комментария */}
+            {editMode ? (
+              <>
+                <TextAreaField value={content} onChange={handleChange} rows={3} />
+                <Button variant='outlined' size='small' style={{ marginTop: '5px' }} onClick={() => setEditMode(false)}>
+                  Применить
+                </Button>
+              </>
+            ) : (
+              <p className='review__message'>{content}</p>
+            )}
           </div>
         </div>
       </li>

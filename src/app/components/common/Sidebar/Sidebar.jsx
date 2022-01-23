@@ -8,6 +8,7 @@ import { getCurrentUserData } from '../../../store/users';
 
 const Sidebar = () => {
   const currentUser = useSelector(getCurrentUserData());
+
   const routes = currentUser.role === 'admin' ? adminRoutes : userProfileRoutes;
   return (
     <MenuList className='sidebar'>

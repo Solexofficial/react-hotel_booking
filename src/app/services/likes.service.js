@@ -8,14 +8,22 @@ const likesService = {
     return data;
   },
   getByReviewId: async reviewId => {
-    const { data } = await httpService.get(likesEndPoint);
-    const { content } = data;
-    return content.filter(like => like.reviewId === reviewId);
+    const { data } = await httpService.get(likesEndPoint, {
+      params: {
+        orderBy: '"reviewId"',
+        equalTo: `"${reviewId}"`,
+      },
+    });
+    return data;
   },
   getByUserId: async userId => {
-    const { data } = await httpService.get(likesEndPoint);
-    const { content } = data;
-    return content.filter(like => like.userId === userId);
+    const { data } = await httpService.get(likesEndPoint, {
+      params: {
+        orderBy: '"userId"',
+        equalTo: `"${userId}"`,
+      },
+    });
+    return data;
   },
   create: async (userId, reviewId) => {
     const newLike = {
