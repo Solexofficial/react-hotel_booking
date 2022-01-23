@@ -3,27 +3,23 @@ import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createLike, getLikesByReviewId, getLikesLoadingStatus, removeLike } from '../../../../store/likes';
 import { removeReview } from '../../../../store/reviews';
-import { getCurrentUserData, getCurrentUserId, getUserById } from '../../../../store/users';
+import { getCurrentUserData, getUserById } from '../../../../store/users';
 import formatDate from '../../../../utils/formatDate';
 import Avatar from '../../../common/Avatar';
 import Button from '../../../common/Button';
-import ButtonLike from '../../../common/ButtonLike';
 import { TextAreaField } from '../../../common/Fields';
 import Loader from '../../../common/Loader';
 import Rating from '../../../common/Rating';
 import Tooltip from '../../../common/Tooltip';
+import ReviewLikes from '../ReviewLikes';
 
 const Review = ({ review }) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const user = useSelector(getUserById(review.userId));
-  const likes = useSelector(getLikesByReviewId(review._id));
-  const likesStatusLoading = useSelector(getLikesLoadingStatus());
   const currentUser = useSelector(getCurrentUserData());
-  const currentUserId = useSelector(getCurrentUserId());
 
   const isAdmin = currentUser.role === 'admin';
   const isAuthor = review.userId === currentUser._id;
@@ -33,19 +29,11 @@ const Review = ({ review }) => {
     setContent(review.content);
   }, [review]);
 
-  const toggleLike = () => {
-    if (likes.some(el => el.userId === currentUserId)) {
-      dispatch(removeLike(currentUserId, review._id));
-    } else {
-      dispatch(createLike(currentUserId, review._id));
-    }
-  };
-
   const handleChange = e => {
     setContent(e.target.value);
   };
 
-  if (user && !likesStatusLoading) {
+  if (user) {
     return (
       <li className='reviews-list__item'>
         <div className='review'>
@@ -53,7 +41,7 @@ const Review = ({ review }) => {
             <div className='avatar'>
               <Avatar alt='пользователя' src={user.avatarPhoto} className='avatar__img' />
             </div>
-            <ButtonLike likes={likes} onToggle={toggleLike} />
+            <ReviewLikes reviewId={review._id} />
           </div>
           <div className='review__content'>
             <div className='review__user-name'>
