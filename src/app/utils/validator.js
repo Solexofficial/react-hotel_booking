@@ -1,4 +1,4 @@
-import isDate from 'date-fns/isDate';
+import { isValid } from 'date-fns/esm';
 
 export function validator(data, config) {
   const errors = {};
@@ -33,8 +33,7 @@ export function validator(data, config) {
         break;
       }
       case 'isValidDate': {
-        console.log(data);
-        statusValidate = !isDate(data);
+        statusValidate = !isValid(data);
         break;
       }
       default:

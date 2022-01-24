@@ -1,17 +1,11 @@
-const DATE_OF_STAY_KEY = 'dateOfStay';
-const COUNT_OF_GUESTS_KEY = 'guests';
+const SEARCH_QUERY = 'search-query';
 
-export function setSessionStorageData(dateOfStay, guests) {
-  sessionStorage.setItem(DATE_OF_STAY_KEY, JSON.stringify(dateOfStay));
-  sessionStorage.setItem(COUNT_OF_GUESTS_KEY, JSON.stringify(guests));
+export function setSessionStorageData(payload) {
+  sessionStorage.setItem(SEARCH_QUERY, JSON.stringify(payload));
 }
 
-export function getDateOfStayData() {
-  return JSON.parse(sessionStorage.getItem(DATE_OF_STAY_KEY));
-}
-
-export function getCountGuestsData() {
-  return JSON.parse(sessionStorage.getItem(COUNT_OF_GUESTS_KEY));
+export function getSearchQueryData() {
+  return JSON.parse(sessionStorage.getItem(SEARCH_QUERY));
 }
 
 export function resetSessionStorageData() {
@@ -20,8 +14,7 @@ export function resetSessionStorageData() {
 
 const sessionStorageService = {
   setSessionStorageData,
-  getDateOfStayData,
-  getCountGuestsData,
+  getSearchQueryData,
   resetSessionStorageData,
 };
 

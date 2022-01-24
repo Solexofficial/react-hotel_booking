@@ -6,6 +6,11 @@
   width: 325px;
 }
 
+.rooms-page__sorting {
+  display: flex;
+  gap: 10px;
+}
+
 .rooms-page__rooms {
   flex: 1;
 }

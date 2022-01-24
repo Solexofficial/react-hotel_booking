@@ -2,6 +2,7 @@ import { ArrowRight } from '@mui/icons-material';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
+import { setSessionStorageData } from '../../../../services/sessionStorage.service';
 import Button from '../../../common/Button/Button';
 import { DateOfStayField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter';
@@ -15,15 +16,6 @@ const initialState = {
   adults: 1,
   children: 0,
   babies: 0,
-  rentPerDay: [0, 15000],
-  canSmoke: false,
-  canPets: false,
-  canInvite: false,
-  hasWideCorridor: false,
-  hasDisabledAssistant: false,
-  hasWifi: false,
-  hasConditioner: false,
-  hasWorkSpace: false,
 };
 
 const SearchRoomsForm = () => {
@@ -38,6 +30,7 @@ const SearchRoomsForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
+      setSessionStorageData(data);
       history.push(`/rooms`);
     }
   };

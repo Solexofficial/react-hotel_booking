@@ -1,6 +1,9 @@
+import { isAfter, isBefore, isEqual, isSameSecond } from 'date-fns';
 import React from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
+import { getSearchQueryData } from '../../../services/sessionStorage.service';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
@@ -67,6 +70,13 @@ const RoomsPage = () => {
     setSortBy(JSON.parse(target.value));
   };
 
+  useEffect(() => {
+    const searchQueryData = getSearchQueryData();
+    if (searchQueryData) {
+      setData(prevState => ({ ...prevState, ...searchQueryData }));
+    }
+  }, []);
+
   //   var arrivalDate = moment("2022-01-12, 13:00:00"),
   //   bookingArrivalDate = moment("2022-01-08, 12:00:00"),
   //   bookingDepartureDate = moment("2022-01-12, 12:00:00");
@@ -76,6 +86,30 @@ const RoomsPage = () => {
   // } else {
   //   console.log("is not between");
   // }
+
+  // const sameOrBefore = (d1 = new Date(), d2 = new Date()) => {
+  //   return isSameSecond(d1, d2) || isBefore(d1, d2);
+  // };
+
+  // const sameOrAfter = (d1 = new Date(), d2 = new Date()) => {
+  //   return isSameSecond(d1, d2) || isAfter(d1, d2);
+  // };
+
+  const isBooked = (
+    [arrivalDate, departureDate] = [new Date(), new Date()],
+    [bookingArrivalDate, bookingDepartureDate] = [new Date(), new Date()]
+  ) => {
+    return (
+      // sameOrBefore(bookingArrivalDate, arrivalDate) &&
+      isBefore(bookingArrivalDate, departureDate) &&
+      // sameOrAfter(bookingDepartureDate, departureDate) &&
+      isAfter(bookingDepartureDate, departureDate)
+    );
+  };
+
+  console.log(
+    isBooked([new Date('2022-01-25'), new Date('2022-01-30')], [new Date('2022-01-24'), new Date('2022-01-29')])
+  );
 
   return (
     <main className='rooms-page'>
@@ -89,8 +123,10 @@ const RoomsPage = () => {
         />
       </aside>
       <section className='rooms-page__rooms'>
-        <RoomsSort sortBy={sortBy} onSort={handleSort} />
-        <RoomsDisplayCount count={pageSize} setCount={handleChangePageSize} options={setPageSizeOptions} />
+        <div className='rooms-page__sorting'>
+          <RoomsSort sortBy={sortBy} onSort={handleSort} />
+          <RoomsDisplayCount count={pageSize} setCount={handleChangePageSize} options={setPageSizeOptions} />
+        </div>
         <h2 className='rooms__title'>Номера, которые мы для вас подобрали</h2>
         {roomsIsLoading ? <RoomsListSkeleton pageSize={pageSize} /> : <RoomsList rooms={roomsListCrop} />}
         {roomsListCrop.length === 0 && <h2>Мы не нашли для вас подходящих номеров по вашим параметрам &#128577;</h2>}
