@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaTypes } = require('mongoose');
 
 const schema = new Schema({
   adults: Number,
@@ -6,8 +6,8 @@ const schema = new Schema({
   children: Number,
   arrivalDate: Date,
   departureDate: Date,
-  roomId: String,
-  userId: String,
+  roomId: { type: SchemaTypes.ObjectId, ref: 'Room' },
+  userId: { type: SchemaTypes.ObjectId, ref: 'Room' },
   totalPrice: Number,
 });
 

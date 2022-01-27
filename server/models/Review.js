@@ -8,16 +8,15 @@ const schema = new Schema(
     },
     rating: Number,
     roomId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: 'Room',
       required: true,
     },
     userId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    created_at: String,
   },
   {
     timestamps: { createdAt: 'created_at' },
