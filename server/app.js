@@ -4,12 +4,14 @@ const config = require('config');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
 const initDatabase = require('./start/initDatabase');
+const routes = require('./routes');
 
 const app = express();
 dotenv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/api', routes);
 
 const PORT = config.get('port') ?? 8080;
 
