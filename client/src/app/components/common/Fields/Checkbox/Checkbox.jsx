@@ -13,7 +13,7 @@ const Checkbox = ({ label, labelDetails, name, color, value, onChange, ...rest }
       <input
         className='visually-hidden checkbox__input'
         type='checkbox'
-        checked={value}
+        checked={!!value}
         name={name}
         value={value}
         onChange={e => onChange(convertToDefEventParam(name, e.target.checked))}

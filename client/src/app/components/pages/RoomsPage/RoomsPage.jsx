@@ -69,10 +69,6 @@ const RoomsPage = () => {
     setSortBy(JSON.parse(target.value));
   };
 
-  useEffect(() => {
-    console.log(filter);
-  }, [data]);
-
   // useEffect(() => {
   //   const searchQueryData = getSearchQueryData();
   //   if (searchQueryData) {

@@ -7,8 +7,8 @@ const valuetext = value => {
   return `${value}₽`;
 };
 
-const RangeSliderField = ({ label, name, description, onChange, value, min, max, minDistance = 1500 }) => {
-  const [sliderValue, setSliderValue] = useState(value);
+const RangeSliderField = ({ label, name, description, onChange, value = [], min, max, minDistance = 1500 }) => {
+  const [sliderValue, setSliderValue] = useState(value.map(Number));
 
   const handleChange = useCallback(
     (event, newValue, activeThumb) => {

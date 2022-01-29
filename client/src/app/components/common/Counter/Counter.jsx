@@ -6,13 +6,13 @@ import Button from '../Button';
 const Counter = ({ name, label, value, min, max, onChange }) => {
   const handleIncrease = e => {
     e.preventDefault();
-    if (value >= max) return;
-    onChange({ target: { name: name, value: value + 1 } });
+    if (+value >= max) return;
+    onChange({ target: { name: name, value: +value + 1 } });
   };
   const handleDecrease = e => {
     e.preventDefault();
-    if (value <= min) return;
-    onChange({ target: { name: name, value: value - 1 } });
+    if (+value <= min) return;
+    onChange({ target: { name: name, value: +value - 1 } });
   };
 
   return (

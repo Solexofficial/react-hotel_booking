@@ -12,7 +12,7 @@ const DateOfStay = ({ onChange, data, errors }) => {
           name='arrivalDate'
           error={errors?.arrivalDate}
           onChange={onChange}
-          value={arrivalDate}
+          value={+arrivalDate}
         />
       </div>
       <div className='dateOfStay'>
@@ -20,9 +20,9 @@ const DateOfStay = ({ onChange, data, errors }) => {
           label='Дата выезда'
           name='departureDate'
           error={errors?.departureDate}
-          minDate={arrivalDate}
+          minDate={+arrivalDate}
           onChange={onChange}
-          value={departureDate}
+          value={+departureDate}
           className='dateOfStay'
         />
       </div>

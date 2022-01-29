@@ -2,6 +2,7 @@ import React from 'react';
 import RoomsFilterItem from '../RoomsFiltersItem';
 
 const RoomsFiltersList = ({ handleChange, data, children }) => {
+  console.table('filters list render');
   const clonedElements = React.Children.map(children, child => {
     const childType = typeof child.type;
     let config = {};
@@ -13,7 +14,7 @@ const RoomsFiltersList = ({ handleChange, data, children }) => {
         ...child.props,
         data,
         onChange: handleChange,
-        value: data[child.props.name] || '',
+        value: data[child.props.name],
       };
     }
 
@@ -23,4 +24,4 @@ const RoomsFiltersList = ({ handleChange, data, children }) => {
   return <form className='filters__form'>{clonedElements}</form>;
 };
 
-export default RoomsFiltersList;
+export default React.memo(RoomsFiltersList);

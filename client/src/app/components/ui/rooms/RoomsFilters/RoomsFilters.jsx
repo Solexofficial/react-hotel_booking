@@ -1,16 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useFiltersQuery } from '../../../../hooks';
 import Button from '../../../common/Button';
 import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter/GuestsCounter';
 import RoomsFilterList from './RoomsFiltersList/RoomsFiltersList';
 
+const oneDayMs = 86000000;
+
+const initialState = {
+  arrivalDate: Date.now(),
+  departureDate: Date.now() + oneDayMs,
+  adults: 0,
+  children: 0,
+  babies: 0,
+  rentPerDay: [0, 15000],
+  canSmoke: false,
+  canPets: false,
+  canInvite: false,
+  hasWideCorridor: false,
+  hasDisabledAssistant: false,
+  hasWifi: false,
+  hasConditioner: false,
+  hasWorkSpace: false,
+};
+
 const RoomsFilter = ({ data, errors, handleResetForm, handleInputChange }) => {
-  console.log('rooms filter render');
+  const [filters, setFilters] = useState(initialState);
+  const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
+
+  const handleResetFilters = e => {
+    e.preventDefault();
+    setFilters(initialState);
+    onResetFilters();
+  };
+
+  useEffect(() => {
+    if (Object.keys(searchFilters).length === 0) {
+      setFilters(initialState);
+    }
+    setFilters({ ...initialState, ...searchFilters });
+  }, [searchFilters]);
 
   return (
     <section className='filters__wrapper'>
       <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
-      <RoomsFilterList data={data} handleChange={handleInputChange}>
+      <RoomsFilterList data={filters} handleChange={handleChangeFilter}>
         <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' errors={errors} />
         <GuestsCounter />
         <RangeSliderField
@@ -42,7 +76,7 @@ const RoomsFilter = ({ data, errors, handleResetForm, handleInputChange }) => {
             labelDetails='На 1 этаже вас встретит специалист и проводит до номера'
           />
         </CheckBoxList>
-        <Button onClick={handleResetForm} fullWidth>
+        <Button type='button' onClick={handleResetFilters} fullWidth>
           Сбросить Фильтры
         </Button>
       </RoomsFilterList>
@@ -50,4 +84,4 @@ const RoomsFilter = ({ data, errors, handleResetForm, handleInputChange }) => {
   );
 };
 
-export default React.memo(RoomsFilter);
+export default RoomsFilter;
