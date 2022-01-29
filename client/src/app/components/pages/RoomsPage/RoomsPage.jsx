@@ -1,7 +1,7 @@
-import React from 'react';
-import { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useFiltersQuery, useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
+import { useFiltersQuery, usePagination, useSort } from '../../../hooks';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
@@ -10,25 +10,6 @@ import RoomsList from '../../ui/rooms/RoomsList';
 import RoomsListSkeleton from '../../ui/rooms/RoomsList/RoomsListSkeleton';
 import RoomsSort from '../../ui/rooms/RoomsSort';
 
-const oneDayMs = 86000000;
-
-const initialState = {
-  arrivalDate: Date.now(),
-  departureDate: Date.now() + oneDayMs,
-  adults: 1,
-  children: 0,
-  babies: 0,
-  rentPerDay: [0, 15000],
-  canSmoke: false,
-  canPets: false,
-  canInvite: false,
-  hasWideCorridor: false,
-  hasDisabledAssistant: false,
-  hasWifi: true,
-  hasConditioner: false,
-  hasWorkSpace: false,
-};
-
 const setPageSizeOptions = [
   { name: '6', value: 6 },
   { name: '12', value: 12 },
@@ -36,34 +17,27 @@ const setPageSizeOptions = [
   { name: '24', value: 24 },
 ];
 
-// const validatorConfig = {
-//   arrivalDate: {
-//     isValidDate: {
-//       message: 'Дата не корректна',
-//     },
-//   },
-//   departureDate: {
-//     isValidDate: {
-//       message: 'Дата не корректна',
-//     },
-//   },
-// };
+// !TODO: add validation filters
+// !TODO: add serverSide filter by queryString
 
 const RoomsPage = () => {
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
+  const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
 
-  const { data, setData, errors, handleInputChange, handleResetForm } = useForm(initialState, false, {});
+  useEffect(() => {
+    console.log(searchFilters);
+    axios.get('test123', { params: searchFilters });
+  }, [searchFilters]);
+
   const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
-  const { filteredItems } = useRoomsFilter(sortedItems, data);
   const {
     itemsListCrop: roomsListCrop,
     currentPage,
     pageSize,
     handleChangePage,
     handleChangePageSize,
-  } = usePagination(filteredItems || [], setPageSizeOptions[1].value);
-  const [filter, changeFilter, clearFilter] = useFiltersQuery();
+  } = usePagination(sortedItems || [], setPageSizeOptions[1].value);
 
   const handleSort = ({ target }) => {
     setSortBy(JSON.parse(target.value));
@@ -89,13 +63,7 @@ const RoomsPage = () => {
   return (
     <main className='rooms-page'>
       <aside className='rooms-page__filters'>
-        <RoomsFilter
-          data={data}
-          setData={setData}
-          errors={errors}
-          handleInputChange={changeFilter}
-          handleResetForm={handleResetForm}
-        />
+        <RoomsFilter searchParams={searchFilters} onChange={handleChangeFilter} onReset={onResetFilters} />
       </aside>
       <section className='rooms-page__rooms'>
         <div className='rooms-page__sorting'>
@@ -106,14 +74,9 @@ const RoomsPage = () => {
         {roomsIsLoading ? <RoomsListSkeleton pageSize={pageSize} /> : <RoomsList rooms={roomsListCrop} />}
         {roomsListCrop.length === 0 && <h2>Мы не нашли для вас подходящих номеров по вашим параметрам &#128577;</h2>}
 
-        {filteredItems.length > pageSize && (
+        {sortedItems.length > pageSize && (
           <div className='rooms-page__pagination'>
-            <Pagination
-              items={filteredItems}
-              pageSize={pageSize}
-              currentPage={currentPage}
-              onChange={handleChangePage}
-            />
+            <Pagination items={sortedItems} pageSize={pageSize} currentPage={currentPage} onChange={handleChangePage} />
             <p className='rooms-page__pagination-info'>
               {`${(currentPage - 1) * pageSize || 1} - 
               ${pageSize * currentPage > rooms.length ? rooms.length : pageSize * currentPage}

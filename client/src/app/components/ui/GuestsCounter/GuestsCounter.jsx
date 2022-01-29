@@ -30,4 +30,4 @@ const GuestsCounter = ({ data, onChange }) => {
   );
 };
 
-export default GuestsCounter;
+export default React.memo(GuestsCounter);

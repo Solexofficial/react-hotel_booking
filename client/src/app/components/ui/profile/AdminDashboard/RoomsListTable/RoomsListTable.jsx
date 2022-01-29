@@ -26,7 +26,7 @@ const headCells = [
     label: 'Рейтинг',
   },
   {
-    id: 'rentPerDay',
+    id: 'price',
     numeric: true,
     disablePadding: false,
     label: 'Аренда в сутки',

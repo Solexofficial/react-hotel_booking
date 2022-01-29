@@ -31,4 +31,4 @@ const DatePickerField = ({ label, name, value, minDate, onChange, error, ...rest
   );
 };
 
-export default DatePickerField;
+export default React.memo(DatePickerField);

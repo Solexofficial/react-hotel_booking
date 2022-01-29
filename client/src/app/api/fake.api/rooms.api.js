@@ -2,7 +2,7 @@ const rooms = [
   {
     _id: '888',
     roomNumber: '888',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 725,
     countReviews: 145,
     type: 'Люкс',
@@ -16,7 +16,7 @@ const rooms = [
   {
     _id: '777',
     roomNumber: '777',
-    rentPerDay: 15000,
+    price: 15000,
     rate: 4,
     countReviews: 1,
     images: {
@@ -29,7 +29,7 @@ const rooms = [
   {
     _id: '2',
     roomNumber: '2',
-    rentPerDay: 1500,
+    price: 1500,
     rate: 8,
     countReviews: 2,
     images: {
@@ -41,7 +41,7 @@ const rooms = [
   {
     _id: '3',
     roomNumber: '3',
-    rentPerDay: 3000,
+    price: 3000,
     rate: 322,
     countReviews: 120,
     images: {
@@ -53,7 +53,7 @@ const rooms = [
   {
     _id: '4',
     roomNumber: '4',
-    rentPerDay: 4000,
+    price: 4000,
     rate: 500,
     countReviews: 131,
     images: {
@@ -65,7 +65,7 @@ const rooms = [
   {
     _id: '5',
     roomNumber: '5',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 700,
     countReviews: 70,
     images: {
@@ -77,7 +77,7 @@ const rooms = [
   {
     _id: '6',
     roomNumber: '6',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 620,
     countReviews: 50,
     images: {
@@ -89,7 +89,7 @@ const rooms = [
   {
     _id: '7',
     roomNumber: '7',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 4,
     countReviews: 145,
     images: {
@@ -101,7 +101,7 @@ const rooms = [
   {
     _id: '8',
     roomNumber: '8',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 3,
     countReviews: 145,
     images: {
@@ -113,7 +113,7 @@ const rooms = [
   {
     _id: '9',
     roomNumber: '9',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 2,
     countReviews: 145,
     images: {
@@ -125,7 +125,7 @@ const rooms = [
   {
     _id: '10',
     roomNumber: '10',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 4,
     countReviews: 145,
     images: {
@@ -137,7 +137,7 @@ const rooms = [
   {
     _id: '11',
     roomNumber: '11',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 3,
     countReviews: 145,
     images: {
@@ -149,7 +149,7 @@ const rooms = [
   {
     _id: '12',
     roomNumber: '12',
-    rentPerDay: 15000,
+    price: 15000,
     rate: 4,
     countReviews: 145,
     images: {
@@ -162,7 +162,7 @@ const rooms = [
   {
     _id: '13',
     roomNumber: '13',
-    rentPerDay: 1500,
+    price: 1500,
     rate: 3,
     countReviews: 145,
     images: {
@@ -174,7 +174,7 @@ const rooms = [
   {
     _id: '14',
     roomNumber: '14',
-    rentPerDay: 3000,
+    price: 3000,
     rate: 2,
     countReviews: 145,
     images: {
@@ -186,7 +186,7 @@ const rooms = [
   {
     _id: '15',
     roomNumber: '15',
-    rentPerDay: 4000,
+    price: 4000,
     rate: 4,
     countReviews: 145,
     images: {
@@ -198,7 +198,7 @@ const rooms = [
   {
     _id: '16',
     roomNumber: '16',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 3,
     countReviews: 145,
     images: {
@@ -210,7 +210,7 @@ const rooms = [
   {
     _id: '17',
     roomNumber: '17',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 2,
     countReviews: 145,
     images: {
@@ -222,7 +222,7 @@ const rooms = [
   {
     _id: '18',
     roomNumber: '18',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 4,
     countReviews: 145,
     images: {
@@ -234,7 +234,7 @@ const rooms = [
   {
     _id: '19',
     roomNumber: '19',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 3,
     countReviews: 145,
     images: {
@@ -246,7 +246,7 @@ const rooms = [
   {
     _id: '20',
     roomNumber: '20',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 2,
     countReviews: 145,
     images: {
@@ -258,7 +258,7 @@ const rooms = [
   {
     _id: '21',
     roomNumber: '21',
-    rentPerDay: 9990,
+    price: 9990,
     rate: 4,
     countReviews: 145,
     images: {
@@ -270,7 +270,7 @@ const rooms = [
   {
     _id: '22',
     roomNumber: '22',
-    rentPerDay: 13000,
+    price: 13000,
     rate: 3,
     countReviews: 145,
     images: {

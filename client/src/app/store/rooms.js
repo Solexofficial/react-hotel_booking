@@ -1,5 +1,4 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import isOutDated from '../utils/isOutDated';
 import roomsService from '../services/rooms.service';
 
 const roomsSlice = createSlice({

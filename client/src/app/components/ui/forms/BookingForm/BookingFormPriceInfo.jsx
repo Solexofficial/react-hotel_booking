@@ -5,11 +5,11 @@ import { getRoomById } from '../../../../store/rooms';
 import Tooltip from '../../../common/Tooltip/Tooltip';
 
 const BookingFormPriceInfo = ({ roomId, countDays, setTotalPrice, totalPrice }) => {
-  const { rentPerDay } = useSelector(getRoomById(roomId));
+  const { price } = useSelector(getRoomById(roomId));
   const DISCOUNT_PERCENT = 10;
   const PRICE_SERVICE = 300;
-  const PRICE_RENT = rentPerDay * countDays;
-  const PRICE_RENT_WITH_DISCOUNT = (rentPerDay * countDays * DISCOUNT_PERCENT) / 100;
+  const PRICE_RENT = price * countDays;
+  const PRICE_RENT_WITH_DISCOUNT = (price * countDays * DISCOUNT_PERCENT) / 100;
 
   const getTotalPrice = () => {
     return PRICE_RENT - PRICE_RENT_WITH_DISCOUNT + PRICE_SERVICE;
@@ -24,7 +24,7 @@ const BookingFormPriceInfo = ({ roomId, countDays, setTotalPrice, totalPrice }) 
     <div className='booking-form__price'>
       <div className='booking-form__price-item'>
         <div className='price-item__result'>
-          <span>{`${rentPerDay}₽ x ${countDays} суток`}</span>
+          <span>{`${price}₽ x ${countDays} суток`}</span>
           <span>{PRICE_RENT}&#8381;</span>
         </div>
       </div>

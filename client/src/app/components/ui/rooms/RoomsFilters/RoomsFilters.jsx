@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useFiltersQuery } from '../../../../hooks';
 import Button from '../../../common/Button';
 import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter/GuestsCounter';
@@ -13,7 +12,7 @@ const initialState = {
   adults: 0,
   children: 0,
   babies: 0,
-  rentPerDay: [0, 15000],
+  price: [0, 15000],
   canSmoke: false,
   canPets: false,
   canInvite: false,
@@ -24,33 +23,32 @@ const initialState = {
   hasWorkSpace: false,
 };
 
-const RoomsFilter = ({ data, errors, handleResetForm, handleInputChange }) => {
+const RoomsFilter = ({ searchParams, onChange, onReset }) => {
   const [filters, setFilters] = useState(initialState);
-  const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
 
   const handleResetFilters = e => {
     e.preventDefault();
     setFilters(initialState);
-    onResetFilters();
+    onReset();
   };
 
   useEffect(() => {
-    if (Object.keys(searchFilters).length === 0) {
+    if (Object.keys(searchParams).length === 0) {
       setFilters(initialState);
     }
-    setFilters({ ...initialState, ...searchFilters });
-  }, [searchFilters]);
+    setFilters({ ...initialState, ...searchParams });
+  }, [searchParams]);
 
   return (
     <section className='filters__wrapper'>
       <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
-      <RoomsFilterList data={filters} handleChange={handleChangeFilter}>
-        <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' errors={errors} />
+      <RoomsFilterList data={filters} handleChange={onChange}>
+        <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
         <GuestsCounter />
         <RangeSliderField
           label='Диапазон цены'
           description='Стоимость за сутки пребывания в номере'
-          name='rentPerDay'
+          name='price'
           min={0}
           max={15000}
         />

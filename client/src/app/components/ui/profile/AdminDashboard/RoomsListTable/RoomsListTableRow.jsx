@@ -28,7 +28,7 @@ const RoomsListTableRow = ({ row }) => {
         </TableCell>
         <TableCell>{row.type}</TableCell>
         <TableCell align='right'>{row.rate}</TableCell>
-        <TableCell align='right'>{row.rentPerDay}&#8381;</TableCell>
+        <TableCell align='right'>{row.price}&#8381;</TableCell>
         <TableCell align='right'>
           {bookings.length > 0 ? (
             <>

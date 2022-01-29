@@ -24,10 +24,8 @@ const useRoomsFilter = (items, filters) => {
     filteredItems = filteredItems.filter(room => room.canSmoke);
   }
 
-  if (filters.rentPerDay) {
-    filteredItems = filteredItems.filter(
-      room => room.rentPerDay >= filters.rentPerDay[0] && room.rentPerDay <= filters.rentPerDay[1]
-    );
+  if (filters.price) {
+    filteredItems = filteredItems.filter(room => room.price >= filters.price[0] && room.price <= filters.price[1]);
   }
 
   return { filteredItems };

@@ -6,8 +6,8 @@ const roomsSortArray = [
   { name: 'По возрастанию', value: { path: 'roomNumber', order: 'asc' } },
   { name: 'Популярное', value: { path: 'countReviews', order: 'desc' } },
   { name: 'Высокий рейтинг', value: { path: 'rate', order: 'desc' } },
-  { name: 'Сначала дешёвые', value: { path: 'rentPerDay', order: 'asc' } },
-  { name: 'Сначала дорогие', value: { path: 'rentPerDay', order: 'desc' } },
+  { name: 'Сначала дешёвые', value: { path: 'price', order: 'asc' } },
+  { name: 'Сначала дорогие', value: { path: 'price', order: 'desc' } },
 ];
 
 const RoomsSort = ({ sortBy, onSort }) => {
