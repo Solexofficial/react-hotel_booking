@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Form, useForm, useModal } from '../../../../hooks';
-import { getSearchQueryData } from '../../../../services/sessionStorage.service';
 import { createBooking, getBookingCreatedStatus } from '../../../../store/bookings';
 import { addBooking } from '../../../../store/rooms';
 import { getCurrentUserId } from '../../../../store/users';
@@ -41,11 +40,6 @@ const BookingForm = () => {
   const countDays = Math.max(1, Math.round((data.departureDate - data.arrivalDate) / oneDayMs));
 
   useEffect(() => {
-    const searchQueryData = getSearchQueryData();
-    if (searchQueryData) {
-      setData(prevState => ({ ...prevState, ...searchQueryData }));
-    }
-
     if (!currentUserId) {
       setEnterError('Войдите, чтобы забронировать номер');
     }

@@ -34,16 +34,13 @@ const addBookingRequested = createAction('rooms/addBookingRequested');
 const addBookingRequestedSuccess = createAction('rooms/addBookingRequestedSuccess');
 const addBookingRequestedFailed = createAction('rooms/addBookingRequestedFailed');
 
-export const loadRoomsList = () => async (dispatch, getState) => {
-  const { lastFetch } = getState().rooms;
-  if (isOutDated(lastFetch)) {
-    dispatch(roomsRequested());
-    try {
-      const { content } = await roomsService.getAll();
-      dispatch(roomsReceived(content || []));
-    } catch (error) {
-      dispatch(roomsRequestFailed(error.message));
-    }
+export const loadRoomsList = params => async (dispatch, getState) => {
+  dispatch(roomsRequested());
+  try {
+    const { content } = await roomsService.getAll(params);
+    dispatch(roomsReceived(content || []));
+  } catch (error) {
+    dispatch(roomsRequestFailed(error.message));
   }
 };
 

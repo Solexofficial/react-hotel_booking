@@ -2,18 +2,18 @@ import { ArrowRight } from '@mui/icons-material';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
-import { setSessionStorageData } from '../../../../services/sessionStorage.service';
 import Button from '../../../common/Button/Button';
 import { DateOfStayField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter';
 import validatorConfig from './validatorConfig';
+import queryString from 'query-string';
 
 const oneDayMs = 86000000;
 
 const initialState = {
   arrivalDate: Date.now(),
   departureDate: Date.now() + oneDayMs,
-  adults: 1,
+  adults: 0,
   children: 0,
   babies: 0,
 };
@@ -30,8 +30,8 @@ const SearchRoomsForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     if (validate(data)) {
-      setSessionStorageData(data);
-      history.push(`/rooms`);
+      const queryParams = queryString.stringify(data);
+      history.push(`/rooms?${queryParams}`);
     }
   };
 

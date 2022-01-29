@@ -1,9 +1,7 @@
-import { isAfter, isBefore, isEqual, isSameSecond } from 'date-fns';
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
-import { getSearchQueryData } from '../../../services/sessionStorage.service';
+import { useFiltersQuery, useForm, usePagination, useRoomsFilter, useSort } from '../../../hooks';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
@@ -26,7 +24,7 @@ const initialState = {
   canInvite: false,
   hasWideCorridor: false,
   hasDisabledAssistant: false,
-  hasWifi: false,
+  hasWifi: true,
   hasConditioner: false,
   hasWorkSpace: false,
 };
@@ -38,24 +36,24 @@ const setPageSizeOptions = [
   { name: '24', value: 24 },
 ];
 
-const validatorConfig = {
-  arrivalDate: {
-    isValidDate: {
-      message: 'Дата не корректна',
-    },
-  },
-  departureDate: {
-    isValidDate: {
-      message: 'Дата не корректна',
-    },
-  },
-};
+// const validatorConfig = {
+//   arrivalDate: {
+//     isValidDate: {
+//       message: 'Дата не корректна',
+//     },
+//   },
+//   departureDate: {
+//     isValidDate: {
+//       message: 'Дата не корректна',
+//     },
+//   },
+// };
 
 const RoomsPage = () => {
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
 
-  const { data, setData, errors, handleInputChange, handleResetForm } = useForm(initialState, false, validatorConfig);
+  const { data, setData, errors, handleInputChange, handleResetForm } = useForm(initialState, false, {});
   const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
   const { filteredItems } = useRoomsFilter(sortedItems, data);
   const {
@@ -65,17 +63,22 @@ const RoomsPage = () => {
     handleChangePage,
     handleChangePageSize,
   } = usePagination(filteredItems || [], setPageSizeOptions[1].value);
+  const [filter, changeFilter, clearFilter] = useFiltersQuery();
 
   const handleSort = ({ target }) => {
     setSortBy(JSON.parse(target.value));
   };
 
   useEffect(() => {
-    const searchQueryData = getSearchQueryData();
-    if (searchQueryData) {
-      setData(prevState => ({ ...prevState, ...searchQueryData }));
-    }
-  }, []);
+    console.log(filter);
+  }, [data]);
+
+  // useEffect(() => {
+  //   const searchQueryData = getSearchQueryData();
+  //   if (searchQueryData) {
+  //     setData(prevState => ({ ...prevState, ...searchQueryData }));
+  //   }
+  // }, []);
 
   //   var arrivalDate = moment("2022-01-12, 13:00:00"),
   //   bookingArrivalDate = moment("2022-01-08, 12:00:00"),
@@ -87,30 +90,6 @@ const RoomsPage = () => {
   //   console.log("is not between");
   // }
 
-  // const sameOrBefore = (d1 = new Date(), d2 = new Date()) => {
-  //   return isSameSecond(d1, d2) || isBefore(d1, d2);
-  // };
-
-  // const sameOrAfter = (d1 = new Date(), d2 = new Date()) => {
-  //   return isSameSecond(d1, d2) || isAfter(d1, d2);
-  // };
-
-  const isBooked = (
-    [arrivalDate, departureDate] = [new Date(), new Date()],
-    [bookingArrivalDate, bookingDepartureDate] = [new Date(), new Date()]
-  ) => {
-    return (
-      // sameOrBefore(bookingArrivalDate, arrivalDate) &&
-      isBefore(bookingArrivalDate, departureDate) &&
-      // sameOrAfter(bookingDepartureDate, departureDate) &&
-      isAfter(bookingDepartureDate, departureDate)
-    );
-  };
-
-  console.log(
-    isBooked([new Date('2022-01-25'), new Date('2022-01-30')], [new Date('2022-01-24'), new Date('2022-01-29')])
-  );
-
   return (
     <main className='rooms-page'>
       <aside className='rooms-page__filters'>
@@ -118,7 +97,7 @@ const RoomsPage = () => {
           data={data}
           setData={setData}
           errors={errors}
-          handleInputChange={handleInputChange}
+          handleInputChange={changeFilter}
           handleResetForm={handleResetForm}
         />
       </aside>
