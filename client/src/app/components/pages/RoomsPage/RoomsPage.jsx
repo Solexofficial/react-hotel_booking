@@ -26,7 +26,6 @@ const RoomsPage = () => {
   const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
 
   useEffect(() => {
-    console.log(searchFilters);
     axios.get('test123', { params: searchFilters });
   }, [searchFilters]);
 

@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const schema = new Schema({
   roomNumber: Number,
-  rentPerDay: Number,
+  price: Number,
   countReviews: Number,
   rate: Number,
   canSmoke: Boolean,
