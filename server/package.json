@@ -10,10 +10,13 @@
   "author": "Mark Pokrovsky <solexofficial@yandex.ru>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "chalk": "^4.1.2",
     "config": "^3.3.7",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "express-validation": "^3.0.8",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8"
   },
   "devDependencies": {
