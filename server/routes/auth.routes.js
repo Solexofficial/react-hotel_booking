@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const { generateUserData } = require('../utils/helpers');
 const User = require('../models/User');
 const router = express.Router({ mergeParams: true });
+const tokenService = require('../services/token.service');
 
 function isTokenInvalid(data, dbToken) {
   return !data || !dbToken || data._id !== dbToken?.user?.toString();

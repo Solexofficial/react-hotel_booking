@@ -6,6 +6,7 @@ const schema = new Schema({
   subscribe: Boolean,
   birthYear: Number,
   avatarPhoto: String,
+  password: String,
   email: { type: String, required: true, unique: true },
   gender: { type: String, enum: ['male', 'female'] },
 });

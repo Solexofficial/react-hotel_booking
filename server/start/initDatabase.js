@@ -25,9 +25,9 @@ module.exports = async () => {
     console.log('rooms add mongoDB');
   }
   const users = await User.find();
-  if (users.length !== usersMockData.length) {
+  if (users.length < usersMockData.length) {
     await createInitialEntity(User, usersMockData);
-    console.log('users add mongoDB');
+    console.log('user add mongoDB');
   }
 };
 
