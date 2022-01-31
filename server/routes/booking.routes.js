@@ -1,6 +1,7 @@
 const express = require('express');
 const Booking = require('../models/Booking');
 const router = express.Router({ mergeParams: true });
+const auth = require('../middleware/auth.middleware');
 
 router.get('/', async (req, res) => {
   try {
@@ -28,7 +29,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-router.delete('/:bookingId', auth, (req, res) => {
+router.delete('/:bookingId', auth, async (req, res) => {
   try {
     const { bookingId } = req.params;
     const removedBooking = await Booking.findById(bookingId);

@@ -1,5 +1,6 @@
 const express = require('express');
 const Review = require('../models/Review');
+const auth = require('../middleware/auth.middleware');
 const router = express.Router({ mergeParams: true });
 
 router.get('/', async (req, res) => {
@@ -28,7 +29,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-router.delete('/:reviewId', auth, (req, res) => {
+router.delete('/:reviewId', auth, async (req, res) => {
   try {
     const { reviewId } = req.params;
     const removedReview = await Review.findById(reviewId);
