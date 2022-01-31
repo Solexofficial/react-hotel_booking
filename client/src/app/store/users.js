@@ -98,7 +98,7 @@ export const signIn =
     dispatch(authRequested());
     try {
       const data = await authService.signIn({ email, password });
-      dispatch(authRequestSuccess({ userId: data.localId }));
+      dispatch(authRequestSuccess({ userId: data.userId }));
       setTokens(data);
       history.push(redirect);
     } catch (error) {
