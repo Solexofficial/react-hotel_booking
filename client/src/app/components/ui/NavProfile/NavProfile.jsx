@@ -80,6 +80,7 @@ const NavProfile = () => {
       </div>
     );
   }
+  return <>Loading...</>;
 };
 
 export default NavProfile;

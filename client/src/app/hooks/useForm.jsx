@@ -17,7 +17,6 @@ function useForm(initialData, validateOnChange, validatorConfig) {
 
   const handleInputChange = useCallback(
     ({ target }) => {
-      console.log(target);
       const { name, value } = target;
       setData(prevState => ({
         ...prevState,

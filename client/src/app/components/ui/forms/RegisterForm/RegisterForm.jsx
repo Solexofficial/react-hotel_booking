@@ -18,7 +18,6 @@ const initialData = {
   secondName: '',
   gender: 'male',
   birthYear: Date.now(),
-  avatarPhoto: `https://avatars.dicebear.com/api/avataaars/${(Math.random() + 1).toString(36).substring(7)}.svg`,
   email: '',
   password: '',
   subscribe: false,

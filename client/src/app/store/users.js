@@ -98,8 +98,8 @@ export const signIn =
     dispatch(authRequested());
     try {
       const data = await authService.signIn({ email, password });
-      dispatch(authRequestSuccess({ userId: data.userId }));
       setTokens(data);
+      dispatch(authRequestSuccess({ userId: data.userId }));
       history.push(redirect);
     } catch (error) {
       const { code, message } = error.response.data.error;
