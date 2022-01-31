@@ -1,6 +1,6 @@
 import httpService from './http.service';
 
-const reviewsEndPoint = 'reviews/';
+const reviewsEndPoint = 'review/';
 
 const reviewsService = {
   getAll: async () => {

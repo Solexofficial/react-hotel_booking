@@ -16,13 +16,13 @@ const AppLoader = ({ children }) => {
   const bookingsStatusLoading = useSelector(getBookingsLoadingStatus());
 
   useEffect(() => {
-    dispatch(loadUsersList());
     dispatch(loadRoomsList());
     dispatch(loadLikesList());
     dispatch(loadReviewsList());
     dispatch(loadBookingsList());
 
     if (isLoggedIn) {
+      dispatch(loadUsersList());
     }
   }, [isLoggedIn]);
 

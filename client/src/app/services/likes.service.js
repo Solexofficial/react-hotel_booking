@@ -1,6 +1,6 @@
 import httpService from './http.service';
 
-const likesEndPoint = 'likes/';
+const likesEndPoint = 'like/';
 
 const likesService = {
   getAll: async () => {

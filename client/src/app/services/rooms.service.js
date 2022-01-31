@@ -1,6 +1,6 @@
 import httpService from './http.service';
 
-const roomsEndPoint = 'rooms/';
+const roomsEndPoint = 'room/';
 
 const roomsService = {
   getAll: async params => {
