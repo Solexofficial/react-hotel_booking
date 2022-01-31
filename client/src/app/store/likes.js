@@ -70,25 +70,26 @@ export const getLikesByUserId = userId => state => {
   }
 };
 
-export const createLike = (userId, reviewId) => async dispatch => {
+export const createLike = payload => async dispatch => {
   dispatch(likeCreateRequested());
   try {
-    const { content } = await likesService.create(userId, reviewId);
+    const { content } = await likesService.create(payload);
     dispatch(likeCreated(content || []));
   } catch (error) {
     dispatch(likeCreateRequestedFailed());
   }
 };
 
-export const removeLike = (userId, reviewId) => async (dispatch, getState) => {
+export const removeLike = payload => async (dispatch, getState) => {
   dispatch(likeRemoveRequested());
   try {
     const { entities } = getState().likes;
-    const userLikes = entities.filter(like => like.userId === userId);
-    const currentLike = userLikes.find(like => like.reviewId === reviewId);
+    const userLikes = entities.filter(like => like.userId === payload.userId);
+    const currentLike = userLikes.find(like => like.reviewId === payload.reviewId);
     const likeId = await likesService.remove(currentLike._id);
     dispatch(likeRemoved(likeId));
   } catch (error) {
+    console.log(error);
     dispatch(likeRemoveRequestedFailed());
   }
 };

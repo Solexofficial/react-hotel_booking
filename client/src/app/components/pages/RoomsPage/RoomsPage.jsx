@@ -26,7 +26,9 @@ const RoomsPage = () => {
   const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
 
   useEffect(() => {
-    axios.get('test123', { params: searchFilters });
+    console.log('filters', searchFilters);
+    const data = axios.get('http://localhost:8080/api/room', { params: searchFilters });
+    data.then(res => console.log('test filtering', res.data));
   }, [searchFilters]);
 
   const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });

@@ -10,8 +10,8 @@ const likesService = {
   getByReviewId: async reviewId => {
     const { data } = await httpService.get(likesEndPoint, {
       params: {
-        orderBy: '"reviewId"',
-        equalTo: `"${reviewId}"`,
+        orderBy: 'reviewId',
+        equalTo: `${reviewId}`,
       },
     });
     return data;
@@ -19,19 +19,14 @@ const likesService = {
   getByUserId: async userId => {
     const { data } = await httpService.get(likesEndPoint, {
       params: {
-        orderBy: '"userId"',
-        equalTo: `"${userId}"`,
+        orderBy: 'userId',
+        equalTo: `${userId}`,
       },
     });
     return data;
   },
-  create: async (userId, reviewId) => {
-    const newLike = {
-      _id: Math.random().toString(36).substring(2, 9),
-      userId,
-      reviewId,
-    };
-    const { data } = await httpService.put(likesEndPoint + newLike._id, newLike);
+  create: async payload => {
+    const { data } = await httpService.post(likesEndPoint, payload);
     return data;
   },
   remove: async id => {

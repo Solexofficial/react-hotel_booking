@@ -20,10 +20,11 @@ const ReviewLikes = ({ reviewId }) => {
   }, [likes, currentUserId]);
 
   const toggleLike = () => {
+    const likeData = { userId: currentUserId, reviewId };
     if (isLiked) {
-      dispatch(removeLike(currentUserId, reviewId));
+      dispatch(removeLike(likeData));
     } else {
-      dispatch(createLike(currentUserId, reviewId));
+      dispatch(createLike(likeData));
     }
   };
 
