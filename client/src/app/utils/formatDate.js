@@ -16,6 +16,7 @@ const months = [
 ];
 
 export function decomposeDate(date) {
+  date = new Date(date).getTime();
   if (typeof date === 'string') {
     date = Number(date);
   }
@@ -34,6 +35,7 @@ export function getDateDDMMYYYY(date) {
 }
 
 export default function formatDate(value) {
+  value = new Date(value).getTime();
   const { year, month, day, hours, min } = decomposeDate(value);
 
   const currentDateTime = Date.now();

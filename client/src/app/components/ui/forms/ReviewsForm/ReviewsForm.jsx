@@ -1,17 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
+import { createReview } from '../../../../store/reviews';
+import Button from '../../../common/Button/Button';
 import { RatingField, TextAreaField } from '../../../common/Fields';
 import validatorConfig from './validatorConfig';
-import Button from '../../../common/Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentUserId } from '../../../../store/users';
-import { useParams } from 'react-router';
-import { createReview } from '../../../../store/reviews';
 
 const ReviewsForm = () => {
   const { roomId } = useParams();
   const dispatch = useDispatch();
-  const currentUserId = useSelector(getCurrentUserId());
   const initialData = { content: '', likes: [], rating: 5 };
   const { data, errors, handleInputChange, validate, handleResetForm } = useForm(initialData, true, validatorConfig);
 
@@ -21,7 +19,6 @@ const ReviewsForm = () => {
       const payload = {
         ...data,
         roomId,
-        userId: currentUserId,
       };
       dispatch(createReview(payload));
       handleResetForm(e);

@@ -12,12 +12,7 @@ const reviewsService = {
     return data;
   },
   create: async payload => {
-    const newReview = {
-      _id: Math.random().toString(36).substring(2, 9),
-      created_at: Date.now(),
-      ...payload,
-    };
-    const { data } = await httpService.put(reviewsEndPoint + newReview._id, newReview);
+    const { data } = await httpService.post(reviewsEndPoint, payload);
     return data;
   },
   remove: async id => {

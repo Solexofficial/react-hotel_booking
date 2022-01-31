@@ -19,7 +19,7 @@ router.post('/', auth, async (req, res) => {
   try {
     const newReview = await Review.create({
       ...req.body,
-      userId: req.user_id,
+      userId: req.user._id,
     });
     res.status(201).send(newReview);
   } catch (error) {
