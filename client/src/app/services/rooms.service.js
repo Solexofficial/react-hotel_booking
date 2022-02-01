@@ -1,14 +1,10 @@
 import httpService from './http.service';
 
-const roomsEndPoint = 'room/';
+const roomsEndPoint = 'rooms/';
 
 const roomsService = {
-  getAll: async params => {
-    const { data } = await httpService.get(roomsEndPoint, {
-      params: {
-        test: 1,
-      },
-    });
+  getAll: async () => {
+    const { data } = await httpService.get(roomsEndPoint);
     return data;
   },
   create: async payload => {
@@ -19,8 +15,12 @@ const roomsService = {
     const { data } = await httpService.get(roomsEndPoint + id);
     return data;
   },
-  setBooking: async (roomId, payload) => {
-    const { data } = await httpService.put(roomsEndPoint + roomId + '/bookings/' + payload._id, payload);
+  setBooking: async payload => {
+    const { data } = await httpService.post(roomsEndPoint + payload.roomId, { bookings: payload._id });
+    return data;
+  },
+  deleteBooking: async payload => {
+    const { data } = await httpService.post(roomsEndPoint + payload.roomId, { bookings: payload._id });
     return data;
   },
 };

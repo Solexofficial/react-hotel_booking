@@ -14,11 +14,11 @@ module.exports = async () => {
     await createInitialEntity(Like, likesMockData);
     console.log('likes add mongoDB');
   }
-  const reviews = await Review.find();
-  if (reviews.length !== reviewsMockData.length) {
-    await createInitialEntity(Review, reviewsMockData);
-    console.log('reviews add mongoDB');
-  }
+  // const reviews = await Review.find();
+  // if (reviews.length < reviewsMockData.length) {
+  //   await createInitialEntity(Review, reviewsMockData);
+  //   console.log('reviews add mongoDB');
+  // }
   const rooms = await Room.find();
   if (rooms.length !== roomsMockData.length) {
     await createInitialEntity(Room, roomsMockData);

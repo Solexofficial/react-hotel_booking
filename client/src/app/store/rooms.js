@@ -29,11 +29,15 @@ const { actions, reducer: roomsReducer } = roomsSlice;
 
 const { roomsRequested, roomsReceived, roomsRequestFailed } = actions;
 
-const addBookingRequested = createAction('rooms/addBookingRequested');
-const addBookingRequestedSuccess = createAction('rooms/addBookingRequestedSuccess');
-const addBookingRequestedFailed = createAction('rooms/addBookingRequestedFailed');
+const addBookingRoomRequested = createAction('rooms/addBookingRoomRequested');
+const addBookingRoomRequestedSuccess = createAction('rooms/addBookingRoomRequestedSuccess');
+const addBookingRoomRequestedFailed = createAction('rooms/addBookingRoomRequestedFailed');
 
-export const loadRoomsList = params => async (dispatch, getState) => {
+const removeBookingRoomRequested = createAction('rooms/removeBookingRoomRequested');
+const removeBookingRoomRequestedSuccess = createAction('rooms/removeBookingRoomRequestedSuccess');
+const removeBookingRoomRequestedFailed = createAction('rooms/removeBookingRoomRequestedFailed');
+
+export const loadRoomsList = params => async dispatch => {
   dispatch(roomsRequested());
   try {
     const { content } = await roomsService.getAll(params);
@@ -43,15 +47,25 @@ export const loadRoomsList = params => async (dispatch, getState) => {
   }
 };
 
-export const addBooking = (roomId, payload) => async dispatch => {
-  dispatch(addBookingRequested());
+export const addBookingRoom = (payload) => async dispatch => {
+  dispatch(addBookingRoomRequested());
   try {
-    roomsService.setBooking(roomId, payload);
-    dispatch(addBookingRequestedSuccess());
+    roomsService.setBooking(payload);
+    dispatch(addBookingRoomRequestedSuccess());
   } catch (error) {
-    dispatch(addBookingRequestedFailed(error.message));
+    dispatch(addBookingRoomRequestedFailed(error.message));
   }
 };
+
+export const removeBookingRoom = (payload) => async dispatch => {
+  dispatch(removeBookingRoomRequested());
+  try {
+    roomsService.deleteBooking(payload);
+    dispatch(removeBookingRoomRequestedSuccess());
+  } catch (error) {
+    dispatch(removeBookingRoomRequestedFailed(error.message));
+  }
+}; 
 
 export const getRooms = () => state => state.rooms.entities;
 export const getRoomsLoadingStatus = () => state => state.rooms.isLoading;

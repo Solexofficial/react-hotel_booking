@@ -74,6 +74,7 @@ export const createBooking = payload => async dispatch => {
   try {
     const { content } = await bookingService.create(payload);
     dispatch(bookingCreated(content));
+    return content;
   } catch (error) {
     dispatch(bookingCreateRequestedFailed(error.message));
   }

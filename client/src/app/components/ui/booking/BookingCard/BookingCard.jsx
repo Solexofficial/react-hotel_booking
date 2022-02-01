@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeBooking } from '../../../../store/bookings';
-import { getRoomById } from '../../../../store/rooms';
+import { getRoomById, removeBookingRoom } from '../../../../store/rooms';
 import { getDateDDMMYYYY } from '../../../../utils/formatDate';
 import Button from '../../../common/Button';
 import { getGuestsLabel } from '../../GuestsCounter/GuestsCounter';
@@ -13,12 +13,17 @@ const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies
   const dispatch = useDispatch();
   const room = useSelector(getRoomById(roomId));
 
+  const handleRemoveBooking = () => {
+    dispatch(removeBooking(_id));
+    dispatch(removeBookingRoom({ roomId, _id }));
+  };
+
   return (
     <Paper className='booking-card'>
       <div className='booking-card__wrapper'>
         <div className='booking-content'>
           <h2>
-            Номер: №<span>{roomId}</span>
+            № <span>{_id}</span>
           </h2>
           <h3 className='booking-info__title'>Информация о бронировании</h3>
           <table className='booking-info'>
@@ -59,7 +64,7 @@ const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies
               Перейти на страницу номера
             </Button>
           </Link>
-          <Button size='small' variant='outlined' color='error' onClick={() => dispatch(removeBooking(_id))}>
+          <Button size='small' variant='outlined' color='error' onClick={handleRemoveBooking}>
             Отменить бронирование
           </Button>
         </div>

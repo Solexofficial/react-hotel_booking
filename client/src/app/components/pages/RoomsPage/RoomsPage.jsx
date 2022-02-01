@@ -27,7 +27,7 @@ const RoomsPage = () => {
 
   useEffect(() => {
     console.log('filters', searchFilters);
-    const data = axios.get('http://localhost:8080/api/room', { params: searchFilters });
+    const data = axios.get('http://localhost:8080/api/rooms', { params: searchFilters });
     data.then(res => console.log('test filtering', res.data));
   }, [searchFilters]);
 

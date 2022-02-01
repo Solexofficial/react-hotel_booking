@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Form, useForm, useModal } from '../../../../hooks';
 import { createBooking, getBookingCreatedStatus } from '../../../../store/bookings';
-import { addBooking } from '../../../../store/rooms';
+import { addBookingRoom } from '../../../../store/rooms';
 import { getCurrentUserId } from '../../../../store/users';
 import Button from '../../../common/Button';
 import { DateOfStayField } from '../../../common/Fields';
@@ -31,7 +31,7 @@ const BookingForm = () => {
   const currentUserId = useSelector(getCurrentUserId());
   const bookingCreateStatusLoading = useSelector(getBookingCreatedStatus());
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-  const { data, setData, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
+  const { data, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
     initialData,
     true,
     validatorConfig
@@ -49,15 +49,17 @@ const BookingForm = () => {
     event.preventDefault();
     if (validate(data)) {
       const payload = {
-        _id: Math.random().toString(36).substring(2, 9),
-        userId: currentUserId,
         roomId: roomId,
         ...data,
         totalPrice,
       };
-      dispatch(addBooking(roomId, payload))
-        .then(dispatch(createBooking(payload)))
-        .then(() => handleOpenModal());
+      try {
+        dispatch(createBooking(payload))
+          .then(bookingData => dispatch(addBookingRoom(bookingData)))
+          .then(() => handleOpenModal());
+      } catch (error) {
+        console.log('error try catch');
+      }
     }
   };
 

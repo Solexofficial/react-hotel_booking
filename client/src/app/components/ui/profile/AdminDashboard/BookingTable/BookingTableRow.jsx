@@ -11,6 +11,11 @@ import { getGuestsLabel } from '../../../GuestsCounter/GuestsCounter';
 const BookingTableRow = ({ row }) => {
   const dispatch = useDispatch();
 
+  const handleRemoveBooking = () => {
+    dispatch(removeBooking(_id));
+    dispatch(removeBookingRoom({ roomId, _id }));
+  };
+
   return (
     <TableRow>
       <TableCell component='th' scope='row'>
@@ -26,12 +31,7 @@ const BookingTableRow = ({ row }) => {
           </IconButton>
         </Tooltip>
         <Tooltip title='Отменить бронирование' disableInteractive={true}>
-          <IconButton
-            aria-label='expand row'
-            size='small'
-            color='error'
-            onClick={() => dispatch(removeBooking(row._id))}
-          >
+          <IconButton aria-label='expand row' size='small' color='error' onClick={handleRemoveBooking}>
             <CancelIcon />
           </IconButton>
         </Tooltip>
