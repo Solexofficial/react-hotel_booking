@@ -11,7 +11,7 @@ import ProfileLikes from '../../ui/profile/ProfileLikes';
 import UserProfile from '../../ui/profile/UserProfile';
 
 const ProfilePage = () => {
-  const { route } = useParams();
+  const { userId, route } = useParams();
   const currentUser = useSelector(getCurrentUserData());
 
   const renderComponent = route => {
@@ -31,15 +31,17 @@ const ProfilePage = () => {
           return <Redirect to={`/profile/${currentUser._id}`} />;
         }
       default:
-        return <UserProfile />;
+        return <UserProfile userId={userId} />;
     }
   };
 
   return (
     <div className='profile-page'>
-      <aside className='profile-sidebar'>
-        <Sidebar />
-      </aside>
+      {currentUser._id === userId && (
+        <aside className='profile-sidebar'>
+          <Sidebar />
+        </aside>
+      )}
       {renderComponent(route)}
     </div>
   );

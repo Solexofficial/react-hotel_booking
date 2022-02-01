@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useMockData } from '../../../../hooks';
-import { getCurrentUserData } from '../../../../store/users';
+import { getUserById } from '../../../../store/users';
 
-const UserProfile = () => {
-  const currentUser = useSelector(getCurrentUserData());
+const UserProfile = ({ userId }) => {
+  const currentUser = useSelector(getUserById(userId));
   const { firstName, secondName } = currentUser;
 
   const { error, initialize, progress, status } = useMockData();
@@ -17,7 +17,7 @@ const UserProfile = () => {
   return (
     <main className='main-profile__page'>
       <h1 className='visually-hidden'>Профиль пользователя отеля toxin</h1>
-      <h2>Приветствуем вас {`${firstName} ${secondName}`}</h2>
+      <h2>Страница пользователя {`${firstName} ${secondName}`}</h2>
       {currentUser?.role === 'admin' && (
         <>
           <h3>Инициализация данных в FireBase</h3>

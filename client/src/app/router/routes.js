@@ -1,22 +1,19 @@
-import Login from '../layouts/login';
-import Main from '../layouts/main';
-import Rooms from '../layouts/rooms';
-import Profile from '../layouts/profile';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import Login from '../layouts/login';
+import Main from '../layouts/main';
+import Profile from '../layouts/profile';
+import Rooms from '../layouts/rooms';
 
 export const userProfileRoutes = [
-  { path: '/profile', name: 'Профиль', icon: <AccountCircleIcon /> },
   { path: '/profile/booking', name: 'Мои бронирования', icon: <StarBorderIcon /> },
   { path: '/profile/likes', name: 'Понравилось', icon: <FavoriteBorderIcon /> },
   { path: '/profile/favorites', name: 'Избранное', icon: <BookmarkBorderIcon /> },
 ];
 
 export const adminRoutes = [
-  { path: '/profile/', name: 'Профиль', icon: <AccountCircleIcon /> },
   { path: '/profile/dashboard', name: 'Панель администратора', icon: <AdminPanelSettingsIcon /> },
   { path: '/profile/booking', name: 'Мои бронирования', icon: <StarBorderIcon /> },
   { path: '/profile/likes', name: 'Понравилось', icon: <FavoriteBorderIcon /> },
@@ -37,4 +34,4 @@ export const publicRoutes = [
   { path: '/', component: Main, exact: true },
 ];
 
-export const privateRoutes = [{ path: '/profile/:route?', component: Profile, exact: true }];
+export const privateRoutes = [{ path: '/profile/:userId?/:route?', component: Profile, exact: true }];

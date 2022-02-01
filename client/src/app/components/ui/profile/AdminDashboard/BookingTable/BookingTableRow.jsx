@@ -6,15 +6,20 @@ import { useDispatch } from 'react-redux';
 import { removeBooking } from '../../../../../store/bookings';
 import { removeBookingRoom } from '../../../../../store/rooms';
 import { getDateDDMMYYYY } from '../../../../../utils/formatDate';
+import history from '../../../../../utils/history';
 import Tooltip from '../../../../common/Tooltip';
 import { getGuestsLabel } from '../../../GuestsCounter/GuestsCounter';
 
 const BookingTableRow = ({ row }) => {
   const dispatch = useDispatch();
-  console.log(row);
+
   const handleRemoveBooking = () => {
     dispatch(removeBooking(row._id));
     dispatch(removeBookingRoom({ roomId: row.roomId, _id: row._id }));
+  };
+
+  const handleOpenUserPage = userId => {
+    history.push(`/profile/${userId}`);
   };
 
   return (
@@ -31,7 +36,12 @@ const BookingTableRow = ({ row }) => {
       <TableCell>
         <div className='booking-row__btns'>
           <Tooltip title='Страница пользователя' disableInteractive={true}>
-            <IconButton aria-label='expand row' size='small' color='primary' onClick={() => console.log(row.userId)}>
+            <IconButton
+              aria-label='expand row'
+              size='small'
+              color='primary'
+              onClick={() => handleOpenUserPage(row.userId)}
+            >
               <AccountCircleIcon />
             </IconButton>
           </Tooltip>

@@ -1,12 +1,16 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { getCurrentUserData, logOut } from '../../../store/users';
 import Avatar from '../../common/Avatar/Avatar';
 import Tooltip from '../../common/Tooltip/Tooltip';
-import { useHistory } from 'react-router';
-import { adminRoutes, userProfileRoutes } from '../../../router/routes';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentUserData, logOut } from '../../../store/users';
 
 const NavProfile = () => {
   const history = useHistory();
@@ -34,7 +38,6 @@ const NavProfile = () => {
 
   if (currentUser) {
     const { avatarPhoto, firstName, secondName } = currentUser;
-    const routes = currentUser.role === 'admin' ? adminRoutes : userProfileRoutes;
     return (
       <div className='profile-wrapper'>
         <Tooltip title='Открыть меню' placement='bottom'>
@@ -61,17 +64,48 @@ const NavProfile = () => {
           onClose={handleCloseUserMenu}
           className='profile-menu'
         >
-          {routes.map(setting => (
+          <MenuItem
+            className='profile-menu__item'
+            name='profile'
+            onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}`)}
+          >
+            <AccountCircleIcon />
+            Профиль
+          </MenuItem>
+          {currentUser.role === 'admin' && (
             <MenuItem
-              key={setting.path}
-              name={setting.name}
-              onClick={() => handleClickSettingsMenu(setting.path)}
               className='profile-menu__item'
+              name='profile'
+              onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/dashboard`)}
             >
-              {setting?.icon}
-              {setting.name}
+              <AdminPanelSettingsIcon />
+              Панель администратора
             </MenuItem>
-          ))}
+          )}
+          <MenuItem
+            className='profile-menu__item'
+            name='booking'
+            onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/booking`)}
+          >
+            <StarBorderIcon />
+            Мои Бронирования
+          </MenuItem>
+          <MenuItem
+            className='profile-menu__item'
+            name='likes'
+            onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/likes`)}
+          >
+            <FavoriteBorderIcon />
+            Понравилось
+          </MenuItem>
+          <MenuItem
+            className='profile-menu__item'
+            name='favorites'
+            onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/favorites`)}
+          >
+            <BookmarkBorderIcon />
+            Избранное
+          </MenuItem>
           <MenuItem className='profile-menu__item' name='logout' onClick={handleLogOut}>
             <ExitToAppIcon />
             Выйти

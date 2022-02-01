@@ -1,30 +1,74 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SettingsIcon from '@mui/icons-material/Settings';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { MenuItem, MenuList } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { userProfileRoutes, adminRoutes } from '../../../router/routes';
 import { getCurrentUserData } from '../../../store/users';
 
 const Sidebar = () => {
   const currentUser = useSelector(getCurrentUserData());
 
-  const routes = currentUser.role === 'admin' ? adminRoutes : userProfileRoutes;
   return (
     <MenuList className='sidebar'>
-      {routes.map(route => (
+      <MenuItem
+        name='profile'
+        component={NavLink}
+        className='sidebar-menu__item'
+        to={`/profile/${currentUser._id}`}
+        exact
+      >
+        <AccountCircleIcon />
+        Мой профиль
+      </MenuItem>
+      {currentUser.role === 'admin' && (
         <MenuItem
-          key={route.path}
-          name={route.name}
+          name='profile'
           component={NavLink}
           className='sidebar-menu__item'
-          to={route.path}
+          to={`/profile/${currentUser._id}/dashboard`}
           exact
         >
-          {route?.icon} {route.name}
+          <AdminPanelSettingsIcon />
+          Панель администратора
         </MenuItem>
-      ))}
-      <MenuItem className='sidebar-menu__item' component={NavLink} name='edit' to='/profile/edit' exact>
+      )}
+      <MenuItem
+        name='profile'
+        component={NavLink}
+        className='sidebar-menu__item'
+        to={`/profile/${currentUser._id}/booking`}
+        exact
+      >
+        <StarBorderIcon />
+        Мои Бронирования
+      </MenuItem>
+      <MenuItem
+        name='profile'
+        component={NavLink}
+        className='sidebar-menu__item'
+        to={`/profile/${currentUser._id}/likes`}
+        exact
+      >
+        <FavoriteBorderIcon />
+        Понравилось
+      </MenuItem>
+      <MenuItem
+        name='profile'
+        component={NavLink}
+        className='sidebar-menu__item'
+        to={`/profile/${currentUser._id}/favorites`}
+        exact
+      >
+        <BookmarkBorderIcon />
+        Избранное
+      </MenuItem>
+
+      <MenuItem className='sidebar-menu__item' component={NavLink} name='edit' to={`/profile/${currentUser._id}/edit`}>
         <SettingsIcon />
         Редактировать профиль
       </MenuItem>

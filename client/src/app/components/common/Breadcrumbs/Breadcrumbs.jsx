@@ -2,20 +2,21 @@ import { Breadcrumbs as MuiBreadcrumbs, Link } from '@mui/material';
 import React from 'react';
 import { Link as RouterLink, Route, useHistory } from 'react-router-dom';
 
-const breadcrumbsMap = {
-  '/rooms': 'Доступные номера',
-  '/profile': 'Мой профиль',
-  '/profile/booking': 'Мои Бронирования',
-  '/profile/likes': 'Понравилось',
-  '/profile/favorites': 'Избранное',
-  '/profile/edit': 'Редактировать профиль',
-  '/profile/dashboard': 'Панель администратора',
-};
-
 const LinkRouter = props => <Link {...props} className='breadcrumbs-item' underline='hover' component={RouterLink} />;
 
 const Breadcrumbs = () => {
   const history = useHistory();
+
+  const breadcrumbsMap = {
+    '/rooms': 'Доступные номера',
+    '/profile': 'Профиль',
+    '/profile/booking': 'Мои Бронирования',
+    '/profile/likes': 'Понравилось',
+    '/profile/favorites': 'Избранное',
+    '/profile/edit': 'Редактировать профиль',
+    '/profile/dashboard': 'Панель администратора',
+  };
+
   return (
     <div className='breadcrumbs'>
       <Route>
