@@ -17,6 +17,7 @@ const initialData = {
   firstName: '',
   secondName: '',
   gender: 'male',
+  role: 'user',
   birthYear: Date.now(),
   email: '',
   password: '',

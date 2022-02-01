@@ -4,10 +4,11 @@ import BookingTableRow from './BookingTableRow';
 
 const BookingTable = ({ bookings, roomNumber }) => {
   const headCells = [
+    { id: 'bookingId', label: 'ID' },
     { id: 'arrivalDate', label: 'Дата заезда' },
     { id: 'departureDate', label: 'Дата выезда' },
-    { id: 'guests', label: 'Количество гостей' },
-    { id: 'totalPrice', label: 'Итоговая стоимость', numeric: true },
+    { id: 'guests', label: 'Кол-во гостей' },
+    { id: 'totalPrice', label: 'Цена', numeric: true },
   ];
   return (
     <>

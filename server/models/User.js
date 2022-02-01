@@ -7,6 +7,7 @@ const schema = new Schema({
   birthYear: Number,
   avatarPhoto: String,
   password: String,
+  role: { type: String, enum: ['user', 'admin'] },
   email: { type: String, required: true, unique: true },
   gender: { type: String, enum: ['male', 'female'] },
 });

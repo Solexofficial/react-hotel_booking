@@ -24,7 +24,7 @@ const RoomsListTableRow = ({ row }) => {
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell component='th' scope='row'>
-          <Link to={`/rooms/${row.roomNumber}`}>{row.roomNumber}</Link>
+          <Link to={`/rooms/${row._id}`}>{row.roomNumber}</Link>
         </TableCell>
         <TableCell>{row.type}</TableCell>
         <TableCell align='right'>{row.rate}</TableCell>

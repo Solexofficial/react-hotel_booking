@@ -41,6 +41,7 @@ router.post('/signUp', [
       const newUser = await User.create({
         ...generateUserData(),
         ...req.body,
+        role: 'user',
         password: hashedPassword,
       });
 
