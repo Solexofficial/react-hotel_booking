@@ -1,9 +1,10 @@
 import React from 'react';
+import ProfileEditForm from '../../forms/ProfileEditForm/ProfileEditForm';
 
 const ProfileEdit = () => {
   return (
     <main className='profile-edit'>
-      <h1>Profile edit</h1>
+      <ProfileEditForm />
     </main>
   );
 };
