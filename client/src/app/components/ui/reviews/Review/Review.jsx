@@ -20,6 +20,7 @@ const Review = ({ review }) => {
   const [editMode, setEditMode] = useState(false);
   const user = useSelector(getUserById(review.userId));
   const currentUser = useSelector(getCurrentUserData());
+  console.log(review.userId);
 
   const isAdmin = currentUser?.role === 'admin';
   const isAuthor = review.userId === currentUser?._id;

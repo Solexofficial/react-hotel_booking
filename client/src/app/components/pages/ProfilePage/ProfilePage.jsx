@@ -17,7 +17,11 @@ const ProfilePage = () => {
   const renderComponent = route => {
     switch (route) {
       case 'edit':
-        return <ProfileEdit />;
+        if (currentUser._id === userId) {
+          return <ProfileEdit />;
+        } else {
+          return <Redirect to={`/profile/${currentUser._id}`} />;
+        }
       case 'booking':
         return <ProfileBooking />;
       case 'likes':
