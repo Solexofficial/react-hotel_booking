@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-router-breadcrumbs-hoc": "^4.1.0"
+  }
+}

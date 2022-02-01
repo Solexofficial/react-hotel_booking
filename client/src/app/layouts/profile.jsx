@@ -9,7 +9,8 @@ import ProfilePage from '../components/pages/ProfilePage';
 import { getCurrentUserId } from '../store/users';
 
 const Profile = () => {
-  const { userId } = useParams();
+  const { userId, route } = useParams();
+  console.log(route);
   const currentUserId = useSelector(getCurrentUserId());
 
   return (
