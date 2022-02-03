@@ -40,8 +40,9 @@ const RoomsPage = () => {
     handleChangePageSize,
   } = usePagination(sortedItems || [], setPageSizeOptions[1].value);
 
-  const handleSort = ({ target }) => {
-    setSortBy(JSON.parse(target.value));
+  const handleSort = event => {
+    setSortBy(JSON.parse(event.target.value));
+    handleChangePage(event, 1);
   };
 
   // useEffect(() => {
