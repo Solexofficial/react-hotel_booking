@@ -13,7 +13,7 @@ const Reviews = () => {
 
   const currentUserId = useSelector(getCurrentUserId());
 
-  const sortedReviews = reviews.sort((a, b) => b.created_at - a.created_at);
+  const sortedReviews = reviews.sort((a, b) => a['created_at'].localeCompare(b['created.at']));
   const totalReviewsCount = sortedReviews.length;
 
   return (
