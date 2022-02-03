@@ -26,18 +26,26 @@ const reviewsSlice = createSlice({
     reviewRemoved: (state, action) => {
       state.entities = state.entities.filter(review => review._id !== action.payload);
     },
+    reviewUpdated: (state, action) => {
+      const reviewIndex = state.entities.findIndex(review => review._id === action.payload._id);
+      state.entities[reviewIndex] = action.payload;
+    },
   },
 });
 
 const { actions, reducer: reviewsReducer } = reviewsSlice;
 
-const { reviewsRequested, reviewsReceived, reviewsRequestFailed, reviewCreated, reviewRemoved } = actions;
+const { reviewsRequested, reviewsReceived, reviewsRequestFailed, reviewCreated, reviewRemoved, reviewUpdated } =
+  actions;
 
 const reviewCreateRequested = createAction('reviews/reviewCreateRequested');
 const reviewCreateRequestedFailed = createAction('reviews/reviewCreateRequestedFailed');
 
 const reviewRemoveRequested = createAction('reviews/reviewRemoveRequested');
 const reviewRemoveRequestedFailed = createAction('reviews/reviewRemoveRequestedFailed');
+
+const reviewUpdateRequested = createAction('reviews/reviewUpdateRequested');
+const reviewUpdateRequestedFailed = createAction('reviews/reviewUpdateRequestedFailed');
 
 export const loadReviewsList = () => async dispatch => {
   dispatch(reviewsRequested());
@@ -66,6 +74,17 @@ export const createReview = payload => async dispatch => {
     dispatch(reviewCreated(content));
   } catch (error) {
     dispatch(reviewCreateRequestedFailed());
+  }
+};
+
+export const updateReview = payload => async dispatch => {
+  dispatch(reviewUpdateRequested());
+  try {
+    const { content } = await reviewsService.update(payload);
+    dispatch(reviewUpdated(content));
+  } catch (error) {
+    console.log(error);
+    dispatch(reviewUpdateRequestedFailed());
   }
 };
 

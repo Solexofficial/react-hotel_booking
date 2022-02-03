@@ -19,6 +19,10 @@ const reviewsService = {
     await httpService.delete(reviewsEndPoint + id);
     return id;
   },
+  update: async payload => {
+    const { data } = await httpService.patch(reviewsEndPoint + payload._id, payload);
+    return data;
+  },
 };
 
 export default reviewsService;

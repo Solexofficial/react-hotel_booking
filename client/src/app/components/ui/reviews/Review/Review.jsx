@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeReview } from '../../../../store/reviews';
+import { removeReview, updateReview } from '../../../../store/reviews';
 import { getCurrentUserData, getUserById } from '../../../../store/users';
 import formatDate from '../../../../utils/formatDate';
 import Avatar from '../../../common/Avatar';
@@ -20,11 +20,23 @@ const Review = ({ review }) => {
   const [editMode, setEditMode] = useState(false);
   const user = useSelector(getUserById(review.userId));
   const currentUser = useSelector(getCurrentUserData());
-  console.log(review.userId);
+
+  const displayReviewData = () => {
+    if (review.created_at === review.updated_at) {
+      return `Редактирован: ${formatDate(review.updated_at)}`;
+    }
+    return formatDate(review.created_at);
+  };
 
   const isAdmin = currentUser?.role === 'admin';
   const isAuthor = review.userId === currentUser?._id;
   const showDeleteBtn = isAdmin || isAuthor;
+
+  const handleChangeReview = () => {
+    setEditMode(false);
+    const payload = { _id: review._id, content };
+    dispatch(updateReview(payload));
+  };
 
   useEffect(() => {
     setContent(review.content);
@@ -69,12 +81,12 @@ const Review = ({ review }) => {
                 <Rating value={review.rating} readOnly />
               </div>
             </div>
-            <p className='review__date'>{formatDate(review.created_at)}</p>
-            {/* !TODO: Сделать форму обновления контента комментария */}
+            {/* <p className='review__date'>{formatDate(review.created_at)}</p> */}
+            <p className='review__date'>{displayReviewData()}</p>
             {editMode ? (
               <>
                 <TextAreaField value={content} onChange={handleChange} rows={3} />
-                <Button variant='outlined' size='small' style={{ marginTop: '5px' }} onClick={() => setEditMode(false)}>
+                <Button variant='outlined' size='small' style={{ marginTop: '5px' }} onClick={handleChangeReview}>
                   Применить
                 </Button>
               </>
