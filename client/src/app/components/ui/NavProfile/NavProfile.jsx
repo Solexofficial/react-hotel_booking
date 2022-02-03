@@ -9,13 +9,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { getCurrentUserData, logOut } from '../../../store/users';
-import Avatar from '../../common/Avatar/Avatar';
-import Tooltip from '../../common/Tooltip/Tooltip';
+import Avatar from '../../common/Avatar';
+import Tooltip from '../../common/Tooltip';
 
 const NavProfile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUserData());
+  console.log(currentUser);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 

@@ -21,17 +21,19 @@ const AppLoader = ({ children }) => {
     dispatch(loadLikesList());
     dispatch(loadReviewsList());
     dispatch(loadBookingsList());
-  }, []);
+  }, [isLoggedIn]);
 
-  if (usersStatusLoading || roomsStatusLoading || likesStatusLoading || reviewsStatusLoading || bookingsStatusLoading)
-    return (
-      <></>
-      // <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      //   <h2>Добро пожаловать в отель Toxin</h2>
-      // </div>
-    );
-
-  return children;
+  if (
+    !usersStatusLoading &&
+    !roomsStatusLoading &&
+    !likesStatusLoading &&
+    !reviewsStatusLoading &&
+    !bookingsStatusLoading
+  ) {
+    return children;
+  } else {
+    return <></>;
+  }
 };
 
 export default AppLoader;
