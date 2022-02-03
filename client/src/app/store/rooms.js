@@ -47,7 +47,7 @@ export const loadRoomsList = params => async dispatch => {
   }
 };
 
-export const addBookingRoom = (payload) => async dispatch => {
+export const addBookingRoom = payload => async dispatch => {
   dispatch(addBookingRoomRequested());
   try {
     roomsService.setBooking(payload);
@@ -57,7 +57,7 @@ export const addBookingRoom = (payload) => async dispatch => {
   }
 };
 
-export const removeBookingRoom = (payload) => async dispatch => {
+export const removeBookingRoom = payload => async dispatch => {
   dispatch(removeBookingRoomRequested());
   try {
     roomsService.deleteBooking(payload);
@@ -65,13 +65,19 @@ export const removeBookingRoom = (payload) => async dispatch => {
   } catch (error) {
     dispatch(removeBookingRoomRequestedFailed(error.message));
   }
-}; 
+};
 
 export const getRooms = () => state => state.rooms.entities;
 export const getRoomsLoadingStatus = () => state => state.rooms.isLoading;
 export const getRoomById = roomId => state => {
   if (state.rooms.entities) {
     return state.rooms.entities.find(room => room._id === roomId);
+  }
+};
+
+export const getRoomsByIds = roomsIds => state => {
+  if (state.rooms.entities) {
+    return state.rooms.entities.filter(room => roomsIds.includes(room._id));
   }
 };
 
