@@ -22,7 +22,7 @@ const Review = ({ review }) => {
   const currentUser = useSelector(getCurrentUserData());
 
   const displayReviewData = () => {
-    if (review.created_at === review.updated_at) {
+    if (review.created_at !== review.updated_at) {
       return `Редактирован: ${formatDate(review.updated_at)}`;
     }
     return formatDate(review.created_at);
