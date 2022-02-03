@@ -1,0 +1,20 @@
+.main-profile__page {
+  width: 100%;
+}
+
+.user-card {
+  display: flex;
+  margin: 30px 0;
+}
+
+.user-card__avatarPhoto {
+  display: block;
+  width: 150px;
+  height: 150px;
+}
+
+.user-card__content {
+  width: 100%;
+  margin-left: 20px;
+  padding: 10px 20px;
+}

@@ -13,23 +13,19 @@ const UserProfile = ({ userId }) => {
   const { error, initialize, progress, status } = useMockData();
 
   const handleClick = () => {
-    console.log('clicked');
+    console.log('initialize firebase data');
     initialize();
   };
 
   return (
-    <main className='main-profile__page' style={{ width: '100%' }}>
+    <main className='main-profile__page'>
       <h1 className='visually-hidden'>Профиль пользователя отеля toxin</h1>
       <h2>Страница пользователя {`${firstName} ${secondName}`}</h2>
-      <div style={{ display: 'flex', margin: '30px 0' }}>
+      <div className='user-card'>
         <div>
-          <img
-            src={currentUser.avatarPhoto}
-            alt='avatarPhoto'
-            style={{ display: 'block', width: '150px', height: '150px' }}
-          />
+          <img className='user-card__avatarPhoto' src={currentUser.avatarPhoto} alt='avatarPhoto' />
         </div>
-        <Paper style={{ width: '100%', marginLeft: '20px', padding: '10px 20px' }}>
+        <Paper className='user-card__content'>
           <p>Имя: {currentUser.firstName}</p>
           <p>Фамилия: {currentUser.secondName}</p>
           <p>Пол: {currentUser.gender === 'male' ? 'Мужской' : 'Женский'}</p>
