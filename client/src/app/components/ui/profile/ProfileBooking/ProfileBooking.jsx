@@ -15,6 +15,7 @@ const ProfileBooking = () => {
         {bookings.map(booking => (
           <BookingCard key={booking._id} {...booking} />
         ))}
+        {bookings.length === 0 && <h3>Список бронирований пуст</h3>}
       </div>
     </div>
   );

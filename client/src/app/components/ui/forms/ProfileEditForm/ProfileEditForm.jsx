@@ -1,7 +1,8 @@
 import React from 'react';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, useForm } from '../../../../hooks';
+import { getCurrentUserData, updateUserData } from '../../../../store/users';
 import Button from '../../../common/Button';
 import { DatePickerField, InputField, RadioGroup } from '../../../common/Fields';
 import withPassword from '../../../common/Fields/HOC/withPassword';
@@ -12,27 +13,26 @@ const genderItems = [
   { id: 'female', title: 'Женщина' },
 ];
 
-const initialData = {
-  firstName: '',
-  secondName: '',
-  gender: 'male',
-  birthYear: Date.now(),
-  email: '',
-  password: '',
-  subscribe: false,
-};
-
 const ProfileEditForm = () => {
+  const currentUserData = useSelector(getCurrentUserData());
+
+  const initialData = {
+    firstName: currentUserData.firstName || '',
+    secondName: currentUserData.secondName || '',
+    gender: currentUserData.gender || 'male',
+    birthYear: currentUserData.birthYear || Date.now(),
+  };
+
   const { data, errors, handleInputChange, handleKeyDown, validate } = useForm(initialData, true, validatorConfig);
 
   const dispatch = useDispatch();
 
-  const InputFieldWithPassword = useMemo(() => withPassword(InputField), []);
+  // const InputFieldWithPassword = useMemo(() => withPassword(InputField), []);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (validate(data)) {
-      console.log(data);
+      dispatch(updateUserData(data));
     }
   };
 
@@ -55,8 +55,8 @@ const ProfileEditForm = () => {
           name='birthYear'
           minDate={new Date('1950-01-01')}
         />
-        <InputField name='email' label='Почта' />
-        <InputFieldWithPassword name='password' label='Пароль' type='password' />
+        {/* <InputField name='email' label='Почта' /> */}
+        {/* <InputFieldWithPassword name='password' label='Пароль' type='password' /> */}
         <Button type='submit' onClick={handleSubmit} fullWidth disabled={Object.keys(errors).length !== 0}>
           Обновить
         </Button>

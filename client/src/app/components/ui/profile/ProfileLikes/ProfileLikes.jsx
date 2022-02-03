@@ -12,11 +12,10 @@ const ProfileLikes = () => {
   const reviewsIds = likes.map(el => el.reviewId);
   const reviews = useSelector(getReviewsByIds(reviewsIds));
 
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <h1 style={{ marginBottom: '20px' }}>Вам понравились отзывы:</h1>
-      <ReviewsList reviews={reviews} />
+      {reviews.length > 0 ? <ReviewsList reviews={reviews} /> : <h3>Список пуст</h3>}
     </div>
   );
 };
