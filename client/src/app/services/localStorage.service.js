@@ -2,6 +2,7 @@ const TOKEN_KEY = 'jwt-token';
 const REFRESH_KEY = 'jwt-refresh-token';
 const EXPIRES_KEY = 'jwt-expires';
 const USER_ID_KEY = 'user-local-id';
+const FAVORITES_ROOM_KEY = 'favorites-room';
 
 export function setTokens({ expiresIn = 3600, accessToken, userId, refreshToken }) {
   const expiresDate = new Date().getTime() + expiresIn * 1000;
@@ -28,6 +29,20 @@ export function getUserId() {
   return localStorage.getItem(USER_ID_KEY);
 }
 
+export function getFavoritesRoom() {
+  return localStorage.getItem(FAVORITES_ROOM_KEY);
+}
+
+export function toggleFavoriteRoom(roomId) {
+  let favoritesRoomList = JSON.parse(getFavoritesRoom()) || [];
+  if (!favoritesRoomList.some(id => id === roomId)) {
+    favoritesRoomList.push(roomId);
+  } else {
+    favoritesRoomList = favoritesRoomList.filter(id => id !== roomId);
+  }
+  localStorage.setItem(FAVORITES_ROOM_KEY, JSON.stringify(favoritesRoomList));
+}
+
 export function removeAuthData() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(REFRESH_KEY);
@@ -42,6 +57,8 @@ const localStorageService = {
   getTokenExpiresDate,
   getUserId,
   removeAuthData,
+  toggleFavoriteRoom,
+  getFavoritesRoom,
 };
 
 export default localStorageService;

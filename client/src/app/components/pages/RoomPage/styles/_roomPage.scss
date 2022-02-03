@@ -1,3 +1,7 @@
+.room-page__gallery-wrapper {
+  position: relative;
+}
+
 .room-page__gallery {
   width: 100%;
   position: relative;
@@ -79,6 +83,29 @@
     .slick-active button {
       background-color: #fff;
       box-shadow: 0px 5px 5px $accent25;
+    }
+  }
+}
+
+.room-page__favoriteBtn {
+  &.MuiIconButton-root {
+    margin: 0 auto;
+    padding: 5px;
+    z-index: 2;
+    // background-color: $accent25;
+    // border: 1px solid $gold;
+    color: $gold;
+    & .MuiSvgIcon-root {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &:hover {
+    &.MuiIconButton-root {
+      // background-color: $accent50;
+      // border: 1px solid $gold;
+      color: $gold;
     }
   }
 }

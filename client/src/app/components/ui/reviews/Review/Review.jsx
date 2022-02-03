@@ -81,7 +81,6 @@ const Review = ({ review }) => {
                 <Rating value={review.rating} readOnly />
               </div>
             </div>
-            {/* <p className='review__date'>{formatDate(review.created_at)}</p> */}
             <p className='review__date'>{displayReviewData()}</p>
             {editMode ? (
               <>

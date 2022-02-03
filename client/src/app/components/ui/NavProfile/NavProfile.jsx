@@ -16,7 +16,6 @@ const NavProfile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUserData());
-  console.log(currentUser);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 

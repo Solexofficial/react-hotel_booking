@@ -1,7 +1,9 @@
 import { Paper } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import localStorageService from '../../../services/localStorage.service';
 import { getRoomById } from '../../../store/rooms';
+import ButtonFavorite from '../../common/ButtonFavorite/ButtonFavorite';
 import ImageSlider from '../../common/ImageSlider';
 import Loader from '../../common/Loader';
 import { BookingForm } from '../../ui/forms';
@@ -13,18 +15,25 @@ import RoomRulesCard from '../../ui/RoomPageCards/RoomRulesCard';
 
 const RoomPage = ({ roomId }) => {
   const room = useSelector(getRoomById(roomId));
+  const isFavorite = localStorageService.getFavoritesRoom().includes(roomId);
+  const [status, setStatus] = useState(isFavorite || false);
 
-  console.log('room render');
+  const handleToggleFavorite = roomId => {
+    localStorageService.toggleFavoriteRoom(roomId);
+    setStatus(prevState => !prevState);
+  };
 
   if (room) {
     const { roomNumber, images, countReviews, type, price } = room;
     return (
       <main>
-        <ImageSlider className='room-page__gallery'>
-          {Object.keys(images).map(img => (
-            <img key={img} className='room-page__gallery-item--img' src={images[img]} alt='roomsPhoto' />
-          ))}
-        </ImageSlider>
+        <div className='room-page__gallery-wrapper'>
+          <ImageSlider className='room-page__gallery'>
+            {Object.keys(images).map(img => (
+              <img key={img} className='room-page__gallery-item--img' src={images[img]} alt='roomsPhoto' />
+            ))}
+          </ImageSlider>
+        </div>
         <div className='room-info'>
           <div className='room-info__column'>
             <div className='room-info__group'>
@@ -39,6 +48,9 @@ const RoomPage = ({ roomId }) => {
           </div>
           <div className='room-info__form'>
             <Paper elevation={3} className='form-card booking-form__card'>
+              <div style={{ display: 'flex' }}>
+                <ButtonFavorite status={status} onToggle={() => handleToggleFavorite(roomId)} />
+              </div>
               <div className='booking-form__header'>
                 <div className='booking-form__numberRoom'>
                   <span className='booking-form__numberRoom-text'>№ {roomNumber}</span>
