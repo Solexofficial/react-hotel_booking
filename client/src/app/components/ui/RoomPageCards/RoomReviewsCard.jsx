@@ -5,12 +5,12 @@ const RoomReviewsCard = ({ countReviews }) => {
   return (
     <div className='room-info__card'>
       <h3 className='room-info__card-title'>Впечатления от номера</h3>
-      Оценок
-      <span className='room-info__card-rating'>{`${countReviews} ${declOfNum(countReviews, [
+      Скоро здесь будет статистика по отзывам! Приносим извинения за неудобства.
+      {/* <span className='room-info__card-rating'>{`${countReviews} ${declOfNum(countReviews, [
         'Отзыв',
         'Отзыва',
         'Отзывов',
-      ])}`}</span>
+      ])}`}</span> */}
     </div>
   );
 };

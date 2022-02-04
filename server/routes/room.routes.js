@@ -53,4 +53,16 @@ router.post('/:roomId', auth, async (req, res) => {
   }
 });
 
+router.patch('/:roomId', auth, async (req, res) => {
+  try {
+    const { roomId } = req.params;
+    const updatedRoom = await Room.findByIdAndUpdate(roomId, req.body, { new: true });
+    res.send(updatedRoom);
+  } catch (error) {
+    res.status(500).json({
+      message: 'На сервере произошла ошибка. Попробуйте позже',
+    });
+  }
+});
+
 module.exports = router;

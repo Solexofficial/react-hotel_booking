@@ -22,12 +22,16 @@ const roomsSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
+    roomUpdated: (state, action) => {
+      const roomIndex = state.entities.findIndex(room => room._id === action.payload._id);
+      state.entities[roomIndex] = action.payload;
+    },
   },
 });
 
 const { actions, reducer: roomsReducer } = roomsSlice;
 
-const { roomsRequested, roomsReceived, roomsRequestFailed } = actions;
+const { roomsRequested, roomsReceived, roomsRequestFailed, roomUpdated } = actions;
 
 const addBookingRoomRequested = createAction('rooms/addBookingRoomRequested');
 const addBookingRoomRequestedSuccess = createAction('rooms/addBookingRoomRequestedSuccess');
@@ -36,6 +40,9 @@ const addBookingRoomRequestedFailed = createAction('rooms/addBookingRoomRequeste
 const removeBookingRoomRequested = createAction('rooms/removeBookingRoomRequested');
 const removeBookingRoomRequestedSuccess = createAction('rooms/removeBookingRoomRequestedSuccess');
 const removeBookingRoomRequestedFailed = createAction('rooms/removeBookingRoomRequestedFailed');
+
+const roomUpdateRequested = createAction('rooms/roomUpdateRequested');
+const roomUpdateRequestedFailed = createAction('rooms/roomUpdateRequestedFailed');
 
 export const loadRoomsList = params => async dispatch => {
   dispatch(roomsRequested());
@@ -64,6 +71,17 @@ export const removeBookingRoom = payload => async dispatch => {
     dispatch(removeBookingRoomRequestedSuccess());
   } catch (error) {
     dispatch(removeBookingRoomRequestedFailed(error.message));
+  }
+};
+
+export const updateRoom = payload => async dispatch => {
+  dispatch(roomUpdateRequested());
+  try {
+    const { content } = await roomsService.update(payload);
+    dispatch(roomUpdated(content));
+  } catch (error) {
+    console.log(error);
+    dispatch(roomUpdateRequestedFailed());
   }
 };
 

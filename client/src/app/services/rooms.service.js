@@ -11,6 +11,10 @@ const roomsService = {
     const { data } = await httpService.put(roomsEndPoint + payload._id, payload);
     return data;
   },
+  update: async payload => {
+    const { data } = await httpService.patch(roomsEndPoint + payload.roomId, payload);
+    return data;
+  },
   getById: async id => {
     const { data } = await httpService.get(roomsEndPoint + id);
     return data;

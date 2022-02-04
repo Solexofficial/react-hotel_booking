@@ -4,6 +4,7 @@ import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeReview, updateReview } from '../../../../store/reviews';
+import { getRoomById, updateRoom } from '../../../../store/rooms';
 import { getCurrentUserData, getUserById } from '../../../../store/users';
 import formatDate from '../../../../utils/formatDate';
 import Avatar from '../../../common/Avatar';
@@ -18,6 +19,7 @@ const Review = ({ review }) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const currentRoomData = useSelector(getRoomById(review.roomId));
   const user = useSelector(getUserById(review.userId));
   const currentUser = useSelector(getCurrentUserData());
 
@@ -36,6 +38,16 @@ const Review = ({ review }) => {
     setEditMode(false);
     const payload = { _id: review._id, content };
     dispatch(updateReview(payload));
+  };
+
+  const handleRemoveReview = () => {
+    dispatch(removeReview(review._id));
+    const updateRoomPayload = {
+      roomId: currentRoomData._id,
+      countReviews: currentRoomData.countReviews - 1,
+      rate: +currentRoomData.rate - review.rating,
+    };
+    dispatch(updateRoom(updateRoomPayload));
   };
 
   useEffect(() => {
@@ -71,7 +83,7 @@ const Review = ({ review }) => {
               {showDeleteBtn && (
                 <div className='review__delete-btn'>
                   <Tooltip title='Удалить отзыв'>
-                    <IconButton onClick={() => dispatch(removeReview(review._id))}>
+                    <IconButton onClick={handleRemoveReview}>
                       <ClearIcon fontSize='small' />
                     </IconButton>
                   </Tooltip>
