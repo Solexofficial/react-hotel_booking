@@ -23,7 +23,7 @@ export default function useSearch(data) {
       setData(data);
       setIsSearching(false);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, data]);
 
   return { filteredData, isSearching, searchTerm, setSearchTerm, handleChangeSearch };
 }

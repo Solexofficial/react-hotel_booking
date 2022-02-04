@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFiltersQuery, usePagination, useSort } from '../../../hooks';
-import useDebounce from '../../../hooks/useDebounce';
 import useSearch from '../../../hooks/useSearch';
+import roomsService from '../../../services/rooms.service';
 import { setSessionStorageData } from '../../../services/sessionStorage.service';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
 import { InputField } from '../../common/Fields';
@@ -21,22 +20,20 @@ const setPageSizeOptions = [
   { name: '24', value: 24 },
 ];
 
-// !TODO: add validation filters
-// !TODO: add serverSide filter by queryString
-
 const RoomsPage = () => {
   const rooms = useSelector(getRooms());
+  const [filteredRooms, setFilteredRooms] = useState(rooms || []);
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
   const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
 
   useEffect(() => {
-    console.log('filters', searchFilters);
-    const data = axios.get('http://localhost:8080/api/rooms', { params: searchFilters });
-    data.then(res => console.log('test filtering', res.data));
+    roomsService.getAll(searchFilters).then(res => {
+      setFilteredRooms(res.content);
+    });
     setSessionStorageData(searchFilters);
   }, [searchFilters]);
 
-  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(rooms);
+  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms);
   const { sortedItems, sortBy, setSortBy } = useSort(filteredData || [], { path: 'roomNumber', order: 'desc' });
   const {
     itemsListCrop: roomsListCrop,
@@ -57,23 +54,6 @@ const RoomsPage = () => {
     setSortBy({ path: 'roomNumber', order: 'desc' });
     handleChangePageSize({ target: setPageSizeOptions[1] });
   };
-
-  // useEffect(() => {
-  //   const searchQueryData = getSearchQueryData();
-  //   if (searchQueryData) {
-  //     setData(prevState => ({ ...prevState, ...searchQueryData }));
-  //   }
-  // }, []);
-
-  //   var arrivalDate = moment("2022-01-12, 13:00:00"),
-  //   bookingArrivalDate = moment("2022-01-08, 12:00:00"),
-  //   bookingDepartureDate = moment("2022-01-12, 12:00:00");
-
-  // if (arrivalDate.isBetween(bookingArrivalDate, bookingDepartureDate)) {
-  //   console.log("is between");
-  // } else {
-  //   console.log("is not between");
-  // }
 
   return (
     <main className='rooms-page'>

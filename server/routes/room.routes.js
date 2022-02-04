@@ -2,18 +2,15 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const Room = require('../models/Room');
 const auth = require('../middleware/auth.middleware');
+const { filterRooms } = require('../utils/filterRooms');
 
 router.get('/', async (req, res) => {
   const query = req.query;
-  console.log('query', query);
   try {
-    let rooms = await Room.find({ ...query });
-    if (query.price) {
-      rooms = await Room.find({ price: { $gte: query.price[0], $lte: query.price[1] } });
-      // return res.status(200).send(rooms);
-    }
+    let rooms = await Room.find();
+    const filteredRooms = await filterRooms(rooms, query);
 
-    res.status(200).send(rooms);
+    res.status(200).send(filteredRooms);
   } catch (error) {
     console.log(error);
     res.status(500).json({
