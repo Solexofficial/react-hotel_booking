@@ -262,7 +262,7 @@
     "roomNumber": 618,
     "type": "Стандарт",
     "price": 9990,
-    "rate": 4,
+    "rate": 0,
     "countReviews": 0,
     "images": {
       "img1": "https://images.unsplash.com/photo-1631049552240-59c37f38802b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
