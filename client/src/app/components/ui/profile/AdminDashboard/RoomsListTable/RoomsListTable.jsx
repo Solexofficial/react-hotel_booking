@@ -32,7 +32,7 @@ const headCells = [
     label: 'Аренда в сутки',
   },
   {
-    id: 'isBooked',
+    id: 'bookings',
     numeric: true,
     disablePadding: false,
     label: 'Статус',
@@ -44,7 +44,7 @@ const RoomsListTable = () => {
   const rooms = useSelector(getRooms());
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
 
-  const { sortedItems, sortBy, handleRequestSort } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
+  const { sortedItems, sortBy, handleRequestSort } = useSort(rooms || [], { path: 'bookings', order: 'desc' });
   const {
     itemsListCrop: roomsCroppedList,
     currentPage,
