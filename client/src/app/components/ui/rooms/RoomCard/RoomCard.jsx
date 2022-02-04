@@ -8,6 +8,8 @@ import Divider from '../../../common/Divider';
 import ImageSlider from '../../../common/ImageSlider';
 import Rating from '../../../common/Rating';
 import declOfNum from '../../../../utils/declOfNum';
+import { getReviewsByRoomId } from '../../../../store/reviews';
+import { useSelector } from 'react-redux';
 
 const comfortIconsMap = {
   hasWifi: <WifiIcon />,
@@ -15,7 +17,11 @@ const comfortIconsMap = {
   hasWorkSpace: <ComputerIcon />,
 };
 
-const RoomCard = ({ _id, roomNumber, price, rate, countReviews, type, images, comforts }) => {
+const RoomCard = ({ _id, roomNumber, price, rate, type, images, comforts }) => {
+  const reviews = useSelector(getReviewsByRoomId(_id));
+  const countReviews = reviews.length;
+  const rating = countReviews > 0 ? reviews.reduce((acc, cur) => acc + cur.rating, 0) : 0;
+
   return (
     <div className='room-card'>
       {comforts && (
@@ -46,7 +52,7 @@ const RoomCard = ({ _id, roomNumber, price, rate, countReviews, type, images, co
         <Divider />
         <div className='room-card__description-row'>
           <div className='room-card__rating'>
-            <Rating name='read-only' value={rate} totalCount={countReviews} readOnly />
+            <Rating name='read-only' value={rating} totalCount={countReviews} readOnly />
           </div>
           <div className='room-card__reviews'>
             <span className='room-card__reviews-count'>{`${countReviews} ${declOfNum(countReviews, [

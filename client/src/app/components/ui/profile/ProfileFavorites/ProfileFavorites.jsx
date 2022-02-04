@@ -12,7 +12,7 @@ const ProfileFavorites = () => {
   return (
     <div style={{ width: '100%' }}>
       <h1 style={{ marginBottom: '20px' }}>Мои любимые номера</h1>
-      <RoomsList rooms={rooms} />
+      {rooms.length > 0 ? <RoomsList rooms={rooms} /> : <h3>Список пуст</h3>}
     </div>
   );
 };
