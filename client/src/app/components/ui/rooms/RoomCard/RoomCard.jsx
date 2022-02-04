@@ -10,6 +10,7 @@ import Rating from '../../../common/Rating';
 import declOfNum from '../../../../utils/declOfNum';
 import { getReviewsByRoomId } from '../../../../store/reviews';
 import { useSelector } from 'react-redux';
+import { useFiltersQuery } from '../../../../hooks';
 
 const comfortIconsMap = {
   hasWifi: <WifiIcon />,
@@ -17,7 +18,7 @@ const comfortIconsMap = {
   hasWorkSpace: <ComputerIcon />,
 };
 
-const RoomCard = ({ _id, roomNumber, price, rate, type, images, comforts }) => {
+const RoomCard = ({ _id, roomNumber, price, type, images, comforts }) => {
   const reviews = useSelector(getReviewsByRoomId(_id));
   const countReviews = reviews.length;
   const rating = countReviews > 0 ? reviews.reduce((acc, cur) => acc + cur.rating, 0) : 0;

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Form, useForm, useModal } from '../../../../hooks';
+import { getSearchQueryData } from '../../../../services/sessionStorage.service';
 import { createBooking, getBookingCreatedStatus } from '../../../../store/bookings';
 import { addBookingRoom } from '../../../../store/rooms';
 import { getCurrentUserId } from '../../../../store/users';
@@ -15,16 +16,17 @@ import validatorConfig from './validatorConfig';
 
 const oneDayMs = 86000000;
 
-const initialData = {
-  arrivalDate: Date.now(),
-  departureDate: Date.now() + oneDayMs,
-  adults: 1,
-  children: 0,
-  babies: 0,
-  totalPrice: 0,
-};
-
 const BookingForm = () => {
+  const searchQueryData = getSearchQueryData();
+  const initialData = {
+    arrivalDate: searchQueryData.arrivalDate || Date.now(),
+    departureDate: searchQueryData.departureDate || Date.now() + oneDayMs,
+    adults: searchQueryData.adults || 0,
+    children: searchQueryData.children || 0,
+    babies: searchQueryData.babies || 0,
+    totalPrice: 0,
+  };
+
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
   const { roomId } = useParams();
@@ -58,7 +60,7 @@ const BookingForm = () => {
           .then(bookingData => dispatch(addBookingRoom(bookingData)))
           .then(() => handleOpenModal());
       } catch (error) {
-        console.log('error try catch');
+        console.log(error);
       }
     }
   };

@@ -7,6 +7,7 @@ import { DateOfStayField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter';
 import validatorConfig from './validatorConfig';
 import queryString from 'query-string';
+import { setSessionStorageData } from '../../../../services/sessionStorage.service';
 
 const oneDayMs = 86000000;
 
@@ -31,6 +32,7 @@ const SearchRoomsForm = () => {
     event.preventDefault();
     if (validate(data)) {
       const queryParams = queryString.stringify(data);
+      setSessionStorageData(queryParams);
       history.push(`/rooms?${queryParams}`);
     }
   };

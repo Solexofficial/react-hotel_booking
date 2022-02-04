@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFiltersQuery, usePagination, useSort } from '../../../hooks';
+import { setSessionStorageData } from '../../../services/sessionStorage.service';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
@@ -29,6 +30,7 @@ const RoomsPage = () => {
     console.log('filters', searchFilters);
     const data = axios.get('http://localhost:8080/api/rooms', { params: searchFilters });
     data.then(res => console.log('test filtering', res.data));
+    setSessionStorageData(searchFilters)
   }, [searchFilters]);
 
   const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
