@@ -25,7 +25,7 @@ const ReviewsForm = () => {
       const updateRoomPayload = {
         roomId: currentRoomData._id,
         countReviews: currentRoomData.countReviews + 1,
-        rate: +currentRoomData.rate + data.rating,
+        rate: Number(currentRoomData.rate + data.rating),
       };
       dispatch(createReview(payload));
       dispatch(updateRoom(updateRoomPayload));
