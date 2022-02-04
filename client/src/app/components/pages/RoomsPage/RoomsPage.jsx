@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFiltersQuery, usePagination, useSort } from '../../../hooks';
+import useDebounce from '../../../hooks/useDebounce';
+import useSearch from '../../../hooks/useSearch';
 import { setSessionStorageData } from '../../../services/sessionStorage.service';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
+import { InputField } from '../../common/Fields';
 import Pagination from '../../common/Pagination';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
 import RoomsFilter from '../../ui/rooms/RoomsFilters';
@@ -30,10 +33,11 @@ const RoomsPage = () => {
     console.log('filters', searchFilters);
     const data = axios.get('http://localhost:8080/api/rooms', { params: searchFilters });
     data.then(res => console.log('test filtering', res.data));
-    setSessionStorageData(searchFilters)
+    setSessionStorageData(searchFilters);
   }, [searchFilters]);
 
-  const { sortedItems, sortBy, setSortBy } = useSort(rooms || [], { path: 'roomNumber', order: 'desc' });
+  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(rooms);
+  const { sortedItems, sortBy, setSortBy } = useSort(filteredData || [], { path: 'roomNumber', order: 'desc' });
   const {
     itemsListCrop: roomsListCrop,
     currentPage,
@@ -45,6 +49,13 @@ const RoomsPage = () => {
   const handleSort = event => {
     setSortBy(JSON.parse(event.target.value));
     handleChangePage(event, 1);
+  };
+
+  const handleResetFilters = () => {
+    onResetFilters();
+    setSearchTerm('');
+    setSortBy({ path: 'roomNumber', order: 'desc' });
+    handleChangePageSize({ target: setPageSizeOptions[1] });
   };
 
   // useEffect(() => {
@@ -67,10 +78,17 @@ const RoomsPage = () => {
   return (
     <main className='rooms-page'>
       <aside className='rooms-page__filters'>
-        <RoomsFilter searchParams={searchFilters} onChange={handleChangeFilter} onReset={onResetFilters} />
+        <RoomsFilter searchParams={searchFilters} onChange={handleChangeFilter} onReset={handleResetFilters} />
       </aside>
       <section className='rooms-page__rooms'>
         <div className='rooms-page__sorting'>
+          <InputField
+            label='Поиск'
+            placeholder='Поиск по номеру...'
+            value={searchTerm}
+            onChange={handleChangeSearch}
+            style={{ flex: '1' }}
+          />
           <RoomsSort sortBy={sortBy} onSort={handleSort} />
           <RoomsDisplayCount count={pageSize} setCount={handleChangePageSize} options={setPageSizeOptions} />
         </div>
