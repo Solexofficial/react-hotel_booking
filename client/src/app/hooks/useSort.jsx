@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 const useSort = (items, initialSortBy) => {
-  console.log(items);
   const [sortBy, setSortBy] = useState(initialSortBy || {});
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {

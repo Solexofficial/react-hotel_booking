@@ -7,6 +7,7 @@ import { setSessionStorageData } from '../../../services/sessionStorage.service'
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
 import { InputField } from '../../common/Fields';
 import Pagination from '../../common/Pagination';
+import Searchbar from '../../common/Searchbar';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
 import RoomsFilter from '../../ui/rooms/RoomsFilters';
 import RoomsList from '../../ui/rooms/RoomsList';
@@ -62,13 +63,7 @@ const RoomsPage = () => {
       </aside>
       <section className='rooms-page__rooms'>
         <div className='rooms-page__sorting'>
-          <InputField
-            label='Поиск'
-            placeholder='Поиск по номеру...'
-            value={searchTerm}
-            onChange={handleChangeSearch}
-            style={{ flex: '1' }}
-          />
+          <Searchbar value={searchTerm} onChange={handleChangeSearch} />
           <RoomsSort sortBy={sortBy} onSort={handleSort} />
           <RoomsDisplayCount count={pageSize} setCount={handleChangePageSize} options={setPageSizeOptions} />
         </div>
