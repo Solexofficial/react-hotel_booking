@@ -1,6 +1,8 @@
 import React from 'react';
 import DatePickerField from '../DatePickerField';
 
+const oneDayMs = 86_000_000;
+
 const DateOfStay = ({ onChange, data, errors }) => {
   const { arrivalDate, departureDate } = data;
 
@@ -20,7 +22,7 @@ const DateOfStay = ({ onChange, data, errors }) => {
           label='Дата выезда'
           name='departureDate'
           error={errors?.departureDate}
-          minDate={+arrivalDate}
+          minDate={+arrivalDate + oneDayMs}
           onChange={onChange}
           value={+departureDate}
           className='dateOfStay'

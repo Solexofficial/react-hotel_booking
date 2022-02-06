@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
-import rooms from '../mockData/rooms.json';
-import users from '../mockData/users.json';
-import reviews from '../mockData/reviews.json';
-import likes from '../mockData/likes.json';
+// import rooms from '../mockData/rooms.json';
+// import users from '../mockData/users.json';
+// import reviews from '../mockData/reviews.json';
+// import likes from '../mockData/likes.json';
 import httpService from '../services/http.service';
+
+const rooms = {};
+const users = {};
+const reviews = {};
+const likes = {};
 
 const useMockData = () => {
   const statusMap = {

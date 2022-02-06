@@ -1,11 +1,9 @@
 import React from 'react';
-import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, useForm } from '../../../../hooks';
 import { getCurrentUserData, updateUserData } from '../../../../store/users';
 import Button from '../../../common/Button';
 import { DatePickerField, InputField, RadioGroup } from '../../../common/Fields';
-import withPassword from '../../../common/Fields/HOC/withPassword';
 import validatorConfig from './validatorConfig';
 
 const genderItems = [

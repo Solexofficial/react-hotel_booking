@@ -29,8 +29,8 @@ const RoomPage = ({ roomId }) => {
       <main>
         <div className='room-page__gallery-wrapper'>
           <ImageSlider className='room-page__gallery'>
-            {Object.keys(images).map(img => (
-              <img key={img} className='room-page__gallery-item--img' src={images[img]} alt='roomsPhoto' />
+            {images.map(img => (
+              <img key={img} className='room-page__gallery-item--img' src={img} alt='roomsPhoto' />
             ))}
           </ImageSlider>
         </div>

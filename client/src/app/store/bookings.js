@@ -25,6 +25,7 @@ const bookingsSlice = createSlice({
       state.isLoading = false;
     },
     bookingCreateRequested: state => {
+      state.error = null;
       state.createBookingLoading = true;
     },
     bookingCreateRequestedFailed: (state, action) => {
@@ -33,10 +34,12 @@ const bookingsSlice = createSlice({
     },
     bookingCreated: (state, action) => {
       state.entities.push(action.payload);
+      state.error = null;
       state.createBookingLoading = false;
     },
     bookingRemoved: (state, action) => {
       state.entities = state.entities.filter(booking => booking._id !== action.payload);
+      state.error = null;
     },
   },
 });
@@ -76,7 +79,8 @@ export const createBooking = payload => async dispatch => {
     dispatch(bookingCreated(content));
     return content;
   } catch (error) {
-    dispatch(bookingCreateRequestedFailed(error.message));
+    const { message } = error.response.data.error;
+    dispatch(bookingCreateRequestedFailed(message));
   }
 };
 
@@ -103,5 +107,7 @@ export const getBookingsByRoomId = roomId => state => {
     return state.bookings.entities.filter(booking => booking.roomId === roomId);
   }
 };
+
+export const getBookingsErrors = () => state => state.bookings.error;
 
 export default bookingsReducer;

@@ -1,4 +1,5 @@
 const express = require('express');
+const { checkCanBooking } = require('../utils/checkCanBooking');
 const Booking = require('../models/Booking');
 const router = express.Router({ mergeParams: true });
 const auth = require('../middleware/auth.middleware');
@@ -17,12 +18,23 @@ router.get('/', async (req, res) => {
 
 router.post('/', auth, async (req, res) => {
   try {
-    const newBooking = await Booking.create({
-      ...req.body,
-      userId: req.user._id,
-    });
-    res.status(201).send(newBooking);
+    const canBooking = await checkCanBooking(req.body);
+    if (canBooking) {
+      const newBooking = await Booking.create({
+        ...req.body,
+        userId: req.user._id,
+      });
+      res.status(201).send(newBooking);
+    } else {
+      res.status(400).send({
+        error: {
+          message: 'BOOKING_EXIST',
+          code: 400,
+        },
+      });
+    }
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: 'На сервере произошла ошибка. Попробуйте позже',
     });

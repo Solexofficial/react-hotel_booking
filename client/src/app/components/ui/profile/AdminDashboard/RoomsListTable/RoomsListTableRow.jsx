@@ -2,16 +2,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Collapse, IconButton, TableCell, TableRow } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getBookingsByRoomId } from '../../../../../store/bookings';
 import Chip from '../../../../common/Chip/Chip';
 import Tooltip from '../../../../common/Tooltip';
+import RoomEditModal from '../../../modals/RoomEditModal';
 import BookingTable from '../BookingTable/BookingTable';
 
 const RoomsListTableRow = ({ row }) => {
   const [open, setOpen] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const bookings = useSelector(getBookingsByRoomId(row._id));
 
   useEffect(() => {
@@ -54,12 +56,7 @@ const RoomsListTableRow = ({ row }) => {
         </TableCell>
         <TableCell align='right'>
           <Tooltip title='Редактировать номер' disableInteractive={true}>
-            <IconButton
-              aria-label='expand row'
-              size='small'
-              color='primary'
-              onClick={() => console.log(`/rooms/${row.roomNumber}/edit`)}
-            >
+            <IconButton aria-label='expand row' size='small' color='primary' onClick={() => setShowEditModal(true)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
@@ -73,6 +70,7 @@ const RoomsListTableRow = ({ row }) => {
           </Collapse>
         </TableCell>
       </TableRow>
+      {showEditModal && <RoomEditModal open={showEditModal} onClose={() => setShowEditModal(false)} roomId={row._id} />}
     </>
   );
 };

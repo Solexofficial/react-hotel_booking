@@ -7,10 +7,13 @@ const { filterRooms } = require('../utils/filterRooms');
 router.get('/', async (req, res) => {
   const query = req.query;
   try {
-    let rooms = await Room.find();
-    const filteredRooms = await filterRooms(rooms, query);
+    const rooms = await Room.find();
+    if (Object.keys(query).length > 0) {
+      const filteredRooms = await filterRooms(rooms, query);
+      return res.status(200).send(filteredRooms);
+    }
 
-    res.status(200).send(filteredRooms);
+    res.status(200).send(rooms);
   } catch (error) {
     console.log(error);
     res.status(500).json({

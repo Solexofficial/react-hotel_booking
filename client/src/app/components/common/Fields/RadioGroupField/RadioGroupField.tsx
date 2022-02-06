@@ -1,7 +1,19 @@
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup as MuiRadioGroup } from '@mui/material';
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup as MuiRadioGroup,
+  RadioGroupProps as MuiRadioGroupProps,
+} from '@mui/material';
 import React from 'react';
 
-const RadioGroupField = ({ name, label, value, onChange, items }) => {
+type RadioGroupType = MuiRadioGroupProps & {
+  label?: string;
+  items: Array<{ id: string; title: string }>;
+};
+
+const RadioGroupField: React.FC<RadioGroupType> = ({ name, label, value, onChange, items }) => {
   return (
     <FormControl component='fieldset'>
       <FormLabel component='legend'>{label}</FormLabel>

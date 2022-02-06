@@ -34,9 +34,9 @@ const RoomCard = ({ _id, roomNumber, price, type, images, comforts }) => {
       )}
       <ImageSlider className='room-card__gallery'>
         {images &&
-          Object.keys(images).map(img => (
+          images.map(img => (
             <div className='room-card__gallery-item' key={img}>
-              <img className='room-card__gallery-item--img' src={images[img]} alt='roomsPhoto' />
+              <img className='room-card__gallery-item--img' src={img} alt='roomsPhoto' />
             </div>
           ))}
       </ImageSlider>

@@ -5,7 +5,6 @@ import useSearch from '../../../hooks/useSearch';
 import roomsService from '../../../services/rooms.service';
 import { setSessionStorageData } from '../../../services/sessionStorage.service';
 import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
-import { InputField } from '../../common/Fields';
 import Pagination from '../../common/Pagination';
 import Searchbar from '../../common/Searchbar';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
@@ -28,7 +27,12 @@ const RoomsPage = () => {
   const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
 
   useEffect(() => {
-    roomsService.getAll(searchFilters).then(res => {
+    const oneDayMs = 86_000_000;
+    const initialSearchFilters = {
+      arrivalDate: Date.now(),
+      departureDate: Date.now() + oneDayMs,
+    };
+    roomsService.getAll({ ...initialSearchFilters, ...searchFilters }).then(res => {
       setFilteredRooms(res.content);
     });
     setSessionStorageData(searchFilters);

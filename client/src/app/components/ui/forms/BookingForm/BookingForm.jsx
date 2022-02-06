@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Form, useForm, useModal } from '../../../../hooks';
 import { getSearchQueryData } from '../../../../services/sessionStorage.service';
-import { createBooking, getBookingCreatedStatus } from '../../../../store/bookings';
+import { createBooking, getBookingCreatedStatus, getBookingsErrors } from '../../../../store/bookings';
 import { addBookingRoom } from '../../../../store/rooms';
 import { getCurrentUserId } from '../../../../store/users';
 import Button from '../../../common/Button';
@@ -14,9 +14,10 @@ import { SuccessBookingModal } from '../../modals';
 import BookingFormPriceInfo from './BookingFormPriceInfo';
 import validatorConfig from './validatorConfig';
 
-const oneDayMs = 86000000;
+const oneDayMs = 86_000_000;
 
 const BookingForm = () => {
+  console.log('booking form render');
   const searchQueryData = getSearchQueryData();
   const initialData = {
     arrivalDate: searchQueryData.arrivalDate || Date.now(),
@@ -32,12 +33,10 @@ const BookingForm = () => {
   const { roomId } = useParams();
   const currentUserId = useSelector(getCurrentUserId());
   const bookingCreateStatusLoading = useSelector(getBookingCreatedStatus());
+  const bookingError = useSelector(getBookingsErrors());
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-  const { data, errors, enterError, setEnterError, handleInputChange, handleKeyDown, validate } = useForm(
-    initialData,
-    true,
-    validatorConfig
-  );
+  const { data, errors, enterError, setEnterError, handleInputChange, handleResetForm, handleKeyDown, validate } =
+    useForm(initialData, false, validatorConfig);
 
   const countDays = Math.max(1, Math.round((data.departureDate - data.arrivalDate) / oneDayMs));
 
@@ -45,7 +44,12 @@ const BookingForm = () => {
     if (!currentUserId) {
       setEnterError('Войдите, чтобы забронировать номер');
     }
-  }, [currentUserId]);
+    if (bookingError) {
+      if (bookingError === 'BOOKING_EXIST') {
+        setEnterError('На выбранные вами даты номер забронирован ');
+      }
+    }
+  }, [currentUserId, bookingError]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -55,13 +59,13 @@ const BookingForm = () => {
         ...data,
         totalPrice,
       };
-      try {
-        dispatch(createBooking(payload))
-          .then(bookingData => dispatch(addBookingRoom(bookingData)))
-          .then(() => handleOpenModal());
-      } catch (error) {
-        console.log(error);
-      }
+
+      dispatch(createBooking(payload)).then(bookingData => {
+        if (bookingData) {
+          dispatch(addBookingRoom(bookingData)).then(() => handleOpenModal());
+          handleResetForm(event);
+        }
+      });
     }
   };
 
