@@ -1,12 +1,29 @@
 import React from 'react';
 
-const Checkbox = ({ label, labelDetails, name, color, value, onChange, ...rest }) => {
-  const convertToDefEventParam = (name, value) => ({
+type ConvertFn = {
+  target: {
+    name: string;
+    value: boolean;
+  };
+};
+
+type CheckboxTypes = {
+  label?: string;
+  labelDetails?: string;
+  name: string;
+  value?: string | boolean;
+  onChange?: (cb: ConvertFn) => ConvertFn;
+};
+
+const Checkbox: React.FC<CheckboxTypes> = ({ label, labelDetails, name, value, onChange, ...rest }) => {
+  const convertToDefEventParam = (name: string, value: boolean) => ({
     target: {
       name,
       value,
     },
   });
+
+  console.log(value);
 
   return (
     <label className='checkbox'>
@@ -15,8 +32,8 @@ const Checkbox = ({ label, labelDetails, name, color, value, onChange, ...rest }
         type='checkbox'
         checked={!!value}
         name={name}
-        value={value}
-        onChange={e => onChange(convertToDefEventParam(name, e.target.checked))}
+        value={value?.toString()}
+        onChange={event => onChange && onChange(convertToDefEventParam(name, event.currentTarget.checked))}
         {...rest}
       />
       <div className='checkbox__indicator'>

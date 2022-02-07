@@ -1,10 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, useForm } from '../../../../hooks';
-import { updateUserData } from '../../../../store/users';
 import { RoomType } from '../../../../types/types';
 import Button from '../../../common/Button';
-import { InputField, RadioGroup, SelectField } from '../../../common/Fields';
+import { Checkbox, CheckBoxList, InputField, RadioGroup, SelectField } from '../../../common/Fields';
 import validatorConfig from './validatorConfig';
 
 type RoomEditFormProps = {
@@ -22,12 +21,8 @@ const roomComfortsOptions = [
 ];
 
 const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData }) => {
-  const initialData = {
-    roomNumber: roomData.roomNumber || '',
-    images: roomData.images || {},
-    price: roomData.price || 0,
-    type: roomData.type || 'Стандарт',
-    comforts: roomData.comforts || [],
+  const initialData: RoomType = {
+    ...roomData,
   };
 
   const { data, errors, handleInputChange, handleKeyDown, validate } = useForm(initialData, true, validatorConfig);
@@ -49,6 +44,23 @@ const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData }) => {
         <RadioGroup label='Тип номера' name='type' items={roomType} value={roomData.type} />
         <InputField name='price' label='Аренда в сутки(₽)' />
         <SelectField label='Удобства' name='comforts' options={roomComfortsOptions} multiple />
+        <CheckBoxList>
+          <Checkbox label='Можно c питомцами' name='canPets' />
+          <Checkbox label='Можно курить' name='canSmoke' />
+          <Checkbox label='Можно пригласить гостей (до 10 человек)' name='canInvite' />
+        </CheckBoxList>
+        <CheckBoxList>
+          <Checkbox
+            label='Широкий коридор'
+            name='hasWideCorridor'
+            labelDetails='Ширина коридоров в номере не менее 91см'
+          />
+          <Checkbox
+            label='Помощник для инвалидов'
+            name='hasDisabledAssistant'
+            labelDetails='На 1 этаже вас встретит специалист и проводит до номера'
+          />
+        </CheckBoxList>
 
         <Button type='submit' onClick={handleSubmit} fullWidth disabled={Object.keys(errors).length !== 0}>
           Обновить
