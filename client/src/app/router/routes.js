@@ -1,11 +1,17 @@
+import React from 'react';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import Login from '../layouts/login';
-import Main from '../layouts/main';
-import Profile from '../layouts/profile';
-import Rooms from '../layouts/rooms';
+// import Login from '../layouts/login';
+// import Main from '../layouts/main';
+// import Profile from '../layouts/profile';
+// import Rooms from '../layouts/rooms';
+
+const Login = React.lazy(() => import('../layouts/login'));
+const Main = React.lazy(() => import('../layouts/main'));
+const Profile = React.lazy(() => import('../layouts/profile'));
+const Rooms = React.lazy(() => import('../layouts/rooms'));
 
 export const userProfileRoutes = [
   { path: '/profile/booking', name: 'Мои бронирования', icon: <StarBorderIcon /> },
