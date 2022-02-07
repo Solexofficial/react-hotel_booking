@@ -13,4 +13,4 @@ const RoomsList = ({ rooms }) => {
   );
 };
 
-export default RoomsList;
+export default React.memo(RoomsList);

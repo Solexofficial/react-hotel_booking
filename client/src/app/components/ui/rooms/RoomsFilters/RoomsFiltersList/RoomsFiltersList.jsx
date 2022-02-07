@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import RoomsFilterItem from '../RoomsFiltersItem';
 
 const RoomsFiltersList = ({ handleChange, data, children }) => {
-  console.table('filters list render');
+  console.log('filters list render');
   const clonedElements = React.Children.map(children, child => {
     const childType = typeof child.type;
     let config = {};

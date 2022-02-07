@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Button from '../../../common/Button';
 import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter/GuestsCounter';
@@ -26,11 +26,11 @@ const initialState = {
 const RoomsFilter = ({ searchParams, onChange, onReset }) => {
   const [filters, setFilters] = useState(initialState);
 
-  const handleResetFilters = e => {
+  const handleResetFilters = useCallback(e => {
     e.preventDefault();
     setFilters(initialState);
     onReset();
-  };
+  }, []);
 
   useEffect(() => {
     if (Object.keys(searchParams).length === 0) {

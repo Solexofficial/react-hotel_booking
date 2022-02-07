@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFiltersQuery, usePagination, useSort } from '../../../hooks';
 import useSearch from '../../../hooks/useSearch';
@@ -53,12 +53,12 @@ const RoomsPage = () => {
     handleChangePage(event, 1);
   };
 
-  const handleResetFilters = () => {
+  const handleResetFilters = useCallback(() => {
     onResetFilters();
     setSearchTerm('');
     setSortBy({ path: 'roomNumber', order: 'desc' });
     handleChangePageSize({ target: setPageSizeOptions[1] });
-  };
+  }, [handleChangePageSize, onResetFilters]);
 
   return (
     <main className='rooms-page'>

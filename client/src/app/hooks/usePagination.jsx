@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function usePagination(items, defaultPageSize, defaultCurrentPage) {
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage || 1);
@@ -10,14 +10,14 @@ function usePagination(items, defaultPageSize, defaultCurrentPage) {
     }
   }, [items, pageSize]);
 
-  const handleChangePage = (event, value) => {
+  const handleChangePage = useCallback((event, value) => {
     setCurrentPage(value);
-  };
+  }, []);
 
-  const handleChangePageSize = event => {
+  const handleChangePageSize = useCallback(event => {
     setPageSize(parseInt(event.target.value, 10));
     setCurrentPage(1);
-  };
+  }, []);
 
   const itemsListCrop = items.slice((currentPage - 1) * pageSize, (currentPage - 1) * pageSize + pageSize);
 

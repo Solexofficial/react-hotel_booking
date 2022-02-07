@@ -1,18 +1,18 @@
 import React from 'react';
-import { TextField } from '@mui/material';
+import { TextField, TextFieldProps as MuiTextFieldProps } from '@mui/material';
 
-type InputTypes = {
-  label: string;
-  type?: string;
-  name: string;
-  placeholder?: string;
-  value?: string;
-  onChange?: () => void;
-  error?: string | null;
-  autoFocus?: boolean;
-  style?: object;
-  [rest: string]: any;
-};
+type InputTypes =
+  | MuiTextFieldProps
+  | {
+      type: string;
+      label: string;
+      name: string;
+      placeholder?: string;
+      value?: string;
+      onChange?: () => void;
+      error?: string | null;
+      autoFocus?: boolean;
+    };
 
 const InputField: React.FC<InputTypes> = ({ label, type = 'text', name, value, onChange, error = null, ...rest }) => {
   return (

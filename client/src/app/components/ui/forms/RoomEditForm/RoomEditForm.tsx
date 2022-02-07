@@ -4,16 +4,21 @@ import { Form, useForm } from '../../../../hooks';
 import { updateUserData } from '../../../../store/users';
 import { RoomType } from '../../../../types/types';
 import Button from '../../../common/Button';
-import { InputField, RadioGroup } from '../../../common/Fields';
+import { InputField, RadioGroup, SelectField } from '../../../common/Fields';
 import validatorConfig from './validatorConfig';
 
 type RoomEditFormProps = {
   roomData: RoomType;
 };
 
-const genderItems = [
-  { id: 'male', title: 'Мужчина' },
-  { id: 'female', title: 'Женщина' },
+const roomType = [
+  { id: 'Стандарт', title: 'Стандарт' },
+  { id: 'Люкс', title: 'Люкс' },
+];
+const roomComfortsOptions = [
+  { name: 'Wi-Fi', value: 'hasWifi' },
+  { name: 'Рабочее место', value: 'hasWorkSpace' },
+  { name: 'Кондиционер', value: 'hasConditioner' },
 ];
 
 const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData }) => {
@@ -32,16 +37,18 @@ const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData }) => {
   const handleSubmit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     if (validate(data)) {
-      dispatch(updateUserData(data));
+      console.log(data);
+      // dispatch(updateUserData(data));
     }
   };
 
   return (
     <>
       <Form data={data} errors={errors} handleChange={handleInputChange} handleKeyDown={handleKeyDown}>
-        <InputField autoFocus name='firstName' label='Имя' />
-        <InputField name='secondName' label='Фамилия' />
-        <RadioGroup name='gender' items={genderItems} />
+        <InputField name='roomNumber' label='№ номера' />
+        <RadioGroup label='Тип номера' name='type' items={roomType} value={roomData.type} />
+        <InputField name='price' label='Аренда в сутки(₽)' />
+        <SelectField label='Удобства' name='comforts' options={roomComfortsOptions} multiple />
 
         <Button type='submit' onClick={handleSubmit} fullWidth disabled={Object.keys(errors).length !== 0}>
           Обновить

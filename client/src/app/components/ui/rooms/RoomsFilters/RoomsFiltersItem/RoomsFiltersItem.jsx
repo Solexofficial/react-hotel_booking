@@ -11,4 +11,4 @@ const RoomsFiltersItem = ({ title, children }) => {
   );
 };
 
-export default RoomsFiltersItem;
+export default React.memo(RoomsFiltersItem);

@@ -1,10 +1,12 @@
 import { Rating as MuiRating } from '@mui/material';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 const Rating = ({ onChange, name, label, value, totalCount = 1, ...rest }) => {
-  const getRating = value => +Math.ceil(value / totalCount).toFixed();
+  const getRating = useCallback(value => +Math.ceil(value / totalCount).toFixed(), [totalCount]);
 
-  return <MuiRating name={name} value={getRating(value)} className='rating-wrapper' onChange={onChange} {...rest} />;
+  const ratingValue = useMemo(() => getRating(value), [getRating, value]);
+
+  return <MuiRating name={name} value={ratingValue} className='rating-wrapper' onChange={onChange} {...rest} />;
 };
 
 export default Rating;

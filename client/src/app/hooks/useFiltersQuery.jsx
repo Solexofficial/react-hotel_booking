@@ -41,9 +41,9 @@ const useFiltersQuery = () => {
 
     [filter, setSearchQuery, clearFilter]
   );
-  const handleResetFilters = () => {
+  const handleResetFilters = useCallback(() => {
     history.replace({});
-  };
+  }, [history]);
 
   return [filter, handleChangeFilter, handleResetFilters];
 };
