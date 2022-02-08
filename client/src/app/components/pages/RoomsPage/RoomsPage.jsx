@@ -27,15 +27,23 @@ const RoomsPage = () => {
   const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
 
   useEffect(() => {
+    let isMounted = true;
     const oneDayMs = 86_000_000;
     const initialSearchFilters = {
       arrivalDate: Date.now(),
       departureDate: Date.now() + oneDayMs,
     };
-    roomsService.getAll({ ...initialSearchFilters, ...searchFilters }).then(res => {
-      setFilteredRooms(res.content);
-    });
-    setSessionStorageData(searchFilters);
+
+    if (isMounted) {
+      roomsService.getAll({ ...initialSearchFilters, ...searchFilters }).then(res => {
+        setFilteredRooms(res.content);
+      });
+      setSessionStorageData(searchFilters);
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [searchFilters]);
 
   const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms, {
