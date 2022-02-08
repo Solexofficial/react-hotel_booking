@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-function usePagination(items: Array<any>, defaultPageSize: number, defaultCurrentPage: number) {
+function usePagination(items: Array<any>, defaultPageSize?: number, defaultCurrentPage?: number) {
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage || 1);
   const [pageSize, setPageSize] = useState(defaultPageSize || 5);
 

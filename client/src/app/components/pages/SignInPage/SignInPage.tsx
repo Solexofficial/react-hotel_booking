@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import LoginForm from '../../ui/forms/LoginForm';
 
-const SignInPage = () => {
+const SignInPage: React.FC = () => {
   return (
     <>
       <h1 className='visually-hidden'>Отель Toxin Войти в личный кабинет</h1>

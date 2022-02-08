@@ -82,4 +82,4 @@ const RoomsFilter = ({ searchParams, onChange, onReset }) => {
   );
 };
 
-export default RoomsFilter;
+export default React.memo(RoomsFilter);

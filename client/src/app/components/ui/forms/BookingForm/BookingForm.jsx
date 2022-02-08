@@ -17,7 +17,6 @@ import validatorConfig from './validatorConfig';
 const oneDayMs = 86_000_000;
 
 const BookingForm = () => {
-  console.log('booking form render');
   const searchQueryData = getSearchQueryData();
   const initialData = {
     arrivalDate: searchQueryData.arrivalDate || Date.now(),

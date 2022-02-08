@@ -24,7 +24,33 @@ const RoomsPage = () => {
   const rooms = useSelector(getRooms());
   const [filteredRooms, setFilteredRooms] = useState(rooms || []);
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
-  const [searchFilters, handleChangeFilter, onResetFilters] = useFiltersQuery();
+  const { searchFilters, handleChangeFilter, handleResetSearchFilters } = useFiltersQuery();
+  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms, {
+    searchBy: 'roomNumber',
+  });
+  const { sortedItems, sortBy, setSortBy } = useSort(filteredData || [], { path: 'roomNumber', order: 'desc' });
+  const {
+    itemsListCrop: roomsListCrop,
+    currentPage,
+    pageSize,
+    handleChangePage,
+    handleChangePageSize,
+  } = usePagination(sortedItems || [], setPageSizeOptions[1].value);
+
+  const handleSort = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSortBy(JSON.parse(event.target.value));
+      handleChangePage(event, 1);
+    },
+    [handleChangePage, setSortBy]
+  );
+
+  const handleResetFilters = useCallback(() => {
+    handleResetSearchFilters();
+    setSearchTerm('');
+    setSortBy({ path: 'roomNumber', order: 'desc' });
+    handleChangePageSize({ target: setPageSizeOptions[1] });
+  }, [handleChangePageSize, handleResetSearchFilters]);
 
   useEffect(() => {
     let isMounted = true;
@@ -45,30 +71,6 @@ const RoomsPage = () => {
       isMounted = false;
     };
   }, [searchFilters]);
-
-  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms, {
-    searchBy: 'roomNumber',
-  });
-  const { sortedItems, sortBy, setSortBy } = useSort(filteredData || [], { path: 'roomNumber', order: 'desc' });
-  const {
-    itemsListCrop: roomsListCrop,
-    currentPage,
-    pageSize,
-    handleChangePage,
-    handleChangePageSize,
-  } = usePagination(sortedItems || [], setPageSizeOptions[1].value);
-
-  const handleSort = event => {
-    setSortBy(JSON.parse(event.target.value));
-    handleChangePage(event, 1);
-  };
-
-  const handleResetFilters = useCallback(() => {
-    onResetFilters();
-    setSearchTerm('');
-    setSortBy({ path: 'roomNumber', order: 'desc' });
-    handleChangePageSize({ target: setPageSizeOptions[1] });
-  }, [handleChangePageSize, onResetFilters]);
 
   return (
     <main className='rooms-page'>

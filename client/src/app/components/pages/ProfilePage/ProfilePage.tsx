@@ -10,11 +10,11 @@ import ProfileFavorites from '../../ui/profile/ProfileFavorites';
 import ProfileLikes from '../../ui/profile/ProfileLikes';
 import UserProfile from '../../ui/profile/UserProfile';
 
-const ProfilePage = () => {
-  const { userId, route } = useParams();
+const ProfilePage: React.FC = () => {
+  const { userId, route } = useParams<{ userId: string; route: string }>();
   const currentUser = useSelector(getCurrentUserData());
 
-  const renderComponent = route => {
+  const renderComponent = (route: string) => {
     switch (route) {
       case 'edit':
         if (currentUser._id === userId) {

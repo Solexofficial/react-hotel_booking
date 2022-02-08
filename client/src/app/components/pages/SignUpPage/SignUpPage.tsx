@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../common/Button/Button';
 import RegisterForm from '../../ui/forms/RegisterForm';
 
-const SignUpPage = () => {
+const SignUpPage: React.FC = () => {
   return (
     <>
       <h1 className='visually-hidden'>Отель Toxin Регистрация</h1>

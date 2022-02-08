@@ -3,7 +3,7 @@ import { InputField } from '../Fields';
 
 type SearchbarProps = {
   value: string;
-  onChange: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Searchbar: React.FC<SearchbarProps> = ({ value, onChange }) => {

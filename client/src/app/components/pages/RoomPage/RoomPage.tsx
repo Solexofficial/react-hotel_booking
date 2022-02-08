@@ -13,12 +13,18 @@ import RoomInfoCard from '../../ui/RoomPageCards/RoomInfoCard';
 import RoomReviewsCard from '../../ui/RoomPageCards/RoomReviewsCard';
 import RoomRulesCard from '../../ui/RoomPageCards/RoomRulesCard';
 
-const RoomPage = ({ roomId }) => {
+type RoomPageProps = {
+  roomId: string;
+};
+
+const RoomPage: React.FC<RoomPageProps> = ({ roomId }) => {
   const room = useSelector(getRoomById(roomId));
-  const isFavorite = localStorageService.getFavoritesRoom().includes(roomId);
+  const isFavorite = localStorageService.getFavoritesRoom()
+    ? localStorageService.getFavoritesRoom()!.includes(roomId)
+    : false;
   const [status, setStatus] = useState(isFavorite || false);
 
-  const handleToggleFavorite = roomId => {
+  const handleToggleFavorite = (roomId: string) => {
     localStorageService.toggleFavoriteRoom(roomId);
     setStatus(prevState => !prevState);
   };
@@ -29,7 +35,7 @@ const RoomPage = ({ roomId }) => {
       <main>
         <div className='room-page__gallery-wrapper'>
           <ImageSlider className='room-page__gallery'>
-            {images.map(img => (
+            {images.map((img: string) => (
               <img key={img} className='room-page__gallery-item--img' src={img} alt='roomsPhoto' />
             ))}
           </ImageSlider>
@@ -61,7 +67,7 @@ const RoomPage = ({ roomId }) => {
                 </div>
               </div>
 
-              <BookingForm price={price} />
+              <BookingForm />
             </Paper>
           </div>
         </div>

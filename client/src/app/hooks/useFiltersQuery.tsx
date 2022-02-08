@@ -4,10 +4,10 @@ import { useCallback, useMemo } from 'react';
 import omit from 'lodash.omit';
 
 const useFiltersQuery = () => {
-  const { search } = useLocation();
+  const { search } = useLocation<string>();
   const history = useHistory();
 
-  const filter = useMemo(() => qs.parse(search, { parseNumbers: true, parseBooleans: true }), [search]);
+  const searchFilters = useMemo(() => qs.parse(search, { parseNumbers: true, parseBooleans: true }), [search]);
 
   const setSearchQuery = useCallback(
     filter => {
@@ -20,32 +20,32 @@ const useFiltersQuery = () => {
   const clearFilter = useCallback(
     ({ target }) => {
       const { name } = target;
-      const newFilter = omit(filter, name);
+      const newFilter = omit(searchFilters, name);
 
       setSearchQuery(newFilter);
     },
-    [filter, setSearchQuery]
+    [searchFilters, setSearchQuery]
   );
 
   const handleChangeFilter = useCallback(
     ({ target }) => {
       const { name, value } = target;
       if (value === false || value === 0) {
-        const newFilter = { ...filter, [name]: value };
+        const newFilter = { ...searchFilters, [name]: value };
         setSearchQuery(newFilter);
         return clearFilter({ target });
       }
-      const newFilter = { ...filter, [name]: value };
+      const newFilter = { ...searchFilters, [name]: value };
       return setSearchQuery(newFilter);
     },
 
-    [filter, setSearchQuery, clearFilter]
+    [searchFilters, setSearchQuery, clearFilter]
   );
-  const handleResetFilters = useCallback(() => {
+  const handleResetSearchFilters = useCallback(() => {
     history.replace({});
   }, [history]);
 
-  return [filter, handleChangeFilter, handleResetFilters];
+  return { searchFilters, handleChangeFilter, handleResetSearchFilters };
 };
 
 export default useFiltersQuery;

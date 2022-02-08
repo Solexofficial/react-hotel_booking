@@ -3,7 +3,7 @@ import React from 'react';
 import Container from '../../common/Container';
 import { SearchRoomsForm } from '../../ui/forms';
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <main className='main-home__page'>
       <Container>
