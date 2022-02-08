@@ -1,11 +1,11 @@
 const SEARCH_QUERY = 'search-query';
 
-export function setSessionStorageData(payload) {
+export function setSessionStorageData(payload: { [key: string]: any }) {
   sessionStorage.setItem(SEARCH_QUERY, JSON.stringify(payload));
 }
 
 export function getSearchQueryData() {
-  return JSON.parse(sessionStorage.getItem(SEARCH_QUERY));
+  return JSON.parse(sessionStorage.getItem(SEARCH_QUERY)!);
 }
 
 export function resetSessionStorageData() {

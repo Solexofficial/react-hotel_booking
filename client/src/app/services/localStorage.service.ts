@@ -4,12 +4,19 @@ const EXPIRES_KEY = 'jwt-expires';
 const USER_ID_KEY = 'user-local-id';
 const FAVORITES_ROOM_KEY = 'favorites-room';
 
-export function setTokens({ expiresIn = 3600, accessToken, userId, refreshToken }) {
+type SetTokensProps = {
+  expiresIn: number;
+  accessToken: string;
+  userId: string;
+  refreshToken: string;
+};
+
+export function setTokens({ expiresIn = 3600, accessToken, userId, refreshToken }: SetTokensProps) {
   const expiresDate = new Date().getTime() + expiresIn * 1000;
 
   localStorage.setItem(TOKEN_KEY, accessToken);
   localStorage.setItem(REFRESH_KEY, refreshToken);
-  localStorage.setItem(EXPIRES_KEY, expiresDate);
+  localStorage.setItem(EXPIRES_KEY, expiresDate.toString());
   localStorage.setItem(USER_ID_KEY, userId);
 }
 
@@ -33,12 +40,12 @@ export function getFavoritesRoom() {
   return localStorage.getItem(FAVORITES_ROOM_KEY);
 }
 
-export function toggleFavoriteRoom(roomId) {
-  let favoritesRoomList = JSON.parse(getFavoritesRoom()) || [];
-  if (!favoritesRoomList.some(id => id === roomId)) {
+export function toggleFavoriteRoom(roomId: string) {
+  let favoritesRoomList = JSON.parse(getFavoritesRoom()!) || [];
+  if (!favoritesRoomList.some((id: string) => id === roomId)) {
     favoritesRoomList.push(roomId);
   } else {
-    favoritesRoomList = favoritesRoomList.filter(id => id !== roomId);
+    favoritesRoomList = favoritesRoomList.filter((id: string) => id !== roomId);
   }
   localStorage.setItem(FAVORITES_ROOM_KEY, JSON.stringify(favoritesRoomList));
 }

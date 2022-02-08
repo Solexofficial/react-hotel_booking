@@ -1,3 +1,4 @@
+import { UserType } from '../types/types';
 import httpService from './http.service';
 import localStorageService from './localStorage.service';
 
@@ -8,11 +9,11 @@ const userService = {
     const { data } = await httpService.get(userEndpoint);
     return data;
   },
-  create: async payload => {
+  create: async (payload: UserType) => {
     const { data } = await httpService.put(userEndpoint + payload._id, payload);
     return data;
   },
-  getById: async id => {
+  getById: async (id: string) => {
     const { data } = await httpService.get(userEndpoint + id);
     return data;
   },
@@ -20,7 +21,7 @@ const userService = {
     const { data } = await httpService.get(userEndpoint + localStorageService.getUserId());
     return data;
   },
-  updateUserData: async payload => {
+  updateUserData: async (payload: UserType) => {
     const { data } = await httpService.patch(userEndpoint + localStorageService.getUserId(), payload);
     return data;
   },

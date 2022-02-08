@@ -1,3 +1,4 @@
+import { LikeType } from '../types/types';
 import httpService from './http.service';
 
 const likesEndPoint = 'like/';
@@ -7,7 +8,7 @@ const likesService = {
     const { data } = await httpService.get(likesEndPoint);
     return data;
   },
-  getByReviewId: async reviewId => {
+  getByReviewId: async (reviewId: string) => {
     const { data } = await httpService.get(likesEndPoint, {
       params: {
         orderBy: 'reviewId',
@@ -16,7 +17,7 @@ const likesService = {
     });
     return data;
   },
-  getByUserId: async userId => {
+  getByUserId: async (userId: string) => {
     const { data } = await httpService.get(likesEndPoint, {
       params: {
         orderBy: 'userId',
@@ -25,11 +26,11 @@ const likesService = {
     });
     return data;
   },
-  create: async payload => {
+  create: async (payload: LikeType) => {
     const { data } = await httpService.post(likesEndPoint, payload);
     return data;
   },
-  remove: async id => {
+  remove: async (id: string) => {
     await httpService.delete(likesEndPoint + id);
     return id;
   },
