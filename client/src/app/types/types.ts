@@ -1,11 +1,11 @@
 export type RoomType = {
-  _id: string;
+  _id?: string;
   roomNumber: number | string;
-  images: Array<string>;
+  images?: Array<string>;
   price: number;
-  type: 'Стандарт' | 'Люкс';
+  type?: 'Стандарт' | 'Люкс';
   comforts?: Array<string>;
-  bookings: Array<string> | null;
+  bookings?: Array<string> | null;
   hasWifi?: boolean;
   hasConditioner?: boolean;
   hasWorkSpace?: boolean;

@@ -22,7 +22,15 @@ const roomComfortsOptions = [
 
 const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData }) => {
   const initialData: RoomType = {
-    ...roomData,
+    roomNumber: roomData.roomNumber || '',
+    type: roomData.type || 'Стандарт',
+    price: roomData.price || 0,
+    comforts: roomData.comforts || [],
+    canPets: roomData.canPets || false,
+    canSmoke: roomData.canSmoke || false,
+    canInvite: roomData.canInvite || false,
+    hasWideCorridor: roomData.hasWideCorridor || false,
+    hasDisabledAssistant: roomData.hasDisabledAssistant || false,
   };
 
   const { data, errors, handleInputChange, handleKeyDown, validate } = useForm(initialData, true, validatorConfig);

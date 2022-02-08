@@ -23,8 +23,6 @@ const Checkbox: React.FC<CheckboxTypes> = ({ label, labelDetails, name, value, o
     },
   });
 
-  console.log(value);
-
   return (
     <label className='checkbox'>
       <input

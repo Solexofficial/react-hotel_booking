@@ -2,7 +2,7 @@ import { isValid } from 'date-fns/esm';
 
 export type ConfigFieldNameType = {
   message: string;
-  value?: number;
+  value?: number | number[];
 };
 
 export type ValidatorConfigType = {
@@ -13,6 +13,7 @@ export type ValidatorConfigType = {
     isCapitalSymbol?: ConfigFieldNameType;
     isContainDigit?: ConfigFieldNameType;
     min?: ConfigFieldNameType;
+    isValidInterval?: ConfigFieldNameType;
     isValidDate?: ConfigFieldNameType;
   };
 };
@@ -27,7 +28,7 @@ export function validator(data: { [key: string]: any }, validatorConfig: Validat
         if (typeof fieldData === 'boolean') {
           statusValidate = !fieldData;
         } else {
-          statusValidate = fieldData.trim() === '';
+          statusValidate = String(fieldData).trim() === '';
         }
         break;
       }
@@ -49,6 +50,12 @@ export function validator(data: { [key: string]: any }, validatorConfig: Validat
       case 'min': {
         if (config.value) {
           statusValidate = fieldData.length < config.value;
+        }
+        break;
+      }
+      case 'isValidInterval': {
+        if (Array.isArray(config.value)) {
+          statusValidate = !(Number(fieldData) >= config.value[0] && Number(fieldData) <= config.value[1]);
         }
         break;
       }
