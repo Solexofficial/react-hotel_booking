@@ -7,17 +7,12 @@ import { RoomEditForm } from '../../forms';
 
 const RoomEditModal = ({ open, onClose, roomId }) => {
   const currentRoom = useSelector(getRoomById(roomId));
-  console.log(currentRoom);
-
-  const handleUpdateRoomData = payload => {
-    console.log(payload);
-  };
 
   return (
-    <Modal title='Редактировать номер' open={open} onClose={onClose}>
+    <Modal title='Редактирование' open={open} onClose={onClose}>
       <DialogContent>
         <h2>Редактировать номер {currentRoom.roomNumber}</h2>
-        <RoomEditForm roomData={currentRoom} />
+        <RoomEditForm roomData={currentRoom} onCloseModal={onClose} />
       </DialogContent>
     </Modal>
   );

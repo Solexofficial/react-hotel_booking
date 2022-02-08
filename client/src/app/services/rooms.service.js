@@ -12,7 +12,7 @@ const roomsService = {
     return data;
   },
   update: async payload => {
-    const { data } = await httpService.patch(roomsEndPoint + payload.roomId, payload);
+    const { data } = await httpService.patch(roomsEndPoint + payload._id, payload);
     return data;
   },
   getById: async id => {

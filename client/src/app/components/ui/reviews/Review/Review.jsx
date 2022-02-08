@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeReview, updateReview } from '../../../../store/reviews';
-import { getRoomById, updateRoom } from '../../../../store/rooms';
+import { getRoomById, updateRoomData } from '../../../../store/rooms';
 import { getCurrentUserData, getUserById } from '../../../../store/users';
 import formatDate from '../../../../utils/formatDate';
 import Avatar from '../../../common/Avatar';
@@ -47,7 +47,7 @@ const Review = ({ review }) => {
       countReviews: currentRoomData.countReviews - 1,
       rate: +currentRoomData.rate - review.rating,
     };
-    dispatch(updateRoom(updateRoomPayload));
+    dispatch(updateRoomData(updateRoomPayload));
   };
 
   useEffect(() => {

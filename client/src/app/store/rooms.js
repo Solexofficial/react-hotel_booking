@@ -74,7 +74,7 @@ export const removeBookingRoom = payload => async dispatch => {
   }
 };
 
-export const updateRoom = payload => async dispatch => {
+export const updateRoomData = payload => async dispatch => {
   dispatch(roomUpdateRequested());
   try {
     const { content } = await roomsService.update(payload);

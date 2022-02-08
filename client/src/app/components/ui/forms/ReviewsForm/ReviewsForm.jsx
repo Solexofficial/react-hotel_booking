@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
 import { createReview } from '../../../../store/reviews';
-import { getRoomById, updateRoom } from '../../../../store/rooms';
+import { getRoomById, updateRoomData } from '../../../../store/rooms';
 import Button from '../../../common/Button/Button';
 import { RatingField, TextAreaField } from '../../../common/Fields';
 import validatorConfig from './validatorConfig';
@@ -29,7 +29,7 @@ const ReviewsForm = () => {
       };
 
       dispatch(createReview(payload));
-      dispatch(updateRoom(updateRoomPayload));
+      dispatch(updateRoomData(updateRoomPayload));
       handleResetForm(e);
     }
   };
