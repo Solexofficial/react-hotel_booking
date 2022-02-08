@@ -38,7 +38,9 @@ const RoomsPage = () => {
     setSessionStorageData(searchFilters);
   }, [searchFilters]);
 
-  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms);
+  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms, {
+    searchBy: 'roomNumber',
+  });
   const { sortedItems, sortBy, setSortBy } = useSort(filteredData || [], { path: 'roomNumber', order: 'desc' });
   const {
     itemsListCrop: roomsListCrop,

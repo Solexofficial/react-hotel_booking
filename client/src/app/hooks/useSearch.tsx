@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
 import useDebounce from './useDebounce';
 
-export default function useSearch(data) {
+export default function useSearch(data: any[], config: { searchBy: string }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredData, setData] = useState([] || data);
+  const [filteredData, setData] = useState(data || []);
   const [isSearching, setIsSearching] = useState(false);
 
-  const handleChangeSearch = e => {
+  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
+
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
       setIsSearching(true);
-      const dataFiltered = data.filter(room =>
-        room.roomNumber.toString().toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+      const dataFiltered = data.filter(item =>
+        item[config.searchBy].toString().toLowerCase().includes(debouncedSearchTerm.toLowerCase())
       );
       setData(dataFiltered);
       setIsSearching(false);

@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
-// import rooms from '../mockData/rooms.json';
-// import users from '../mockData/users.json';
-// import reviews from '../mockData/reviews.json';
-// import likes from '../mockData/likes.json';
 import httpService from '../services/http.service';
+import { RoomType, UserType, ReviewType, LikeType } from '../types/types';
 
-const rooms = {};
-const users = {};
-const reviews = {};
-const likes = {};
+const rooms: Array<RoomType> = [];
+const users: Array<UserType> = [];
+const reviews: Array<ReviewType> = [];
+const likes: Array<LikeType> = [];
 
 const useMockData = () => {
   const statusMap = {
@@ -17,7 +14,7 @@ const useMockData = () => {
     success: 'Ready',
     error: 'Error occurred',
   };
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
   const [status, setStatus] = useState(statusMap.idle);
   const [progress, setProgress] = useState(0);
   const [count, setCount] = useState(0);
@@ -64,8 +61,10 @@ const useMockData = () => {
         incrementCount();
       }
     } catch (error) {
-      setError(error);
-      setStatus(statusMap.error);
+      if (error instanceof Error) {
+        setError(error);
+        setStatus(statusMap.error);
+      }
     }
   }
 
