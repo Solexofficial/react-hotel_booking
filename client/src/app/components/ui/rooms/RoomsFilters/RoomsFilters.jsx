@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useFiltersQuery } from '../../../../hooks';
 import Button from '../../../common/Button';
 import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter/GuestsCounter';
@@ -23,26 +24,22 @@ const initialState = {
   hasWorkSpace: false,
 };
 
-const RoomsFilter = ({ searchParams, onChange, onReset }) => {
-  const [filters, setFilters] = useState(initialState);
+const RoomsFilter = ({ onReset }) => {
+  const { searchFilters, handleChangeFilter, handleResetSearchFilters } = useFiltersQuery();
 
-  const handleResetFilters = useCallback(e => {
-    e.preventDefault();
-    setFilters(initialState);
-    onReset();
-  }, []);
-
-  useEffect(() => {
-    if (Object.keys(searchParams).length === 0) {
-      setFilters(initialState);
-    }
-    setFilters({ ...initialState, ...searchParams });
-  }, [searchParams]);
+  const handleResetFilters = useCallback(
+    e => {
+      e.preventDefault();
+      handleResetSearchFilters();
+      onReset();
+    },
+    [handleResetSearchFilters, onReset]
+  );
 
   return (
     <section className='filters__wrapper'>
       <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
-      <RoomsFilterList data={filters} handleChange={onChange}>
+      <RoomsFilterList data={{ ...initialState, ...searchFilters }} handleChange={handleChangeFilter}>
         <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
         <GuestsCounter />
         <RangeSliderField
