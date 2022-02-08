@@ -6,8 +6,8 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import Container from '../components/common/Container';
 
-const Login = () => {
-  const { type } = useParams();
+const Login: React.FC = () => {
+  const { type } = useParams<{ type?: string }>();
   return (
     <>
       <Header />

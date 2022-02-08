@@ -8,9 +8,8 @@ import Header from '../components/common/Header/Header';
 import ProfilePage from '../components/pages/ProfilePage';
 import { getCurrentUserId } from '../store/users';
 
-const Profile = () => {
-  const { userId, route } = useParams();
-  console.log(route);
+const Profile: React.FC = () => {
+  const { userId } = useParams<{ userId?: string }>();
   const currentUserId = useSelector(getCurrentUserId());
 
   return (

@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from '../../store/users';
 
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
   const isLoggedIn = useSelector(getIsLoggedIn());
 
   return (

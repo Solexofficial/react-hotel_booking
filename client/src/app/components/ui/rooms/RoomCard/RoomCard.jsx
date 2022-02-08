@@ -2,15 +2,14 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import ComputerIcon from '@mui/icons-material/Computer';
 import WifiIcon from '@mui/icons-material/Wifi';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getReviewsByRoomId } from '../../../../store/reviews';
+import declOfNum from '../../../../utils/declOfNum';
 import Badge from '../../../common/Badge';
 import Divider from '../../../common/Divider';
 import ImageSlider from '../../../common/ImageSlider';
 import Rating from '../../../common/Rating';
-import declOfNum from '../../../../utils/declOfNum';
-import { getReviewsByRoomId } from '../../../../store/reviews';
-import { useSelector } from 'react-redux';
-import { useFiltersQuery } from '../../../../hooks';
 
 const comfortIconsMap = {
   hasWifi: <WifiIcon />,

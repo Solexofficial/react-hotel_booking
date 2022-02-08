@@ -7,8 +7,8 @@ import Header from '../components/common/Header';
 import RoomPage from '../components/pages/RoomPage';
 import RoomsPage from '../components/pages/RoomsPage';
 
-const Rooms = () => {
-  const { roomId } = useParams();
+const Rooms: React.FC = () => {
+  const { roomId } = useParams<{ roomId?: string }>();
 
   return (
     <>
