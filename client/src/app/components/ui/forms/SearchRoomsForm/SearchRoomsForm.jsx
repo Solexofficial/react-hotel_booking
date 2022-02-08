@@ -14,7 +14,7 @@ const oneDayMs = 86000000;
 const initialState = {
   arrivalDate: Date.now(),
   departureDate: Date.now() + oneDayMs,
-  adults: 0,
+  adults: 1,
   children: 0,
   babies: 0,
 };

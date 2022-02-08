@@ -22,7 +22,7 @@ const BookingForm = () => {
   const initialData = {
     arrivalDate: searchQueryData.arrivalDate || Date.now(),
     departureDate: searchQueryData.departureDate || Date.now() + oneDayMs,
-    adults: searchQueryData.adults || 0,
+    adults: searchQueryData.adults || 1,
     children: searchQueryData.children || 0,
     babies: searchQueryData.babies || 0,
     totalPrice: 0,
