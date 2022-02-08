@@ -1,4 +1,4 @@
-export default function declOfNum(n, words) {
+export default function declOfNum(n: number, words: string[]) {
   n = Math.abs(n) % 100;
   const n1 = n % 10;
   if (n > 10 && n < 20) {

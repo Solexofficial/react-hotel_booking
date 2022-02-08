@@ -75,7 +75,7 @@ const RoomsPage = () => {
   return (
     <main className='rooms-page'>
       <aside className='rooms-page__filters'>
-        <RoomsFilter searchParams={searchFilters} onChange={handleChangeFilter} onReset={handleResetFilters} />
+        <RoomsFilter onReset={handleResetFilters} />
       </aside>
       <section className='rooms-page__rooms'>
         <div className='rooms-page__sorting'>

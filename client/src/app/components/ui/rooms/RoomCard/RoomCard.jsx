@@ -32,7 +32,7 @@ const RoomCard = ({ _id, roomNumber, price, type, images, comforts }) => {
         </Badge>
       )}
       <ImageSlider className='room-card__gallery'>
-        {images &&
+        {images.length > 0 &&
           images.map(img => (
             <div className='room-card__gallery-item' key={img}>
               <img className='room-card__gallery-item--img' src={img} alt='roomsPhoto' />

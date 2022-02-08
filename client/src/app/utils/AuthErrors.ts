@@ -1,4 +1,4 @@
-const generateAuthError = message => {
+const generateAuthError = (message: string) => {
   switch (message) {
     case 'EMAIL_EXISTS':
       return 'Пользователь с таким email уже существует';

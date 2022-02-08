@@ -15,7 +15,7 @@ const months = [
   'Декабря',
 ];
 
-export function decomposeDate(date) {
+export function decomposeDate(date: number | Date) {
   date = new Date(date).getTime();
   if (typeof date === 'string') {
     date = Number(date);
@@ -29,12 +29,12 @@ export function decomposeDate(date) {
   return { date, year, month, day, hours, min };
 }
 
-export function getDateDDMMYYYY(date) {
+export function getDateDDMMYYYY(date: number | Date) {
   const { day, month, year } = decomposeDate(date);
   return `${day} ${months[month]} ${year}`;
 }
 
-export default function formatDate(value) {
+export default function formatDate(value: number | Date) {
   value = new Date(value).getTime();
   const { year, month, day, hours, min } = decomposeDate(value);
 
@@ -42,11 +42,11 @@ export default function formatDate(value) {
   const postCreatedTime = Number(value);
   const diffTime = Math.abs(currentDateTime - postCreatedTime);
 
-  const checkLeapYear = year => {
+  const checkLeapYear = (year: number) => {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   };
 
-  const getValidTime = (hours, min) => {
+  const getValidTime = (hours: number | string, min: number | string) => {
     hours = hours < 10 ? `0${hours}` : hours;
     min = min < 10 ? `0${min}` : min;
     return `${hours}:${min}`;
