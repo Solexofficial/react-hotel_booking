@@ -79,6 +79,10 @@ export const createBooking = payload => async dispatch => {
     dispatch(bookingCreated(content));
     return content;
   } catch (error) {
+    if (error.response.status === 500) {
+      dispatch(bookingCreateRequestedFailed(error.response.data.message));
+      return;
+    }
     const { message } = error.response.data.error;
     dispatch(bookingCreateRequestedFailed(message));
   }

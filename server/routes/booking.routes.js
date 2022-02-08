@@ -20,10 +20,13 @@ router.post('/', auth, async (req, res) => {
   try {
     const canBooking = await checkCanBooking(req.body);
     if (canBooking) {
+      console.log(req.body);
       const newBooking = await Booking.create({
         ...req.body,
         userId: req.user._id,
+        expires_at: req.body.departureDate - req.body.arrivalDate,
       });
+
       res.status(201).send(newBooking);
     } else {
       res.status(400).send({

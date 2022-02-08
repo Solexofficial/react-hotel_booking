@@ -48,6 +48,9 @@ const BookingForm = () => {
       if (bookingError === 'BOOKING_EXIST') {
         setEnterError('На выбранные вами даты номер забронирован ');
       }
+      if (bookingError === 'На сервере произошла ошибка. Попробуйте позже') {
+        setEnterError('Упс, что-то пошло не так, попробуйте позже');
+      }
     }
   }, [currentUserId, bookingError]);
 
@@ -59,13 +62,16 @@ const BookingForm = () => {
         ...data,
         totalPrice,
       };
-
-      dispatch(createBooking(payload)).then(bookingData => {
-        if (bookingData) {
-          dispatch(addBookingRoom(bookingData)).then(() => handleOpenModal());
-          handleResetForm(event);
-        }
-      });
+      try {
+        dispatch(createBooking(payload)).then(bookingData => {
+          if (bookingData) {
+            dispatch(addBookingRoom(bookingData)).then(() => handleOpenModal());
+            handleResetForm(event);
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
