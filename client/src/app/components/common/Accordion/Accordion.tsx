@@ -1,9 +1,18 @@
 import { ExpandMore } from '@mui/icons-material';
-import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import {
+  Accordion as MuiAccordion,
+  AccordionDetails,
+  AccordionSummary,
+  AccordionProps as MuiAccordionProps,
+} from '@mui/material';
 import Divider from '../Divider';
 import React from 'react';
 
-const Accordion = ({ children, label }) => {
+type AccordionProps = MuiAccordionProps & {
+  label: string;
+};
+
+const Accordion: React.FC<AccordionProps> = ({ children, label }) => {
   return (
     <MuiAccordion>
       <AccordionSummary expandIcon={<ExpandMore />} aria-controls='panel1a-content' id='panel1a-header'>

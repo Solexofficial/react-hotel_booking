@@ -1,7 +1,7 @@
-import { TextField } from '@mui/material';
+import { TextField, TextFieldProps as MuiTextFieldProps } from '@mui/material';
 import React from 'react';
 
-const TextAreaField = ({ label, name, value, onChange, error, rows = 5 }) => {
+const TextAreaField: React.FC<MuiTextFieldProps> = ({ label, name, value, onChange, error, rows = 5 }) => {
   return (
     <>
       <TextField

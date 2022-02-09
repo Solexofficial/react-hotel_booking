@@ -1,7 +1,11 @@
-import { Rating as MuiRating } from '@mui/material';
+import { Rating as MuiRating, RatingProps as MuiRatingProps } from '@mui/material';
 import React, { useCallback, useMemo } from 'react';
 
-const Rating = ({ onChange, name, label, value, totalCount = 1, ...rest }) => {
+type RatingProps = MuiRatingProps & {
+  totalCount?: number;
+};
+
+const Rating: React.FC<RatingProps> = ({ onChange, name, value, totalCount = 1, ...rest }) => {
   const getRating = useCallback(value => +Math.ceil(value / totalCount).toFixed(), [totalCount]);
 
   const ratingValue = useMemo(() => getRating(value), [getRating, value]);

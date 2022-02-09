@@ -1,17 +1,44 @@
-import { Slider } from '@mui/material';
+import { Slider, SliderProps } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import Loader from '../../Loader';
 import { InputField } from '..';
 
-const valuetext = value => {
+const valuetext = (value: number) => {
   return `${value}₽`;
 };
 
-const RangeSliderField = ({ label, name, description, onChange, value = [], min, max, minDistance = 1500 }) => {
-  const [sliderValue, setSliderValue] = useState(value.map(Number));
+type onChange = {
+  target: {
+    name?: string;
+    value: number[];
+  };
+};
+
+type RangeSliderFieldProps = SliderProps & {
+  label: string;
+  description: string;
+  minDistance: number;
+  value: number[];
+  onChange: (props: onChange) => void;
+};
+
+const RangeSliderField: React.FC<RangeSliderFieldProps> = ({
+  label,
+  name,
+  description,
+  onChange,
+  value = [],
+  min = 0,
+  max = 1000,
+  minDistance = 1500,
+}) => {
+  const [sliderValue, setSliderValue] = useState<number[]>(value.map(Number));
 
   const handleChange = useCallback(
-    (event, newValue, activeThumb) => {
+    (event: Event, newValue: number | number[], activeThumb: number) => {
+      if (!Array.isArray(newValue)) {
+        return;
+      }
       if (newValue[1] - newValue[0] < minDistance) {
         if (activeThumb === 0) {
           const clamped = Math.min(newValue[0], max - minDistance);
@@ -27,13 +54,13 @@ const RangeSliderField = ({ label, name, description, onChange, value = [], min,
     [max, minDistance]
   );
 
-  const handleInputChange = ({ target }) => {
-    console.log(target.value);
-    if (target.name === 'max') {
-      onChange({ target: { name, value: [sliderValue[0], +target.value] } });
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.name);
+    if (event.target.name === 'max') {
+      onChange({ target: { name, value: [sliderValue[0], +event.target.value] } });
     }
-    if (target.name === 'min') {
-      onChange({ target: { name, value: [+target.value, sliderValue[1]] } });
+    if (event.target.name === 'min') {
+      onChange({ target: { name, value: [+event.target.value, sliderValue[1]] } });
     }
   };
 
@@ -59,7 +86,7 @@ const RangeSliderField = ({ label, name, description, onChange, value = [], min,
           min={min}
           max={max}
           step={100}
-          onChangeCommitted={() => onChange({ target: { name, value: sliderValue } })}
+          onChangeCommitted={() => onChange({ target: { name: name || '', value: sliderValue } })}
         />
         <div className='range-slider__inputs' style={{ display: 'flex', gap: 10 }}>
           <InputField
@@ -67,8 +94,7 @@ const RangeSliderField = ({ label, name, description, onChange, value = [], min,
             label='От'
             name='min'
             type='number'
-            min={min}
-            value={value[0]}
+            value={String(value[0])}
             onChange={handleInputChange}
           />
           <InputField
@@ -76,12 +102,12 @@ const RangeSliderField = ({ label, name, description, onChange, value = [], min,
             label='До'
             type='number'
             inputProps={{ max: max }}
-            value={value[1]}
+            value={String(value[1])}
             onChange={handleInputChange}
           />
         </div>
 
-        {description && <p sx={{ fontSize: '12px' }}>Стоимость за сутки пребывания в номере</p>}
+        {description && <p style={{ fontSize: '12px' }}>Стоимость за сутки пребывания в номере</p>}
       </div>
     );
   }

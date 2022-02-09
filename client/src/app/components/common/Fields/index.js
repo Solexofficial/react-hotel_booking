@@ -2,7 +2,6 @@ import Checkbox from './Checkbox';
 import CheckBoxList from './CheckboxList';
 import DateOfStayField from './DateOfStay';
 import DatePickerField from './DatePickerField';
-import GuestsDropdownField from './GuestsDropdownField';
 import InputField from './InputField';
 import RadioGroup from './RadioGroupField';
 import RangeSliderField from './RangeSliderField';
@@ -20,6 +19,5 @@ export {
   DateOfStayField,
   DatePickerField,
   RangeSliderField,
-  GuestsDropdownField,
   RatingField,
 };

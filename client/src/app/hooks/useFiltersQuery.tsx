@@ -30,6 +30,7 @@ const useFiltersQuery = () => {
   const handleChangeFilter = useCallback(
     ({ target }) => {
       const { name, value } = target;
+      console.log('onChange', target);
       if (value === false || value === 0) {
         const newFilter = { ...searchFilters, [name]: value };
         setSearchQuery(newFilter);

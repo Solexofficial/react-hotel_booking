@@ -1,11 +1,17 @@
-import { IconButton } from '@material-ui/core';
+import { IconButton, IconButtonProps } from '@material-ui/core';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from '../../../store/users';
 
-const ButtonLike = ({ displayCount, status, onToggle }) => {
+type ButtonFavoriteProps = IconButtonProps & {
+  displayCount: number;
+  status: boolean;
+  onToggle: () => void;
+};
+
+const ButtonLike: React.FC<ButtonFavoriteProps> = ({ displayCount, status, onToggle }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
   return (
     <IconButton

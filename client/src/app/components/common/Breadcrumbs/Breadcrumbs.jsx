@@ -1,12 +1,13 @@
-import { Breadcrumbs as MuiBreadcrumbs, Link } from '@mui/material';
+import { Breadcrumbs as MuiBreadcrumbs, BreadcrumbsProps as MuiBreadcrumbsProps, Link } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
-import { Link as RouterLink, Route } from 'react-router-dom';
+import { Link as RouterLink, LinkProps, Route } from 'react-router-dom';
 import { getRoomById } from '../../../store/rooms';
 import { getUserById } from '../../../store/users';
 
 const UserBreadcrumb = props => {
+  console.log(props);
   const user = useSelector(getUserById(props.match.params.userId));
   return <span>{`${user.firstName} ${user.secondName}`}</span>;
 };
@@ -71,9 +72,15 @@ const routeConfig = [
   },
 ];
 
-const LinkRouter = props => <Link {...props} className='breadcrumbs-item' underline='hover' component={RouterLink} />;
+const LinkRouter = (props: LinkProps) => (
+  <Link {...props} className='breadcrumbs-item' underline='hover' component={RouterLink} />
+);
 
-const Breadcrumbs = ({ breadcrumbs }) => {
+type BreadcrumbsPropsType = MuiBreadcrumbsProps & {
+  breadcrumbs: [],
+};
+
+const Breadcrumbs: React.FC<BreadcrumbsPropsType> = ({ breadcrumbs }) => {
   return (
     <div className='breadcrumbs'>
       <Route>

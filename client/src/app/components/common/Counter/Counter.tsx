@@ -3,13 +3,29 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import React from 'react';
 import Button from '../Button';
 
-const Counter = ({ name, label, value, min, max, onChange }) => {
-  const handleIncrease = e => {
+type OnChangeProps = {
+  target: {
+    name: string;
+    value: number;
+  };
+};
+
+type CounterProps = {
+  name: string;
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (props: OnChangeProps) => void;
+};
+
+const Counter: React.FC<CounterProps> = ({ name, label, value, min, max, onChange }) => {
+  const handleIncrease = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     if (+value >= max) return;
-    onChange({ target: { name: name, value: +value + 1 } });
+    onChange({ target: { name: name, value: Number(value) + 1 } });
   };
-  const handleDecrease = e => {
+  const handleDecrease = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     if (+value <= min) return;
     onChange({ target: { name: name, value: +value - 1 } });

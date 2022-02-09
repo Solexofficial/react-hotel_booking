@@ -2,7 +2,7 @@ import { Button as MuiButton, ButtonProps as MuiButtonProps } from '@mui/materia
 import React from 'react';
 
 type ButtonProps = MuiButtonProps & {
-  rounded?: string;
+  rounded?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({ size, color, variant, onClick, type, rounded, children, ...rest }) => {
