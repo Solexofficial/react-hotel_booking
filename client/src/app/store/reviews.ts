@@ -99,12 +99,16 @@ export const updateReview =
 export const getReviewsByIds = (reviewsIds: string[]) => (state: RootState) => {
   if (state.reviews.entities) {
     return state.reviews.entities.filter((review: ReviewType) => reviewsIds.includes(review._id));
+  } else {
+    return [];
   }
 };
 
 export const getReviewsByRoomId = (roomId: string) => (state: RootState) => {
   if (state.reviews.entities) {
     return state.reviews.entities.filter((review: ReviewType) => review.roomId === roomId);
+  } else {
+    return [];
   }
 };
 

@@ -10,16 +10,17 @@ import Badge from '../../../common/Badge';
 import Divider from '../../../common/Divider';
 import ImageSlider from '../../../common/ImageSlider';
 import Rating from '../../../common/Rating';
+import { RoomType } from '../../../../types/types';
 
-const comfortIconsMap = {
+const comfortIconsMap: { [x: string]: JSX.Element } = {
   hasWifi: <WifiIcon />,
   hasConditioner: <AcUnitIcon />,
   hasWorkSpace: <ComputerIcon />,
 };
 
-const RoomCard = ({ _id, roomNumber, price, type, images, comforts }) => {
+const RoomCard: React.FC<RoomType> = ({ _id, roomNumber, price, type, images, comforts }) => {
   const reviews = useSelector(getReviewsByRoomId(_id));
-  const countReviews = reviews.length;
+  const countReviews = reviews ? reviews.length : 0;
   const rating = countReviews > 0 ? reviews.reduce((acc, cur) => acc + cur.rating, 0) : 0;
 
   return (
@@ -32,7 +33,7 @@ const RoomCard = ({ _id, roomNumber, price, type, images, comforts }) => {
         </Badge>
       )}
       <ImageSlider className='room-card__gallery'>
-        {images.length > 0 &&
+        {images &&
           images.map(img => (
             <div className='room-card__gallery-item' key={img}>
               <img className='room-card__gallery-item--img' src={img} alt='roomsPhoto' />

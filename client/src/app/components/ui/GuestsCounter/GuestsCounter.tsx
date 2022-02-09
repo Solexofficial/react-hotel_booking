@@ -2,7 +2,7 @@ import React from 'react';
 import Counter from '../../common/Counter';
 import declOfNum from '../../../utils/declOfNum';
 
-export const getGuestsLabel = (adults, children, babies) => {
+export const getGuestsLabel = (adults: number, children: number, babies: number) => {
   const guests = [Number(adults), Number(children), Number(babies)];
   const countGuests = guests.reduce((acc, cur) => acc + cur, 0);
   const countBabies = Number(babies);
@@ -17,7 +17,12 @@ export const getGuestsLabel = (adults, children, babies) => {
   return countGuests > 0 ? guestsStr : 'Сколько гостей';
 };
 
-const GuestsCounter = ({ data, onChange }) => {
+type GuestsCounterProps = {
+  data: { adults: number; children: number; babies: number };
+  onChange: () => void;
+};
+
+const GuestsCounter: React.FC<GuestsCounterProps> = ({ data, onChange }) => {
   const { adults, children, babies } = data;
 
   return (

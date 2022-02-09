@@ -4,12 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeBooking } from '../../../../store/bookings';
 import { getRoomById, removeBookingRoom } from '../../../../store/rooms';
+import { BookingType } from '../../../../types/types';
 import { getDateDDMMYYYY } from '../../../../utils/formatDate';
 import Button from '../../../common/Button';
 import { getGuestsLabel } from '../../GuestsCounter/GuestsCounter';
 import RoomCard from '../../rooms/RoomCard';
 
-const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies, totalPrice, roomId }) => {
+const BookingCard: React.FC<BookingType> = ({
+  _id,
+  arrivalDate,
+  departureDate,
+  adults,
+  children,
+  babies,
+  totalPrice,
+  roomId,
+}) => {
   const dispatch = useDispatch();
   const room = useSelector(getRoomById(roomId));
 
@@ -57,7 +67,14 @@ const BookingCard = ({ _id, arrivalDate, departureDate, adults, children, babies
         </div>
         <div className='booking-card__btns'>
           <div style={{ width: '100%' }}>
-            <RoomCard {...room} />
+            <RoomCard
+              _id={room?._id || 'id not found'}
+              roomNumber={room?.roomNumber || 'not found'}
+              price={room?.price || 0}
+              type={room?.type}
+              images={room?.images}
+              comforts={room?.comforts}
+            />
           </div>
           <Link to={`/rooms/${roomId}`}>
             <Button size='small' fullWidth>

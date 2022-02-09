@@ -1,5 +1,5 @@
 export type RoomType = {
-  _id?: string;
+  _id: string;
   roomNumber: number | string;
   countReviews?: number;
   rate?: number;
