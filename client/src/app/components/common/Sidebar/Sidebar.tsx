@@ -15,60 +15,35 @@ const Sidebar = () => {
 
   return (
     <MenuList className='sidebar'>
-      <MenuItem
-        name='profile'
-        component={NavLink}
-        className='sidebar-menu__item'
-        to={`/profile/${currentUser._id}`}
-        exact
-      >
+      <MenuItem component={NavLink} className='sidebar-menu__item' to={`/profile/${currentUser?._id}`} exact>
         <AccountCircleIcon />
         Мой профиль
       </MenuItem>
-      {currentUser.role === 'admin' && (
+      {currentUser?.role === 'admin' && (
         <MenuItem
-          name='profile'
           component={NavLink}
           className='sidebar-menu__item'
-          to={`/profile/${currentUser._id}/dashboard`}
+          to={`/profile/${currentUser?._id}/dashboard`}
           exact
         >
           <AdminPanelSettingsIcon />
           Панель администратора
         </MenuItem>
       )}
-      <MenuItem
-        name='profile'
-        component={NavLink}
-        className='sidebar-menu__item'
-        to={`/profile/${currentUser._id}/booking`}
-        exact
-      >
+      <MenuItem component={NavLink} className='sidebar-menu__item' to={`/profile/${currentUser?._id}/booking`} exact>
         <StarBorderIcon />
         Мои Бронирования
       </MenuItem>
-      <MenuItem
-        name='profile'
-        component={NavLink}
-        className='sidebar-menu__item'
-        to={`/profile/${currentUser._id}/likes`}
-        exact
-      >
+      <MenuItem component={NavLink} className='sidebar-menu__item' to={`/profile/${currentUser?._id}/likes`} exact>
         <FavoriteBorderIcon />
         Понравилось
       </MenuItem>
-      <MenuItem
-        name='profile'
-        component={NavLink}
-        className='sidebar-menu__item'
-        to={`/profile/${currentUser._id}/favorites`}
-        exact
-      >
+      <MenuItem component={NavLink} className='sidebar-menu__item' to={`/profile/${currentUser?._id}/favorites`} exact>
         <BookmarkBorderIcon />
         Избранное
       </MenuItem>
 
-      <MenuItem className='sidebar-menu__item' component={NavLink} name='edit' to={`/profile/${currentUser._id}/edit`}>
+      <MenuItem className='sidebar-menu__item' component={NavLink} to={`/profile/${currentUser?._id}/edit`}>
         <SettingsIcon />
         Редактировать профиль
       </MenuItem>

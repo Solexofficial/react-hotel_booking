@@ -1,7 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { RoutesNavType } from '../../../router/routes';
 
-const NavList = ({ label, routes, direction = 'row', spacing, ...rest }) => {
+type NavListProps = {
+  label?: string;
+  direction?: 'row' | 'column';
+  routes: RoutesNavType[];
+  [x: string]: any;
+};
+
+const NavList: React.FC<NavListProps> = ({ label, routes, direction = 'row', ...rest }) => {
   return (
     <nav {...rest}>
       {label && <h3>{label}</h3>}

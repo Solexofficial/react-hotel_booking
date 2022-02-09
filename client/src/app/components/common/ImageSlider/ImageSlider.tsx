@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from 'react-slick';
+import Slider, { CustomArrowProps, Settings as SlickSettings } from 'react-slick';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
@@ -12,7 +12,7 @@ const defaultSettings = {
   slidesToScroll: 1,
 };
 
-function NextButton({ onClick }) {
+function NextButton({ onClick }: CustomArrowProps) {
   return (
     <button className='slick-arrow slick-arrow--next' onClick={onClick}>
       <ChevronRightIcon />
@@ -20,7 +20,7 @@ function NextButton({ onClick }) {
   );
 }
 
-function PrevButton({ onClick }) {
+function PrevButton({ onClick }: CustomArrowProps) {
   return (
     <button className='slick-arrow slick-arrow--before' onClick={onClick}>
       <ChevronLeftIcon />
@@ -28,7 +28,13 @@ function PrevButton({ onClick }) {
   );
 }
 
-const ImageSlider = ({ children, ...settings }) => {
+type ImageSliderProps = {
+  children: React.ReactNode | React.ReactNode[];
+  settings?: SlickSettings;
+  [x: string]: any;
+};
+
+const ImageSlider: React.FC<ImageSliderProps> = ({ children, ...settings }) => {
   return (
     <Slider {...defaultSettings} {...settings}>
       {children}

@@ -3,14 +3,10 @@ import SendIcon from '@mui/icons-material/Send';
 import React, { useCallback, useState } from 'react';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material';
 
-type InjectedProps = {
-  type: string;
-  value: string;
-  InputProps: { endAdornment: JSX.Element };
-};
+type InjectedProps = {};
 
 const withSubscribe =
-  <MuiTextFieldProps extends InjectedProps>(Component: React.ComponentType<MuiTextFieldProps>) =>
+  <P extends InjectedProps>(Component: React.ComponentType<P>) =>
   (props: MuiTextFieldProps) => {
     const [data, setData] = useState('');
     const handleSubscribe = () => {
@@ -28,7 +24,7 @@ const withSubscribe =
 
     return (
       <Component
-        {...props}
+        {...(props as P)}
         onChange={handleChange}
         value={data}
         InputProps={{

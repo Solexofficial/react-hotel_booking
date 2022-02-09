@@ -11,7 +11,7 @@ import Logo from '../Logo';
 import NavList from '../NavList';
 import useStyles from './styles';
 
-const Header = () => {
+const Header: React.FC = () => {
   const isLoggedIn = useSelector(getIsLoggedIn());
   const classes = useStyles();
 
@@ -20,7 +20,7 @@ const Header = () => {
       <Container>
         <div className='header__inner'>
           <Logo className='header__logo' />
-          <NavList routes={navigationRoutes} spacing={2} className='header-nav' />
+          <NavList routes={navigationRoutes} className='header-nav' />
           {isLoggedIn ? (
             <>
               <Divider orientation='vertical' flexItem className='header__divider' />

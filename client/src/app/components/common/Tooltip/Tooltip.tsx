@@ -1,7 +1,7 @@
 import React from 'react';
-import { Tooltip as MuiTooltip } from '@mui/material';
+import { Tooltip as MuiTooltip, TooltipProps } from '@mui/material';
 
-const Tooltip = ({ children, title, placement = 'top', ...props }) => {
+const Tooltip: React.FC<TooltipProps> = ({ children, title, placement = 'top', ...props }) => {
   return (
     <MuiTooltip title={title} placement={placement} arrow {...props}>
       {children}

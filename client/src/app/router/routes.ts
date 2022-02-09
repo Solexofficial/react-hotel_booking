@@ -3,6 +3,8 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { SvgIconTypeMap } from '@mui/material';
 
 const Login = React.lazy(() => import('../layouts/login'));
 const Main = React.lazy(() => import('../layouts/main'));
@@ -14,6 +16,14 @@ export const userProfileRoutes = [
   { path: '/profile/likes', name: 'Понравилось', icon: FavoriteBorderIcon },
   { path: '/profile/favorites', name: 'Избранное', icon: BookmarkBorderIcon },
 ];
+
+export type RoutesNavType = {
+  path: string;
+  name: string;
+  icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
+    muiName: string;
+  };
+};
 
 export const adminRoutes = [
   { path: '/profile/dashboard', name: 'Панель администратора', icon: AdminPanelSettingsIcon },

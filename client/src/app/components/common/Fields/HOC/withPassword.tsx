@@ -3,13 +3,10 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material';
 
-type InjectedProps = {
-  type: string;
-  InputProps: { endAdornment: JSX.Element };
-};
+type InjectedProps = {};
 
 const withPassword =
-  <MuiTextFieldProps extends InjectedProps>(Component: React.ComponentType<MuiTextFieldProps>) =>
+  <P extends InjectedProps>(Component: React.ComponentType<P>) =>
   (props: MuiTextFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -23,7 +20,7 @@ const withPassword =
 
     return (
       <Component
-        {...(props as MuiTextFieldProps)}
+        {...(props as P)}
         type={showPassword ? 'text' : 'password'}
         InputProps={{
           endAdornment: (

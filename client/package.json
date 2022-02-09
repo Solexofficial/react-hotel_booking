@@ -19,6 +19,8 @@
     "@types/lodash": "^4.14.178",
     "@types/lodash.omit": "^4.5.6",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-slick": "^0.23.8",
+    "@types/slick-carousel": "^1.6.37",
     "axios": "^0.24.0",
     "date-fns": "^2.28.0",
     "lodash.omit": "^4.5.0",

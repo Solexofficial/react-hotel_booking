@@ -2,13 +2,9 @@ import { Backdrop as MuiBackdrop, BackdropProps as MuiBackdropProps } from '@mui
 import React from 'react';
 import Loader from '../Loader';
 
-type BackdropProps = MuiBackdropProps & {
-  isOpen: boolean;
-};
-
-const Backdrop: React.FC<BackdropProps> = ({ isOpen }) => {
+const Backdrop: React.FC<MuiBackdropProps> = ({ open }) => {
   return (
-    <MuiBackdrop open={isOpen}>
+    <MuiBackdrop open={open || false}>
       <Loader />
     </MuiBackdrop>
   );
