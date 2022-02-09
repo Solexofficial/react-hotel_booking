@@ -104,8 +104,9 @@ export const getRoomById = (roomId: string) => (state: RootState) => {
 
 export const getRoomsByIds = (roomsIds: string[]) => (state: RootState) => {
   if (state.rooms.entities) {
-    return state.rooms.entities.filter(room => roomsIds.includes(room._id || ''));
+    return state.rooms.entities.filter(room => (roomsIds.length > 0 ? roomsIds.includes(room._id || '') : false));
   }
+  return [];
 };
 
 export default roomsReducer;
