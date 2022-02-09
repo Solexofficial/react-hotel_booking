@@ -77,7 +77,6 @@ const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData, onCloseModal }) =
           Обновить
         </Button>
       </Form>
-      {/* {error && <p className='form__enter-error'>{error}</p>} */}
     </>
   );
 };

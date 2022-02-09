@@ -23,13 +23,7 @@ const AppLoader = ({ children }) => {
     dispatch(loadBookingsList());
   }, [isLoggedIn]);
 
-  if (
-    !usersStatusLoading &&
-    !roomsStatusLoading &&
-    !likesStatusLoading &&
-    !reviewsStatusLoading &&
-    !bookingsStatusLoading
-  ) {
+  if (!usersStatusLoading && !roomsStatusLoading && !reviewsStatusLoading && !bookingsStatusLoading) {
     return children;
   } else {
     return <></>;

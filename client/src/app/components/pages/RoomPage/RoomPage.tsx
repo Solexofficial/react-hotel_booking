@@ -35,9 +35,10 @@ const RoomPage: React.FC<RoomPageProps> = ({ roomId }) => {
       <main>
         <div className='room-page__gallery-wrapper'>
           <ImageSlider className='room-page__gallery'>
-            {images.map((img: string) => (
-              <img key={img} className='room-page__gallery-item--img' src={img} alt='roomsPhoto' />
-            ))}
+            {images &&
+              images.map((img: string) => (
+                <img key={img} className='room-page__gallery-item--img' src={img} alt='roomsPhoto' />
+              ))}
           </ImageSlider>
         </div>
         <div className='room-info'>

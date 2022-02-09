@@ -17,10 +17,10 @@ const ProfilePage: React.FC = () => {
   const renderComponent = (route: string) => {
     switch (route) {
       case 'edit':
-        if (currentUser._id === userId) {
+        if (currentUser?._id === userId) {
           return <ProfileEdit />;
         } else {
-          return <Redirect to={`/profile/${currentUser._id}`} />;
+          return <Redirect to={`/profile/${currentUser?._id}`} />;
         }
       case 'booking':
         return <ProfileBooking />;
@@ -29,10 +29,10 @@ const ProfilePage: React.FC = () => {
       case 'favorites':
         return <ProfileFavorites />;
       case 'dashboard':
-        if (currentUser.role === 'admin') {
+        if (currentUser?.role === 'admin') {
           return <AdminDashboard />;
         } else {
-          return <Redirect to={`/profile/${currentUser._id}`} />;
+          return <Redirect to={`/profile/${currentUser?._id}`} />;
         }
       default:
         return <UserProfile userId={userId} />;
@@ -41,7 +41,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className='profile-page'>
-      {currentUser._id === userId && (
+      {currentUser?._id === userId && (
         <aside className='profile-sidebar'>
           <Sidebar />
         </aside>

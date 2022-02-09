@@ -1,12 +1,14 @@
+import { AppThunk, RootState } from './createStore';
+import { ReviewType } from './../types/types';
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import reviewsService from '../services/reviews.service';
 
 const reviewsSlice = createSlice({
   name: 'reviews',
   initialState: {
-    entities: null,
-    isLoading: false,
-    error: null,
+    entities: [] as Array<ReviewType>,
+    isLoading: false as boolean,
+    error: null as string | null,
   },
   reducers: {
     reviewsRequested: state => {
@@ -47,7 +49,7 @@ const reviewRemoveRequestedFailed = createAction('reviews/reviewRemoveRequestedF
 const reviewUpdateRequested = createAction('reviews/reviewUpdateRequested');
 const reviewUpdateRequestedFailed = createAction('reviews/reviewUpdateRequestedFailed');
 
-export const loadReviewsList = () => async dispatch => {
+export const loadReviewsList = (): AppThunk => async dispatch => {
   dispatch(reviewsRequested());
   try {
     const { content } = await reviewsService.getAll();
@@ -57,50 +59,56 @@ export const loadReviewsList = () => async dispatch => {
   }
 };
 
-export const removeReview = reviewId => async dispatch => {
-  dispatch(reviewRemoveRequested());
-  try {
-    const id = await reviewsService.remove(reviewId);
-    dispatch(reviewRemoved(id));
-  } catch (error) {
-    dispatch(reviewRemoveRequestedFailed());
-  }
-};
+export const removeReview =
+  (reviewId: string): AppThunk =>
+  async dispatch => {
+    dispatch(reviewRemoveRequested());
+    try {
+      const id = await reviewsService.remove(reviewId);
+      dispatch(reviewRemoved(id));
+    } catch (error) {
+      dispatch(reviewRemoveRequestedFailed());
+    }
+  };
 
-export const createReview = payload => async dispatch => {
-  dispatch(reviewCreateRequested());
-  try {
-    const { content } = await reviewsService.create(payload);
-    dispatch(reviewCreated(content));
-  } catch (error) {
-    dispatch(reviewCreateRequestedFailed());
-  }
-};
+export const createReview =
+  (payload: ReviewType): AppThunk =>
+  async dispatch => {
+    dispatch(reviewCreateRequested());
+    try {
+      const { content } = await reviewsService.create(payload);
+      dispatch(reviewCreated(content));
+    } catch (error) {
+      dispatch(reviewCreateRequestedFailed());
+    }
+  };
 
-export const updateReview = payload => async dispatch => {
-  dispatch(reviewUpdateRequested());
-  try {
-    const { content } = await reviewsService.update(payload);
-    dispatch(reviewUpdated(content));
-  } catch (error) {
-    console.log(error);
-    dispatch(reviewUpdateRequestedFailed());
-  }
-};
+export const updateReview =
+  (payload: ReviewType): AppThunk =>
+  async dispatch => {
+    dispatch(reviewUpdateRequested());
+    try {
+      const { content } = await reviewsService.update(payload);
+      dispatch(reviewUpdated(content));
+    } catch (error) {
+      console.log(error);
+      dispatch(reviewUpdateRequestedFailed());
+    }
+  };
 
-export const getReviewsByIds = reviewsIds => state => {
+export const getReviewsByIds = (reviewsIds: string[]) => (state: RootState) => {
   if (state.reviews.entities) {
-    return state.reviews.entities.filter(review => reviewsIds.includes(review._id));
+    return state.reviews.entities.filter((review: ReviewType) => reviewsIds.includes(review._id));
   }
 };
 
-export const getReviewsByRoomId = roomId => state => {
+export const getReviewsByRoomId = (roomId: string) => (state: RootState) => {
   if (state.reviews.entities) {
-    return state.reviews.entities.filter(review => review.roomId === roomId);
+    return state.reviews.entities.filter((review: ReviewType) => review.roomId === roomId);
   }
 };
 
-export const getReviews = () => state => state.reviews.entities;
-export const getReviewsLoadingStatus = () => state => state.reviews.isLoading;
+export const getReviews = () => (state: RootState) => state.reviews.entities;
+export const getReviewsLoadingStatus = () => (state: RootState) => state.reviews.isLoading;
 
 export default reviewsReducer;

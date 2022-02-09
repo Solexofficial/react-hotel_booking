@@ -4,7 +4,7 @@ import httpService from './http.service';
 const roomsEndPoint = 'rooms/';
 
 const roomsService = {
-  getAll: async (params: { [key: string]: any }) => {
+  getAll: async (params?: { [key: string]: any }) => {
     const { data } = await httpService.get(roomsEndPoint, { params: { ...params } });
     return data;
   },
@@ -24,7 +24,7 @@ const roomsService = {
     const { data } = await httpService.post(roomsEndPoint + payload.roomId, { bookings: payload._id });
     return data;
   },
-  deleteBooking: async (payload: BookingType) => {
+  deleteBooking: async (payload: { roomId: string; _id: string }) => {
     const { data } = await httpService.post(roomsEndPoint + payload.roomId, { bookings: payload._id });
     return data;
   },

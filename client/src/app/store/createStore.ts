@@ -3,7 +3,7 @@ import usersReducer from './users';
 import likesReducer from './likes';
 import reviewsReducer from './reviews';
 import bookingsReducer from './bookings';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
   rooms: roomsReducer,
@@ -18,3 +18,8 @@ export function createStore() {
     reducer: rootReducer,
   });
 }
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof createStore>;
+export type AppDispatch = AppStore['dispatch'];
+export type AppThunk = ThunkAction<void, RootState, unknown, Action>;
