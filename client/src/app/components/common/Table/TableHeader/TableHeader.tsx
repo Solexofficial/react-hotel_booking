@@ -1,8 +1,19 @@
-import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
+import { TableCell, TableHead, TableRow, TableSortLabel, TableHeadProps as MuiTableHeaderProps } from '@mui/material';
 import React from 'react';
 
-const TableHeader = ({ headCells, sortBy, onRequestSort }) => {
-  const createSortHandler = property => event => {
+type TableHeaderProps = MuiTableHeaderProps & {
+  headCells: {
+    id: string;
+    numeric: boolean;
+    disablePadding: boolean;
+    label: string;
+  }[];
+  sortBy: { path: string; order: 'asc' | 'desc' };
+  onRequestSort: (event: React.MouseEvent<unknown>, property: string) => void;
+};
+
+const TableHeader: React.FC<TableHeaderProps> = ({ headCells, sortBy, onRequestSort }) => {
+  const createSortHandler = (property: string) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 

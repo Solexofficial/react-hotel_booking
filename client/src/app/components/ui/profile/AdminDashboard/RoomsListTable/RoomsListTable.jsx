@@ -6,6 +6,8 @@ import { getRooms, getRoomsLoadingStatus } from '../../../../../store/rooms';
 import { Table, TableBody, TableHeader } from '../../../../common/Table';
 import RoomsListTableRow from './RoomsListTableRow';
 
+
+
 const headCells = [
   {
     id: 'roomNumber',

@@ -1,7 +1,7 @@
-import { Table as MuiTable, TableContainer, Toolbar } from '@mui/material';
+import { Table as MuiTable, TableContainer, Toolbar, TableProps } from '@mui/material';
 import React from 'react';
 
-const Table = ({ children, title }) => {
+const Table: React.FC<TableProps> = ({ children, title }) => {
   return (
     <>
       {title && (

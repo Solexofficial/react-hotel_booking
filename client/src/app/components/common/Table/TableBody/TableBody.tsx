@@ -1,7 +1,13 @@
 import React from 'react';
-import { TableBody as MuiTableBody, TableCell, TableRow } from '@mui/material';
+import { TableBody as MuiTableBody, TableCell, TableRow, TableBodyProps as MuiTableBodyProps } from '@mui/material';
 
-const TableBody = ({ itemsCount, page, rowsPerPage, children }) => {
+type TableBodyProps = MuiTableBodyProps & {
+  itemsCount: number;
+  page: number;
+  rowsPerPage: number;
+};
+
+const TableBody: React.FC<TableBodyProps> = ({ itemsCount, page, rowsPerPage, children }) => {
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - itemsCount) : 0;
 
   return (
