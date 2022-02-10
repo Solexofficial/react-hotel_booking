@@ -1,24 +1,24 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserData, logOut } from '../../../store/users';
+import history from '../../../utils/history';
 import Avatar from '../../common/Avatar';
 import Tooltip from '../../common/Tooltip';
-import history from '../../../utils/history';
 
 const NavProfile = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUserData());
 
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const handleOpenUserMenu = event => {
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -26,7 +26,7 @@ const NavProfile = () => {
     setAnchorElUser(null);
   };
 
-  const handleClickSettingsMenu = path => {
+  const handleClickSettingsMenu = (path: string) => {
     history.push(path);
     handleCloseUserMenu();
   };
@@ -41,7 +41,7 @@ const NavProfile = () => {
       <div className='profile-wrapper'>
         <Tooltip title='Открыть меню' placement='bottom'>
           <IconButton onClick={handleOpenUserMenu} className='profile-avatar__btn'>
-            <Avatar alt='user-photo' src={avatarPhoto} />
+            <Avatar alt='user-photo' src={avatarPhoto || ''} />
           </IconButton>
         </Tooltip>
         <div className='profile-username__wrapper'>
@@ -65,7 +65,6 @@ const NavProfile = () => {
         >
           <MenuItem
             className='profile-menu__item'
-            name='profile'
             onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}`)}
           >
             <AccountCircleIcon />
@@ -74,7 +73,6 @@ const NavProfile = () => {
           {currentUser.role === 'admin' && (
             <MenuItem
               className='profile-menu__item'
-              name='profile'
               onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/dashboard`)}
             >
               <AdminPanelSettingsIcon />
@@ -83,7 +81,6 @@ const NavProfile = () => {
           )}
           <MenuItem
             className='profile-menu__item'
-            name='booking'
             onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/booking`)}
           >
             <StarBorderIcon />
@@ -91,7 +88,6 @@ const NavProfile = () => {
           </MenuItem>
           <MenuItem
             className='profile-menu__item'
-            name='likes'
             onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/likes`)}
           >
             <FavoriteBorderIcon />
@@ -99,13 +95,12 @@ const NavProfile = () => {
           </MenuItem>
           <MenuItem
             className='profile-menu__item'
-            name='favorites'
             onClick={() => handleClickSettingsMenu(`/profile/${currentUser._id}/favorites`)}
           >
             <BookmarkBorderIcon />
             Избранное
           </MenuItem>
-          <MenuItem className='profile-menu__item' name='logout' onClick={handleLogOut}>
+          <MenuItem className='profile-menu__item' onClick={handleLogOut}>
             <ExitToAppIcon />
             Выйти
           </MenuItem>

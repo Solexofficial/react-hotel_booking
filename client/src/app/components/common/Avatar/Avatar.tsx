@@ -4,7 +4,7 @@ import React from 'react';
 type AvatarProps = {
   alt: string;
   src: string;
-  className: string;
+  className?: string;
 };
 
 const Avatar: React.FC<AvatarProps> = ({ alt, src, className }) => {
