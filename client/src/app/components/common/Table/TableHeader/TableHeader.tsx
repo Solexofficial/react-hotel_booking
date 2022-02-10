@@ -14,7 +14,9 @@ type TableHeaderProps = MuiTableHeaderProps & {
 
 const TableHeader: React.FC<TableHeaderProps> = ({ headCells, sortBy, onRequestSort }) => {
   const createSortHandler = (property: string) => (event: React.MouseEvent<unknown>) => {
-    onRequestSort(event, property);
+    if (onRequestSort) {
+      onRequestSort(event, property);
+    }
   };
 
   return (

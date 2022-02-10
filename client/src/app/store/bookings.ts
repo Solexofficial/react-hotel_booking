@@ -116,6 +116,7 @@ export const getBookingsByRoomId = (roomId: string) => (state: RootState) => {
   if (state.bookings.entities) {
     return state.bookings.entities.filter(booking => booking.roomId === roomId);
   }
+  return [];
 };
 
 export const getBookingsErrors = () => (state: RootState) => state.bookings.error;

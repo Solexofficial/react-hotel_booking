@@ -5,7 +5,7 @@ import BookingTableRow from './BookingTableRow';
 
 type BookingTableProps = {
   bookings: BookingType[];
-  roomNumber: string;
+  roomNumber: string | number;
 };
 
 const BookingTable: React.FC<BookingTableProps> = ({ bookings, roomNumber }) => {

@@ -6,12 +6,17 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getBookingsByRoomId } from '../../../../../store/bookings';
+import { RoomType } from '../../../../../types/types';
 import Chip from '../../../../common/Chip/Chip';
 import Tooltip from '../../../../common/Tooltip';
 import RoomEditModal from '../../../modals/RoomEditModal';
 import BookingTable from '../BookingTable/BookingTable';
 
-const RoomsListTableRow = ({ row }) => {
+type RoomsListTableRowProps = {
+  row: RoomType;
+};
+
+const RoomsListTableRow: React.FC<RoomsListTableRowProps> = ({ row }) => {
   const [open, setOpen] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const bookings = useSelector(getBookingsByRoomId(row._id));

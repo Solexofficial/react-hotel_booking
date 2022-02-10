@@ -36,7 +36,7 @@ const useSort = (items: any[], initialSortBy: { path: string; order: Order }) =>
     return stabilizedThis.map(el => el[0]);
   }
 
-  const handleRequestSort = (event: Event, property: string) => {
+  const handleRequestSort = (event: Event | React.MouseEvent<unknown>, property: string) => {
     const isAsc = sortBy.path === property && sortBy.order === 'asc';
     setSortBy({ path: property, order: isAsc ? 'desc' : 'asc' });
   };
