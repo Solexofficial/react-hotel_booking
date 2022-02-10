@@ -66,6 +66,7 @@ export const getLikesByUserId = (userId: string) => (state: RootState) => {
   if (state.likes.entities) {
     return state.likes.entities.filter(like => like.userId === userId);
   }
+  return [];
 };
 
 export const createLike =

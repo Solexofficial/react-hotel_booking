@@ -26,7 +26,7 @@ export type BookingType = {
   arrivalDate: Date;
   departureDate: Date;
   roomId: string;
-  userId?: string;
+  userId: string;
   totalPrice: number;
   expires_at?: number;
 };

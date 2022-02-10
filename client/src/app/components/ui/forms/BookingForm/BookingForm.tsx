@@ -20,14 +20,6 @@ const oneDayMs = 86_000_000;
 
 const BookingForm = () => {
   const searchQueryData = getSearchQueryData();
-  const initialData = {
-    arrivalDate: searchQueryData.arrivalDate || Date.now(),
-    departureDate: searchQueryData.departureDate || Date.now() + oneDayMs,
-    adults: searchQueryData.adults || 1,
-    children: searchQueryData.children || 0,
-    babies: searchQueryData.babies || 0,
-    totalPrice: 0,
-  };
 
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useAppDispatch();
@@ -36,6 +28,17 @@ const BookingForm = () => {
   const bookingCreateStatusLoading = useSelector(getBookingCreatedStatus());
   const bookingError = useSelector(getBookingsErrors());
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+
+  const initialData = {
+    arrivalDate: searchQueryData.arrivalDate || Date.now(),
+    departureDate: searchQueryData.departureDate || Date.now() + oneDayMs,
+    adults: searchQueryData.adults || 1,
+    children: searchQueryData.children || 0,
+    babies: searchQueryData.babies || 0,
+    userId: currentUserId || 'not found',
+    roomId: roomId,
+    totalPrice: 0,
+  };
   const { data, errors, enterError, setEnterError, handleInputChange, handleResetForm, handleKeyDown, validate } =
     useForm(initialData, false, validatorConfig);
 
@@ -59,7 +62,6 @@ const BookingForm = () => {
     event.preventDefault();
     if (validate(data)) {
       const payload = {
-        roomId: roomId,
         ...data,
         totalPrice,
       };

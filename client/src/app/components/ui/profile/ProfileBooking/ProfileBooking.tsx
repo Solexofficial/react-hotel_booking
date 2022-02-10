@@ -6,7 +6,7 @@ import BookingCard from '../../booking/BookingCard/BookingCard';
 
 const ProfileBooking = () => {
   const currentUserId = useSelector(getCurrentUserId());
-  const bookings = useSelector(getBookingsByUserId(currentUserId));
+  const bookings = useSelector(getBookingsByUserId(currentUserId || 'not found'));
 
   return (
     <div style={{ width: '100%' }}>

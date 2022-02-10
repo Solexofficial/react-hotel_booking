@@ -175,9 +175,7 @@ export const getUserById = (userId: string) => (state: RootState) => {
 export const getIsLoggedIn = () => (state: RootState) => state.users.isLoggedIn;
 export const getDataStatus = () => (state: RootState) => state.users.dataLoaded;
 export const getCurrentUserId = () => (state: RootState) => {
-  if (state.users.auth) {
-    return state.users.auth.userId;
-  }
+  return state.users.auth.userId;
 };
 export const getAuthErrors = () => (state: RootState) => state.users.error;
 
