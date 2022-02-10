@@ -3,13 +3,12 @@ import { DialogContent, DialogActions } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getDateDDMMYYYY } from '../../../../utils/formatDate';
-import { useHistory } from 'react-router';
 import Button from '../../../common/Button';
 import Modal from '../../../common/Modal';
 import { getCurrentUserId } from '../../../../store/users';
+import history from '../../../../utils/history';
 
 const SuccessBookingModal = ({ open, onClose, isLoading, bookingData }) => {
-  const history = useHistory();
   const currentUserId = useSelector(getCurrentUserId());
   const dateArrival = getDateDDMMYYYY(bookingData.arrivalDate);
   const dateDeparture = getDateDDMMYYYY(bookingData.departureDate);

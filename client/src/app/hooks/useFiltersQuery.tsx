@@ -1,11 +1,11 @@
-import { useHistory, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import qs from 'query-string';
 import { useCallback, useMemo } from 'react';
 import omit from 'lodash.omit';
+import history from '../utils/history';
 
 const useFiltersQuery = () => {
   const { search } = useLocation<string>();
-  const history = useHistory();
 
   const searchFilters = useMemo(() => qs.parse(search, { parseNumbers: true, parseBooleans: true }), [search]);
 

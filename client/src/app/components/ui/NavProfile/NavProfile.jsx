@@ -7,13 +7,12 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import { getCurrentUserData, logOut } from '../../../store/users';
 import Avatar from '../../common/Avatar';
 import Tooltip from '../../common/Tooltip';
+import history from '../../../utils/history';
 
 const NavProfile = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUserData());
 

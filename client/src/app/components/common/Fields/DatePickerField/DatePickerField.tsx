@@ -1,15 +1,23 @@
-import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DatePicker, { DatePickerProps } from '@mui/lab/DatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { TextField } from '@mui/material';
 import ruLocale from 'date-fns/locale/ru';
-import DatePicker from '@mui/lab/DatePicker';
 import React from 'react';
 
-const DatePickerField = ({ label, name, value, minDate, onChange, error, ...rest }) => {
-  const convertToDefEventParam = (name, value) => ({
+type DatePickerFieldProps = DatePickerProps & {
+  label: string;
+  value: Date | number;
+  minDate: Date | number;
+  name: string;
+  error?: string;
+};
+
+const DatePickerField: React.FC<DatePickerFieldProps> = ({ label, name, value, minDate, onChange, error, ...rest }) => {
+  const convertToDefEventParam = (name: string, value: Date | number | null) => ({
     target: {
       name,
-      value,
+      value: new Date(Number(value)).getTime(),
     },
   });
 
@@ -20,11 +28,12 @@ const DatePickerField = ({ label, name, value, minDate, onChange, error, ...rest
         label={label}
         value={value}
         minDate={minDate || Date.now()}
+        //TODO: inputProps not found DatePickerTypes.... ??
+        //@ts-ignore
         inputProps={{ placeholder: 'ДД.ММ.ГГГГ' }}
         onChange={date => {
-          onChange(convertToDefEventParam(name, new Date(date).getTime()));
+          onChange(convertToDefEventParam(name, date));
         }}
-        {...rest}
         renderInput={params => <TextField {...params} {...(error && { error: true, helperText: error })} />}
       />
     </LocalizationProvider>

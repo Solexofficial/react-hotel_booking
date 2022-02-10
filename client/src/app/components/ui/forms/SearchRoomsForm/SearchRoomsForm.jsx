@@ -1,6 +1,5 @@
 import { ArrowRight } from '@mui/icons-material';
 import React from 'react';
-import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
 import Button from '../../../common/Button/Button';
 import { DateOfStayField } from '../../../common/Fields';
@@ -8,6 +7,7 @@ import GuestsCounter from '../../GuestsCounter';
 import validatorConfig from './validatorConfig';
 import queryString from 'query-string';
 import { setSessionStorageData } from '../../../../services/sessionStorage.service';
+import history from '../../../../utils/history';
 
 const oneDayMs = 86000000;
 
@@ -20,7 +20,6 @@ const initialState = {
 };
 
 const SearchRoomsForm = () => {
-  const history = useHistory();
 
   const { data, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialState,

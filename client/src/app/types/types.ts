@@ -35,11 +35,11 @@ export type UserType = {
   _id?: string;
   firstName: string;
   secondName: string;
-  subscribe: boolean;
+  subscribe?: boolean;
   birthYear: Date | number;
   avatarPhoto?: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   role: 'user' | 'admin';
   gender: 'male' | 'female';
 };

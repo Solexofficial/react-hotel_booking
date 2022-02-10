@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import React from 'react';
 import DatePickerField from '../DatePickerField';
 
@@ -18,21 +19,24 @@ const DateOfStay: React.FC<DateOfStayProps> = ({ onChange, data, errors }) => {
         <DatePickerField
           label='Дата прибытия'
           name='arrivalDate'
-          error={errors?.arrivalDate}
           minDate={+arrivalDate}
           onChange={onChange}
           value={+arrivalDate}
+          renderInput={params => (
+            <TextField {...params} {...(errors?.arrivalDate && { error: true, helperText: errors?.arrivalDate })} />
+          )}
         />
       </div>
       <div className='dateOfStay'>
         <DatePickerField
           label='Дата выезда'
           name='departureDate'
-          error={errors?.departureDate}
           minDate={+arrivalDate + oneDayMs}
           onChange={onChange}
           value={+departureDate}
-          className='dateOfStay'
+          renderInput={params => (
+            <TextField {...params} {...(errors?.departureDate && { error: true, helperText: errors?.departureDate })} />
+          )}
         />
       </div>
     </div>

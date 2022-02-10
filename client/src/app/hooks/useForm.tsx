@@ -3,7 +3,7 @@ import { validator, ValidatorConfigType } from '../utils/validator';
 
 function useForm<T>(initialData: T, validateOnChange: boolean, validatorConfig: ValidatorConfigType) {
   const [data, setData] = useState<T>(initialData);
-  const [errors, setErrors] = useState<object>({});
+  const [errors, setErrors] = useState<{ [x: string]: string }>({});
   const [enterError, setEnterError] = useState<string | null>(null);
 
   const validate = useCallback(
