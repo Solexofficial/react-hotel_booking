@@ -106,7 +106,7 @@ export const updateUserData =
   };
 
 export const signIn =
-  ({ payload, redirect }: { payload: SignInDataType; redirect: string }): AppThunk =>
+  ({ payload, redirect }: { payload: SignInDataType; redirect?: string }): AppThunk =>
   async dispatch => {
     const { email, password } = payload;
     dispatch(authRequested());
@@ -115,7 +115,7 @@ export const signIn =
       console.log(data);
       setTokens(data);
       dispatch(authRequestSuccess({ userId: data.userId }));
-      history.push(redirect);
+      history.push(redirect || '/');
     } catch (error) {
       const { code, message } = error.response.data.error;
       if (code === 400) {

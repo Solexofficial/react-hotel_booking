@@ -1,14 +1,15 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
 import { getAuthErrors, signIn } from '../../../../store/users';
+import { SignInDataType } from '../../../../types/types';
+import history from '../../../../utils/history';
 import Button from '../../../common/Button/Button';
 import { InputField } from '../../../common/Fields';
 import withPassword from '../../../common/Fields/HOC/withPassword';
 import validatorConfig from './validatorConfig';
 
-const initialData = {
+const initialData: SignInDataType = {
   email: '',
   password: '',
 };
@@ -20,13 +21,11 @@ const LoginForm = () => {
     validatorConfig
   );
   const loginError = useSelector(getAuthErrors());
-  const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (validate(data)) {
-      signIn(data);
       const redirect = history.location.state ? history.location.state.from.pathname : '/';
       dispatch(signIn({ payload: data, redirect }));
       handleResetForm(e);
@@ -37,7 +36,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} data={data} errors={errors} handleChange={handleInputChange}>
+      <Form data={data} errors={errors} handleChange={handleInputChange}>
         <InputField name='email' label='Email' autoFocus />
         <InputFieldWithPassword name='password' label='Пароль' type='password' />
         <Button onClick={handleSubmit} fullWidth type='submit' disabled={enterError ? true : false}>

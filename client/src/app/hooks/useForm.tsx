@@ -69,7 +69,7 @@ type FormType = {
     [key: string]: any;
   };
   children?: React.ReactNode;
-  handleKeyDown: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleKeyDown?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
