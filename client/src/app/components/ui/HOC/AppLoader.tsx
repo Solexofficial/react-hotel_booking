@@ -1,19 +1,16 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBookingsLoadingStatus, loadBookingsList } from '../../../store/bookings';
-import { getLikesLoadingStatus, loadLikesList } from '../../../store/likes';
-import { getReviewsLoadingStatus, loadReviewsList } from '../../../store/reviews';
+import { loadBookingsList } from '../../../store/bookings';
+import { loadLikesList } from '../../../store/likes';
+import { loadReviewsList } from '../../../store/reviews';
 import { getRoomsLoadingStatus, loadRoomsList } from '../../../store/rooms';
 import { getIsLoggedIn, getUsersLoadingStatus, loadUsersList } from '../../../store/users';
 
-const AppLoader = ({ children }) => {
+const AppLoader = ({ children }: any) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn());
   const usersStatusLoading = useSelector(getUsersLoadingStatus());
   const roomsStatusLoading = useSelector(getRoomsLoadingStatus());
-  const likesStatusLoading = useSelector(getLikesLoadingStatus());
-  const reviewsStatusLoading = useSelector(getReviewsLoadingStatus());
-  const bookingsStatusLoading = useSelector(getBookingsLoadingStatus());
 
   useEffect(() => {
     dispatch(loadUsersList());
@@ -23,7 +20,7 @@ const AppLoader = ({ children }) => {
     dispatch(loadBookingsList());
   }, [isLoggedIn]);
 
-  if (!usersStatusLoading && !roomsStatusLoading && !reviewsStatusLoading && !bookingsStatusLoading) {
+  if (!usersStatusLoading && !roomsStatusLoading) {
     return children;
   } else {
     return <></>;

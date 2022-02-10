@@ -2,7 +2,7 @@ import { RoomType } from './../../../../types/types';
 import { ValidatorConfigType } from '../../../../utils/validator';
 
 type ConfigType = {
-  [Property in keyof RoomType]: ValidatorConfigType[Property];
+  [Property in keyof RoomType]?: ValidatorConfigType[Property];
 };
 
 const validatorConfig: ConfigType = {

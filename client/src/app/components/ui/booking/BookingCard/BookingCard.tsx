@@ -25,7 +25,7 @@ const BookingCard: React.FC<BookingType> = ({
 
   const handleRemoveBooking = () => {
     dispatch(removeBooking(_id));
-    dispatch(removeBookingRoom({ roomId, _id }));
+    dispatch(removeBookingRoom({ roomId, _id: _id || '' }));
   };
 
   return (

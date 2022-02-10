@@ -93,11 +93,11 @@ export const createBooking =
   };
 
 export const removeBooking =
-  (bookingId: string): AppThunk =>
+  (bookingId?: string): AppThunk =>
   async dispatch => {
     dispatch(removeBookingRequested());
     try {
-      const id = await bookingService.remove(bookingId);
+      const id = await bookingService.remove(bookingId || '');
       dispatch(bookingRemoved(id));
     } catch (error) {
       dispatch(removeBookingRequestedFailed());

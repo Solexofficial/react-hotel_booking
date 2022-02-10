@@ -41,7 +41,7 @@ function useForm<T>(initialData: T, validateOnChange: boolean, validatorConfig: 
     }
   }, []);
 
-  const handleResetForm = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleResetForm = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setData(initialData);
     setErrors({});

@@ -19,7 +19,7 @@ export const getGuestsLabel = (adults: number, children: number, babies: number)
 
 type GuestsCounterProps = {
   data: { adults: number; children: number; babies: number };
-  onChange: () => void;
+  onChange: ({ target }: any) => void;
 };
 
 const GuestsCounter: React.FC<GuestsCounterProps> = ({ data, onChange }) => {

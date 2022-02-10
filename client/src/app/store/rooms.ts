@@ -71,7 +71,6 @@ export const addBookingRoom =
 export const removeBookingRoom =
   (payload: { roomId: string; _id: string }): AppThunk =>
   async dispatch => {
-    console.log(payload);
     dispatch(removeBookingRoomRequested());
     try {
       roomsService.deleteBooking(payload);

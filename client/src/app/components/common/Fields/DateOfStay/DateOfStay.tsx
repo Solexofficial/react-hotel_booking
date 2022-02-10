@@ -3,7 +3,13 @@ import DatePickerField from '../DatePickerField';
 
 const oneDayMs = 86_000_000;
 
-const DateOfStay = ({ onChange, data, errors }) => {
+type DateOfStayProps = {
+  data: any;
+  errors?: { [x: string]: string };
+  onChange: (target: any) => void;
+};
+
+const DateOfStay: React.FC<DateOfStayProps> = ({ onChange, data, errors }) => {
   const { arrivalDate, departureDate } = data;
 
   return (
@@ -13,6 +19,7 @@ const DateOfStay = ({ onChange, data, errors }) => {
           label='Дата прибытия'
           name='arrivalDate'
           error={errors?.arrivalDate}
+          minDate={+arrivalDate}
           onChange={onChange}
           value={+arrivalDate}
         />

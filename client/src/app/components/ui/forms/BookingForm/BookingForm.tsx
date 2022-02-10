@@ -1,12 +1,14 @@
 import { ArrowRight } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Form, useForm, useModal } from '../../../../hooks';
 import { getSearchQueryData } from '../../../../services/sessionStorage.service';
 import { createBooking, getBookingCreatedStatus, getBookingsErrors } from '../../../../store/bookings';
+import { useAppDispatch } from '../../../../store/createStore';
 import { addBookingRoom } from '../../../../store/rooms';
 import { getCurrentUserId } from '../../../../store/users';
+import { BookingType } from '../../../../types/types';
 import Button from '../../../common/Button';
 import { DateOfStayField } from '../../../common/Fields';
 import GuestsCounter from '../../GuestsCounter';
@@ -28,8 +30,8 @@ const BookingForm = () => {
   };
 
   const [totalPrice, setTotalPrice] = useState(0);
-  const dispatch = useDispatch();
-  const { roomId } = useParams();
+  const dispatch = useAppDispatch();
+  const { roomId } = useParams<{ roomId: string }>();
   const currentUserId = useSelector(getCurrentUserId());
   const bookingCreateStatusLoading = useSelector(getBookingCreatedStatus());
   const bookingError = useSelector(getBookingsErrors());
@@ -53,7 +55,7 @@ const BookingForm = () => {
     }
   }, [currentUserId, bookingError]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (validate(data)) {
       const payload = {
@@ -62,7 +64,7 @@ const BookingForm = () => {
         totalPrice,
       };
       try {
-        dispatch(createBooking(payload)).then(bookingData => {
+        dispatch(createBooking(payload)).then((bookingData: BookingType) => {
           if (bookingData) {
             dispatch(addBookingRoom(bookingData)).then(() => handleOpenModal());
             handleResetForm(event);
@@ -76,17 +78,10 @@ const BookingForm = () => {
 
   return (
     <>
-      <Form
-        onSubmit={handleSubmit}
-        data={data}
-        errors={errors}
-        handleChange={handleInputChange}
-        handleKeyDown={handleKeyDown}
-      >
-        <DateOfStayField name='dateOfStay' className='booking-form' data={data} />
-        <GuestsCounter name='guests' data={data} />
+      <Form data={data} errors={errors} handleChange={handleInputChange} handleKeyDown={handleKeyDown}>
+        <DateOfStayField onChange={handleInputChange} data={data} />
+        <GuestsCounter onChange={handleInputChange} data={data} />
         <BookingFormPriceInfo
-          name='totalPrice'
           roomId={roomId}
           totalPrice={totalPrice}
           countDays={countDays}

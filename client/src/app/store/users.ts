@@ -141,7 +141,7 @@ export const signUp =
     }
   };
 
-export const logOut = (): AppThunk => dispatch => {
+export const logOut = (): AppThunk => async dispatch => {
   localStorageService.removeAuthData();
   dispatch(userLoggedOut());
   history.push('/');

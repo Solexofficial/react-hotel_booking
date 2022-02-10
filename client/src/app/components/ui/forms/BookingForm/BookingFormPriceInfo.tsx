@@ -4,8 +4,15 @@ import { useSelector } from 'react-redux';
 import { getRoomById } from '../../../../store/rooms';
 import Tooltip from '../../../common/Tooltip/Tooltip';
 
-const BookingFormPriceInfo = ({ roomId, countDays, setTotalPrice, totalPrice }) => {
-  const { price } = useSelector(getRoomById(roomId));
+type Props = {
+  roomId: string;
+  countDays: number;
+  setTotalPrice: (value: number) => void;
+  totalPrice: number;
+};
+
+const BookingFormPriceInfo: React.FC<Props> = ({ roomId, countDays, setTotalPrice, totalPrice }) => {
+  const { price } = useSelector(getRoomById(roomId)) || { price: 0 };
   const DISCOUNT_PERCENT = 10;
   const PRICE_SERVICE = 300;
   const PRICE_RENT = price * countDays;
