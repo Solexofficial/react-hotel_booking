@@ -5,13 +5,19 @@ import { getRoomById } from '../../../../store/rooms';
 import Modal from '../../../common/Modal';
 import { RoomEditForm } from '../../forms';
 
-const RoomEditModal = ({ open, onClose, roomId }) => {
+type RoomModalProps = {
+  open: boolean;
+  onClose: () => void;
+  roomId: string;
+};
+
+const RoomEditModal: React.FC<RoomModalProps> = ({ open, onClose, roomId }) => {
   const currentRoom = useSelector(getRoomById(roomId));
 
   return (
     <Modal title='Редактирование' open={open} onClose={onClose}>
       <DialogContent>
-        <h2>Редактировать номер {currentRoom.roomNumber}</h2>
+        <h2>Редактировать номер {currentRoom?.roomNumber}</h2>
         <RoomEditForm roomData={currentRoom} onCloseModal={onClose} />
       </DialogContent>
     </Modal>

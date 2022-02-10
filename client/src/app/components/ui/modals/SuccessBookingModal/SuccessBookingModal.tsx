@@ -7,8 +7,16 @@ import Button from '../../../common/Button';
 import Modal from '../../../common/Modal';
 import { getCurrentUserId } from '../../../../store/users';
 import history from '../../../../utils/history';
+import { BookingType } from '../../../../types/types';
 
-const SuccessBookingModal = ({ open, onClose, isLoading, bookingData }) => {
+type SuccessBookingModalProps = {
+  open: boolean;
+  onClose: () => void;
+  isLoading: boolean;
+  bookingData: BookingType;
+};
+
+const SuccessBookingModal: React.FC<SuccessBookingModalProps> = ({ open, onClose, isLoading, bookingData }) => {
   const currentUserId = useSelector(getCurrentUserId());
   const dateArrival = getDateDDMMYYYY(bookingData.arrivalDate);
   const dateDeparture = getDateDDMMYYYY(bookingData.departureDate);

@@ -8,7 +8,7 @@ import { Checkbox, CheckBoxList, InputField, RadioGroup, SelectField } from '../
 import validatorConfig from './validatorConfig';
 
 type RoomEditFormProps = {
-  roomData: RoomType;
+  roomData: RoomType | undefined;
   onCloseModal: () => void;
 };
 
@@ -24,16 +24,16 @@ const roomComfortsOptions = [
 
 const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData, onCloseModal }) => {
   const initialData: RoomType = {
-    _id: roomData._id,
-    roomNumber: roomData.roomNumber || '',
-    type: roomData.type || 'Стандарт',
-    price: roomData.price || 0,
-    comforts: roomData.comforts || [],
-    canPets: roomData.canPets || false,
-    canSmoke: roomData.canSmoke || false,
-    canInvite: roomData.canInvite || false,
-    hasWideCorridor: roomData.hasWideCorridor || false,
-    hasDisabledAssistant: roomData.hasDisabledAssistant || false,
+    _id: roomData?._id || 'not found',
+    roomNumber: roomData?.roomNumber || '',
+    type: roomData?.type || 'Стандарт',
+    price: roomData?.price || 0,
+    comforts: roomData?.comforts || [],
+    canPets: roomData?.canPets || false,
+    canSmoke: roomData?.canSmoke || false,
+    canInvite: roomData?.canInvite || false,
+    hasWideCorridor: roomData?.hasWideCorridor || false,
+    hasDisabledAssistant: roomData?.hasDisabledAssistant || false,
   };
 
   const { data, errors, handleInputChange, handleKeyDown, validate } = useForm(initialData, true, validatorConfig);
@@ -52,7 +52,7 @@ const RoomEditForm: React.FC<RoomEditFormProps> = ({ roomData, onCloseModal }) =
     <>
       <Form data={data} errors={errors} handleChange={handleInputChange} handleKeyDown={handleKeyDown}>
         <InputField name='roomNumber' label='№ номера' autoFocus />
-        <RadioGroup label='Тип номера' name='type' items={roomType} value={roomData.type} />
+        <RadioGroup label='Тип номера' name='type' items={roomType} value={roomData?.type} />
         <InputField name='price' label='Аренда в сутки(₽)' />
         <SelectField label='Удобства' name='comforts' options={roomComfortsOptions} multiple />
         <CheckBoxList>
