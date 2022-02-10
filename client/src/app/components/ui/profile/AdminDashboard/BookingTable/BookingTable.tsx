@@ -1,8 +1,14 @@
 import React from 'react';
+import { BookingType } from '../../../../../types/types';
 import { Table, TableBody, TableHeader } from '../../../../common/Table';
 import BookingTableRow from './BookingTableRow';
 
-const BookingTable = ({ bookings, roomNumber }) => {
+type BookingTableProps = {
+  bookings: BookingType[];
+  roomNumber: string;
+};
+
+const BookingTable: React.FC<BookingTableProps> = ({ bookings, roomNumber }) => {
   const headCells = [
     { id: 'bookingId', label: 'ID' },
     { id: 'arrivalDate', label: 'Дата заезда' },

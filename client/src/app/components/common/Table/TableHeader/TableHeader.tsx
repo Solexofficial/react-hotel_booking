@@ -4,12 +4,12 @@ import React from 'react';
 type TableHeaderProps = MuiTableHeaderProps & {
   headCells: {
     id: string;
-    numeric: boolean;
-    disablePadding: boolean;
+    numeric?: boolean;
+    disablePadding?: boolean;
     label: string;
   }[];
-  sortBy: { path: string; order: 'asc' | 'desc' };
-  onRequestSort: (event: React.MouseEvent<unknown>, property: string) => void;
+  sortBy?: { path: string; order: 'asc' | 'desc' };
+  onRequestSort?: (event: React.MouseEvent<unknown>, property: string) => void;
 };
 
 const TableHeader: React.FC<TableHeaderProps> = ({ headCells, sortBy, onRequestSort }) => {

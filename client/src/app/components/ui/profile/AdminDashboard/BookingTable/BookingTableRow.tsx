@@ -5,20 +5,25 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeBooking } from '../../../../../store/bookings';
 import { removeBookingRoom } from '../../../../../store/rooms';
+import { BookingType } from '../../../../../types/types';
 import { getDateDDMMYYYY } from '../../../../../utils/formatDate';
 import history from '../../../../../utils/history';
 import Tooltip from '../../../../common/Tooltip';
 import { getGuestsLabel } from '../../../GuestsCounter/GuestsCounter';
 
-const BookingTableRow = ({ row }) => {
+type BookingTableRowProps = {
+  row: BookingType;
+};
+
+const BookingTableRow: React.FC<BookingTableRowProps> = ({ row }) => {
   const dispatch = useDispatch();
 
   const handleRemoveBooking = () => {
     dispatch(removeBooking(row._id));
-    dispatch(removeBookingRoom({ roomId: row.roomId, _id: row._id }));
+    dispatch(removeBookingRoom({ roomId: row.roomId, _id: row._id || '' }));
   };
 
-  const handleOpenUserPage = userId => {
+  const handleOpenUserPage = (userId: string) => {
     history.push(`/profile/${userId}`);
   };
 
@@ -40,7 +45,7 @@ const BookingTableRow = ({ row }) => {
               aria-label='expand row'
               size='small'
               color='primary'
-              onClick={() => handleOpenUserPage(row.userId)}
+              onClick={() => handleOpenUserPage(row.userId || 'not found')}
             >
               <AccountCircleIcon />
             </IconButton>
