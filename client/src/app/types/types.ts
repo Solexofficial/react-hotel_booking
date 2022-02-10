@@ -50,8 +50,8 @@ export type ReviewType = {
   rating: number;
   roomId: string;
   userId?: string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: Date | string;
+  updated_at?: Date | string;
 };
 
 export type LikeType = {

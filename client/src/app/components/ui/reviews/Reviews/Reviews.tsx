@@ -8,12 +8,13 @@ import { ReviewsForm } from '../../forms';
 import ReviewsList from '../ReviewsList';
 
 const Reviews = () => {
-  const { roomId } = useParams();
+  const { roomId } = useParams<{ roomId: string }>();
   const reviews = useSelector(getReviewsByRoomId(roomId));
 
   const currentUserId = useSelector(getCurrentUserId());
 
-  const sortedReviews = reviews.sort((a, b) => a['created_at'].localeCompare(b['created.at']));
+  const sortedReviews = reviews.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  console.log(sortedReviews);
   const totalReviewsCount = sortedReviews.length;
 
   return (

@@ -24,9 +24,9 @@ const ReviewsForm: React.FC = () => {
         roomId,
       };
       const updateRoomPayload: RoomType = {
-        _id: currentRoomData?._id || '',
-        roomNumber: currentRoomData?.roomNumber || 'not found',
+        _id: currentRoomData?._id || 'not found',
         price: currentRoomData?.price || 0,
+        roomNumber: currentRoomData?.roomNumber || 'not found',
         countReviews: (currentRoomData?.countReviews || 0) + 1,
         rate: Number(currentRoomData?.rate) + Number(data.rating),
       };

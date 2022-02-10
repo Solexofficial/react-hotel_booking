@@ -15,7 +15,7 @@ const months = [
   'Декабря',
 ];
 
-export function decomposeDate(date: number | Date) {
+export function decomposeDate(date: number | Date | string) {
   date = new Date(date).getTime();
   if (typeof date === 'string') {
     date = Number(date);
@@ -29,12 +29,12 @@ export function decomposeDate(date: number | Date) {
   return { date, year, month, day, hours, min };
 }
 
-export function getDateDDMMYYYY(date: number | Date) {
+export function getDateDDMMYYYY(date: number | Date | string) {
   const { day, month, year } = decomposeDate(date);
   return `${day} ${months[month]} ${year}`;
 }
 
-export default function formatDate(value: number | Date) {
+export default function formatDate(value: number | Date | string) {
   value = new Date(value).getTime();
   const { year, month, day, hours, min } = decomposeDate(value);
 

@@ -1,7 +1,12 @@
 import React from 'react';
+import { ReviewType } from '../../../../types/types';
 import Review from '../Review';
 
-const ReviewsList = ({ reviews }) => {
+type ReviewsListProps = {
+  reviews: ReviewType[];
+};
+
+const ReviewsList: React.FC<ReviewsListProps> = ({ reviews }) => {
   return (
     <ul className='reviews-list'>
       {reviews.map(review => (

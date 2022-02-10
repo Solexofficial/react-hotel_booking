@@ -26,7 +26,7 @@ const likesService = {
     });
     return data;
   },
-  create: async (payload: LikeType) => {
+  create: async (payload: { userId: string; reviewId: string }) => {
     const { data } = await httpService.post(likesEndPoint, payload);
     return data;
   },

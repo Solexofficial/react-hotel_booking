@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeReview, updateReview } from '../../../../store/reviews';
 import { getRoomById, updateRoomData } from '../../../../store/rooms';
 import { getCurrentUserData, getUserById } from '../../../../store/users';
+import { ReviewType } from '../../../../types/types';
 import formatDate from '../../../../utils/formatDate';
 import Avatar from '../../../common/Avatar';
 import Button from '../../../common/Button';
@@ -15,19 +16,23 @@ import Rating from '../../../common/Rating';
 import Tooltip from '../../../common/Tooltip';
 import ReviewLikes from '../ReviewLikes';
 
-const Review = ({ review }) => {
+type ReviewProps = {
+  review: ReviewType;
+};
+
+const Review: React.FC<ReviewProps> = ({ review }) => {
   const dispatch = useDispatch();
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState<string | null>(null);
   const [editMode, setEditMode] = useState(false);
   const currentRoomData = useSelector(getRoomById(review.roomId));
-  const user = useSelector(getUserById(review.userId));
+  const user = useSelector(getUserById(review.userId || ''));
   const currentUser = useSelector(getCurrentUserData());
 
   const displayReviewData = () => {
     if (review.created_at !== review.updated_at) {
-      return `Редактирован: ${formatDate(review.updated_at)}`;
+      return `Редактирован: ${formatDate(review?.updated_at || '')}`;
     }
-    return formatDate(review.created_at);
+    return formatDate(review?.created_at || '');
   };
 
   const isAdmin = currentUser?.role === 'admin';
@@ -36,16 +41,18 @@ const Review = ({ review }) => {
 
   const handleChangeReview = () => {
     setEditMode(false);
-    const payload = { _id: review._id, content };
+    const payload = { _id: review._id, rating: review.rating, roomId: review.roomId, content: review.content };
     dispatch(updateReview(payload));
   };
 
   const handleRemoveReview = () => {
-    dispatch(removeReview(review._id));
+    dispatch(removeReview(review._id || ''));
     const updateRoomPayload = {
-      roomId: currentRoomData._id,
-      countReviews: currentRoomData.countReviews - 1,
-      rate: +currentRoomData.rate - review.rating,
+      _id: currentRoomData?._id || 'not found',
+      price: currentRoomData?.price || 0,
+      roomNumber: currentRoomData?.roomNumber || 'not found',
+      countReviews: Number(currentRoomData?.countReviews) - 1,
+      rate: Number(currentRoomData?.rate) - review.rating,
     };
     dispatch(updateRoomData(updateRoomPayload));
   };
@@ -54,7 +61,7 @@ const Review = ({ review }) => {
     setContent(review.content);
   }, [review]);
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value);
   };
 
@@ -64,9 +71,9 @@ const Review = ({ review }) => {
         <div className='review'>
           <div className='review__avatar'>
             <div className='avatar'>
-              <Avatar alt='пользователя' src={user.avatarPhoto} className='avatar__img' />
+              <Avatar alt='пользователя' src={user.avatarPhoto || ''} className='avatar__img' />
             </div>
-            <ReviewLikes reviewId={review._id} />
+            <ReviewLikes reviewId={review._id || ''} />
           </div>
           <div className='review__content'>
             <div className='review__user-name'>

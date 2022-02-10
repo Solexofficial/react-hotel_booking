@@ -60,6 +60,7 @@ export const getLikesByReviewId = (reviewId: string) => (state: RootState) => {
   if (state.likes.entities) {
     return state.likes.entities.filter(like => like.reviewId === reviewId);
   }
+  return [];
 };
 
 export const getLikesByUserId = (userId: string) => (state: RootState) => {
@@ -70,7 +71,7 @@ export const getLikesByUserId = (userId: string) => (state: RootState) => {
 };
 
 export const createLike =
-  (payload: LikeType): AppThunk =>
+  (payload: { userId: string; reviewId: string }): AppThunk =>
   async dispatch => {
     dispatch(likeCreateRequested());
     try {
@@ -82,7 +83,7 @@ export const createLike =
   };
 
 export const removeLike =
-  (payload: LikeType): AppThunk =>
+  (payload: { userId: string; reviewId: string }): AppThunk =>
   async (dispatch, getState) => {
     dispatch(likeRemoveRequested());
     try {
