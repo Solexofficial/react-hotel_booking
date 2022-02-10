@@ -45,7 +45,7 @@ const RoomPage: React.FC<RoomPageProps> = ({ roomId }) => {
           <div className='room-info__column'>
             <div className='room-info__group'>
               <RoomInfoCard />
-              <RoomReviewsCard countReviews={countReviews} />
+              <RoomReviewsCard />
             </div>
             <Reviews />
             <div className='room-info__group'>

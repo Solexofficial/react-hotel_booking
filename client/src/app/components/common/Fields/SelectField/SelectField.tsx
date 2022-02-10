@@ -11,20 +11,20 @@ import {
 type SelectFieldType = MuiSelectProps & {
   label?: string;
   value?: string;
-  onChange?: () => void;
+  onChange?: (e: React.FormEvent<HTMLSelectElement>) => void;
   defaultValue?: string;
   error?: string;
   name: string;
   options: OptionsItemType[];
-  multiple: boolean;
+  multiple?: boolean;
 };
 
-type OptionsItemType = {
+export type OptionsItemType = {
   name: string;
   value: string | number | OptionSortType;
 };
 
-type OptionSortType = {
+export type OptionSortType = {
   name: string;
   value: {
     order: string;

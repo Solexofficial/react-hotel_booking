@@ -24,7 +24,7 @@ const RoomsPage = () => {
   const rooms = useSelector(getRooms());
   const [filteredRooms, setFilteredRooms] = useState(rooms || []);
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
-  const { searchFilters, handleChangeFilter, handleResetSearchFilters } = useFiltersQuery();
+  const { searchFilters, handleResetSearchFilters } = useFiltersQuery();
   const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms, {
     searchBy: 'roomNumber',
   });
