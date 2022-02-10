@@ -45,11 +45,11 @@ export type UserType = {
 };
 
 export type ReviewType = {
-  _id: string;
+  _id?: string;
   content: string;
   rating: number;
   roomId: string;
-  userId: string;
+  userId?: string;
   created_at?: Date;
   updated_at?: Date;
 };

@@ -20,14 +20,13 @@ const initialState = {
 };
 
 const SearchRoomsForm = () => {
-
   const { data, errors, handleInputChange, handleKeyDown, validate, handleResetForm } = useForm(
     initialState,
     true,
     validatorConfig
   );
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (validate(data)) {
       const queryParams = queryString.stringify(data);
@@ -37,15 +36,9 @@ const SearchRoomsForm = () => {
   };
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      data={data}
-      errors={errors}
-      handleChange={handleInputChange}
-      handleKeyDown={handleKeyDown}
-    >
-      <DateOfStayField name='dateOfStay' errors={errors} />
-      <GuestsCounter name='guests' />
+    <Form data={data} errors={errors} handleChange={handleInputChange} handleKeyDown={handleKeyDown}>
+      <DateOfStayField data={data} onChange={handleInputChange} errors={errors} />
+      <GuestsCounter data={data} onChange={handleInputChange} />
       <Button
         variant='outlined'
         type='button'

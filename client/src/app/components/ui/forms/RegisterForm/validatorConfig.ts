@@ -1,4 +1,11 @@
-const validatorConfig = {
+import { UserType } from '../../../../types/types';
+import { ValidatorConfigType } from '../../../../utils/validator';
+
+type ConfigType = {
+  [Property in keyof UserType]?: ValidatorConfigType[Property];
+};
+
+const validatorConfig: ConfigType = {
   firstName: {
     isRequired: {
       message: 'Поле "Имя" обязательно для заполнения',
@@ -33,6 +40,7 @@ const validatorConfig = {
       message: 'Пароль должен содержать минимум 8 символов',
     },
   },
+  
 };
 
 export default validatorConfig;

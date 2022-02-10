@@ -1,6 +1,10 @@
 const SEARCH_QUERY = 'search-query';
 
-export function setSessionStorageData(payload: { [key: string]: any }) {
+type Keys = {
+  SEARCH_QUERY: typeof SEARCH_QUERY;
+};
+
+export function setSessionStorageData(payload: { [Property in keyof Keys]?: string } | string) {
   sessionStorage.setItem(SEARCH_QUERY, JSON.stringify(payload));
 }
 

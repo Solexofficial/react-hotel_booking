@@ -4,28 +4,31 @@ import { useParams } from 'react-router';
 import { Form, useForm } from '../../../../hooks';
 import { createReview } from '../../../../store/reviews';
 import { getRoomById, updateRoomData } from '../../../../store/rooms';
+import { ReviewType, RoomType } from '../../../../types/types';
 import Button from '../../../common/Button/Button';
 import { RatingField, TextAreaField } from '../../../common/Fields';
 import validatorConfig from './validatorConfig';
 
-const ReviewsForm = () => {
-  const { roomId } = useParams();
+const ReviewsForm: React.FC = () => {
+  const { roomId } = useParams<{ roomId: string }>();
   const dispatch = useDispatch();
-  const initialData = { content: '', likes: [], rating: 5 };
+  const initialData = { content: '' as ReviewType['content'], likes: [], rating: 5 as ReviewType['rating'] };
   const currentRoomData = useSelector(getRoomById(roomId));
   const { data, errors, handleInputChange, validate, handleResetForm } = useForm(initialData, true, validatorConfig);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (validate(data)) {
       const payload = {
         ...data,
         roomId,
       };
-      const updateRoomPayload = {
-        roomId: currentRoomData._id,
-        countReviews: currentRoomData.countReviews + 1,
-        rate: Number(currentRoomData.rate) + Number(data.rating),
+      const updateRoomPayload: RoomType = {
+        _id: currentRoomData?._id || '',
+        roomNumber: currentRoomData?.roomNumber || 'not found',
+        price: currentRoomData?.price || 0,
+        countReviews: (currentRoomData?.countReviews || 0) + 1,
+        rate: Number(currentRoomData?.rate) + Number(data.rating),
       };
 
       dispatch(createReview(payload));
