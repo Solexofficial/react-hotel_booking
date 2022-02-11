@@ -13,6 +13,7 @@ import useStyles from './styles';
 
 const Header: React.FC = () => {
   const isLoggedIn = useSelector(getIsLoggedIn());
+  // !TODO: fix bug styles without useStyles
   const classes = useStyles();
 
   return (

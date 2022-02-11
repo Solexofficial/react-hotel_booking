@@ -1,23 +1,28 @@
-import { Breadcrumbs as MuiBreadcrumbs, BreadcrumbsProps as MuiBreadcrumbsProps, Link } from '@mui/material';
+import { Breadcrumbs as MuiBreadcrumbs, Link } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
-import { Link as RouterLink, LinkProps, Route } from 'react-router-dom';
+import withBreadcrumbs, { BreadcrumbsRoute } from 'react-router-breadcrumbs-hoc';
+import { Link as RouterLink, LinkProps, Route, RouteComponentProps } from 'react-router-dom';
 import { getRoomById } from '../../../store/rooms';
 import { getUserById } from '../../../store/users';
 
-const UserBreadcrumb = props => {
-  console.log(props);
+type RouteParams = {
+  userId: string;
+  roomId: string;
+  route: string;
+};
+
+const UserBreadcrumb: React.FC<RouteComponentProps<RouteParams>> = props => {
   const user = useSelector(getUserById(props.match.params.userId));
-  return <span>{`${user.firstName} ${user.secondName}`}</span>;
+  return <span>{`${user?.firstName} ${user?.secondName}`}</span>;
 };
 
-const RoomBreadcrumb = props => {
+const RoomBreadcrumb: React.FC<RouteComponentProps<RouteParams>> = props => {
   const room = useSelector(getRoomById(props.match.params.roomId));
-  return <span>Номер №{room.roomNumber}</span>;
+  return <span>Номер №{room?.roomNumber}</span>;
 };
 
-const UserRouteBreadcrumb = props => {
+const UserRouteBreadcrumb: React.FC<RouteComponentProps<RouteParams>> = props => {
   const route = props.match.params.route;
 
   let breadcrumbText;
@@ -76,8 +81,8 @@ const LinkRouter = (props: LinkProps) => (
   <Link {...props} className='breadcrumbs-item' underline='hover' component={RouterLink} />
 );
 
-type BreadcrumbsPropsType = MuiBreadcrumbsProps & {
-  breadcrumbs: [],
+type BreadcrumbsPropsType = {
+  breadcrumbs: any;
 };
 
 const Breadcrumbs: React.FC<BreadcrumbsPropsType> = ({ breadcrumbs }) => {
@@ -87,7 +92,7 @@ const Breadcrumbs: React.FC<BreadcrumbsPropsType> = ({ breadcrumbs }) => {
         {() => {
           return (
             <MuiBreadcrumbs aria-label='breadcrumb'>
-              {breadcrumbs.map(({ match, breadcrumb }, index) => {
+              {breadcrumbs.map(({ match, breadcrumb }: BreadcrumbsRoute, index: number) => {
                 const last = index === breadcrumbs.length - 1;
                 return last ? (
                   <span className='breadcrumbs-item--last' key={match.url}>
