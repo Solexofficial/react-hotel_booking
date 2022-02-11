@@ -112,7 +112,6 @@ export const signIn =
     dispatch(authRequested());
     try {
       const data = await authService.signIn({ email, password });
-      console.log(data);
       setTokens(data);
       dispatch(authRequestSuccess({ userId: data.userId }));
       history.push(redirect || '/');

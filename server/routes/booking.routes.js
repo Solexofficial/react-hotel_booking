@@ -20,7 +20,6 @@ router.post('/', auth, async (req, res) => {
   try {
     const canBooking = await checkCanBooking(req.body);
     if (canBooking) {
-      console.log(req.body);
       const newBooking = await Booking.create({
         ...req.body,
         userId: req.user._id,
@@ -37,7 +36,6 @@ router.post('/', auth, async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       message: 'На сервере произошла ошибка. Попробуйте позже',
     });

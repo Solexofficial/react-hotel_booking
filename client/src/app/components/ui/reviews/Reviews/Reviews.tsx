@@ -14,7 +14,6 @@ const Reviews = () => {
   const currentUserId = useSelector(getCurrentUserId());
 
   const sortedReviews = reviews.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
-  console.log(sortedReviews);
   const totalReviewsCount = sortedReviews.length;
 
   return (

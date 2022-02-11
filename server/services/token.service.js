@@ -9,8 +9,6 @@ class TokenService {
 
     const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET);
 
-    console.log('tokens', accessToken, refreshToken);
-
     return {
       accessToken,
       refreshToken,

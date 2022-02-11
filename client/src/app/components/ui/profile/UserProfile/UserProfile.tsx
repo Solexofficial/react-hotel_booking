@@ -11,7 +11,6 @@ const UserProfile = ({ userId }: { userId: string }) => {
   const { error, initialize, progress, status } = useMockData();
 
   const handleClick = () => {
-    console.log('initialize firebase data');
     initialize();
   };
 

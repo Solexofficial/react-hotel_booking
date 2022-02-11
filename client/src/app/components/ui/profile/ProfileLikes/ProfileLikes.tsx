@@ -6,7 +6,6 @@ import { getCurrentUserId } from '../../../../store/users';
 import ReviewsList from '../../reviews/ReviewsList';
 
 const ProfileLikes = () => {
-  console.log('render');
   const currentUserId = useSelector(getCurrentUserId());
   const likes = useSelector(getLikesByUserId(currentUserId || 'not found'));
   const reviewsIds = likes.map(el => el.reviewId);

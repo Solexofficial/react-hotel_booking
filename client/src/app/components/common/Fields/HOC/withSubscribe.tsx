@@ -10,7 +10,6 @@ const withSubscribe =
   (props: MuiTextFieldProps) => {
     const [data, setData] = useState('');
     const handleSubscribe = () => {
-      console.log(`subscribe entities push email: ${data}`);
       setData('');
     };
 
