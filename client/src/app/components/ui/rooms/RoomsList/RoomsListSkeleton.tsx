@@ -1,7 +1,7 @@
 import React from 'react';
 import RoomCardSkeleton from '../RoomCard/RoomCardSkeleton';
 
-const RoomsListSkeleton = ({ pageSize }) => {
+const RoomsListSkeleton = ({ pageSize }: { pageSize: number }) => {
   const roomsSkeletonArray = Array(pageSize).fill('');
   return (
     <ul className='rooms__list'>

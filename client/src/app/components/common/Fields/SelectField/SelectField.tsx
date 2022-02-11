@@ -21,14 +21,14 @@ type SelectFieldType = MuiSelectProps & {
 
 export type OptionsItemType = {
   name: string;
-  value: string | number | OptionSortType;
+  value: string | number | OptionSortType | { path: string; order: string };
 };
 
 export type OptionSortType = {
   name: string;
   value: {
-    order: string;
     path: string;
+    order: string;
   };
 };
 

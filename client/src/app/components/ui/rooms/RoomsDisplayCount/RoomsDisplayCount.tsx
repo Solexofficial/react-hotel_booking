@@ -1,7 +1,7 @@
+import { SelectProps as MuiSelectProps } from '@mui/material';
 import React from 'react';
 import { SelectField } from '../../../common/Fields';
 import { OptionsItemType } from '../../../common/Fields/SelectField/SelectField';
-import { SelectChangeEvent, SelectProps as MuiSelectProps } from '@mui/material';
 
 type RoomsDisplayCountProps = MuiSelectProps & {
   count: number;

@@ -1,7 +1,12 @@
 import React from 'react';
 import RoomCard from '../RoomCard';
+import { RoomType } from '../../../../types/types';
 
-const RoomsList = ({ rooms }) => {
+type RoomListProps = {
+  rooms: RoomType[];
+};
+
+const RoomsList: React.FC<RoomListProps> = ({ rooms }) => {
   return (
     <ul className='rooms__list'>
       {rooms.map(room => (

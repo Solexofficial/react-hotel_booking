@@ -1,5 +1,6 @@
 import React from 'react';
 import { SelectField } from '../../../common/Fields';
+import { RoomType } from '../../../../types/types';
 
 const roomsSortArray = [
   { name: 'По убыванию', value: { path: 'roomNumber', order: 'desc' } },
@@ -10,9 +11,15 @@ const roomsSortArray = [
   { name: 'Сначала дорогие', value: { path: 'price', order: 'desc' } },
 ];
 
-const RoomsSort = ({ sortBy, onSort }) => {
+type RoomSortProps = {
+  sortBy: { path: keyof RoomType; order: 'asc' | 'desc' };
+  onSort: () => void;
+};
+
+const RoomsSort: React.FC<RoomSortProps> = ({ sortBy, onSort }) => {
   return (
     <SelectField
+      name='roomSort'
       style={{ minWidth: '200px' }}
       label='Сортировать'
       value={JSON.stringify(sortBy)}
