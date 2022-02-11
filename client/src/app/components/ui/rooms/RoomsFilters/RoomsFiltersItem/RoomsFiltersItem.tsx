@@ -1,6 +1,11 @@
 import React from 'react';
 
-const RoomsFiltersItem = ({ title, children }) => {
+type RoomsFiltersItemProps = {
+  title?: string;
+  children: React.ReactNode;
+};
+
+const RoomsFiltersItem: React.FC<RoomsFiltersItemProps> = ({ title, children }) => {
   return (
     <div className='filters__item'>
       <fieldset className='filters__group'>

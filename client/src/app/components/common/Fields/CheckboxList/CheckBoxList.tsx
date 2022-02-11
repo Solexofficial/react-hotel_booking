@@ -6,6 +6,7 @@ type CheckBoxListTypes = {
   data?: {
     [key: string]: any;
   };
+  title?: string;
 };
 
 type CheckboxItemProps = {

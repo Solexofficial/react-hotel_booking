@@ -8,6 +8,7 @@ type DateOfStayProps = {
   data: any;
   errors?: { [x: string]: string };
   onChange: (target: any) => void;
+  title?: string;
 };
 
 const DateOfStay: React.FC<DateOfStayProps> = ({ onChange, data, errors }) => {

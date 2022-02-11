@@ -11,7 +11,7 @@ import {
 type SelectFieldType = MuiSelectProps & {
   label?: string;
   value?: string;
-  onChange?: (e: React.FormEvent<HTMLSelectElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
   error?: string;
   name: string;

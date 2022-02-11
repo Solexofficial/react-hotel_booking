@@ -1,0 +1,25 @@
+.rangeSlier-header {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rangeSlider-header__label {
+  font-size: $text-sm;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.rangeSlider-header__value {
+  font-size: 12px;
+}
+
+.rangeSlider__inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.rangeSlider__description {
+  font-size: 12px;
+}

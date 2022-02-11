@@ -17,8 +17,8 @@ type onChange = {
 type RangeSliderFieldProps = SliderProps & {
   label: string;
   description: string;
-  minDistance: number;
-  value: number[];
+  minDistance?: number;
+  value?: number[];
   onChange: (props: onChange) => void;
 };
 
@@ -55,7 +55,6 @@ const RangeSliderField: React.FC<RangeSliderFieldProps> = ({
   );
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name);
     if (event.target.name === 'max') {
       onChange({ target: { name, value: [sliderValue[0], +event.target.value] } });
     }
@@ -71,9 +70,9 @@ const RangeSliderField: React.FC<RangeSliderFieldProps> = ({
   if (value) {
     return (
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
-          <p style={{ fontSize: '12px', textTransform: 'uppercase' }}>{label || 'Range Slider'}</p>
-          <p style={{ fontSize: '12px' }}>
+        <div className='rangeSlier-header'>
+          <p className='rangeSlider-header__label'>{label || 'Range Slider'}</p>
+          <p className='rangeSlider-header__value'>
             {value[0]}&#8381; - {value[1]}&#8381;
           </p>
         </div>
@@ -88,7 +87,7 @@ const RangeSliderField: React.FC<RangeSliderFieldProps> = ({
           step={100}
           onChangeCommitted={() => onChange({ target: { name: name || '', value: sliderValue } })}
         />
-        <div className='range-slider__inputs' style={{ display: 'flex', gap: 10 }}>
+        <div className='rangeSlider__inputs'>
           <InputField
             inputProps={{ min: min }}
             label='От'
@@ -107,7 +106,7 @@ const RangeSliderField: React.FC<RangeSliderFieldProps> = ({
           />
         </div>
 
-        {description && <p style={{ fontSize: '12px' }}>Стоимость за сутки пребывания в номере</p>}
+        {description && <p className='rangeSlider__description'>Стоимость за сутки пребывания в номере</p>}
       </div>
     );
   }

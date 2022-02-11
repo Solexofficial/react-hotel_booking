@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useFiltersQuery } from '../../../../hooks';
 import Button from '../../../common/Button';
 import { Checkbox, CheckBoxList, DateOfStayField, RangeSliderField } from '../../../common/Fields';
@@ -24,7 +24,11 @@ const initialState = {
   hasWorkSpace: false,
 };
 
-const RoomsFilter = ({ onReset }) => {
+type RoomsFilterProps = {
+  onReset: () => void;
+};
+
+const RoomsFilter: React.FC<RoomsFilterProps> = ({ onReset }) => {
   const { searchFilters, handleChangeFilter, handleResetSearchFilters } = useFiltersQuery();
 
   const handleResetFilters = useCallback(
@@ -36,16 +40,19 @@ const RoomsFilter = ({ onReset }) => {
     [handleResetSearchFilters, onReset]
   );
 
+  const data = { ...initialState, ...searchFilters };
+
   return (
     <section className='filters__wrapper'>
       <h2 className='visually-hidden'>Поиск номеров в отеле toxin</h2>
-      <RoomsFilterList data={{ ...initialState, ...searchFilters }} handleChange={handleChangeFilter}>
-        <DateOfStayField title='Дата пребывания в отеле' name='dateOfStay' />
-        <GuestsCounter />
+      <RoomsFilterList data={data} handleChange={handleChangeFilter}>
+        <DateOfStayField data={data} onChange={handleChangeFilter} title='Дата пребывания в отеле' />
+        <GuestsCounter data={data} onChange={handleChangeFilter} />
         <RangeSliderField
           label='Диапазон цены'
           description='Стоимость за сутки пребывания в номере'
           name='price'
+          onChange={handleChangeFilter}
           min={0}
           max={15000}
         />
