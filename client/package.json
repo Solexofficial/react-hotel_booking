@@ -1,7 +1,6 @@
 {
   "name": "react-hotel_booking",
   "version": "0.1.0",
-  "homepage": ".",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
@@ -40,7 +39,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"

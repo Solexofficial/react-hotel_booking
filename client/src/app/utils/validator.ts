@@ -77,6 +77,5 @@ export function validator(data: { [key: string]: any }, validatorConfig: Validat
       }
     }
   }
-  console.log(errors);
   return errors;
 }
