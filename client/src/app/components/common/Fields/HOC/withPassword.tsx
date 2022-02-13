@@ -1,4 +1,4 @@
-import { IconButton, InputAdornment } from '@material-ui/core';
+import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material';

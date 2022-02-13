@@ -1,4 +1,4 @@
-import { Link } from '@material-ui/core';
+import { Link } from '@mui/material';
 import { GitHub } from '@mui/icons-material';
 import React from 'react';
 import Container from '../Container';

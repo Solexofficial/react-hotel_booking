@@ -1,4 +1,4 @@
-import { IconButton, InputAdornment } from '@material-ui/core';
+import { IconButton, InputAdornment } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useCallback, useState } from 'react';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material';
