@@ -9,12 +9,9 @@ import Container from '../Container';
 import Divider from '../Divider';
 import Logo from '../Logo';
 import NavList from '../NavList';
-import useStyles from './styles';
 
 const Header: React.FC = () => {
   const isLoggedIn = useSelector(getIsLoggedIn());
-  // !TODO: fix bug styles without useStyles
-  const classes = useStyles();
 
   return (
     <header className='header'>
