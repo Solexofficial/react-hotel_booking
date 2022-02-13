@@ -9,7 +9,7 @@ import {
 import React from 'react';
 
 type RadioGroupType = MuiRadioGroupProps & {
-  label: string;
+  label?: string;
   items: Array<{ id: string; title: string }>;
 };
 
