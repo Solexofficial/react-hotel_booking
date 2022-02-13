@@ -9,7 +9,7 @@ type onChange = {
 };
 
 type SwitchProps = MuiSwitchProps & {
-  label?: string;
+  label: string;
   onChange: (fn: onChange) => void;
 };
 
@@ -32,7 +32,7 @@ const Switch: React.FC<SwitchProps> = ({ label, value, name, onChange, ...rest }
             {...rest}
           />
         }
-        label={label}
+        label={label || ''}
       />
     </FormControl>
   );
