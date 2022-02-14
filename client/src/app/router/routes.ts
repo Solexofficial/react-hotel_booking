@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material';
+import Page404 from '../components/pages/404Page';
 
 const Login = React.lazy(() => import('../layouts/login'));
 const Main = React.lazy(() => import('../layouts/main'));
@@ -44,6 +45,7 @@ export const publicRoutes = [
   { path: '/login/:type?', component: Login },
   { path: '/rooms/:roomId?/', component: Rooms },
   { path: '/', component: Main, exact: true },
+  { path: '*', component: Page404 },
 ];
 
-export const privateRoutes = [{ path: '/profile/:userId?/:route?', component: Profile, exact: true }];
+export const privateRoutes = [{ path: '/profile/:userId?/:route?', component: Profile, exact: false }];
