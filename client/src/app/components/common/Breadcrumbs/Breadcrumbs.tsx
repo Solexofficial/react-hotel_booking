@@ -14,7 +14,10 @@ type RouteParams = {
 
 const UserBreadcrumb: React.FC<RouteComponentProps<RouteParams>> = props => {
   const user = useSelector(getUserById(props.match.params.userId));
-  return <span>{`${user?.firstName} ${user?.secondName}`}</span>;
+  if (user) {
+    return <span>{`${user?.firstName} ${user?.secondName}`}</span>;
+  }
+  return <span>Пользователь не найден</span>;
 };
 
 const RoomBreadcrumb: React.FC<RouteComponentProps<RouteParams>> = props => {

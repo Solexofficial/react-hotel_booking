@@ -3,13 +3,14 @@ import { publicRoutes, privateRoutes } from '../routes';
 import { Switch, Route, Redirect } from 'react-router';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from '../../store/users';
+import Page404 from '../../components/pages/404Page';
 
 const AppRouter: React.FC = () => {
   const isLoggedIn = useSelector(getIsLoggedIn());
   return (
     <>
-      <Switch>
-        <Suspense fallback={<></>}>
+      <Suspense fallback={<></>}>
+        <Switch>
           {isLoggedIn &&
             privateRoutes.map(route =>
               route.path ? (
@@ -21,9 +22,10 @@ const AppRouter: React.FC = () => {
               <Route path={route.path} component={route.component} exact={route.exact} key={route.path} />
             ) : null
           )}
-        </Suspense>
-        <Redirect to={isLoggedIn ? '/' : 'login/signIn'} />
-      </Switch>
+          <Route path='*' component={Page404} />
+          <Redirect to={isLoggedIn ? '/' : 'login/signIn'} />
+        </Switch>
+      </Suspense>
     </>
   );
 };
