@@ -5,12 +5,24 @@ type RatingProps = MuiRatingProps & {
   totalCount?: number;
 };
 
-const Rating: React.FC<RatingProps> = ({ onChange, name, value, totalCount = 1, ...rest }) => {
-  const getRating = useCallback(value => +Math.ceil(value / totalCount).toFixed(), [totalCount]);
+const Rating: React.FC<RatingProps> = ({ onChange, name, value, totalCount = 1, precision, ...rest }) => {
+  const getRating = useCallback(
+    value => (precision ? +(value / totalCount).toFixed(2) : +Math.ceil(value / totalCount).toFixed()),
+    [totalCount, precision]
+  );
 
   const ratingValue = useMemo(() => getRating(value), [getRating, value]);
 
-  return <MuiRating name={name} value={ratingValue} className='rating-wrapper' onChange={onChange} {...rest} />;
+  return (
+    <MuiRating
+      name={name}
+      value={ratingValue}
+      className='rating-wrapper'
+      onChange={onChange}
+      precision={precision}
+      {...rest}
+    />
+  );
 };
 
 export default Rating;
