@@ -10,11 +10,11 @@ type TableHeadCell<T> = {
 
 type TableHeaderProps<T> = MuiTableHeaderProps & {
   headCells: Array<TableHeadCell<T>>;
-  sortBy: {
+  sortBy?: {
     path: keyof T;
     order: 'asc' | 'desc';
   };
-  onRequestSort: (event: Event | React.MouseEvent<unknown, MouseEvent>, property: keyof T) => void;
+  onRequestSort?: (event: Event | React.MouseEvent<unknown, MouseEvent>, property: keyof T) => void;
 };
 
 function TableHeader<T>({ headCells, sortBy, onRequestSort }: TableHeaderProps<T>) {
