@@ -7,7 +7,6 @@ type RoomListProps = {
 };
 
 const RoomsList: React.FC<RoomListProps> = ({ rooms }) => {
-  console.log(rooms);
   return (
     <ul className='rooms__list'>
       {rooms.map(room => (

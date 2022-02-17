@@ -4,11 +4,14 @@ import { useSelector } from 'react-redux';
 import { useMockData } from '../../../../hooks';
 import { getUserById } from '../../../../store/users';
 import { getDateDDMMYYYY } from '../../../../utils/formatDate';
+import config from '../../../../config.json';
 
 const UserProfile = ({ userId }: { userId: string }) => {
   const currentUser = useSelector(getUserById(userId));
 
   const { error, initialize, progress, status } = useMockData();
+
+  const isFireBase = currentUser?.role === 'admin' && config.isFireBase;
 
   const handleClick = () => {
     initialize();
@@ -31,7 +34,7 @@ const UserProfile = ({ userId }: { userId: string }) => {
           </Paper>
         </div>
 
-        {currentUser?.role === 'admin' && (
+        {isFireBase && (
           <>
             <h3>Инициализация данных в FireBase</h3>
             <ul>

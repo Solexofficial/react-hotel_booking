@@ -16,7 +16,6 @@ type ProfileContentProxyProps = {
 
 const ProfileContentProxy: React.FC<ProfileContentProxyProps> = ({ userId, route }) => {
   const currentUser = useSelector(getCurrentUserData());
-  console.log(userId, route);
   const contentByType: { [x: string]: JSX.Element } = {
     booking: <ProfileBooking />,
     likes: <ProfileLikes />,
