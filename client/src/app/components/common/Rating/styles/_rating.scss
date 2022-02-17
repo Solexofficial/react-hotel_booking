@@ -12,7 +12,14 @@
   }
 
   & .MuiRating-icon {
-    color: $purple;
+    // color: $purple;
+    &.MuiRating-iconFilled {
+      color: $purple;
+    }
+
+    &.MuiRating-iconHover {
+      color: $purple;
+    }
   }
 }
 

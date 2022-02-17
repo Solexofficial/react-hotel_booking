@@ -30,7 +30,7 @@ const RoomPage: React.FC<RoomPageProps> = ({ roomId }) => {
   };
 
   if (room) {
-    const { roomNumber, images, type, price } = room;
+    const { roomNumber, images, type, price, countReviews, rate } = room;
     return (
       <main>
         <div className='room-page__gallery-wrapper'>
@@ -45,7 +45,7 @@ const RoomPage: React.FC<RoomPageProps> = ({ roomId }) => {
           <div className='room-info__column'>
             <div className='room-info__group'>
               <RoomInfoCard />
-              <RoomReviewsCard />
+              <RoomReviewsCard countReviews={countReviews} rate={rate} />
             </div>
             <Reviews />
             <div className='room-info__group'>
