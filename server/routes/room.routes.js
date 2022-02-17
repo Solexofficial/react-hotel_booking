@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:roomId', auth, async (req, res) => {
+router.get('/:roomId', async (req, res) => {
   const { roomId } = req.params;
   try {
     const room = await Room.findById(roomId);

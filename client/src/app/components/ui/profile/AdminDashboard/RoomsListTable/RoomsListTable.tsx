@@ -3,12 +3,18 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { usePagination, useSort } from '../../../../../hooks';
 import { getRooms, getRoomsLoadingStatus } from '../../../../../store/rooms';
+import { RoomType } from '../../../../../types/types';
 import { Table, TableBody, TableHeader } from '../../../../common/Table';
 import RoomsListTableRow from './RoomsListTableRow';
 
+type HeadCell = {
+  id: keyof RoomType;
+  numeric?: boolean;
+  disablePadding?: boolean;
+  label: string;
+};
 
-
-const headCells = [
+const headCells: HeadCell[] = [
   {
     id: 'roomNumber',
     numeric: false,

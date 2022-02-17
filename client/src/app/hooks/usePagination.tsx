@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-function usePagination(items: Array<any>, defaultPageSize?: number, defaultCurrentPage?: number) {
+function usePagination<T>(items: Array<T>, defaultPageSize?: number, defaultCurrentPage?: number) {
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage || 1);
   const [pageSize, setPageSize] = useState(defaultPageSize || 5);
 
@@ -21,7 +21,7 @@ function usePagination(items: Array<any>, defaultPageSize?: number, defaultCurre
 
   const itemsListCrop = items.slice((currentPage - 1) * pageSize, (currentPage - 1) * pageSize + pageSize);
 
-  return { itemsListCrop, currentPage, pageSize, handleChangePage, handleChangePageSize };
+  return { itemsListCrop, currentPage, pageSize, handleChangePage, handleChangePageSize } as const;
 }
 
 export default usePagination;

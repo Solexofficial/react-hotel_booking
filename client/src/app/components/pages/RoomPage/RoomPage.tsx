@@ -30,7 +30,7 @@ const RoomPage: React.FC<RoomPageProps> = ({ roomId }) => {
   };
 
   if (room) {
-    const { roomNumber, images, countReviews, type, price } = room;
+    const { roomNumber, images, type, price } = room;
     return (
       <main>
         <div className='room-page__gallery-wrapper'>

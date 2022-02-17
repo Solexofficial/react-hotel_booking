@@ -42,10 +42,10 @@ export const navigationRoutes = [
 ];
 
 export const publicRoutes = [
-  { path: '/login/:type?', component: Login },
-  { path: '/rooms/:roomId?/', component: Rooms },
+  { path: '/login/:type?', component: Login, exact: true },
+  { path: '/rooms/:roomId?/', component: Rooms, exact: true },
   { path: '/', component: Main, exact: true },
   { path: '*', component: Page404 },
 ];
 
-export const privateRoutes = [{ path: '/profile/:userId?/:route?', component: Profile, exact: false }];
+export const privateRoutes = [{ path: '/profile/:userId?/:route?', component: Profile, exact: true }];

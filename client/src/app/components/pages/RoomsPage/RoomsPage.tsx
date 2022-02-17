@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFiltersQuery, usePagination, useSort } from '../../../hooks';
 import useSearch from '../../../hooks/useSearch';
-import roomsService from '../../../services/rooms.service';
 import { setSessionStorageData } from '../../../services/sessionStorage.service';
-import { getRooms, getRoomsLoadingStatus } from '../../../store/rooms';
+import { useAppDispatch } from '../../../store/createStore';
+import { getFilteredRooms, getRoomsLoadingStatus, loadFilteredRoomsList } from '../../../store/rooms';
 import Pagination from '../../common/Pagination';
 import Searchbar from '../../common/Searchbar';
 import RoomsDisplayCount from '../../ui/rooms/RoomsDisplayCount';
@@ -21,11 +21,11 @@ const setPageSizeOptions = [
 ];
 
 const RoomsPage = () => {
-  const rooms = useSelector(getRooms());
-  const [filteredRooms, setFilteredRooms] = useState(rooms || []);
+  const rooms = useSelector(getFilteredRooms());
+  const dispatch = useAppDispatch();
   const roomsIsLoading = useSelector(getRoomsLoadingStatus());
   const { searchFilters, handleResetSearchFilters } = useFiltersQuery();
-  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(filteredRooms, {
+  const { filteredData, searchTerm, setSearchTerm, handleChangeSearch } = useSearch(rooms, {
     searchBy: 'roomNumber',
   });
   const { sortedItems, sortBy, setSortBy } = useSort(filteredData || [], { path: 'roomNumber', order: 'desc' });
@@ -53,23 +53,14 @@ const RoomsPage = () => {
   }, [handleChangePageSize, handleResetSearchFilters]);
 
   useEffect(() => {
-    let isMounted = true;
     const oneDayMs = 86_000_000;
     const initialSearchFilters = {
       arrivalDate: Date.now(),
       departureDate: Date.now() + oneDayMs,
     };
 
-    if (isMounted) {
-      roomsService.getAll({ ...initialSearchFilters, ...searchFilters }).then(res => {
-        setFilteredRooms(res.content);
-      });
-      setSessionStorageData(searchFilters);
-    }
-
-    return () => {
-      isMounted = false;
-    };
+    setSessionStorageData(searchFilters);
+    dispatch(loadFilteredRoomsList({ ...initialSearchFilters, ...searchFilters }));
   }, [searchFilters]);
 
   return (

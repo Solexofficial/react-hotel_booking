@@ -6,7 +6,6 @@ import { getIsLoggedIn } from '../../store/users';
 
 const AppRouter: React.FC = () => {
   const isLoggedIn = useSelector(getIsLoggedIn());
-
   return (
     <>
       <Switch>
@@ -23,8 +22,8 @@ const AppRouter: React.FC = () => {
             ) : null
           )}
         </Suspense>
+        <Redirect to={isLoggedIn ? '/' : 'login/signIn'} />
       </Switch>
-      <Redirect to={isLoggedIn ? '/' : 'login/signIn'} />
     </>
   );
 };

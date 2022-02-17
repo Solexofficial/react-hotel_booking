@@ -1,19 +1,24 @@
 import { TableCell, TableHead, TableRow, TableSortLabel, TableHeadProps as MuiTableHeaderProps } from '@mui/material';
 import React from 'react';
 
-type TableHeaderProps = MuiTableHeaderProps & {
-  headCells: {
-    id: string;
-    numeric?: boolean;
-    disablePadding?: boolean;
-    label: string;
-  }[];
-  sortBy?: { path: string; order: 'asc' | 'desc' };
-  onRequestSort?: (event: React.MouseEvent<unknown>, property: string) => void;
+type TableHeadCell<T> = {
+  id: keyof T;
+  numeric?: boolean;
+  disablePadding?: boolean;
+  label: string;
 };
 
-const TableHeader: React.FC<TableHeaderProps> = ({ headCells, sortBy, onRequestSort }) => {
-  const createSortHandler = (property: string) => (event: React.MouseEvent<unknown>) => {
+type TableHeaderProps<T> = MuiTableHeaderProps & {
+  headCells: Array<TableHeadCell<T>>;
+  sortBy: {
+    path: keyof T;
+    order: 'asc' | 'desc';
+  };
+  onRequestSort: (event: Event | React.MouseEvent<unknown, MouseEvent>, property: keyof T) => void;
+};
+
+function TableHeader<T>({ headCells, sortBy, onRequestSort }: TableHeaderProps<T>) {
+  const createSortHandler = (property: keyof T) => (event: React.MouseEvent<unknown>) => {
     if (onRequestSort) {
       onRequestSort(event, property);
     }
@@ -24,7 +29,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headCells, sortBy, onRequestS
       <TableRow>
         {headCells.map(headCell => (
           <TableCell
-            key={headCell.id}
+            key={String(headCell.id)}
             align={headCell?.numeric ? 'right' : 'left'}
             padding={headCell?.disablePadding ? 'none' : 'normal'}
             sortDirection={sortBy && sortBy.path === headCell.id ? sortBy.order : false}
@@ -50,6 +55,6 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headCells, sortBy, onRequestS
       </TableRow>
     </TableHead>
   );
-};
+}
 
 export default TableHeader;

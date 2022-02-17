@@ -7,9 +7,9 @@ const roomsSlice = createSlice({
   name: 'rooms',
   initialState: {
     entities: [] as Array<RoomType>,
+    filteredEntities: [] as Array<RoomType>,
     isLoading: true as boolean,
     error: null as string | null,
-    lastFetch: null as number | null,
   },
   reducers: {
     roomsRequested: state => {
@@ -17,7 +17,10 @@ const roomsSlice = createSlice({
     },
     roomsReceived: (state, action) => {
       state.entities = action.payload;
-      state.lastFetch = Date.now();
+      state.isLoading = false;
+    },
+    filteredRoomsReceived: (state, action) => {
+      state.filteredEntities = action.payload;
       state.isLoading = false;
     },
     roomsRequestFailed: (state, action) => {
@@ -33,7 +36,7 @@ const roomsSlice = createSlice({
 
 const { actions, reducer: roomsReducer } = roomsSlice;
 
-const { roomsRequested, roomsReceived, roomsRequestFailed, roomUpdated } = actions;
+const { roomsRequested, roomsReceived, roomsRequestFailed, roomUpdated, filteredRoomsReceived } = actions;
 
 const addBookingRoomRequested = createAction('rooms/addBookingRoomRequested');
 const addBookingRoomRequestedSuccess = createAction('rooms/addBookingRoomRequestedSuccess');
@@ -55,6 +58,18 @@ export const loadRoomsList = (): AppThunk => async dispatch => {
     dispatch(roomsRequestFailed(error.message));
   }
 };
+
+export const loadFilteredRoomsList =
+  (queryParams?: any): AppThunk =>
+  async dispatch => {
+    dispatch(roomsRequested());
+    try {
+      const { content } = await roomsService.getAll(queryParams);
+      dispatch(filteredRoomsReceived(content || []));
+    } catch (error) {
+      dispatch(roomsRequestFailed(error.message));
+    }
+  };
 
 export const addBookingRoom =
   (payload: BookingType): AppThunk =>
@@ -94,6 +109,7 @@ export const updateRoomData =
   };
 
 export const getRooms = () => (state: RootState) => state.rooms.entities;
+export const getFilteredRooms = () => (state: RootState) => state.rooms.filteredEntities;
 export const getRoomsLoadingStatus = () => (state: RootState) => state.rooms.isLoading;
 export const getRoomById = (roomId: string) => (state: RootState) => {
   if (state.rooms.entities) {
