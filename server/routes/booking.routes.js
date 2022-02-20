@@ -46,8 +46,10 @@ router.delete('/:bookingId', auth, async (req, res) => {
   try {
     const { bookingId } = req.params;
     const removedBooking = await Booking.findById(bookingId);
+    const isAdmin = req.userRole === 'admin';
+    const currentUser = removedBooking.userId.toString() === req.user._id;
 
-    if (removedBooking.userId.toString() === req.user._id) {
+    if (currentUser || isAdmin) {
       await removedBooking.remove();
       return res.send(null);
     } else {
