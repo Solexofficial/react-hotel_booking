@@ -33,7 +33,9 @@ async function start() {
     mongoose.connection.once('open', () => {
       initDatabase();
     });
-    await mongoose.connect(config.get('MONGO_URI'));
+    await mongoose.connect(
+      'mongodb+srv://solexofficial:solexofficial123@cluster0.ijqvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+    );
     console.log(chalk.green('MongoDB connected.'));
     app.listen(PORT, () => console.log(chalk.green(`Server has been started on port ${PORT}...`)));
   } catch (error) {
