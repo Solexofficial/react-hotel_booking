@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "cross-env NODE_ENV=production server/server.js"
+    "start": "concurrently \"npm run serve\" \"npm run client\""
   },
   "dependencies": {
     "concurrently": "^7.0.0"
