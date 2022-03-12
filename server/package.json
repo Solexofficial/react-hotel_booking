@@ -26,10 +26,9 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "mongoose": "^6.1.8"
-  },
-  "devDependencies": {
+    "mongoose": "^6.1.8",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.15"
-  }
+  },
+  "devDependencies": {}
 }
