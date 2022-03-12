@@ -7,8 +7,12 @@
     "node": "14.x"
   },
   "scripts": {
+    "client-install": "npm install --prefix client",
     "start": "cross-env NODE_ENV=production node app.js",
-    "serve": "nodemon NODE_ENV=development app.js"
+    "serve": "nodemon NODE_ENV=development app.js",
+    "client": "yarn start --prefix client",
+    "dev": "concurrently \"npm run serve\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Mark Pokrovsky <solexofficial@yandex.ru>",
   "license": "ISC",
