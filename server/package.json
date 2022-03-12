@@ -8,8 +8,8 @@
   },
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "cross-env NODE_ENV=production app.js",
-    "serve": "nodemon NODE_ENV=development app.js",
+    "start": "cross-env NODE_ENV=production server.js",
+    "serve": "nodemon NODE_ENV=development server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run serve\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
