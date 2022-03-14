@@ -19,6 +19,7 @@ app.use('/api', routes);
 const PORT = process.env.PORT || config.get('port') || 8080;
 
 if (process.env.NODE_ENV === 'production') {
+  console.log('production');
   app.use('/', express.static(path.join(__dirname, 'client')));
 
   const indexPath = path.join(__dirname, 'client', 'index.html');
