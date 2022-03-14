@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use('/api', routes);
 
-const PORT = config.get('port') || 8080;
+const PORT = process.env.PORT || config.get('port') || 8080;
 
 if (process.env.NODE_ENV === 'production') {
   console.log('production');

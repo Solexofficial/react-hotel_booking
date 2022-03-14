@@ -1,5 +1,5 @@
 {
-  "apiEndPoint": "http://localhost:8080/api",
+  "apiEndPoint": "http://secret-mesa-68506.herokuapp.com/api",
 
   "isFireBase": false
 }
