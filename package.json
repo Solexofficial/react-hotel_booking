@@ -1,6 +1,11 @@
 {
   "scripts": {
-    "start": "concurrently \"npm run serve\" \"npm run client\""
+    "server": "cross-env NODE_ENV=production node server/server.js",
+    "client": "yarn start --prefix client",
+    "client:install": "npm install --prefix client",
+    "client:build": "npm run build --prefix client",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client "
   },
   "dependencies": {
     "concurrently": "^7.0.0"
