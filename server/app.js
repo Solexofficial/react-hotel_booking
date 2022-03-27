@@ -17,10 +17,11 @@ app.use(cors());
 app.use('/api', routes);
 
 const PORT = process.env.PORT || config.get('port') || 8080;
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 if (process.env.NODE_ENV === 'production') {
   console.log('production');
   app.use('/', express.static(path.join(__dirname, 'client')));
+  app.use('/images', express.static(path.join(__dirname, 'images')));
 
   const indexPath = path.join(__dirname, 'client', 'index.html');
 
