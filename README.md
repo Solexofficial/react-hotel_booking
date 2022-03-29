@@ -2,7 +2,7 @@
 
 SPA приложение с клиент-серверной архитектурой.
 # Админ Login/Password: admin@mail.ru, Test1234
-# deploy: secret-mesa-68506.herokuapp.com/
+# deploy: https://secret-mesa-68506.herokuapp.com/rooms
 
 
 # Стек технологий
