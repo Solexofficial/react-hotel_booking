@@ -10,6 +10,7 @@ SPA приложение с клиент-серверной архитектур
 - React-Redux, Redux Toolkit
 - SASS, MUI
 - NodeJS, Express, MongoDB
+- Docker
 
 ![Screenshot](./screenshots/main-page.png)
 
