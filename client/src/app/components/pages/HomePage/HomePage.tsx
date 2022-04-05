@@ -3,9 +3,6 @@ import React from 'react';
 import Container from '../../common/Container';
 import { SearchRoomsForm } from '../../ui/forms';
 
-import background from '../../../assets/img/room888/1.jpg';
-<img src={background} alt='test' />;
-
 const HomePage: React.FC = () => {
   return (
     <main className='main-home__page'>
@@ -15,7 +12,6 @@ const HomePage: React.FC = () => {
           <Paper elevation={3} className='form-card searchRooms-form'>
             <h2>Найдём номера под ваши пожелания</h2>
             <SearchRoomsForm />
-            <img src={background} alt='test' />
           </Paper>
           <p className='main__text-wishes'>Лучшие номера для вашей работы, отдыха и просто вдохновения</p>
         </div>
