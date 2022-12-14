@@ -16,6 +16,14 @@ SPA приложение с клиент-серверной архитектур
 # deploy: https://secret-mesa-68506.herokuapp.com/rooms
 
 
+# Запуск проекта локально(временное решение) 🔥🔥🔥
+```
+cd client -> npm start
+cd server -> npm run serve
+change apiEndPoint -> client/config.json = {"apiEndPoint": "http://localhost:8080/api"}
+```
+
+
 # Стек технологий
 - React, Typescript
 - React-Redux, Redux Toolkit
